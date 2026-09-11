@@ -25,6 +25,11 @@ jobs:
     # (it is what Pages' "Source: GitHub Actions" mode deploys to).
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -34,14 +39,6 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
-
-      url: ${{ steps.deployment.outputs.page_url }}
-    defaults:
-      run:
-        working-directory: frontend
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
 
       - name: Set up Node
         uses: actions/setup-node@v4
