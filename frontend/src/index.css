@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Self-hosted fonts — no third-party request at runtime (local/private-first product). */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('./assets/fonts/inter-latin-variable.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('./assets/fonts/jetbrainsmono-latin-variable.woff2') format('woff2');
+}
+
 :root{
   --bg:#0B1120;
   --bg-card:#131C2E;
