@@ -31,6 +31,10 @@
   --violet-dim:rgba(139,92,246,0.12);
 }
 *{ scrollbar-width:thin; scrollbar-color: var(--border) transparent; }
+/* Explicit selection highlight — the dark theme hides the browser default. */
+::selection{ background:rgba(16,185,129,0.45); color:#F8FAFC; }
+::-moz-selection{ background:rgba(16,185,129,0.45); color:#F8FAFC; }
+input::selection, textarea::selection{ background:rgba(16,185,129,0.45); color:#F8FAFC; }
 body{ margin:0; background:var(--bg); color:var(--text-primary); font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
 ::-webkit-scrollbar{ width:6px; height:6px; }
 ::-webkit-scrollbar-thumb{ background:var(--border); border-radius:999px; }
