@@ -126,11 +126,13 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
     [],
   )
 
-  // Hardware Fit matrix: every SWE-V model that also has Q4 data (independent of Explorer filters)
+  // Hardware Fit matrix: every OPEN-WEIGHT model with Q4 data (local-run
+  // candidates — closed/API-only models can't run on local VRAM anyway).
+  // Best SWE-V first; unscored models sink to the bottom.
   const hwModels = useMemo(
     () =>
       allModels
-        .filter((m) => parseQ4(m.full_q4_vram_gb) != null && parsePct(m.swe_bench_verified) != null)
+        .filter((m) => isOpenWeight(m.license) && parseQ4(m.full_q4_vram_gb) != null)
         .sort((a, b) => (parsePct(b.swe_bench_verified) ?? -1) - (parsePct(a.swe_bench_verified) ?? -1)),
     [],
   )

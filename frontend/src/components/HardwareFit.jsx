@@ -2,7 +2,7 @@ import { HardDrive } from 'lucide-react'
 import { parseQ4, fmtDate } from '../lib/parse'
 import { hardwareTiers, fitsModel } from '../lib/hardware'
 
-/** Independent top-30-by-SWE-V hardware fit matrix + tier cards + notes. */
+/** All open-weight models with Q4 VRAM data, best SWE-V first. Independent of Explorer filters. */
 export default function HardwareFit({ models, stats, hwModels }) {
   const fitsCount = (vram) => models.filter((m) => {
     const q4 = parseQ4(m.full_q4_vram_gb)
@@ -13,7 +13,7 @@ export default function HardwareFit({ models, stats, hwModels }) {
     <div className="space-y-4">
       <div className="card p-4">
         <h2 className="font-bold flex items-center gap-2"><HardDrive size={16} aria-hidden="true" /> Hardware Fit Matrix (Q4 weights)</h2>
-        <p className="text-sm text-white/60">All {hwModels.length} models with SWE-bench Verified + Q4 VRAM data, best SWE-V first. Independent of Explorer filters.</p>
+        <p className="text-sm text-white/60">All {hwModels.length} open-weight models with Q4 VRAM data, best SWE-V first. Closed / API-only models excluded (no local weights). Independent of Explorer filters.</p>
         <div className="overflow-auto mt-4">
           <table className="w-full text-xs">
             <thead>

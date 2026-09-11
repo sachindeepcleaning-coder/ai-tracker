@@ -32,9 +32,10 @@ export default function Leaderboards({ leaderboardTB, leaderboardSWE, leaderboar
                 </div>
               ))}
             </div>
-            <div className="mt-3 h-[180px]">
+            <div className="mt-3 h-[220px]">
+              <p className="text-[11px] text-white/40 mb-1">Top 12 shown in chart · full list above.</p>
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={board.data.map((m) => ({ name: m.model.split(' ').slice(0, 2).join(' '), v: parsePct(m[board.key]) || 0 }))} layout="vertical">
+                <BarChart data={board.data.slice(0, 12).map((m) => ({ name: m.model.split(' ').slice(0, 2).join(' '), v: parsePct(m[board.key]) || 0 }))} layout="vertical">
                   <XAxis type="number" domain={[0, 100]} hide />
                   <YAxis dataKey="name" type="category" width={90} tick={{ fontSize: 10, fill: '#94A3B8' }} />
                   <Tooltip contentStyle={{ background: '#131C2E', border: '1px solid rgba(255,255,255,0.1)' }} />
