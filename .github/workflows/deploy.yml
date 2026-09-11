@@ -21,6 +21,21 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # actions/deploy-pages requires this exact environment name
+    # (it is what Pages' "Source: GitHub Actions" mode deploys to).
+    environment:
+      name: github-pages
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Migrates Pages from "deploy from branch" (gh-pages) to
+      # "GitHub Actions" source mode; both build from identical master content.
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      url: ${{ steps.deployment.outputs.page_url }}
     defaults:
       run:
         working-directory: frontend
@@ -50,4 +65,5 @@ jobs:
           path: frontend/dist
 
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
