@@ -1,10 +1,7 @@
-import { useState } from 'react'
 import { Search, Filter, ChevronDown, Check, X, ArrowUpRight } from 'lucide-react'
 import { parsePct, parseQ4, paramsLabel } from '../lib/parse'
 import { licenseBadge } from '../lib/license'
 import { SORT_OPTIONS } from '../hooks/useModels'
-
-const PAGE_SIZE = 36
 
 /** Native <select> with a predictable chevron (no browser-specific "empty square" artifacts). */
 function Select({ label, value, onChange, className = '', children, ...rest }) {
@@ -41,15 +38,10 @@ export default function Explorer({
   onViewCompare,
 }) {
   const { q, provider, license, openOnly, maxQ4, sort } = filters
-  const [visible, setVisible] = useState(PAGE_SIZE)
-  const set = (patch) => {
-    setFilters((f) => ({ ...f, ...patch }))
-    setVisible(PAGE_SIZE) // event-driven pager reset on filter change
-  }
+  // Show the full catalog — no pagination; every matching model renders at once.
+  const set = (patch) => setFilters((f) => ({ ...f, ...patch }))
 
   const clearAll = () => setFilters({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'rank' })
-
-  const shown = filtered.slice(0, visible)
 
   return (
     <div className="space-y-4">
@@ -141,7 +133,7 @@ export default function Explorer({
       )}
 
       {/* Grid */}
-      {shown.length === 0 ? (
+      {filtered.length === 0 ? (
         <div className="card p-10 text-center">
           <p className="font-semibold">No models match your filters.</p>
           <button onClick={clearAll} className="mt-3 btn btn-ghost text-sm" type="button">Clear all filters</button>
@@ -149,7 +141,7 @@ export default function Explorer({
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {shown.map((m) => {
+            {filtered.map((m) => {
               const swe = parsePct(m.swe_bench_verified)
               const tb = parsePct(m.terminal_bench)
               const lcb = parsePct(m.livecodebench_v6)
@@ -214,14 +206,6 @@ export default function Explorer({
               )
             })}
           </div>
-
-          {visible < filtered.length && (
-            <div className="text-center pt-2">
-              <button type="button" onClick={() => setVisible((v) => v + PAGE_SIZE)} className="btn btn-ghost text-sm">
-                Show more ({Math.min(PAGE_SIZE, filtered.length - visible)} more · {filtered.length - visible} left)
-              </button>
-            </div>
-          )}
         </>
       )}
     </div>
