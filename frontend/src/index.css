@@ -19,6 +19,7 @@
 }
 
 :root{
+  color-scheme:dark;
   --bg:#0B1120;
   --bg-card:#131C2E;
   --bg-surf:#1A2540;
@@ -31,10 +32,13 @@
   --violet-dim:rgba(139,92,246,0.12);
 }
 *{ scrollbar-width:thin; scrollbar-color: var(--border) transparent; }
-/* Explicit selection highlight — the dark theme hides the browser default. */
-::selection{ background:#10B981; color:#04120C; text-shadow:none; }
-::-moz-selection{ background:#10B981; color:#04120C; text-shadow:none; }
-input::selection, textarea::selection{ background:#10B981; color:#04120C; text-shadow:none; }
+/* Explicit selection highlight — solid dark text on emerald; no light-on-light washout. */
+::selection{ background:#10B981 !important; color:#04120C !important; -webkit-text-fill-color:#04120C; text-shadow:none; }
+::-moz-selection{ background:#10B981 !important; color:#04120C !important; -webkit-text-fill-color:#04120C; text-shadow:none; }
+input::selection, textarea::selection, option::selection{ background:#10B981 !important; color:#04120C !important; -webkit-text-fill-color:#04120C; text-shadow:none; }
+/* Native dropdown options: keep dark menu so selected option text stays readable. */
+option{ background-color:#131C2E; color:#E2E8F0; }
+option:checked, option:hover{ background-color:#10B981; color:#04120C; }
 body{ margin:0; background:var(--bg); color:var(--text-primary); font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
 ::-webkit-scrollbar{ width:6px; height:6px; }
 ::-webkit-scrollbar-thumb{ background:var(--border); border-radius:999px; }

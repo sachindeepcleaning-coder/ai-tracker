@@ -11,7 +11,7 @@ function Select({ label, value, onChange, className = '', children, ...rest }) {
         aria-label={label}
         value={value}
         onChange={onChange}
-        className="appearance-none px-3 py-2.5 pr-8 rounded-xl bg-white/5 border border-white/10 text-sm cursor-pointer focus:outline-none focus:border-emerald-500/50"
+        className="appearance-none px-3 py-2.5 pr-8 rounded-xl bg-[#131C2E] border border-white/10 text-sm text-[#E2E8F0] cursor-pointer focus:outline-none focus:border-emerald-500/50"
         {...rest}
       >
         {children}
