@@ -10,16 +10,16 @@ import Tracker from './components/Tracker'
 import DetailModal from './components/DetailModal'
 import ErrorBoundary from './components/ErrorBoundary'
 import { allModels, providers, licenses, useModels } from './hooks/useModels'
-import { VERIFIED_AT } from './lib/parse'
+import { VERIFIED_AT, fmtDate } from './lib/parse'
 
 export default function App() {
   const [tab, setTab] = useState('explorer')
-  const [filters, setFilters] = useState({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'rank' })
+  const [filters, setFilters] = useState({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: 'all' })
   const [showFilters, setShowFilters] = useState(false)
   const [compare, setCompare] = useState([])
   const [detail, setDetail] = useState(null)
 
-  const { stats, filtered, leaderboardTB, leaderboardSWE, leaderboardLCB, hwModels } = useModels(filters)
+  const { stats, filtered, latestModels, leaderboardTB, leaderboardSWE, leaderboardLCB, hwModels } = useModels(filters)
 
   const toggleCompare = (id) => setCompare((c) => c.includes(id) ? c.filter((x) => x !== id) : c.length >= 4 ? c : [...c, id])
   const compareModels = allModels.filter((m) => compare.includes(m.id))
@@ -48,15 +48,29 @@ export default function App() {
         })}
       </div>
 
-      {/* Recent releases pointer */}
+      {/* Recent releases pointer — driven by the `released` field in data.json */}
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 pb-4">
         <div className="card p-4 bg-violet-500/5 border-violet-500/20">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <Zap size={16} className="text-violet-400" aria-hidden="true" />
-            <span className="font-bold">New frontier releases</span>
-            <span className="ml-auto badge bg-violet-500/15 text-violet-400 border-violet-500/30 text-[10px]">Tracker tab</span>
+            <span className="font-bold">Newest in the catalog</span>
+            {latestModels.map((m) => (
+              <button
+                key={m.id}
+                type="button"
+                onClick={() => setDetail(m)}
+                className="inline-flex items-center gap-1.5 bg-violet-500/10 border border-violet-500/25 rounded-full px-2.5 py-1 text-xs text-violet-200 hover:bg-violet-500/20"
+                title="Open details"
+              >
+                <span className="font-semibold">{m.model}</span>
+                <span className="text-violet-300/70">{fmtDate(m.released)}</span>
+              </button>
+            ))}
+            <button type="button" onClick={() => setTab('tracker')} className="ml-auto btn btn-ghost text-xs py-1">
+              Full Sep tracker
+            </button>
           </div>
-          <p className="text-xs text-white/50 mt-1">The <b>Tracker</b> tab has a curated, date-sorted list of Sep 2026 releases with full details. This Explorer view is ranked by benchmark performance, not release date.</p>
+          <p className="text-xs text-white/50 mt-1">Explorer defaults to <b>Sort: Latest release ↓</b> so the freshest models are on top; switch to <b>Rank ↑</b> for the performance-ordered frontier list.</p>
         </div>
       </div>
 

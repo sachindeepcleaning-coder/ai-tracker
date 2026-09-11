@@ -1,6 +1,6 @@
 import { Zap, Award, BarChart3 } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
-import { parsePct } from '../lib/parse'
+import { parsePct, fmtDate } from '../lib/parse'
 
 export default function Leaderboards({ leaderboardTB, leaderboardSWE, leaderboardLCB }) {
   const boards = [
@@ -16,13 +16,16 @@ export default function Leaderboards({ leaderboardTB, leaderboardSWE, leaderboar
         return (
           <div key={board.title} className="card p-4">
             <h3 className="font-bold flex items-center gap-2"><Icon size={16} className="text-emerald-400" aria-hidden="true" />{board.title}</h3>
-            <p className="text-xs text-white/50 mb-3">Vendor-reported; Scale standardized open best 38.7% vs 59.1% proprietary.</p>
+            <p className="text-xs text-white/50 mb-3">Top {board.data.length} scored models · release dates shown where known (as-of Sep 10, 2026).</p>
             <div className="space-y-2" aria-label={`${board.title} rankings`}>
               {board.data.map((m, i) => (
                 <div key={m.id} className="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10">
                   <span className={`w-7 h-7 rounded-full grid place-items-center text-xs font-black ${i < 3 ? 'bg-amber-500 text-black' : 'bg-white/10 text-white/70'}`} aria-hidden="true">{i + 1}</span>
                   <div className="min-w-0 flex-1">
-                    <div className="text-sm font-semibold truncate">{m.model}</div>
+                    <div className="text-sm font-semibold truncate">
+                      {m.model}
+                      {m.released && <span className="ml-1.5 text-[10px] font-mono text-sky-300/80 align-middle">{fmtDate(m.released)}</span>}
+                    </div>
                     <div className="text-xs text-white/50">{m.provider} · {m.license}</div>
                   </div>
                   <div className="text-sm font-mono font-bold text-emerald-400">{m[board.key]}</div>

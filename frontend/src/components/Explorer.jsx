@@ -1,7 +1,7 @@
 import { Search, Filter, ChevronDown, Check, X, ArrowUpRight } from 'lucide-react'
-import { parsePct, parseQ4, paramsLabel } from '../lib/parse'
+import { parsePct, parseQ4, paramsLabel, fmtDate, daysOld } from '../lib/parse'
 import { licenseBadge } from '../lib/license'
-import { SORT_OPTIONS } from '../hooks/useModels'
+import { SORT_OPTIONS, RELEASE_WINDOWS } from '../hooks/useModels'
 
 /** Native <select> with a predictable chevron (no browser-specific "empty square" artifacts). */
 function Select({ label, value, onChange, className = '', children, ...rest }) {
@@ -37,11 +37,11 @@ export default function Explorer({
   onDetail,
   onViewCompare,
 }) {
-  const { q, provider, license, openOnly, maxQ4, sort } = filters
+  const { q, provider, license, openOnly, maxQ4, sort, releaseWindow } = filters
   // Show the full catalog — no pagination; every matching model renders at once.
   const set = (patch) => setFilters((f) => ({ ...f, ...patch }))
 
-  const clearAll = () => setFilters({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'rank' })
+  const clearAll = () => setFilters({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: 'all' })
 
   return (
     <div className="space-y-4">
@@ -73,6 +73,11 @@ export default function Explorer({
             </Select>
             <Select label="Sort models" value={sort} onChange={(e) => set({ sort: e.target.value })}>
               {SORT_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </Select>
+            <Select label="Filter by release date" value={releaseWindow} onChange={(e) => set({ releaseWindow: e.target.value })}>
+              {RELEASE_WINDOWS.map((o) => (
                 <option key={o.value} value={o.value}>{o.label}</option>
               ))}
             </Select>
@@ -148,14 +153,22 @@ export default function Explorer({
               const q4 = parseQ4(m.full_q4_vram_gb)
               const lic = licenseBadge(m.license)
               const isSel = compare.includes(m.id)
+              const age = daysOld(m.released)
+              const isNew = age <= 7
               return (
                 <article key={m.id} className={`card p-4 hover:border-white/15 transition group ${isSel ? 'ring-1 ring-emerald-500 border-emerald-500/30' : ''}`}>
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-[11px] font-mono bg-white/10 border border-white/10 rounded-md px-1.5 py-0.5">#{m.rank}</span>
                         <span className={`badge ${lic.cls}`}>{lic.label}</span>
                         {m.is_free && <span className="badge bg-emerald-500/15 text-emerald-400 border-emerald-500/30">Free</span>}
+                        {m.released && (
+                          <span className={`badge ${isNew ? 'bg-sky-500/20 text-sky-300 border-sky-400/40' : 'bg-white/5 text-white/50 border-white/10'}`} title={`Released ${m.released} (data as-of Sep 10, 2026)`}>
+                            {isNew && <span className="inline-block w-1.5 h-1.5 rounded-full bg-sky-400 mr-1" aria-hidden="true" />}
+                            {isNew ? 'NEW · ' : ''}{fmtDate(m.released)}
+                          </span>
+                        )}
                       </div>
                       <h3 className="font-bold leading-tight mt-2 line-clamp-2">{m.model}</h3>
                       <p className="text-xs text-white/50">{m.provider} · {paramsLabel(m)} · {m.context_window}</p>

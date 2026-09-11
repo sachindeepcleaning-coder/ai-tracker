@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { X, ArrowUpRight } from 'lucide-react'
 import { licenseBadge } from '../lib/license'
+import { fmtDateFull } from '../lib/parse'
 
 const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
 
@@ -93,7 +94,10 @@ export default function DetailModal({ detail, onClose, onToggleCompare }) {
           <div className="bg-white/5 rounded-xl p-3 border border-white/5">
             <div className="text-xs text-white/50">License / Context</div>
             <div className="font-bold">{detail.license}</div>
-            <div className="text-xs text-white/60">{detail.context_window} · {detail.is_free ? 'Free tier' : 'Paid API'}</div>
+            <div className="text-xs text-white/60">
+              {detail.context_window} · {detail.is_free ? 'Free tier' : 'Paid API'}
+              {detail.released && <> · Released {fmtDateFull(detail.released)}</>}
+            </div>
           </div>
         </div>
 

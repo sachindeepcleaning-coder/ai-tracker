@@ -1,6 +1,6 @@
 import { Scale, Zap, BarChart3 } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, ScatterChart, Scatter, Cell } from 'recharts'
-import { parsePct, parseQ4 } from '../lib/parse'
+import { parsePct, parseQ4, fmtDate } from '../lib/parse'
 
 const COLORS = ['#10B981', '#8B5CF6', '#F59E0B', '#06B6D4']
 
@@ -62,6 +62,7 @@ export default function Compare({ compareModels, onBack, onClear }) {
           <tbody className="divide-y divide-white/5">
             {[
               ['Provider', (m) => m.provider],
+              ['Released', (m) => (m.released ? fmtDate(m.released) : '—')],
               ['Params', (m) => `${m.total_parameters} / ${m.active_parameters}`],
               ['Q4 VRAM', (m) => m.full_q4_vram_gb ?? '—'],
               ['License', (m) => m.license],

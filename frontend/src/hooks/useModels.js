@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import raw from '../data.json'
-import { parsePct, parseQ4 } from '../lib/parse'
+import { parsePct, parseQ4, DATA_AS_OF } from '../lib/parse'
 import { isOpenWeight } from '../lib/license'
 
 /** Catalog singleton — 267 rows from data.json. */
@@ -13,6 +13,7 @@ const NO_VALUE = -1
 
 /** Sort keys offered in the Explorer dropdown (rank is CSV order, 1 = top frontier). */
 export const SORT_OPTIONS = [
+  { value: 'latest', label: 'Sort: Latest release ↓' },
   { value: 'rank', label: 'Sort: Rank ↑' },
   { value: 'frontier', label: 'Sort: Frontier TB ↓' },
   { value: 'swev', label: 'Sort: SWE-V ↓' },
@@ -22,8 +23,25 @@ export const SORT_OPTIONS = [
   { value: 'price_in', label: 'Sort: Cheapest in' },
 ]
 
+/** Release-window filter options (measured against DATA_AS_OF). */
+export const RELEASE_WINDOWS = [
+  { value: 'all', label: 'Released: any time' },
+  { value: '7', label: 'Released: last 7 days' },
+  { value: '30', label: 'Released: last 30 days' },
+  { value: '90', label: 'Released: last 90 days' },
+]
+
 function compare(a, b, sort) {
   switch (sort) {
+    case 'latest': {
+      // Newest first; models with no release date sink to the bottom.
+      const ar = a.released || ''
+      const br = b.released || ''
+      if (!ar && !br) return 0
+      if (!ar) return 1
+      if (!br) return -1
+      return br.localeCompare(ar) || parseInt(a.rank, 10) - parseInt(b.rank, 10)
+    }
     case 'rank':
       return parseInt(a.rank, 10) - parseInt(b.rank, 10)
     case 'frontier': {
@@ -50,7 +68,7 @@ function compare(a, b, sort) {
  * summary stats, the filter/sort pipeline, leaderboards, and the
  * Hardware Fit matrix rows.
  */
-export function useModels({ q, provider, license, openOnly, maxQ4, sort }) {
+export function useModels({ q, provider, license, openOnly, maxQ4, sort, releaseWindow }) {
   const stats = useMemo(() => {
     const open = allModels.filter((m) => isOpenWeight(m.license)).length
     const withSWE = allModels.filter((m) => parsePct(m.swe_bench_verified) != null).length
@@ -74,9 +92,21 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort }) {
         return q4 != null && q4 <= lim
       })
     }
+    if (releaseWindow && releaseWindow !== 'all') {
+      const days = parseInt(releaseWindow, 10)
+      const cutoff = new Date(DATA_AS_OF + 'T00:00:00Z')
+      cutoff.setUTCDate(cutoff.getUTCDate() - days)
+      out = out.filter((m) => m.released && new Date(m.released + 'T00:00:00Z') >= cutoff)
+    }
     out.sort((a, b) => compare(a, b, sort))
     return out
-  }, [q, provider, license, openOnly, maxQ4, sort])
+  }, [q, provider, license, openOnly, maxQ4, sort, releaseWindow])
+
+  // Newest catalog entries (for the "New frontier releases" pointer card).
+  const latestModels = useMemo(
+    () => allModels.filter((m) => m.released).sort((a, b) => b.released.localeCompare(a.released)).slice(0, 3),
+    [],
+  )
 
   const leaderboardTB = useMemo(
     () => allModels.filter((m) => parsePct(m.terminal_bench) != null).sort((a, b) => parsePct(b.terminal_bench) - parsePct(a.terminal_bench)).slice(0, 12),
@@ -101,5 +131,5 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort }) {
     [],
   )
 
-  return { stats, filtered, leaderboardTB, leaderboardSWE, leaderboardLCB, hwModels }
+  return { stats, filtered, latestModels, leaderboardTB, leaderboardSWE, leaderboardLCB, hwModels }
 }

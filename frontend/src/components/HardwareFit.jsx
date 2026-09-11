@@ -1,5 +1,5 @@
 import { HardDrive } from 'lucide-react'
-import { parseQ4 } from '../lib/parse'
+import { parseQ4, fmtDate } from '../lib/parse'
 import { hardwareTiers, fitsModel } from '../lib/hardware'
 
 /** Independent top-30-by-SWE-V hardware fit matrix + tier cards + notes. */
@@ -32,7 +32,7 @@ export default function HardwareFit({ models, stats, hwModels }) {
                 const q4 = parseQ4(m.full_q4_vram_gb)
                 return (
                   <tr key={m.id} className="border-b border-white/5 hover:bg-white/[0.03]">
-                    <td className="p-2 sticky left-0 bg-[#131C2E]"><div className="font-semibold">{m.model.slice(0, 28)}</div><div className="text-white/50">{q4}GB · {m.provider}</div></td>
+                    <td className="p-2 sticky left-0 bg-[#131C2E]"><div className="font-semibold">{m.model.slice(0, 28)}{m.released && <span className="ml-1 text-[10px] font-mono text-sky-300/80">{fmtDate(m.released)}</span>}</div><div className="text-white/50">{q4}GB · {m.provider}</div></td>
                     {hardwareTiers.map((h) => {
                       const fit = fitsModel(q4, h.vram)
                       const symbol = fit === 'fit' ? '✓' : fit === 'tight' ? '~' : '×'
