@@ -13,7 +13,7 @@ export default function HardwareFit({ models, stats, hwModels }) {
     <div className="space-y-4">
       <div className="card p-4">
         <h2 className="font-bold flex items-center gap-2"><HardDrive size={16} aria-hidden="true" /> Hardware Fit Matrix (Q4 weights)</h2>
-        <p className="text-sm text-white/60">Top 30 models by SWE-bench Verified (descending) that have Q4 VRAM data. Independent of Explorer filters.</p>
+        <p className="text-sm text-white/60">All {hwModels.length} models with SWE-bench Verified + Q4 VRAM data, best SWE-V first. Independent of Explorer filters.</p>
         <div className="overflow-auto mt-4">
           <table className="w-full text-xs">
             <thead>

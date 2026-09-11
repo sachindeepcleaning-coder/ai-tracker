@@ -29,6 +29,7 @@ export const RELEASE_WINDOWS = [
   { value: '7', label: 'Released: last 7 days' },
   { value: '30', label: 'Released: last 30 days' },
   { value: '90', label: 'Released: last 90 days' },
+  { value: 'dated', label: 'Released: has date only' },
 ]
 
 function compare(a, b, sort) {
@@ -93,10 +94,14 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
       })
     }
     if (releaseWindow && releaseWindow !== 'all') {
-      const days = parseInt(releaseWindow, 10)
-      const cutoff = new Date(DATA_AS_OF + 'T00:00:00Z')
-      cutoff.setUTCDate(cutoff.getUTCDate() - days)
-      out = out.filter((m) => m.released && new Date(m.released + 'T00:00:00Z') >= cutoff)
+      if (releaseWindow === 'dated') {
+        out = out.filter((m) => m.released)
+      } else {
+        const days = parseInt(releaseWindow, 10)
+        const cutoff = new Date(DATA_AS_OF + 'T00:00:00Z')
+        cutoff.setUTCDate(cutoff.getUTCDate() - days)
+        out = out.filter((m) => m.released && new Date(m.released + 'T00:00:00Z') >= cutoff)
+      }
     }
     out.sort((a, b) => compare(a, b, sort))
     return out
@@ -109,25 +114,24 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
   )
 
   const leaderboardTB = useMemo(
-    () => allModels.filter((m) => parsePct(m.terminal_bench) != null).sort((a, b) => parsePct(b.terminal_bench) - parsePct(a.terminal_bench)).slice(0, 12),
+    () => allModels.filter((m) => parsePct(m.terminal_bench) != null).sort((a, b) => parsePct(b.terminal_bench) - parsePct(a.terminal_bench)),
     [],
   )
   const leaderboardSWE = useMemo(
-    () => allModels.filter((m) => parsePct(m.swe_bench_verified) != null).sort((a, b) => parsePct(b.swe_bench_verified) - parsePct(a.swe_bench_verified)).slice(0, 12),
+    () => allModels.filter((m) => parsePct(m.swe_bench_verified) != null).sort((a, b) => parsePct(b.swe_bench_verified) - parsePct(a.swe_bench_verified)),
     [],
   )
   const leaderboardLCB = useMemo(
-    () => allModels.filter((m) => parsePct(m.livecodebench_v6) != null).sort((a, b) => parsePct(b.livecodebench_v6) - parsePct(a.livecodebench_v6)).slice(0, 10),
+    () => allModels.filter((m) => parsePct(m.livecodebench_v6) != null).sort((a, b) => parsePct(b.livecodebench_v6) - parsePct(a.livecodebench_v6)),
     [],
   )
 
-  // Hardware Fit matrix: top 30 by SWE-V that also have Q4 data (independent of Explorer filters)
+  // Hardware Fit matrix: every SWE-V model that also has Q4 data (independent of Explorer filters)
   const hwModels = useMemo(
     () =>
       allModels
         .filter((m) => parseQ4(m.full_q4_vram_gb) != null && parsePct(m.swe_bench_verified) != null)
-        .sort((a, b) => (parsePct(b.swe_bench_verified) ?? -1) - (parsePct(a.swe_bench_verified) ?? -1))
-        .slice(0, 30),
+        .sort((a, b) => (parsePct(b.swe_bench_verified) ?? -1) - (parsePct(a.swe_bench_verified) ?? -1)),
     [],
   )
 

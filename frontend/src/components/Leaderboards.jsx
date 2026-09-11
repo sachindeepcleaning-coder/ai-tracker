@@ -16,8 +16,8 @@ export default function Leaderboards({ leaderboardTB, leaderboardSWE, leaderboar
         return (
           <div key={board.title} className="card p-4">
             <h3 className="font-bold flex items-center gap-2"><Icon size={16} className="text-emerald-400" aria-hidden="true" />{board.title}</h3>
-            <p className="text-xs text-white/50 mb-3">Top {board.data.length} scored models · release dates shown where known (as-of Sep 10, 2026).</p>
-            <div className="space-y-2" aria-label={`${board.title} rankings`}>
+            <p className="text-xs text-white/50 mb-3">{board.data.length} scored models · scroll for all · release dates shown where known (as-of Sep 10, 2026).</p>
+            <div className="space-y-2 max-h-[380px] overflow-y-auto pr-1" aria-label={`${board.title} rankings`} tabIndex={0}>
               {board.data.map((m, i) => (
                 <div key={m.id} className="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10">
                   <span className={`w-7 h-7 rounded-full grid place-items-center text-xs font-black ${i < 3 ? 'bg-amber-500 text-black' : 'bg-white/10 text-white/70'}`} aria-hidden="true">{i + 1}</span>
