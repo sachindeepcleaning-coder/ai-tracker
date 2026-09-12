@@ -1,6 +1,6 @@
 # Session Chat Log — 2026-08-09
 
-**Working directory:** `/home/vegeta/Music/ai`
+**Working directory:** local clone of the `ai-tracker` repo
 **Topic:** AI coding models — API vs local cost, local hardware, and scaling economics
 
 ---

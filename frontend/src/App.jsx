@@ -106,7 +106,7 @@ export default function App() {
       {detail && <DetailModal detail={detail} onClose={() => setDetail(null)} onToggleCompare={toggleCompare} />}
 
       <footer className="max-w-[1400px] mx-auto px-4 md:px-6 py-6 text-xs text-white/40 border-t border-white/5 mt-6">
-        Built from <span className="text-white/70">coding_benchmarks_july2026_final.csv (ranks 1-267, single source of truth)</span> + regenerated <span className="text-white/70">ai_coding_api_vs_local_summary.json + frontend/src/data.json</span>. ₹95.12/USD. Online re-verified {VERIFIED_AT} (DeepSeek docs / Anthropic docs / Google AI docs / llm-releases 349 / AA v4.3). Nemotron 3.5 Lightning duplicated in source CSV (ranks 221+245). Not vendor quotes — planning estimates. Source folder: `/home/vegeta/Music/ai`.
+        Built from <span className="text-white/70">coding_benchmarks_july2026_final.csv (ranks 1-267, single source of truth)</span> + regenerated <span className="text-white/70">ai_coding_api_vs_local_summary.json + frontend/src/data.json</span>. ₹95.12/USD. Online re-verified {VERIFIED_AT} (DeepSeek docs / Anthropic docs / Google AI docs / llm-releases 349 / AA v4.3). Nemotron 3.5 Lightning duplicated in source CSV (ranks 221+245). Not vendor quotes — planning estimates. Source: GitHub repo `sachindeepcleaning-coder/ai-tracker`.
       </footer>
     </div>
   )

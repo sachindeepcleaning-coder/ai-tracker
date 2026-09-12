@@ -1,6 +1,6 @@
 # Session Chat Log — 2026-08-09 (Full Session: 100k Users → India's Own AI)
 
-**Working directory:** `/home/vegeta/Music/ai`
+**Working directory:** local clone of the `ai-tracker` repo
 **Topic:** From API-vs-local costs → serving 100k concurrent users → India's own fine-tuned Kimi K3 → cost/pricing at hyperscale
 
 ---
