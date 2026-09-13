@@ -1,17 +1,17 @@
 import { Search, Filter, ChevronDown, Check, X, ArrowUpRight } from 'lucide-react'
-import { parsePct, parseQ4, paramsLabel, fmtDate, daysOld } from '../lib/parse'
+import { parsePct, parseQ4, paramsLabel, fmtDate, fmtDateFull, daysOld, DATA_AS_OF } from '../lib/parse'
 import { licenseBadge } from '../lib/license'
 import { SORT_OPTIONS, RELEASE_WINDOWS } from '../hooks/useModels'
 
 /** Native <select> with a predictable chevron (no browser-specific "empty square" artifacts). */
 function Select({ label, value, onChange, className = '', children, ...rest }) {
   return (
-    <div className={`relative inline-flex ${className}`}>
+    <div className={`relative inline-flex max-w-full ${className}`}>
       <select
         aria-label={label}
         value={value}
         onChange={onChange}
-        className="appearance-none px-3 py-2.5 pr-8 rounded-xl bg-[#131C2E] border border-white/10 text-sm text-[#E2E8F0] cursor-pointer focus:outline-none focus:border-emerald-500/50"
+        className="appearance-none px-3 py-2.5 pr-8 rounded-xl bg-[#131C2E] border border-white/10 text-sm text-[#E2E8F0] cursor-pointer focus:outline-none focus:border-emerald-500/50 max-w-full"
         {...rest}
       >
         {children}
@@ -25,7 +25,7 @@ export default function Explorer({
   models,
   filtered,
   providers,
-  licenses,
+  licenseGroups,
   filters,
   setFilters,
   showFilters,
@@ -67,7 +67,7 @@ export default function Explorer({
             </Select>
             <Select label="Filter by license" value={license} onChange={(e) => set({ license: e.target.value })}>
               <option value="all">All licenses</option>
-              {licenses.map((l) => (
+              {licenseGroups.map((l) => (
                 <option key={l} value={l}>{l}</option>
               ))}
             </Select>
@@ -146,7 +146,7 @@ export default function Explorer({
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {filtered.map((m) => {
+            {filtered.map((m, idx) => {
               const swe = parsePct(m.swe_bench_verified)
               const tb = parsePct(m.terminal_bench)
               const lcb = parsePct(m.livecodebench_v6)
@@ -156,7 +156,7 @@ export default function Explorer({
               const age = daysOld(m.released)
               const isNew = age <= 7
               return (
-                <article key={m.id} className={`card p-4 hover:border-white/15 transition group ${isSel ? 'ring-1 ring-emerald-500 border-emerald-500/30' : ''}`}>
+                <article key={m.id} className={`card card-enter p-4 hover:border-white/15 transition group ${isSel ? 'ring-1 ring-emerald-500 border-emerald-500/30' : ''}`} style={{ animationDelay: `${Math.min(idx, 11) * 35}ms` }}>
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
@@ -164,7 +164,7 @@ export default function Explorer({
                         <span className={`badge ${lic.cls}`}>{lic.label}</span>
                         {m.is_free && <span className="badge bg-emerald-500/15 text-emerald-400 border-emerald-500/30">Free</span>}
                         {m.released && (
-                          <span className={`badge ${isNew ? 'bg-sky-500/20 text-sky-300 border-sky-400/40' : 'bg-white/5 text-white/50 border-white/10'}`} title={`Released ${m.released} (data as-of Sep 10, 2026)`}>
+                          <span className={`badge ${isNew ? 'bg-sky-500/20 text-sky-300 border-sky-400/40' : 'bg-white/5 text-white/50 border-white/10'}`} title={`Released ${m.released} (data as-of ${fmtDateFull(DATA_AS_OF)})`}>
                             {isNew && <span className="inline-block w-1.5 h-1.5 rounded-full bg-sky-400 mr-1" aria-hidden="true" />}
                             {isNew ? 'NEW · ' : ''}{fmtDate(m.released)}
                           </span>

@@ -1,16 +1,30 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { Zap, Database, Award, Layers, Cpu } from 'lucide-react'
 import Header from './components/Header'
 import Explorer from './components/Explorer'
-import Leaderboards from './components/Leaderboards'
-import HardwareFit from './components/HardwareFit'
-import CostCalc from './components/CostCalc'
-import Compare from './components/Compare'
-import Tracker from './components/Tracker'
 import DetailModal from './components/DetailModal'
 import ErrorBoundary from './components/ErrorBoundary'
-import { allModels, providers, licenses, useModels } from './hooks/useModels'
+import { allModels, providers, licenseGroups, useModels } from './hooks/useModels'
 import { VERIFIED_AT, fmtDate } from './lib/parse'
+
+/* Secondary tabs are code-split: the 767KB eager bundle drops to the Explorer-only
+   critical path, and recharts (used only by chart tabs) stays out of first paint. */
+const Leaderboards = lazy(() => import('./components/Leaderboards'))
+const HardwareFit = lazy(() => import('./components/HardwareFit'))
+const CostCalc = lazy(() => import('./components/CostCalc'))
+const Compare = lazy(() => import('./components/Compare'))
+const Tracker = lazy(() => import('./components/Tracker'))
+
+function TabFallback() {
+  return (
+    <div className="card p-8 text-center" role="status" aria-live="polite">
+      <span className="inline-flex items-center gap-2 text-sm text-white/60">
+        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
+        Loading panel…
+      </span>
+    </div>
+  )
+}
 
 export default function App() {
   const [tab, setTab] = useState('explorer')
@@ -26,6 +40,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:top-3 focus:left-3 btn btn-primary">Skip to content</a>
       <Header tab={tab} onTab={setTab} stats={stats} explorerCount={filtered.length} />
 
       {/* KPI strip */}
@@ -75,14 +90,14 @@ export default function App() {
       </div>
 
       {/* Main */}
-      <main className="max-w-[1400px] mx-auto px-4 md:px-6 pb-10">
+      <main id="main" className="max-w-[1400px] mx-auto px-4 md:px-6 pb-10">
         <ErrorBoundary>
           {tab === 'explorer' && (
             <Explorer
               models={allModels}
               filtered={filtered}
               providers={providers}
-              licenses={licenses}
+              licenseGroups={licenseGroups}
               filters={filters}
               setFilters={setFilters}
               showFilters={showFilters}
@@ -95,11 +110,13 @@ export default function App() {
               onViewCompare={() => setTab('compare')}
             />
           )}
-          {tab === 'leaderboards' && <Leaderboards leaderboardTB={leaderboardTB} leaderboardSWE={leaderboardSWE} leaderboardLCB={leaderboardLCB} />}
-          {tab === 'hardware' && <HardwareFit models={allModels} stats={stats} hwModels={hwModels} />}
-          {tab === 'cost' && <CostCalc />}
-          {tab === 'compare' && <Compare compareModels={compareModels} onBack={() => setTab('explorer')} onClear={() => setCompare([])} />}
-          {tab === 'tracker' && <Tracker />}
+          <Suspense fallback={<TabFallback />}>
+            {tab === 'leaderboards' && <Leaderboards leaderboardTB={leaderboardTB} leaderboardSWE={leaderboardSWE} leaderboardLCB={leaderboardLCB} />}
+            {tab === 'hardware' && <HardwareFit models={allModels} stats={stats} hwModels={hwModels} />}
+            {tab === 'cost' && <CostCalc />}
+            {tab === 'compare' && <Compare compareModels={compareModels} onBack={() => setTab('explorer')} onClear={() => setCompare([])} />}
+            {tab === 'tracker' && <Tracker />}
+          </Suspense>
         </ErrorBoundary>
       </main>
 

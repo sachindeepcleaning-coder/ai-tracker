@@ -8,24 +8,29 @@ export const VERIFIED_AT = 'Sep 13, 2026'
 /** Data as-of anchor (from data.json conversation_summary) — used for "latest" windows. */
 export const DATA_AS_OF = '2026-09-13'
 
-/** '2026-09-10' -> 'Sep 10' (UTC so the label is stable regardless of viewer timezone). */
+/** '2026-09-10' -> 'Sep 10' (UTC so the label is stable regardless of viewer timezone).
+    Coarse dates that aren't ISO ('Sep 2026') pass through unchanged instead of "Invalid Date". */
 export function fmtDate(iso) {
   if (!iso) return null
   const d = new Date(iso + 'T00:00:00Z')
+  if (isNaN(d.getTime())) return String(iso)
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })
 }
 
-/** '2026-09-10' -> 'Sep 10, 2026' */
+/** '2026-09-10' -> 'Sep 10, 2026' (coarse dates pass through unchanged). */
 export function fmtDateFull(iso) {
   if (!iso) return null
   const d = new Date(iso + 'T00:00:00Z')
+  if (isNaN(d.getTime())) return String(iso)
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
 }
 
 /** Days between a released date and the data as-of anchor (negative-safe). */
 export function daysOld(iso) {
   if (!iso) return Infinity
-  return Math.round((new Date(DATA_AS_OF + 'T00:00:00Z') - new Date(iso + 'T00:00:00Z')) / 86400000)
+  const d = new Date(iso + 'T00:00:00Z')
+  if (isNaN(d.getTime())) return Infinity
+  return Math.round((new Date(DATA_AS_OF + 'T00:00:00Z') - d) / 86400000)
 }
 
 /** Extract the first number from a "93.4%"-style cell. Returns null when absent. */

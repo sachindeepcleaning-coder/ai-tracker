@@ -1,13 +1,20 @@
 import { useMemo } from 'react'
 import raw from '../data.json'
 import { parsePct, parseQ4, DATA_AS_OF } from '../lib/parse'
-import { isOpenWeight } from '../lib/license'
+import { isOpenWeight, licenseBadge } from '../lib/license'
 
 /** Catalog singleton — 267 rows from data.json. */
 export const allModels = raw.all_coding_models || raw
 
 export const providers = [...new Set(allModels.map((m) => m.provider))].sort()
-export const licenses = [...new Set(allModels.map((m) => m.license))].sort()
+
+/** Short license category for filter dropdowns (raw strings carry dates/prices and
+    would balloon a native <select> past the viewport on mobile). Capped for safety. */
+function licLabel(lic) {
+  const label = licenseBadge(lic).label
+  return label.length > 28 ? label.slice(0, 26) + '…' : label
+}
+export const licenseGroups = [...new Set(allModels.map((m) => licLabel(m.license)))].sort()
 
 const NO_VALUE = -1
 
@@ -84,7 +91,7 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
       out = out.filter((m) => (m.model + ' ' + m.provider).toLowerCase().includes(qq))
     }
     if (provider !== 'all') out = out.filter((m) => m.provider === provider)
-    if (license !== 'all') out = out.filter((m) => m.license === license)
+    if (license !== 'all') out = out.filter((m) => licLabel(m.license) === license)
     if (openOnly) out = out.filter((m) => isOpenWeight(m.license))
     if (maxQ4 !== 'all') {
       const lim = parseFloat(maxQ4)

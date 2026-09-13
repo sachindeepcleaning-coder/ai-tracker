@@ -49,3 +49,22 @@ body{ margin:0; background:var(--bg); color:var(--text-primary); font-family:'In
 .btn-primary:hover{ background:#059669; }
 .btn-ghost{ background:var(--bg-surf); border:1px solid var(--border); color:var(--text-primary); }
 .btn-ghost:hover{ background:rgba(255,255,255,0.06); }
+
+/* Keyboard focus rings — visible for keyboard users, silent for mouse users. */
+:focus-visible{ outline:2px solid var(--primary); outline-offset:2px; border-radius:6px; }
+select:focus-visible, input:focus-visible{ outline-offset:0; }
+
+/* Staggered card entrance — one orchestrated load sequence, capped via inline delay. */
+@keyframes card-rise{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+.card-enter{ animation:card-rise .4s cubic-bezier(.2,.7,.3,1) both; }
+
+/* Respect users who opt out of motion. */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  .card-enter{ animation:none; }
+}
