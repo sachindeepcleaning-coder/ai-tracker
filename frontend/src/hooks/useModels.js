@@ -16,6 +16,22 @@ function licLabel(lic) {
 }
 export const licenseGroups = [...new Set(allModels.map((m) => licLabel(m.license)))].sort()
 
+/** Every benchmark column tracked in the catalog — coding first, then reasoning/math.
+    Drives the Leaderboards tab (one board per benchmark). */
+export const BENCHMARKS = [
+  { key: 'terminal_bench', title: 'Terminal-Bench 2.1', icon: 'zap' },
+  { key: 'swe_bench_verified', title: 'SWE-bench Verified', icon: 'award' },
+  { key: 'swe_bench_pro', title: 'SWE-bench Pro (Scale std.)', icon: 'award' },
+  { key: 'livecodebench_v6', title: 'LiveCodeBench V6', icon: 'chart' },
+  { key: 'humaneval', title: 'HumanEval', icon: 'chart' },
+  { key: 'gpqa_diamond', title: 'GPQA Diamond', icon: 'brain' },
+  { key: 'mmlu_pro', title: 'MMLU-Pro', icon: 'brain' },
+  { key: 'aime_2026', title: 'AIME 2026', icon: 'brain' },
+  { key: 'math', title: 'MATH', icon: 'brain' },
+  { key: 'hle', title: "Humanity's Last Exam (HLE)", icon: 'brain' },
+  { key: 'arc_agi_2', title: 'ARC-AGI-2', icon: 'brain' },
+]
+
 const NO_VALUE = -1
 
 /** Sort keys offered in the Explorer dropdown (rank is CSV order, 1 = top frontier). */
@@ -120,19 +136,6 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
     [],
   )
 
-  const leaderboardTB = useMemo(
-    () => allModels.filter((m) => parsePct(m.terminal_bench) != null).sort((a, b) => parsePct(b.terminal_bench) - parsePct(a.terminal_bench)),
-    [],
-  )
-  const leaderboardSWE = useMemo(
-    () => allModels.filter((m) => parsePct(m.swe_bench_verified) != null).sort((a, b) => parsePct(b.swe_bench_verified) - parsePct(a.swe_bench_verified)),
-    [],
-  )
-  const leaderboardLCB = useMemo(
-    () => allModels.filter((m) => parsePct(m.livecodebench_v6) != null).sort((a, b) => parsePct(b.livecodebench_v6) - parsePct(a.livecodebench_v6)),
-    [],
-  )
-
   // Hardware Fit matrix: every OPEN-WEIGHT model with Q4 data (local-run
   // candidates — closed/API-only models can't run on local VRAM anyway).
   // Best SWE-V first; unscored models sink to the bottom.
@@ -144,5 +147,17 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
     [],
   )
 
-  return { stats, filtered, latestModels, leaderboardTB, leaderboardSWE, leaderboardLCB, hwModels }
+  // Leaderboard for EVERY benchmark column in the catalog (coding + reasoning/math),
+  // sorted best-first. parsePct handles annotated cells like "USAMO 2026: 99.8%".
+  const leaderboards = useMemo(() => {
+    const out = {}
+    for (const bench of BENCHMARKS) {
+      out[bench.key] = allModels
+        .filter((m) => parsePct(m[bench.key]) != null)
+        .sort((a, b) => (parsePct(b[bench.key]) ?? -1) - (parsePct(a[bench.key]) ?? -1))
+    }
+    return out
+  }, [])
+
+  return { stats, filtered, latestModels, leaderboards, hwModels }
 }

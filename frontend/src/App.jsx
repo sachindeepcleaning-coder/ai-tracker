@@ -33,7 +33,7 @@ export default function App() {
   const [compare, setCompare] = useState([])
   const [detail, setDetail] = useState(null)
 
-  const { stats, filtered, latestModels, leaderboardTB, leaderboardSWE, leaderboardLCB, hwModels } = useModels(filters)
+  const { stats, filtered, latestModels, leaderboards, hwModels } = useModels(filters)
 
   const toggleCompare = (id) => setCompare((c) => c.includes(id) ? c.filter((x) => x !== id) : c.length >= 4 ? c : [...c, id])
   const compareModels = allModels.filter((m) => compare.includes(m.id))
@@ -111,7 +111,7 @@ export default function App() {
             />
           )}
           <Suspense fallback={<TabFallback />}>
-            {tab === 'leaderboards' && <Leaderboards leaderboardTB={leaderboardTB} leaderboardSWE={leaderboardSWE} leaderboardLCB={leaderboardLCB} />}
+            {tab === 'leaderboards' && <Leaderboards leaderboards={leaderboards} />}
             {tab === 'hardware' && <HardwareFit models={allModels} stats={stats} hwModels={hwModels} />}
             {tab === 'cost' && <CostCalc />}
             {tab === 'compare' && <Compare compareModels={compareModels} onBack={() => setTab('explorer')} onClear={() => setCompare([])} />}
