@@ -1,6 +1,6 @@
 {
   "conversation_summary": {
-    "date": "2026-09-10 (online re-verified: DeepSeek docs V4.1 Flash GA + legacy routing Sep 14, Anthropic docs Fable 5.1 cache $0.25, Google Gemini intro to Dec 31 2026, llm-releases 349, AA v4.3; CSV ranks 1-267 single source of truth; V4.1 Flash MIT open weights on HF Sep 10)",
+    "date": "2026-09-13 (fact-checked vs HuggingFace/Cognition/Sakana primary sources; GLM-5.2 Turbo deleted; V4.1 Flash fixed 552B/8B+16B/280GB/CED; SWE-2+Fugu Max+Fugu Ultra v2.0 added; Qwen3.8-Max-Preview retired; Nemotron 3.5 Lightning duplicate deduped)",
     "currency_assumption": "1 USD = ₹95.12",
     "goal": "Compare API costs versus local hardware for extremely high-volume agentic coding.",
     "workload": {
@@ -6099,34 +6099,6 @@
     {
       "id": "rank-207",
       "rank": "207",
-      "model": "Qwen3.8-Max-Preview",
-      "provider": "Alibaba",
-      "total_parameters": "2.4T",
-      "active_parameters": "Unknown",
-      "full_q4_vram_gb": null,
-      "license": "Proprietary (Preview; weights pending; see rank 267 base weights)",
-      "swe_bench_verified": null,
-      "swe_bench_pro": null,
-      "livecodebench_v6": null,
-      "terminal_bench": null,
-      "humaneval": null,
-      "mmlu_pro": null,
-      "gpqa_diamond": null,
-      "hle": null,
-      "math": null,
-      "aime_2026": null,
-      "arc_agi_2": null,
-      "context_window": "~984K",
-      "price_in_usd_per_mtok": null,
-      "price_out_usd_per_mtok": null,
-      "price_in_inr_per_mtok": null,
-      "price_out_inr_per_mtok": null,
-      "is_free": false,
-      "released": null
-    },
-    {
-      "id": "rank-208",
-      "rank": "208",
       "model": "Laguna S 2.1",
       "provider": "Poolside",
       "total_parameters": "118B",
@@ -6153,8 +6125,8 @@
       "released": null
     },
     {
-      "id": "rank-209",
-      "rank": "209",
+      "id": "rank-208",
+      "rank": "208",
       "model": "Leanstral 1.5",
       "provider": "Mistral AI",
       "total_parameters": "119B",
@@ -6181,8 +6153,8 @@
       "released": null
     },
     {
-      "id": "rank-210",
-      "rank": "210",
+      "id": "rank-209",
+      "rank": "209",
       "model": "DeepSWE-Preview",
       "provider": "Together AI / Agentica",
       "total_parameters": "32B",
@@ -6209,8 +6181,8 @@
       "released": null
     },
     {
-      "id": "rank-211",
-      "rank": "211",
+      "id": "rank-210",
+      "rank": "210",
       "model": "SWE-Swiss-32B",
       "provider": "Open Source Community",
       "total_parameters": "32B",
@@ -6237,8 +6209,8 @@
       "released": null
     },
     {
-      "id": "rank-212",
-      "rank": "212",
+      "id": "rank-211",
+      "rank": "211",
       "model": "Claude Opus 5 🆕🆕",
       "provider": "Anthropic",
       "total_parameters": "Closed",
@@ -6265,8 +6237,8 @@
       "released": null
     },
     {
-      "id": "rank-213",
-      "rank": "213",
+      "id": "rank-212",
+      "rank": "212",
       "model": "Ling 3.0 Flash 🆕",
       "provider": "inclusionAI",
       "total_parameters": "124B",
@@ -6293,8 +6265,8 @@
       "released": null
     },
     {
-      "id": "rank-214",
-      "rank": "214",
+      "id": "rank-213",
+      "rank": "213",
       "model": "Aion-3.0-Mini",
       "provider": "AionLabs",
       "total_parameters": "Unknown",
@@ -6321,8 +6293,8 @@
       "released": null
     },
     {
-      "id": "rank-215",
-      "rank": "215",
+      "id": "rank-214",
+      "rank": "214",
       "model": "K-EXAONE 2.0 🆕",
       "provider": "LG AI Research",
       "total_parameters": "750B",
@@ -6349,8 +6321,8 @@
       "released": null
     },
     {
-      "id": "rank-216",
-      "rank": "216",
+      "id": "rank-215",
+      "rank": "215",
       "model": "openPangu-2.0-Pro 🆕",
       "provider": "Huawei",
       "total_parameters": "505B",
@@ -6377,8 +6349,8 @@
       "released": null
     },
     {
-      "id": "rank-217",
-      "rank": "217",
+      "id": "rank-216",
+      "rank": "216",
       "model": "Instella-MoE-16B-A3B-Think 🆕",
       "provider": "AMD",
       "total_parameters": "16B",
@@ -6405,8 +6377,8 @@
       "released": null
     },
     {
-      "id": "rank-218",
-      "rank": "218",
+      "id": "rank-217",
+      "rank": "217",
       "model": "A.X K2 🆕",
       "provider": "SK Telecom",
       "total_parameters": "688B",
@@ -6433,8 +6405,8 @@
       "released": null
     },
     {
-      "id": "rank-219",
-      "rank": "219",
+      "id": "rank-218",
+      "rank": "218",
       "model": "Qwen3.8-27B",
       "provider": "Alibaba",
       "total_parameters": "27B",
@@ -6461,8 +6433,8 @@
       "released": null
     },
     {
-      "id": "rank-220",
-      "rank": "220",
+      "id": "rank-219",
+      "rank": "219",
       "model": "DeepSeek V4 Pro 0813",
       "provider": "DeepSeek",
       "total_parameters": "1.6T",
@@ -6489,36 +6461,8 @@
       "released": null
     },
     {
-      "id": "rank-221",
-      "rank": "221",
-      "model": "Nemotron 3.5 Lightning",
-      "provider": "NVIDIA",
-      "total_parameters": "31.6B",
-      "active_parameters": "3.6B",
-      "full_q4_vram_gb": "16",
-      "license": "OpenMDW-1.1",
-      "swe_bench_verified": null,
-      "swe_bench_pro": null,
-      "livecodebench_v6": null,
-      "terminal_bench": null,
-      "humaneval": null,
-      "mmlu_pro": null,
-      "gpqa_diamond": null,
-      "hle": null,
-      "math": null,
-      "aime_2026": null,
-      "arc_agi_2": null,
-      "context_window": "1M",
-      "price_in_usd_per_mtok": null,
-      "price_out_usd_per_mtok": null,
-      "price_in_inr_per_mtok": null,
-      "price_out_inr_per_mtok": null,
-      "is_free": false,
-      "released": null
-    },
-    {
-      "id": "rank-222",
-      "rank": "222",
+      "id": "rank-220",
+      "rank": "220",
       "model": "Ling 3.0 Tiny",
       "provider": "inclusionAI",
       "total_parameters": "7.9B",
@@ -6545,8 +6489,8 @@
       "released": null
     },
     {
-      "id": "rank-223",
-      "rank": "223",
+      "id": "rank-221",
+      "rank": "221",
       "model": "GLM-5.3",
       "provider": "Z.AI",
       "total_parameters": "743B",
@@ -6573,8 +6517,8 @@
       "released": "2026-08-27"
     },
     {
-      "id": "rank-224",
-      "rank": "224",
+      "id": "rank-222",
+      "rank": "222",
       "model": "Gemini 3.7 Flash",
       "provider": "Google",
       "total_parameters": "Unknown",
@@ -6601,8 +6545,8 @@
       "released": null
     },
     {
-      "id": "rank-225",
-      "rank": "225",
+      "id": "rank-223",
+      "rank": "223",
       "model": "Muse Spark 1.2",
       "provider": "Meta",
       "total_parameters": "Unknown",
@@ -6629,8 +6573,8 @@
       "released": null
     },
     {
-      "id": "rank-226",
-      "rank": "226",
+      "id": "rank-224",
+      "rank": "224",
       "model": "Muse Glimmer 30B",
       "provider": "Meta",
       "total_parameters": "30B",
@@ -6657,8 +6601,8 @@
       "released": null
     },
     {
-      "id": "rank-227",
-      "rank": "227",
+      "id": "rank-225",
+      "rank": "225",
       "model": "Seed 2.1 Turbo",
       "provider": "ByteDance",
       "total_parameters": "Unknown",
@@ -6685,8 +6629,8 @@
       "released": null
     },
     {
-      "id": "rank-228",
-      "rank": "228",
+      "id": "rank-226",
+      "rank": "226",
       "model": "GLM-5.3-Flash",
       "provider": "Z.AI",
       "total_parameters": "320B",
@@ -6713,8 +6657,8 @@
       "released": "2026-08-25"
     },
     {
-      "id": "rank-229",
-      "rank": "229",
+      "id": "rank-227",
+      "rank": "227",
       "model": "Granite 4.2 8B",
       "provider": "IBM",
       "total_parameters": "8B",
@@ -6741,8 +6685,8 @@
       "released": null
     },
     {
-      "id": "rank-230",
-      "rank": "230",
+      "id": "rank-228",
+      "rank": "228",
       "model": "LFM2.5-2.6B",
       "provider": "LiquidAI",
       "total_parameters": "2.6B",
@@ -6769,8 +6713,8 @@
       "released": null
     },
     {
-      "id": "rank-231",
-      "rank": "231",
+      "id": "rank-229",
+      "rank": "229",
       "model": "Qwen3.8-Flash-Next",
       "provider": "Alibaba",
       "total_parameters": "180B",
@@ -6797,8 +6741,8 @@
       "released": "2026-08-26"
     },
     {
-      "id": "rank-232",
-      "rank": "232",
+      "id": "rank-230",
+      "rank": "230",
       "model": "MAI-Code-1.1-Flash",
       "provider": "Microsoft",
       "total_parameters": "138B",
@@ -6825,8 +6769,8 @@
       "released": "2026-08-11"
     },
     {
-      "id": "rank-233",
-      "rank": "233",
+      "id": "rank-231",
+      "rank": "231",
       "model": "North-Micro-Vision-Instruct",
       "provider": "Cohere Labs",
       "total_parameters": "2.4B",
@@ -6853,8 +6797,8 @@
       "released": null
     },
     {
-      "id": "rank-234",
-      "rank": "234",
+      "id": "rank-232",
+      "rank": "232",
       "model": "Ornith-1.5-397B",
       "provider": "DeepReinforce/Ornith",
       "total_parameters": "403B",
@@ -6881,8 +6825,8 @@
       "released": "2026-08-19"
     },
     {
-      "id": "rank-235",
-      "rank": "235",
+      "id": "rank-233",
+      "rank": "233",
       "model": "Ornith-1.5-35B-A3B",
       "provider": "DeepReinforce/Ornith",
       "total_parameters": "36B",
@@ -6909,8 +6853,8 @@
       "released": "2026-08-19"
     },
     {
-      "id": "rank-236",
-      "rank": "236",
+      "id": "rank-234",
+      "rank": "234",
       "model": "Ornith-1.5-9B",
       "provider": "DeepReinforce/Ornith",
       "total_parameters": "10B",
@@ -6937,8 +6881,8 @@
       "released": "2026-08-19"
     },
     {
-      "id": "rank-237",
-      "rank": "237",
+      "id": "rank-235",
+      "rank": "235",
       "model": "Apodex 1.1-mini",
       "provider": "Apodex AI",
       "total_parameters": "35B",
@@ -6965,8 +6909,8 @@
       "released": "2026-08-24"
     },
     {
-      "id": "rank-238",
-      "rank": "238",
+      "id": "rank-236",
+      "rank": "236",
       "model": "Qwen3.8-Flash",
       "provider": "Alibaba",
       "total_parameters": "125B",
@@ -6993,8 +6937,8 @@
       "released": null
     },
     {
-      "id": "rank-239",
-      "rank": "239",
+      "id": "rank-237",
+      "rank": "237",
       "model": "Cohere Parse 5",
       "provider": "Cohere",
       "total_parameters": "2.3B",
@@ -7021,8 +6965,8 @@
       "released": null
     },
     {
-      "id": "rank-240",
-      "rank": "240",
+      "id": "rank-238",
+      "rank": "238",
       "model": "Ling-3.0-flash-Fin",
       "provider": "inclusionAI (Ant Group)",
       "total_parameters": "124B",
@@ -7049,8 +6993,8 @@
       "released": "2026-09-04"
     },
     {
-      "id": "rank-241",
-      "rank": "241",
+      "id": "rank-239",
+      "rank": "239",
       "model": "Thomson",
       "provider": "Thomson Reuters",
       "total_parameters": "Undisc.",
@@ -7077,8 +7021,8 @@
       "released": null
     },
     {
-      "id": "rank-242",
-      "rank": "242",
+      "id": "rank-240",
+      "rank": "240",
       "model": "Hy-MT2-30B-A3B",
       "provider": "Tencent Hunyuan",
       "total_parameters": "30B",
@@ -7105,8 +7049,8 @@
       "released": null
     },
     {
-      "id": "rank-243",
-      "rank": "243",
+      "id": "rank-241",
+      "rank": "241",
       "model": "Dots3-Note Preview",
       "provider": "Dots Studio (Xiaohongshu)",
       "total_parameters": "280B",
@@ -7133,8 +7077,8 @@
       "released": null
     },
     {
-      "id": "rank-244",
-      "rank": "244",
+      "id": "rank-242",
+      "rank": "242",
       "model": "LFM2.5-VL-3B",
       "provider": "Liquid AI",
       "total_parameters": "3.1B",
@@ -7161,8 +7105,8 @@
       "released": null
     },
     {
-      "id": "rank-245",
-      "rank": "245",
+      "id": "rank-243",
+      "rank": "243",
       "model": "Nemotron 3.5 Lightning",
       "provider": "NVIDIA",
       "total_parameters": "31.6B",
@@ -7189,8 +7133,8 @@
       "released": null
     },
     {
-      "id": "rank-246",
-      "rank": "246",
+      "id": "rank-244",
+      "rank": "244",
       "model": "Namazu",
       "provider": "Sakana AI",
       "total_parameters": "Undisc.",
@@ -7217,8 +7161,8 @@
       "released": null
     },
     {
-      "id": "rank-247",
-      "rank": "247",
+      "id": "rank-245",
+      "rank": "245",
       "model": "Solar Pro 4",
       "provider": "Upstage",
       "total_parameters": "Undisc.",
@@ -7245,8 +7189,8 @@
       "released": null
     },
     {
-      "id": "rank-248",
-      "rank": "248",
+      "id": "rank-246",
+      "rank": "246",
       "model": "GPT-5.6-Cyber",
       "provider": "OpenAI",
       "total_parameters": "Undisc.",
@@ -7273,36 +7217,8 @@
       "released": null
     },
     {
-      "id": "rank-249",
-      "rank": "249",
-      "model": "GLM-5.2 Turbo",
-      "provider": "Z.ai",
-      "total_parameters": "753B",
-      "active_parameters": "40B",
-      "full_q4_vram_gb": "372",
-      "license": "Proprietary (Available; fast-serving tier; base MIT)",
-      "swe_bench_verified": null,
-      "swe_bench_pro": null,
-      "livecodebench_v6": null,
-      "terminal_bench": "81.0%*",
-      "humaneval": null,
-      "mmlu_pro": null,
-      "gpqa_diamond": null,
-      "hle": null,
-      "math": null,
-      "aime_2026": null,
-      "arc_agi_2": null,
-      "context_window": "1M",
-      "price_in_usd_per_mtok": 1.99,
-      "price_out_usd_per_mtok": 6.16,
-      "price_in_inr_per_mtok": 189.29,
-      "price_out_inr_per_mtok": 585.94,
-      "is_free": false,
-      "released": null
-    },
-    {
-      "id": "rank-250",
-      "rank": "250",
+      "id": "rank-247",
+      "rank": "247",
       "model": "Claude Fable 5.1",
       "provider": "Anthropic",
       "total_parameters": "Undisc.",
@@ -7329,8 +7245,8 @@
       "released": "2026-09-01"
     },
     {
-      "id": "rank-251",
-      "rank": "251",
+      "id": "rank-248",
+      "rank": "248",
       "model": "Claude Mythos 5.1",
       "provider": "Anthropic",
       "total_parameters": "Undisc.",
@@ -7357,8 +7273,8 @@
       "released": "2026-09-01"
     },
     {
-      "id": "rank-252",
-      "rank": "252",
+      "id": "rank-249",
+      "rank": "249",
       "model": "Qwen3.8-Max-0902",
       "provider": "Alibaba",
       "total_parameters": "2.4T",
@@ -7385,8 +7301,8 @@
       "released": "2026-09-02"
     },
     {
-      "id": "rank-253",
-      "rank": "253",
+      "id": "rank-250",
+      "rank": "250",
       "model": "DeepSeek V4 Flash Vision Exp",
       "provider": "DeepSeek",
       "total_parameters": "284B",
@@ -7413,8 +7329,8 @@
       "released": null
     },
     {
-      "id": "rank-254",
-      "rank": "254",
+      "id": "rank-251",
+      "rank": "251",
       "model": "Gemini 3.8 Flash",
       "provider": "Google",
       "total_parameters": "Undisc.",
@@ -7441,8 +7357,8 @@
       "released": "2026-09-02"
     },
     {
-      "id": "rank-255",
-      "rank": "255",
+      "id": "rank-252",
+      "rank": "252",
       "model": "Muse Spark 1.3",
       "provider": "Meta",
       "total_parameters": "Undisc.",
@@ -7469,8 +7385,8 @@
       "released": "2026-09-02"
     },
     {
-      "id": "rank-256",
-      "rank": "256",
+      "id": "rank-253",
+      "rank": "253",
       "model": "Mercury 2.5",
       "provider": "Inception",
       "total_parameters": "Undisc.",
@@ -7497,8 +7413,8 @@
       "released": "2026-09-08"
     },
     {
-      "id": "rank-257",
-      "rank": "257",
+      "id": "rank-254",
+      "rank": "254",
       "model": "GPT-6 Astra",
       "provider": "OpenAI",
       "total_parameters": "Undisc.",
@@ -7525,8 +7441,8 @@
       "released": "2026-09-03"
     },
     {
-      "id": "rank-258",
-      "rank": "258",
+      "id": "rank-255",
+      "rank": "255",
       "model": "GPT-6 Astra Pro",
       "provider": "OpenAI",
       "total_parameters": "Undisc.",
@@ -7553,14 +7469,14 @@
       "released": "2026-09-03"
     },
     {
-      "id": "rank-259",
-      "rank": "259",
+      "id": "rank-256",
+      "rank": "256",
       "model": "DeepSeek V4.1 Flash",
       "provider": "DeepSeek",
-      "total_parameters": "763B",
-      "active_parameters": "Undisc.",
-      "full_q4_vram_gb": "382",
-      "license": "MIT (open weights Sep 10 HF; 48 shards ~510GB FP8; KV-cache compression; vision; routes legacy V4 Flash/Pro; cache-hit $0.003 off-peak/$0.006 peak)",
+      "total_parameters": "552B",
+      "active_parameters": "8B/16B",
+      "full_q4_vram_gb": 280,
+      "license": "MIT (open weights Sep 10 HF; Causal Encoder-Decoder 40L; 384 experts; 8B prefill/16B decode; 890 bytes/tok KV; Engram 196B; 48 shards ~510GB FP8; KV-cache compression; vision; routes legacy V4 Flash/Pro; cache-hit $0.003 off-peak/$0.006 peak)",
       "swe_bench_verified": null,
       "swe_bench_pro": null,
       "livecodebench_v6": null,
@@ -7581,8 +7497,8 @@
       "released": "2026-09-10"
     },
     {
-      "id": "rank-260",
-      "rank": "260",
+      "id": "rank-257",
+      "rank": "257",
       "model": "MiniCPM5-2B",
       "provider": "OpenBMB",
       "total_parameters": "2.5B",
@@ -7609,8 +7525,8 @@
       "released": "2026-09-07"
     },
     {
-      "id": "rank-261",
-      "rank": "261",
+      "id": "rank-258",
+      "rank": "258",
       "model": "K2 Horizon 375B-A23B",
       "provider": "IFM (MBZUAI)",
       "total_parameters": "375B",
@@ -7637,8 +7553,8 @@
       "released": "2026-09-03"
     },
     {
-      "id": "rank-262",
-      "rank": "262",
+      "id": "rank-259",
+      "rank": "259",
       "model": "Quasar 438B",
       "provider": "Multiverse Computing",
       "total_parameters": "438B",
@@ -7665,8 +7581,8 @@
       "released": "2026-09-02"
     },
     {
-      "id": "rank-263",
-      "rank": "263",
+      "id": "rank-260",
+      "rank": "260",
       "model": "Ling-3.0-flash-Sante",
       "provider": "inclusionAI (Ant Group)",
       "total_parameters": "124B",
@@ -7693,8 +7609,8 @@
       "released": "2026-09-04"
     },
     {
-      "id": "rank-264",
-      "rank": "264",
+      "id": "rank-261",
+      "rank": "261",
       "model": "Ling-3.0-flash-VL",
       "provider": "inclusionAI (Ant Group)",
       "total_parameters": "124B",
@@ -7721,8 +7637,8 @@
       "released": "2026-09-10"
     },
     {
-      "id": "rank-265",
-      "rank": "265",
+      "id": "rank-262",
+      "rank": "262",
       "model": "Gemini 3.8 Flash Cyber",
       "provider": "Google",
       "total_parameters": "Undisc.",
@@ -7749,8 +7665,8 @@
       "released": "2026-09-02"
     },
     {
-      "id": "rank-266",
-      "rank": "266",
+      "id": "rank-263",
+      "rank": "263",
       "model": "Tencent Hy4 preview",
       "provider": "Tencent Hunyuan",
       "total_parameters": "770B",
@@ -7777,8 +7693,8 @@
       "released": "2026-08-28"
     },
     {
-      "id": "rank-267",
-      "rank": "267",
+      "id": "rank-264",
+      "rank": "264",
       "model": "Qwen3.8-Max",
       "provider": "Alibaba",
       "total_parameters": "2.4T",
@@ -7803,6 +7719,90 @@
       "price_out_inr_per_mtok": 570.72,
       "is_free": false,
       "released": "2026-08-13"
+    },
+    {
+      "id": "rank-265",
+      "rank": "265",
+      "model": "SWE-2",
+      "provider": "Cognition",
+      "total_parameters": "Undisc.",
+      "active_parameters": "Undisc.",
+      "full_q4_vram_gb": null,
+      "license": "Proprietary (Devin only; FrontierCode 50.0%; DeepSWE 73.0%; TB2.1 92.8%; TB4 27.3%)",
+      "swe_bench_verified": "-",
+      "swe_bench_pro": "-",
+      "livecodebench_v6": "-",
+      "terminal_bench": "92.8% (TB2.1 vendor)",
+      "humaneval": "-",
+      "mmlu_pro": "-",
+      "gpqa_diamond": "27.3% (TB4 vendor)",
+      "hle": "-",
+      "math": "-",
+      "aime_2026": "-",
+      "arc_agi_2": "-",
+      "context_window": "1M",
+      "price_in_usd_per_mtok": "$20.00",
+      "price_out_usd_per_mtok": "$100.00",
+      "price_in_inr_per_mtok": "₹1902.40",
+      "price_out_inr_per_mtok": "₹9512.00",
+      "is_free": false,
+      "released": "Sep 2026"
+    },
+    {
+      "id": "rank-266",
+      "rank": "266",
+      "model": "Fugu Max",
+      "provider": "Sakana AI",
+      "total_parameters": "Undisc.",
+      "active_parameters": "Orchestration",
+      "full_q4_vram_gb": null,
+      "license": "Proprietary (Sakana AI; orchestration system; not EU/EEA)",
+      "swe_bench_verified": "-",
+      "swe_bench_pro": "-",
+      "livecodebench_v6": "-",
+      "terminal_bench": "-",
+      "humaneval": "-",
+      "mmlu_pro": "-",
+      "gpqa_diamond": "-",
+      "hle": "-",
+      "math": "-",
+      "aime_2026": "-",
+      "arc_agi_2": "-",
+      "context_window": "1M",
+      "price_in_usd_per_mtok": "$2.00",
+      "price_out_usd_per_mtok": "$6.00",
+      "price_in_inr_per_mtok": "₹190.24",
+      "price_out_inr_per_mtok": "₹570.72",
+      "is_free": false,
+      "released": "Sep 2026"
+    },
+    {
+      "id": "rank-267",
+      "rank": "267",
+      "model": "Fugu Ultra v2.0",
+      "provider": "Sakana AI",
+      "total_parameters": "Undisc.",
+      "active_parameters": "Orchestration",
+      "full_q4_vram_gb": null,
+      "license": "Proprietary (Sakana AI; v2.0; orchestration system; not EU/EEA)",
+      "swe_bench_verified": "-",
+      "swe_bench_pro": "-",
+      "livecodebench_v6": "-",
+      "terminal_bench": "-",
+      "humaneval": "-",
+      "mmlu_pro": "-",
+      "gpqa_diamond": "-",
+      "hle": "-",
+      "math": "-",
+      "aime_2026": "-",
+      "arc_agi_2": "-",
+      "context_window": "1M",
+      "price_in_usd_per_mtok": "$5.00",
+      "price_out_usd_per_mtok": "$30.00",
+      "price_in_inr_per_mtok": "₹475.60",
+      "price_out_inr_per_mtok": "₹2853.60",
+      "is_free": false,
+      "released": "Sep 2026"
     }
   ]
 }

@@ -4,9 +4,9 @@
  */
 
 export const INR_PER_USD = 95.12
-export const VERIFIED_AT = 'Sep 10, 2026'
+export const VERIFIED_AT = 'Sep 13, 2026'
 /** Data as-of anchor (from data.json conversation_summary) — used for "latest" windows. */
-export const DATA_AS_OF = '2026-09-10'
+export const DATA_AS_OF = '2026-09-13'
 
 /** '2026-09-10' -> 'Sep 10' (UTC so the label is stable regardless of viewer timezone). */
 export function fmtDate(iso) {
