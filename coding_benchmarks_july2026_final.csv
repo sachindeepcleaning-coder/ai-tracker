@@ -263,7 +263,7 @@ Rank,Model,Provider,Total Parameters,Active Parameters,Full Q4 VRAM (GB),License
 262,Gemini 3.8 Flash Cyber,Google,Undisc.,Undisc.,?,Proprietary (Available Sep 2; Fairwind-gated vuln detection/patching; same base as 3.8 Flash),-,-,-,-,-,-,-,-,-,-,-,$0.75,$3.75,1M,₹71.34,₹356.70
 263,Tencent Hy4 preview,Tencent Hunyuan,770B,49B,385,Apache 2.0 (Available; preview Aug 28; 1M+ ctx; TB2.1 85.4 / DeepSWE 64.3 vendor),-,-,-,85.4% (TB2.1 vendor),-,-,-,-,-,-,64.3% (DeepSWE vendor),$0.834,$2.501,1M+,₹79.33,₹237.90
 264,Qwen3.8-Max,Alibaba,2.4T,95B,1200,Qwen License (custom; open weights Aug 13; attribution >100M MAU; MaaS >$50M/yr separate; TB2.1 86.6 / DeepSWE 56.6 vendor),-,67.7% (SWE-Pro vendor),-,86.6% (TB2.1 vendor),-,-,-,-,-,-,56.6% (DeepSWE vendor),$2.00,$6.00,1M,₹190.24,₹570.72
-265,SWE-2,Cognition,Undisc.,Undisc.,?,Proprietary (Devin only; FrontierCode 50.0%; DeepSWE 73.0%; TB2.1 92.8%; TB4 27.3%),-,-,-,92.8% (TB2.1 vendor),-,-,27.3% (TB4 vendor),-,-,-,50.0% (FrontierCode vendor),$20.00,$100.00,1M,₹1902.40,₹9512.00
-266,Fugu Max,Sakana AI,Undisc.,Orchestration,?,Proprietary (Sakana AI; orchestration system; not EU/EEA),-,-,-,-,-,-,-,-,-,-,$2.00,$6.00,1M,₹190.24,₹570.72
-267,Fugu Ultra v2.0,Sakana AI,Undisc.,Orchestration,?,Proprietary (Sakana AI; v2.0; orchestration system; not EU/EEA),-,-,-,-,-,-,-,-,-,-,$5.00,$30.00,1M,₹475.60,₹2853.60
+265,SWE-2,Cognition,Undisc.,Undisc.,?,Proprietary (Devin only; FrontierCode 50.0%; DeepSWE 73.0%; TB2.1 92.8%; TB4 27.3%),-,-,-,92.8% (TB2.1 vendor),-,-,-,-,-,-,-,$20.00,$100.00,1M,₹1902.40,₹9512.00
+266,Fugu Max,Sakana AI,Undisc.,Orchestration,?,Proprietary (Sakana AI; orchestration system; not EU/EEA),-,-,-,-,-,-,-,-,-,-,-,$2.00,$6.00,1M,₹190.24,₹570.72
+267,Fugu Ultra v2.0,Sakana AI,Undisc.,Orchestration,?,Proprietary (Sakana AI; v2.0; orchestration system; not EU/EEA),-,-,-,-,-,-,-,-,-,-,-,$5.00,$30.00,1M,₹475.60,₹2853.60
 # See CHANGELOG.md for update history

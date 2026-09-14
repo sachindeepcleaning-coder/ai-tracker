@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { IndianRupee } from 'lucide-react'
 import { allModels } from '../hooks/useModels'
 import { INR_PER_USD } from '../lib/parse'
@@ -44,7 +44,10 @@ export function resolveSample(s, catalog = allModels) {
     const candidates = catalog.filter(
       (m) => normalizeModelName(m.model).includes(want) || want.includes(normalizeModelName(m.model)),
     )
-    if (candidates.length === 1) model = candidates[0]
+    if (candidates.length === 1) {
+      model = candidates[0]
+      console.info(`CostCalc: "${s.model}" resolved via fuzzy fallback -> "${model.model}" (verify pricing)`)
+    }
   }
   if (!model) console.warn(`CostCalc: sample model "${s.model}" not found in catalog — prices fall back to 0`)
   return {

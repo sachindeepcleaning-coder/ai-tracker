@@ -1,3 +1,4 @@
+import React from 'react'
 import { Scale, Zap, BarChart3 } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, ScatterChart, Scatter, Cell } from 'recharts'
 import { parsePct, parseQ4, fmtDate } from '../lib/parse'

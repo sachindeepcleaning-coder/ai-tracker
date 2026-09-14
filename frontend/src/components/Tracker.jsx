@@ -1,3 +1,4 @@
+import React from 'react'
 import { Sparkles } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
 
@@ -43,13 +44,13 @@ export default function Tracker() {
       <div className="grid md:grid-cols-2 gap-4">
         <div className="card p-4">
           <h3 className="font-bold">Frontier tightness</h3>
-          <p className="text-sm text-white/60 mt-1">TB2.1 90.6 (V4.1 Flash) &gt; 88.3 (K3) ≈ 88.2 (GLM-5.3) ≈ 87.9 (V4 Pro 0813) &gt; 86.6 (QMax) &gt; 86.1 (Ornith); top-to-6th gap ~4.5 pts across 5-10× hardware. Giants not worth it for single-user — spend on infra for models that fit 512GB.</p>
+          <p className="text-sm text-white/60 mt-1">TB2.1 92.8 (SWE-2, vendor) &gt; 90.6 (V4.1 Flash) &gt; 88.3 (K3) ≈ 88.2 (GLM-5.3) ≈ 87.9 (V4 Pro 0813) &gt; 86.6 (QMax) &gt; 86.1 (Ornith); top-to-6th gap ~6.7 pts across 5-10× hardware. Giants not worth it for single-user — spend on infra for models that fit 512GB.</p>
           <div className="mt-3 h-[160px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={[{ n: 'V4.1 Flash', tb: 90.6 }, { n: 'K3', tb: 88.3 }, { n: 'GLM5.3', tb: 88.2 }, { n: 'V4 Pro', tb: 87.9 }, { n: 'QMax', tb: 86.6 }, { n: 'Ornith', tb: 86.1 }]}>
+              <BarChart data={[{ n: 'SWE-2', tb: 92.8 }, { n: 'V4.1 Flash', tb: 90.6 }, { n: 'K3', tb: 88.3 }, { n: 'GLM5.3', tb: 88.2 }, { n: 'V4 Pro', tb: 87.9 }, { n: 'QMax', tb: 86.6 }, { n: 'Ornith', tb: 86.1 }]}>
                 <CartesianGrid stroke="rgba(255,255,255,0.06)" />
                 <XAxis dataKey="n" tick={{ fontSize: 10, fill: '#94A3B8' }} />
-                <YAxis domain={[80, 92]} tick={{ fill: '#94A3B8' }} />
+                <YAxis domain={[80, 95]} tick={{ fill: '#94A3B8' }} />
                 <Tooltip contentStyle={{ background: '#131C2E', border: '1px solid rgba(255,255,255,0.1)' }} />
                 <Bar dataKey="tb" fill="#8B5CF6" radius={[6, 6, 0, 0]} />
               </BarChart>

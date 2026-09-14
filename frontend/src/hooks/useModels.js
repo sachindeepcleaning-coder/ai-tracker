@@ -3,8 +3,49 @@ import raw from '../data.json'
 import { parsePct, parseQ4, DATA_AS_OF } from '../lib/parse'
 import { isOpenWeight, licenseBadge } from '../lib/license'
 
-/** Catalog singleton — 267 rows from data.json. */
+/**
+ * One catalog row (from data.json, regenerated from the CSV via `npm run data`).
+ * @typedef {Object} Model
+ * @property {string} id         Stable key "rank-N" (survives re-ranks better than index).
+ * @property {string} rank       CSV rank "1".."267" (1 = top frontier).
+ * @property {string} model      Display name — the join key for CostCalc samples.
+ * @property {string} provider
+ * @property {string|null} total_parameters  "770B" / "Unknown" / "Undisc."
+ * @property {string|null} active_parameters "49B" / "8B/16B" / "Unknown".
+ * @property {number|string|null} full_q4_vram_gb  Number when plain, annotated string ("~1400G") for display.
+ * @property {string} license    Raw free-text cell — badge/filter use heuristics (lib/license).
+ * @property {string|null} swe_bench_verified  "93.4%"-style cells; use parsePct().
+ * @property {string|null} swe_bench_pro
+ * @property {string|null} livecodebench_v6
+ * @property {string|null} terminal_bench
+ * @property {string|null} humaneval
+ * @property {string|null} mmlu_pro
+ * @property {string|null} gpqa_diamond
+ * @property {string|null} hle
+ * @property {string|null} math
+ * @property {string|null} aime_2026
+ * @property {string|null} arc_agi_2
+ * @property {string|null} context_window    "1M" / "260K".
+ * @property {number|null} price_in_usd_per_mtok
+ * @property {number|null} price_out_usd_per_mtok
+ * @property {number|null} price_in_inr_per_mtok
+ * @property {number|null} price_out_inr_per_mtok
+ * @property {boolean} is_free   Curated (not in CSV).
+ * @property {string|null} released  ISO "2026-09-10" or coarse "Sep 2026" — curated (not in CSV).
+ */
+
+/** @type {Model[]} Catalog singleton — 267 rows from data.json. */
 export const allModels = raw.all_coding_models || raw
+
+// Dev-only invariant check: catches malformed regens (duplicate ids, rank gaps) at startup.
+if (import.meta.env.DEV) {
+  const ids = new Set(allModels.map((m) => m.id))
+  const ranks = allModels.map((m) => parseInt(m.rank, 10)).sort((a, b) => a - b)
+  const contiguous = ranks.every((r, i) => r === i + 1)
+  if (ids.size !== allModels.length || !contiguous) {
+    console.warn(`useModels: catalog invariants violated — ${allModels.length} rows, ${ids.size} unique ids, ranks contiguous: ${contiguous}. Re-run \`npm run data\`.`)
+  }
+}
 
 export const providers = [...new Set(allModels.map((m) => m.provider))].sort()
 

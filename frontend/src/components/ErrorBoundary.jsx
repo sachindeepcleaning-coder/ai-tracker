@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 /** Prevents a single bad data row / chart glitch from blanking the whole dashboard. */
 export default class ErrorBoundary extends Component {

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Zap, Award, BarChart3, BrainCircuit } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import { parsePct, fmtDate, fmtDateFull, DATA_AS_OF } from '../lib/parse'

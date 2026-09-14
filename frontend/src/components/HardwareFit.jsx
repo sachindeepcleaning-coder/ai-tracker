@@ -1,3 +1,4 @@
+import React from 'react'
 import { HardDrive } from 'lucide-react'
 import { parseQ4, fmtDate } from '../lib/parse'
 import { hardwareTiers, fitsModel } from '../lib/hardware'

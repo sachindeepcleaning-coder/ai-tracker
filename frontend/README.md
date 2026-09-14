@@ -12,8 +12,9 @@ Live site: https://sachindeepcleaning-coder.github.io/ai-tracker/
 | Build | Vite 8 (`@vitejs/plugin-react`) |
 | UI | React 19, Tailwind 3, Lucide icons |
 | Charts | Recharts 3 |
-| Data | Static `src/data.json` (ranks 1-267, single source of truth = `coding_benchmarks_july2026_final.csv`) |
+| Data | Static `src/data.json` (ranks 1-267, single source of truth = `coding_benchmarks_july2026_final.csv`, regenerated via `npm run data`) |
 | Lint | Oxlint |
+| Tests | Vitest 3 + jsdom (`src/**/__tests__/`, `src/App.test.jsx`, `src/data.test.js`) |
 | Fonts | Self-hosted Inter + JetBrains Mono (woff2 in `src/assets/fonts/`) |
 
 ## Layout
@@ -32,14 +33,16 @@ src/
     useModels.js           filter/sort pipeline, stats, leaderboards, HW matrix rows
   components/
     Header.jsx             sticky header + section tabs
-    Explorer.jsx           search/filters/compare bar + card grid (paged 36)
-    Leaderboards.jsx       TB2.1 / SWE-V / LCB leaderboards + charts
-    HardwareFit.jsx        Q4 fit matrix + tier cards
-    CostCalc.jsx           API vs local cost calculator (prices from data.json)
+    Explorer.jsx           search/filters/compare bar + full card grid (all 267 at once, no pagination)
+    Leaderboards.jsx       11 benchmark boards (coding + reasoning/math) + top-12 charts
+    HardwareFit.jsx        Q4 fit matrix (open-weight only) + tier cards
+    CostCalc.jsx           API vs local cost calculator (prices resolved by model name from data.json)
     Compare.jsx            up to 4-model charts + side-by-side table
     Tracker.jsx            Sep 2026 release tracker + frontier tightness
-    DetailModal.jsx        accessible dialog (focus trap, Esc, aria-modal)
+    DetailModal.jsx        accessible dialog (focus trap, Esc, aria-modal, compare toggle)
     ErrorBoundary.jsx      crash guard around tab content
+  scripts/
+    regen-data.mjs         CSV -> data.json regeneration (preserves curated released/is_free)
 ```
 
 ## Develop
@@ -48,9 +51,13 @@ src/
 npm install
 npm run dev        # local dev server
 npm run lint       # oxlint
+npm run test       # vitest (parse/hardware/useModels/CostCalc/App shell/data integrity)
 npm run build      # production build -> dist/
 npm run preview    # preview the production build
+npm run data       # regenerate src/data.json from the CSV (after CSV edits)
 ```
+
+Secondary tabs (Leaderboards, HardwareFit, CostCalc, Compare, Tracker) are **code-split** via `React.lazy` + `Suspense` — recharts stays off the first-paint critical path. The CI deploy workflow (`.github/workflows/deploy.yml`) runs lint + tests + build on every push to `master`.
 
 ## Deploy to GitHub Pages (project site)
 
@@ -68,13 +75,13 @@ The favicon and any `/`-rooted asset in `index.html` must use `%BASE_URL%` (e.g.
 
 ### Option A — GitHub Actions (recommended)
 
-A workflow lives at `.github/workflows/deploy.yml` (repo root) and publishes `frontend/dist` to the `gh-pages` branch on push to `master`:
+The workflow at `.github/workflows/deploy.yml` (repo root) builds `frontend/dist` and publishes it via the **GitHub Pages "GitHub Actions" source mode** (environment `github-pages`) on every push to `master`:
 
 ```bash
-# push to master; the Pages deploy runs automatically
+# push to master; lint -> test -> build -> deploy runs automatically
 ```
 
-Then enable **Settings → Pages → Deploy from a branch → `gh-pages` / `/(root)`**.
+Then enable **Settings → Pages → Source: GitHub Actions**.
 
 ### Option B — Manual
 
@@ -91,13 +98,14 @@ git subtree push --prefix frontend/dist origin gh-pages
 
 ## Updating the catalog
 
-1. Regenerate `src/data.json` from `coding_benchmarks_july2026_final.csv` (+ `ai_coding_api_vs_local_summary.json`).
-2. Keep the first row's `id` scheme (`rank-<n>`) — `CostCalc` resolves sample prices by these ids.
-3. If a cost sample references a new model, add its `rank-<n>` to `COST_SAMPLES` in `components/CostCalc.jsx`.
-4. Run `npm run lint && npm run build` and re-verify the live URL.
+1. Edit `coding_benchmarks_july2026_final.csv` (repo root), then run `npm run data` — this regenerates `src/data.json` using the canonical column mapping and **preserves curated `released` / `is_free`** from the existing data.json (matched by rank id).
+2. Keep the `rank-<n>` id scheme — `CostCalc` resolves sample prices by **model name** (with normalized/fuzzy fallback), so re-ranks are safe.
+3. If a cost sample references a new model, add `{ model: '<exact catalog name>' }` to `COST_SAMPLES` in `components/CostCalc.jsx`.
+4. Run `npm run test && npm run lint && npm run build` — the data integrity tests catch string prices, rank gaps, and missing ids before deploy.
 
 ## Notes
 
-- No router, no TypeScript — one page, tabbed. Split is per-tab components + shared lib/hook helpers.
+- No router, no TypeScript — one page, tabbed. Split is per-tab components + shared lib/hook helpers. JSDoc `Model` typedef in `hooks/useModels.js` documents the row shape.
 - All benchmark scores are vendor-reported unless marked `AA` / `Scale` / `BenchLM`; figures are planning estimates, not vendor quotes.
 - Currency assumption: 1 USD = ₹95.12 (standardized Aug 14, 2026).
+- Vitest note: components rendered in tests carry `import React from 'react'` (vitest classic-JSX path); the Vite build uses the automatic runtime either way.
