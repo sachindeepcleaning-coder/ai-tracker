@@ -1,5 +1,5 @@
-import { lazy, Suspense, useState } from 'react'
-import { Zap, Database, Award, Layers, Cpu } from 'lucide-react'
+import React, { lazy, Suspense, useState } from 'react'
+import { Zap, Database, Award, Layers, Cpu, Calendar } from 'lucide-react'
 import Header from './components/Header'
 import Explorer from './components/Explorer'
 import DetailModal from './components/DetailModal'
@@ -44,12 +44,13 @@ export default function App() {
       <Header tab={tab} onTab={setTab} stats={stats} explorerCount={filtered.length} />
 
       {/* KPI strip */}
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-4 grid grid-cols-2 md:grid-cols-5 gap-3">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-4 grid grid-cols-2 md:grid-cols-6 gap-3">
         {[
           { k: 'Total models', v: stats.total, s: 'CSV 1-267, fact-checked Sep 13', icon: Database },
           { k: 'Open-weight', v: stats.open, s: `${Math.round((stats.open / stats.total) * 100)}% open`, icon: Layers },
           { k: 'With SWE-V', v: stats.withSWE, s: 'have SWE-bench Verified', icon: Award },
           { k: 'With Q4 size', v: stats.withQ4, s: 'have Q4 VRAM', icon: Cpu },
+          { k: 'With release date', v: stats.dated, s: `${Math.round((stats.dated / stats.total) * 100)}% of catalog`, icon: Calendar },
           { k: 'Best Q4 fit', v: 'Qwen 27B', s: '17 GB → 200 tok/s on 1×5090', icon: Zap },
         ].map((card) => {
           const Icon = card.icon

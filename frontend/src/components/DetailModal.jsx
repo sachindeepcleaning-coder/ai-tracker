@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { X, ArrowUpRight } from 'lucide-react'
 import { licenseBadge } from '../lib/license'
 import { fmtDateFull } from '../lib/parse'

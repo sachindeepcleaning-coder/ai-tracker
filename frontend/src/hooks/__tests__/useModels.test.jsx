@@ -24,8 +24,10 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
     const { stats } = renderUseModels()
     expect(stats).toHaveProperty('withQ4')
     expect(stats).not.toHaveProperty('avgQ4')
+    expect(stats).toHaveProperty('dated')
     expect(stats.total).toBe(267)
     expect(stats.withQ4).toBe(allModels.filter(m => parseQ4(m.full_q4_vram_gb) != null).length)
+    expect(stats.dated).toBe(allModels.filter(m => m.released).length)
     expect(stats.withSWE).toBe(allModels.filter(m => parsePct(m.swe_bench_verified) != null).length)
   })
 

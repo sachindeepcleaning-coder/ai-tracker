@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Search, Award, HardDrive, IndianRupee, Scale, Timer } from 'lucide-react'
 import { VERIFIED_AT } from '../lib/parse'
 

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Search, Filter, ChevronDown, Check, X, ArrowUpRight } from 'lucide-react'
 import { parsePct, parseQ4, paramsLabel, fmtDate, fmtDateFull, daysOld, DATA_AS_OF } from '../lib/parse'
 import { licenseBadge } from '../lib/license'

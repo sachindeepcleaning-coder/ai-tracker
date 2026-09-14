@@ -38,13 +38,13 @@ export function resolveSample(s, catalog = allModels) {
     const want = normalizeModelName(s.model)
     model = catalog.find((m) => normalizeModelName(m.model) === want)
   }
-  // 4) suffix / includes fallback — last resort for alias mismatches
+  // 4) substring fallback — only if exactly one candidate (avoids "GPT-5" matching both GPT-5.6 Sol and GPT-5 Terra)
   if (!model) {
     const want = normalizeModelName(s.model)
-    model = catalog.find((m) => {
-      const have = normalizeModelName(m.model)
-      return have.includes(want) || want.includes(have)
-    })
+    const candidates = catalog.filter(
+      (m) => normalizeModelName(m.model).includes(want) || want.includes(normalizeModelName(m.model)),
+    )
+    if (candidates.length === 1) model = candidates[0]
   }
   if (!model) console.warn(`CostCalc: sample model "${s.model}" not found in catalog — prices fall back to 0`)
   return {
