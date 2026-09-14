@@ -1,7 +1,7 @@
 import React from 'react'
 import { Zap, Award, BarChart3, BrainCircuit } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
-import { parsePct, fmtDate, fmtDateFull, DATA_AS_OF } from '../lib/parse'
+import { parsePct, scoreSource, fmtDate, fmtDateFull, DATA_AS_OF } from '../lib/parse'
 import { licenseBadge } from '../lib/license'
 import { BENCHMARKS } from '../hooks/useModels'
 
@@ -29,7 +29,12 @@ export default function Leaderboards({ leaderboards }) {
                       </div>
                       <div className="text-xs text-white/50">{m.provider} · {licenseBadge(m.license).label}</div>
                     </div>
-                    <div className="text-sm font-mono font-bold text-emerald-400 shrink-0">{m[bench.key]}</div>
+                    <div className="text-sm font-mono font-bold text-emerald-400 shrink-0">
+                      {m[bench.key]}
+                      {scoreSource(m[bench.key]) === 'vendor' && (
+                        <span className="ml-1 align-middle text-[9px] font-sans font-semibold uppercase tracking-wide text-amber-400/80" title="Vendor-reported score (own harness) — not independently standardized">V</span>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>

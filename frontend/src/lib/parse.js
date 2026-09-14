@@ -58,6 +58,19 @@ export function parseQ4(v) {
   return m ? parseFloat(m[1]) : null
 }
 
+/** Score provenance from a benchmark cell: '92.8% (TB2.1 vendor)' -> 'vendor'.
+    Plain cells -> null (vendor-reported is the catalog default, so only
+    deviations from prose-only reporting are surfaced in the UI). */
+export function scoreSource(v) {
+  const s = String(v ?? '').toLowerCase()
+  if (!s || s === '-') return null
+  if (s.includes('vendor')) return 'vendor'
+  if (/\baa\b/.test(s)) return 'aa'
+  if (/\bscale\b/.test(s)) return 'scale'
+  if (s.includes('benchlm')) return 'benchlm'
+  return null
+}
+
 /** "0.15" -> "$0.15/M" (keeps 2 decimals for fractions, trims trailing zeros otherwise). */
 export function fmtUsdPerM(v) {
   if (v == null) return '—'

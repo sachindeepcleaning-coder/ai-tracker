@@ -66,4 +66,19 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
     expect(latestModels.length).toBe(3)
     for (const m of latestModels) expect(m.released).toBeTruthy()
   })
+
+  it('bestFit: dynamic best open-weight ≤32GB by SWE-V (not hardcoded Qwen 27B)', async () => {
+    const { bestFit } = renderUseModels()
+    expect(bestFit).not.toBeNull()
+    const { parseQ4, parsePct } = await import('../../lib/parse.js')
+    const { isOpenWeight } = await import('../../lib/license.js')
+    expect(isOpenWeight(bestFit.license)).toBe(true)
+    expect(parseQ4(bestFit.full_q4_vram_gb)).toBeLessThanOrEqual(32)
+    // must be the best SWE-V among ≤32GB open-weight candidates
+    const bestSwe = allModels
+      .filter((m) => isOpenWeight(m.license) && (parseQ4(m.full_q4_vram_gb) ?? Infinity) <= 32)
+      .map((m) => parsePct(m.swe_bench_verified) ?? -1)
+      .sort((a, b) => b - a)[0]
+    expect(parsePct(bestFit.swe_bench_verified) ?? -1).toBe(bestSwe)
+  })
 })

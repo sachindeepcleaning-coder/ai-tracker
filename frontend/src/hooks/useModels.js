@@ -178,6 +178,16 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
     [],
   )
 
+  // Best open-weight model that fits a 1×5090 (Q4 <= 32GB), best SWE-V first
+  // (TB as tiebreak) — drives the dynamic "Best Q4 fit" KPI card.
+  const bestFit = useMemo(() => {
+    const cands = allModels
+      .filter((m) => isOpenWeight(m.license) && (parseQ4(m.full_q4_vram_gb) ?? Infinity) <= 32)
+      .map((m) => ({ m, swe: parsePct(m.swe_bench_verified) ?? -1, tb: parsePct(m.terminal_bench) ?? -1 }))
+      .sort((a, b) => b.swe - a.swe || b.tb - a.tb)
+    return cands[0]?.m ?? null
+  }, [])
+
   // Hardware Fit matrix: every OPEN-WEIGHT model with Q4 data (local-run
   // candidates — closed/API-only models can't run on local VRAM anyway).
   // Best SWE-V first; unscored models sink to the bottom.
@@ -201,5 +211,5 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
     return out
   }, [])
 
-  return { stats, filtered, latestModels, leaderboards, hwModels }
+  return { stats, filtered, latestModels, leaderboards, hwModels, bestFit }
 }

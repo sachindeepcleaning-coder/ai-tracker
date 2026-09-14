@@ -4,6 +4,28 @@ import { parsePct, parseQ4, paramsLabel, fmtDate, fmtDateFull, daysOld, DATA_AS_
 import { licenseBadge } from '../lib/license'
 import { SORT_OPTIONS, RELEASE_WINDOWS } from '../hooks/useModels'
 
+/** Download the current filtered view as CSV or JSON (client-side blob). */
+const EXPORT_COLS = ['rank', 'model', 'provider', 'total_parameters', 'active_parameters', 'full_q4_vram_gb', 'license', 'swe_bench_verified', 'swe_bench_pro', 'livecodebench_v6', 'terminal_bench', 'context_window', 'price_in_usd_per_mtok', 'price_out_usd_per_mtok', 'released']
+
+function exportModels(rows, fmt) {
+  let blob, name
+  if (fmt === 'json') {
+    blob = new Blob([JSON.stringify(rows, null, 2)], { type: 'application/json' })
+    name = `ai-tracker-${rows.length}-models.json`
+  } else {
+    const esc = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`
+    const csv = [EXPORT_COLS.join(','), ...rows.map((m) => EXPORT_COLS.map((c) => esc(m[c])).join(','))].join('\n')
+    blob = new Blob([csv], { type: 'text/csv' })
+    name = `ai-tracker-${rows.length}-models.csv`
+  }
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = name
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
 /** Native <select> with a predictable chevron (no browser-specific "empty square" artifacts). */
 function Select({ label, value, onChange, className = '', children, ...rest }) {
   return (
@@ -107,6 +129,8 @@ export default function Explorer({
               <Check size={12} className="text-emerald-400" aria-hidden="true" />
               <span aria-live="polite">{filtered.length} / {models.length} shown</span>
             </div>
+            <button onClick={() => exportModels(filtered, 'csv')} className="text-xs text-white/70 underline" type="button">Export CSV</button>
+            <button onClick={() => exportModels(filtered, 'json')} className="text-xs text-white/70 underline" type="button">JSON</button>
             <button onClick={clearAll} className="text-xs text-white/70 underline" type="button">Clear all</button>
           </div>
         )}

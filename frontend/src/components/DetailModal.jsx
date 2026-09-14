@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { X, ArrowUpRight } from 'lucide-react'
 import { licenseBadge } from '../lib/license'
-import { fmtDateFull } from '../lib/parse'
+import { fmtDateFull, scoreSource } from '../lib/parse'
 
 const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
 
@@ -81,6 +81,7 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
             <div key={k} className="bg-white/5 rounded-xl p-3 border border-white/5 text-center">
               <div className="text-[11px] tracking-widest font-bold text-white/40">{k}</div>
               <div className="font-bold">{v || '—'}</div>
+              {v && scoreSource(v) === 'vendor' && <div className="text-[9px] uppercase tracking-wide text-amber-400/80 mt-0.5">vendor-reported</div>}
             </div>
           ))}
         </div>

@@ -73,6 +73,26 @@ export default function Tracker() {
           </div>
         </div>
       </div>
+      <div className="card p-4">
+        <h3 className="font-bold">Expected next / pricing watch</h3>
+        <p className="text-sm text-white/60 mt-1">Upcoming changes already on record — plan around them, the catalog snapshot predates these.</p>
+        <div className="mt-3 grid md:grid-cols-2 gap-3 text-xs">
+          {[
+            ['Sep 14', 'V4 Pro routing', 'DeepSeek V4 Pro routed Sep 14 12:00 Beijing (after this snapshot); legacy V4 Flash/Vision already retired+routed, billed Flash.'],
+            ['Oct 4', 'Ling-3.0-flash-Sante free tier ends', 'API-first free thru Oct 4 via Vercel; Sante-specific weights still unconfirmed, base family MIT.'],
+            ['≥Nov 21', 'GPT-5.6 Sol promo ends', 'Sol $4/20 promo holds to ≥Nov 21, then reverts to $5/30.'],
+            ['Jan 1 2027', 'Gemini 3.8 Flash intro doubles', 'Intro $0.75/$3.75 → $1.50/$7.50 after Dec 31 2026.'],
+          ].map(([d, t, desc]) => (
+            <div key={t} className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-3">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono bg-black/20 border border-white/10 rounded-full px-2 py-0.5">{d}</span>
+                <span className="font-bold">{t}</span>
+              </div>
+              <p className="text-white/60 mt-1 leading-relaxed">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

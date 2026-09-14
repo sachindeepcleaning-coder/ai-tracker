@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parsePct, parseQ4, fmtDate, fmtDateFull, daysOld, DATA_AS_OF } from '../parse.js'
+import { parsePct, parseQ4, fmtDate, fmtDateFull, daysOld, scoreSource, DATA_AS_OF } from '../parse.js'
 
 describe('parsePct', () => {
   it('prefers %-anchored number over year in annotated cells', () => {
@@ -22,6 +22,24 @@ describe('parsePct', () => {
   it('handles decimals', () => {
     expect(parsePct('88.30%')).toBe(88.3)
     expect(parsePct('100%')).toBe(100)
+  })
+})
+
+describe('scoreSource', () => {
+  it('detects vendor annotations', () => {
+    expect(scoreSource('92.8% (TB2.1 vendor)')).toBe('vendor')
+    expect(scoreSource('64.7% (SWE-Pro vendor; TB2.1 82% vendor)')).toBe('vendor')
+    expect(scoreSource('50.0% (FrontierCode vendor)')).toBe('vendor')
+  })
+  it('detects aa / scale / benchlm', () => {
+    expect(scoreSource('53.9 (AA)')).toBe('aa')
+    expect(scoreSource('38.7% Scale std.')).toBe('scale')
+    expect(scoreSource('61.2 BenchLM')).toBe('benchlm')
+  })
+  it('plain cells -> null', () => {
+    expect(scoreSource('93.4%')).toBeNull()
+    expect(scoreSource(null)).toBeNull()
+    expect(scoreSource('-')).toBeNull()
   })
 })
 

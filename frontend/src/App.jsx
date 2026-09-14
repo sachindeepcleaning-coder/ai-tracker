@@ -1,11 +1,11 @@
-import React, { lazy, Suspense, useState } from 'react'
+import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { Zap, Database, Award, Layers, Cpu, Calendar } from 'lucide-react'
 import Header from './components/Header'
 import Explorer from './components/Explorer'
 import DetailModal from './components/DetailModal'
 import ErrorBoundary from './components/ErrorBoundary'
 import { allModels, providers, licenseGroups, useModels } from './hooks/useModels'
-import { VERIFIED_AT, fmtDate } from './lib/parse'
+import { VERIFIED_AT, fmtDate, parseQ4 } from './lib/parse'
 
 /* Secondary tabs are code-split: the 767KB eager bundle drops to the Explorer-only
    critical path, and recharts (used only by chart tabs) stays out of first paint. */
@@ -26,14 +26,52 @@ function TabFallback() {
   )
 }
 
+const DEFAULT_FILTERS = { q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: 'all' }
+
+/** Shareable views: filters + tab hydrate from the URL query string, then stay
+    in sync via replaceState so any filtered view can be pasted as a link. */
+function filtersFromUrl() {
+  try {
+    const p = new URLSearchParams(window.location.search)
+    return {
+      q: p.get('q') || DEFAULT_FILTERS.q,
+      provider: p.get('provider') || DEFAULT_FILTERS.provider,
+      license: p.get('license') || DEFAULT_FILTERS.license,
+      openOnly: p.get('open') === '1',
+      maxQ4: p.get('q4') || DEFAULT_FILTERS.maxQ4,
+      sort: p.get('sort') || DEFAULT_FILTERS.sort,
+      releaseWindow: p.get('rel') || DEFAULT_FILTERS.releaseWindow,
+    }
+  } catch {
+    return { ...DEFAULT_FILTERS }
+  }
+}
+
 export default function App() {
-  const [tab, setTab] = useState('explorer')
-  const [filters, setFilters] = useState({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: 'all' })
+  const [tab, setTab] = useState(() => {
+    try { return new URLSearchParams(window.location.search).get('tab') || 'explorer' } catch { return 'explorer' }
+  })
+  const [filters, setFilters] = useState(filtersFromUrl)
   const [showFilters, setShowFilters] = useState(false)
   const [compare, setCompare] = useState([])
   const [detail, setDetail] = useState(null)
 
-  const { stats, filtered, latestModels, leaderboards, hwModels } = useModels(filters)
+  const { stats, filtered, latestModels, leaderboards, hwModels, bestFit } = useModels(filters)
+
+  // Keep the URL in sync with the current view (skip default values).
+  useEffect(() => {
+    const p = new URLSearchParams()
+    if (tab !== 'explorer') p.set('tab', tab)
+    if (filters.q) p.set('q', filters.q)
+    if (filters.provider !== 'all') p.set('provider', filters.provider)
+    if (filters.license !== 'all') p.set('license', filters.license)
+    if (filters.openOnly) p.set('open', '1')
+    if (filters.maxQ4 !== 'all') p.set('q4', filters.maxQ4)
+    if (filters.sort !== 'latest') p.set('sort', filters.sort)
+    if (filters.releaseWindow !== 'all') p.set('rel', filters.releaseWindow)
+    const qs = p.toString()
+    window.history.replaceState(null, '', `${window.location.pathname}${qs ? `?${qs}` : ''}${window.location.hash}`)
+  }, [tab, filters])
 
   const toggleCompare = (id) => setCompare((c) => c.includes(id) ? c.filter((x) => x !== id) : c.length >= 4 ? c : [...c, id])
   const compareModels = allModels.filter((m) => compare.includes(m.id))
@@ -51,7 +89,12 @@ export default function App() {
           { k: 'With SWE-V', v: stats.withSWE, s: 'have SWE-bench Verified', icon: Award },
           { k: 'With Q4 size', v: stats.withQ4, s: 'have Q4 VRAM', icon: Cpu },
           { k: 'With release date', v: stats.dated, s: `${Math.round((stats.dated / stats.total) * 100)}% of catalog`, icon: Calendar },
-          { k: 'Best Q4 fit', v: 'Qwen 27B', s: '17 GB → 200 tok/s on 1×5090', icon: Zap },
+          {
+            k: 'Best Q4 fit',
+            v: bestFit ? bestFit.model : '—',
+            s: bestFit ? `${parseQ4(bestFit.full_q4_vram_gb)} GB Q4 → fits 1×5090 (best SWE-V ≤32GB)` : 'no scored open-weight model fits 1×5090',
+            icon: Zap,
+          },
         ].map((card) => {
           const Icon = card.icon
           return (
@@ -124,6 +167,16 @@ export default function App() {
       {detail && <DetailModal detail={detail} onClose={() => setDetail(null)} onToggleCompare={toggleCompare} inCompare={compare.includes(detail.id)} />}
 
       <footer className="max-w-[1400px] mx-auto px-4 md:px-6 py-6 text-xs text-white/40 border-t border-white/5 mt-6">
+        <details className="mb-3 group">
+          <summary className="cursor-pointer text-white/60 font-semibold hover:text-white/80 select-none">About & methodology</summary>
+          <div className="mt-2 space-y-2 text-white/50 leading-relaxed">
+            <p><b className="text-white/70">Data:</b> single source of truth <span className="text-white/70">coding_benchmarks_july2026_final.csv (ranks 1-267)</span>, regenerated into <span className="text-white/70">src/data.json</span> via <span className="font-mono">npm run data</span> (curated release dates and free-tier flags are preserved across regeneration). Fact-checked {VERIFIED_AT} against HuggingFace / Cognition / Sakana / DeepSeek / Anthropic / Google / llm-releases / AA v4.3. Not vendor quotes — planning estimates.</p>
+            <p><b className="text-white/70">Scores:</b> vendor-reported by default; cells annotated <span className="font-mono">(vendor)</span> carry the vendor's own harness numbers, so treat a "+vendor" tag as self-reported unless marked AA / Scale / BenchLM. SWE-bench Verified is contaminated per OpenAI Feb 2026 — prefer SWE-bench Pro (Scale standardized) for apples-to-apples.</p>
+            <p><b className="text-white/70">License heuristics:</b> free-text license cells are classified by string heuristics (lib/license.js); "commercially gated open weights" (e.g. Modified MIT with revenue clauses) still counts as open-weight — weights are public even when commercial use is restricted.</p>
+            <p><b className="text-white/70">Cost model:</b> 99% input / 1% output agentic loop with prompt-cache hit discount; ₹95.12/USD (standardized Aug 14, 2026). Hardware fit assumes +10-15GB runtime overhead on top of Q4 weights (lib/hardware.js: ≤85% comfortable, ≤115% tight).</p>
+            <p><b className="text-white/70">Contribute:</b> corrections and new rows welcome via <a className="underline hover:text-white/70" href="https://github.com/sachindeepcleaning-coder/ai-tracker/issues" target="_blank" rel="noopener noreferrer">GitHub issues</a> — edit the CSV, run <span className="font-mono">npm run data</span>, and the integrity tests gate the deploy.</p>
+          </div>
+        </details>
         Built from <span className="text-white/70">coding_benchmarks_july2026_final.csv (ranks 1-267, single source of truth)</span> + regenerated <span className="text-white/70">ai_coding_api_vs_local_summary.json + frontend/src/data.json</span>. ₹95.12/USD. Fact-checked {VERIFIED_AT} (HuggingFace / Cognition / Sakana / DeepSeek / Anthropic / Google / llm-releases / AA v4.3). Not vendor quotes — planning estimates. Source: GitHub repo `sachindeepcleaning-coder/ai-tracker`.
       </footer>
     </div>
