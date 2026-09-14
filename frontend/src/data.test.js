@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
 const here = dirname(fileURLToPath(import.meta.url))
-const data = JSON.parse(readFileSync(join(here, 'data.json'), 'utf8'))
+const raw = readFileSync(join(here, 'data.json'), 'utf8')
+const data = JSON.parse(raw)
 const models = data.all_coding_models
 
 describe('data.json integrity (regen gate)', () => {
@@ -38,6 +39,29 @@ describe('data.json integrity (regen gate)', () => {
     expect(dated.length).toBeGreaterThanOrEqual(30)
     const flash = models.find((m) => m.model === 'DeepSeek V4.1 Flash')
     expect(flash.released).toBe('2026-09-10')
+  })
+
+  it('release-date coverage >= 60% with released_est tiering (regen gate)', () => {
+    const dated = models.filter((m) => m.released)
+    expect(dated.length / models.length).toBeGreaterThanOrEqual(0.6)
+    // every released row is ISO YYYY-MM-DD with an est flag
+    for (const m of dated) {
+      expect(m.released).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+      expect(typeof m.released_est).toBe('boolean')
+    }
+    // exact dates: documented signals (V4.1 Flash, Kimi K3 license date); est dates: family/provider inference
+    const exact = dated.filter((m) => !m.released_est)
+    const est = dated.filter((m) => m.released_est)
+    expect(exact.length).toBeGreaterThanOrEqual(30)
+    expect(est.length).toBeGreaterThan(0)
+    // SWE-2 coarse 'Sep 2026' normalized to estimated mid-month ISO
+    const swe2 = models.find((m) => m.model === 'SWE-2')
+    expect(swe2.released).toBe('2026-09-15')
+    expect(swe2.released_est).toBe(true)
+  })
+
+  it('data_regen_at timestamp present (drives "Data last refreshed")', () => {
+    expect(data.data_regen_at).toMatch(/^\d{4}-\d{2}-\d{2}$/)
   })
 
   it('SWE-2 keeps only correctly-attributed benchmarks (TB2.1 yes; GPQA/ARC null)', () => {

@@ -71,17 +71,25 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
           </button>
         </div>
 
-        <div className="grid grid-cols-4 gap-2 mt-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4">
           {[
             ['SWE-V', detail.swe_bench_verified],
             ['SWE-Pro', detail.swe_bench_pro],
             ['LCB V6', detail.livecodebench_v6],
             ['TB 2.1', detail.terminal_bench],
+            ['HumanEval', detail.humaneval],
+            ['MMLU-Pro', detail.mmlu_pro],
+            ['GPQA-D', detail.gpqa_diamond],
+            ['HLE', detail.hle],
+            ['MATH', detail.math],
+            ['AIME 2026', detail.aime_2026],
+            ['ARC-AGI-2', detail.arc_agi_2],
           ].map(([k, v]) => (
             <div key={k} className="bg-white/5 rounded-xl p-3 border border-white/5 text-center">
               <div className="text-[11px] tracking-widest font-bold text-white/40">{k}</div>
               <div className="font-bold">{v || '—'}</div>
               {v && scoreSource(v) === 'vendor' && <div className="text-[9px] uppercase tracking-wide text-amber-400/80 mt-0.5">vendor-reported</div>}
+              {v && ['aa', 'scale', 'benchlm'].includes(scoreSource(v)) && <div className="text-[9px] uppercase tracking-wide text-sky-300/90 mt-0.5">independent</div>}
             </div>
           ))}
         </div>
@@ -91,21 +99,24 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
             <div className="text-xs text-white/50">Price (USD / Mtok)</div>
             <div className="font-mono font-bold">{detail.price_in_usd_per_mtok != null ? `$${detail.price_in_usd_per_mtok} → $${detail.price_out_usd_per_mtok}` : '— (local/free)'}</div>
             <div className="text-xs text-white/50">INR: {detail.price_in_inr_per_mtok != null ? `₹${detail.price_in_inr_per_mtok} → ₹${detail.price_out_inr_per_mtok}` : '—'}</div>
+            <div className="text-xs text-white/50">Q4 {detail.full_q4_vram_gb ?? '—'} GB · ctx {detail.context_window}</div>
           </div>
           <div className="bg-white/5 rounded-xl p-3 border border-white/5">
-            <div className="text-xs text-white/50">License / Context</div>
-            <div className="font-bold">{detail.license}</div>
+            <div className="text-xs text-white/50">License notes / Context</div>
+            <div className="font-bold break-words">{detail.license}</div>
             <div className="text-xs text-white/60">
-              {detail.context_window} · {detail.is_free ? 'Free tier' : 'Paid API'}
-              {detail.released && <> · Released {fmtDateFull(detail.released)}</>}
+              {detail.is_free ? 'Free tier' : 'Paid API'}
+              {detail.released && <> · {detail.released_est ? 'Released ≈' : 'Released'} {fmtDateFull(detail.released)}</>}
             </div>
           </div>
         </div>
 
-        <div className="mt-4 flex gap-2">
+        <div className="mt-4 flex gap-2 flex-wrap">
           <button type="button" onClick={() => { onToggleCompare(detail.id); onClose() }} className="btn btn-primary text-sm">{inCompare ? 'Remove from compare' : 'Add to compare'}</button>
           <button type="button" onClick={onClose} className="btn btn-ghost text-sm">Close</button>
           <a href={`https://huggingface.co/models?search=${encodeURIComponent(detail.model)}`} target="_blank" rel="noopener noreferrer" className="ml-auto btn btn-ghost text-sm">Open HF <ArrowUpRight size={12} aria-hidden="true" /></a>
+          <a href={`https://www.google.com/search?q=${encodeURIComponent(detail.model + ' pricing per million tokens')}`} target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-sm">Pricing <ArrowUpRight size={12} aria-hidden="true" /></a>
+          <a href={`https://www.google.com/search?q=${encodeURIComponent(detail.model + ' paper technical report')}`} target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-sm">Paper <ArrowUpRight size={12} aria-hidden="true" /></a>
         </div>
         <p className="text-xs text-white/40 mt-3">Scores vendor-reported unless AA/Scale/BenchLM. SWE-bench Verified contaminated per OpenAI Feb 2026 — prefer SWE-Pro Scale standardized for apples-to-apples.</p>
       </div>

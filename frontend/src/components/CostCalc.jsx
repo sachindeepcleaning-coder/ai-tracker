@@ -62,6 +62,9 @@ export default function CostCalc() {
   const [tokPerDay, setTokPerDay] = useState(1_000_000_000)
   const [cacheHit, setCacheHit] = useState(70)
   const [outputPct, setOutputPct] = useState(1)
+  // Any catalog model can be priced — picker resolves by name (4-tier match) at current sliders.
+  const [picked, setPicked] = useState('')
+  const pickOptions = allModels.filter((m) => m.price_in_usd_per_mtok != null).sort((a, b) => a.model.localeCompare(b.model))
 
   const dailyBudget = (() => {
     const input = tokPerDay * (1 - outputPct / 100)
@@ -69,18 +72,44 @@ export default function CostCalc() {
     const hit = input * cacheHit / 100
     const miss = input - hit
     // Representative models — Sep 10 online-verified per-token $/Mtok (off-peak where tiered)
-    return COST_SAMPLES.map((s) => {
+    const rows = COST_SAMPLES.map((s) => {
       const r = resolveSample(s)
       const cost = (miss / 1e6) * r.in + (hit / 1e6) * r.cache + (output / 1e6) * r.out
       return { name: r.name, day: cost, mo: cost * 30, yr: cost * 365, in: r.in, out: r.out, cache: r.cache }
     })
+    if (picked) {
+      const pm = allModels.find((m) => m.model === picked)
+      if (pm) {
+        const cin = pm.price_in_usd_per_mtok ?? 0
+        const cout = pm.price_out_usd_per_mtok ?? 0
+        const cost = (miss / 1e6) * cin + (output / 1e6) * cout
+        rows.push({ name: `${pm.model} (your pick)`, day: cost, mo: cost * 30, yr: cost * 365, in: cin, out: cout, cache: null })
+      }
+    }
+    return rows
   })()
+
+  const pickedRow = picked ? dailyBudget.find((r) => r.name.startsWith(picked)) : null
 
   return (
     <div className="grid lg:grid-cols-3 gap-4">
       <div className="lg:col-span-1 card p-4 space-y-4">
         <h2 className="font-bold flex items-center gap-2"><IndianRupee size={16} aria-hidden="true" /> Cost Calculator</h2>
         <p className="text-xs text-white/50">99% input / 1% output agentic loop. ₹95.12/USD `ai_coding_api_vs_local_summary.json:9`.</p>
+        <div>
+          <label htmlFor="modelPick" className="text-xs font-bold tracking-widest uppercase text-white/60">Price any catalog model</label>
+          <select
+            id="modelPick"
+            value={picked}
+            onChange={(e) => setPicked(e.target.value)}
+            className="w-full mt-1 px-3 py-2.5 rounded-xl bg-[#131C2E] border border-white/10 text-sm text-[#E2E8F0] cursor-pointer focus:outline-none focus:border-emerald-500/50"
+          >
+            <option value="">— pick a model ({pickOptions.length} with pricing) —</option>
+            {pickOptions.map((m) => (
+              <option key={m.id} value={m.model}>{m.model} (${m.price_in_usd_per_mtok}/M in)</option>
+            ))}
+          </select>
+        </div>
         <div>
           <label htmlFor="tokensPerDay" className="text-xs font-bold tracking-widest uppercase text-white/60">Tokens / day (input+output)</label>
           <input id="tokensPerDay" type="range" min={100_000_000} max={5_000_000_000} step={100_000_000} value={tokPerDay} onChange={(e) => setTokPerDay(parseInt(e.target.value))} className="w-full accent-emerald-500" />
@@ -102,11 +131,26 @@ export default function CostCalc() {
       </div>
 
       <div className="lg:col-span-2 space-y-3">
+        {pickedRow && (
+          <div className="card p-4 ring-1 ring-violet-500/40">
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="min-w-[180px]">
+                <div className="font-bold text-sm text-violet-200">{pickedRow.name}</div>
+                <div className="text-xs text-white/50">${pickedRow.in}/$ {pickedRow.out} per M (no cache tier assumed)</div>
+              </div>
+              <div className="flex gap-4 flex-1 justify-end text-center">
+                <div><div className="text-xs text-white/50">Per day</div><div className="font-mono font-bold">₹{Math.round(pickedRow.day * INR_PER_USD).toLocaleString()}</div></div>
+                <div><div className="text-xs text-white/50">Per 30d</div><div className="font-mono font-bold text-violet-300">₹{(pickedRow.mo * INR_PER_USD / 100000).toFixed(1)}L</div></div>
+                <div><div className="text-xs text-white/50">Per yr</div><div className="font-mono font-bold text-violet-300">₹{(pickedRow.yr * INR_PER_USD / 10000000).toFixed(1)}Cr</div></div>
+              </div>
+            </div>
+          </div>
+        )}
         {dailyBudget.map((row) => (
           <div key={row.name} className="card p-4 flex flex-wrap items-center gap-4">
             <div className="min-w-[180px]">
               <div className="font-bold text-sm">{row.name}</div>
-              <div className="text-xs text-white/50">${row.in}/$ {row.out} per M · hit $ {row.cache}/M</div>
+              <div className="text-xs text-white/50">${row.in}/$ {row.out} per M{row.cache != null ? ` · hit $ ${row.cache}/M` : ''}</div>
             </div>
             <div className="flex gap-4 flex-1 justify-end text-center">
               <div><div className="text-xs text-white/50">Per day</div><div className="font-mono font-bold">₹{Math.round(row.day * INR_PER_USD).toLocaleString()}</div></div>
@@ -117,7 +161,12 @@ export default function CostCalc() {
         ))}
 
         <div className="card p-4">
-          <h3 className="font-bold text-sm">Local hardware (5-yr TCO) vs API</h3>
+          <h3 className="font-bold text-sm">Local hardware (5-yr TCO) vs API — side by side</h3>
+          {pickedRow && (
+            <p className="text-xs text-white/60 mt-2" aria-live="polite">
+              Your pick <b className="text-violet-200">{picked}</b>: API ₹{(pickedRow.yr * INR_PER_USD / 10000000).toFixed(1)}Cr/yr at current sliders → a ₹5L 1×5090 (if the model fits ≤32GB Q4) pays for itself in ~{Math.max(0.1, 5 / (pickedRow.yr * INR_PER_USD / 100000)).toFixed(1)} yr of API spend.
+            </p>
+          )}
           <div className="grid grid-cols-3 gap-3 mt-3 text-sm">
             <div className="bg-white/5 rounded-xl p-3 border border-white/10"><div className="font-bold">1×5090 ₹5L</div><div className="text-xs text-white/50">Qwen27B 200tok/s. API breakeven ~1.2 yr at 1B/day uncached V4 Flash `ai_coding_api_vs_local_summary.json:183`</div></div>
             <div className="bg-white/5 rounded-xl p-3 border border-white/10"><div className="font-bold">4× Spark ₹24-30L</div><div className="text-xs text-white/50">GLM-5.3+V4.1 Flash+Qwen. Only sub-crore that runs all 3 `single_user_india_local_ai.md:333`</div></div>

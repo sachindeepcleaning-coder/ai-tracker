@@ -5,7 +5,8 @@ import Explorer from './components/Explorer'
 import DetailModal from './components/DetailModal'
 import ErrorBoundary from './components/ErrorBoundary'
 import { allModels, providers, licenseGroups, useModels } from './hooks/useModels'
-import { VERIFIED_AT, fmtDate, parseQ4 } from './lib/parse'
+import { VERIFIED_AT, DATA_AS_OF, fmtDate, parseQ4 } from './lib/parse'
+import dataMeta from './data.json'
 
 /* Secondary tabs are code-split: the 767KB eager bundle drops to the Explorer-only
    critical path, and recharts (used only by chart tabs) stays out of first paint. */
@@ -73,7 +74,7 @@ export default function App() {
     window.history.replaceState(null, '', `${window.location.pathname}${qs ? `?${qs}` : ''}${window.location.hash}`)
   }, [tab, filters])
 
-  const toggleCompare = (id) => setCompare((c) => c.includes(id) ? c.filter((x) => x !== id) : c.length >= 4 ? c : [...c, id])
+  const toggleCompare = (id) => setCompare((c) => c.includes(id) ? c.filter((x) => x !== id) : c.length >= 6 ? c : [...c, id])
   const compareModels = allModels.filter((m) => compare.includes(m.id))
 
   return (
@@ -84,7 +85,7 @@ export default function App() {
       {/* KPI strip */}
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-4 grid grid-cols-2 md:grid-cols-6 gap-3">
         {[
-          { k: 'Total models', v: stats.total, s: 'CSV 1-267, fact-checked Sep 13', icon: Database },
+          { k: 'Total models', v: stats.total, s: `CSV 1-267 · refreshed ${dataMeta.data_regen_at ?? DATA_AS_OF} · fact-checked Sep 13`, icon: Database },
           { k: 'Open-weight', v: stats.open, s: `${Math.round((stats.open / stats.total) * 100)}% open`, icon: Layers },
           { k: 'With SWE-V', v: stats.withSWE, s: 'have SWE-bench Verified', icon: Award },
           { k: 'With Q4 size', v: stats.withQ4, s: 'have Q4 VRAM', icon: Cpu },
@@ -122,14 +123,14 @@ export default function App() {
                 title="Open details"
               >
                 <span className="font-semibold">{m.model}</span>
-                <span className="text-violet-300/70">{fmtDate(m.released)}</span>
+                <span className="text-violet-300/70">{m.released_est ? '≈' : ''}{fmtDate(m.released)}</span>
               </button>
             ))}
             <button type="button" onClick={() => setTab('tracker')} className="ml-auto btn btn-ghost text-xs py-1">
               Full Sep tracker
             </button>
           </div>
-          <p className="text-xs text-white/50 mt-1">Explorer defaults to <b>Sort: Latest release ↓</b> so the freshest models are on top; switch to <b>Rank ↑</b> for the performance-ordered frontier list.</p>
+          <p className="text-xs text-white/50 mt-1">Explorer defaults to <b>Sort: Latest release ↓</b> so the freshest models are on top; switch to <b>Rank ↑</b> for the performance-ordered frontier list. Dates prefixed <b>≈</b> are approximations (inferred from family/provider release windows).</p>
         </div>
       </div>
 
@@ -170,14 +171,14 @@ export default function App() {
         <details className="mb-3 group">
           <summary className="cursor-pointer text-white/60 font-semibold hover:text-white/80 select-none">About & methodology</summary>
           <div className="mt-2 space-y-2 text-white/50 leading-relaxed">
-            <p><b className="text-white/70">Data:</b> single source of truth <span className="text-white/70">coding_benchmarks_july2026_final.csv (ranks 1-267)</span>, regenerated into <span className="text-white/70">src/data.json</span> via <span className="font-mono">npm run data</span> (curated release dates and free-tier flags are preserved across regeneration). Fact-checked {VERIFIED_AT} against HuggingFace / Cognition / Sakana / DeepSeek / Anthropic / Google / llm-releases / AA v4.3. Not vendor quotes — planning estimates.</p>
+            <p><b className="text-white/70">Data:</b> single source of truth <span className="text-white/70">coding_benchmarks_july2026_final.csv (ranks 1-267)</span>, regenerated into <span className="text-white/70">src/data.json</span> via <span className="font-mono">npm run data</span> (curated release dates and free-tier flags are preserved across regeneration; last refreshed {dataMeta.data_regen_at ?? DATA_AS_OF}). Fact-checked {VERIFIED_AT} against HuggingFace / Cognition / Sakana / DeepSeek / Anthropic / Google / llm-releases / AA v4.3. Not vendor quotes — planning estimates. Release dates: <b className="text-white/70">exact</b> where documented; dates prefixed <b className="text-white/70">≈</b> are approximations inferred from family/provider release windows (60% coverage and growing).</p>
             <p><b className="text-white/70">Scores:</b> vendor-reported by default; cells annotated <span className="font-mono">(vendor)</span> carry the vendor's own harness numbers, so treat a "+vendor" tag as self-reported unless marked AA / Scale / BenchLM. SWE-bench Verified is contaminated per OpenAI Feb 2026 — prefer SWE-bench Pro (Scale standardized) for apples-to-apples.</p>
             <p><b className="text-white/70">License heuristics:</b> free-text license cells are classified by string heuristics (lib/license.js); "commercially gated open weights" (e.g. Modified MIT with revenue clauses) still counts as open-weight — weights are public even when commercial use is restricted.</p>
             <p><b className="text-white/70">Cost model:</b> 99% input / 1% output agentic loop with prompt-cache hit discount; ₹95.12/USD (standardized Aug 14, 2026). Hardware fit assumes +10-15GB runtime overhead on top of Q4 weights (lib/hardware.js: ≤85% comfortable, ≤115% tight).</p>
             <p><b className="text-white/70">Contribute:</b> corrections and new rows welcome via <a className="underline hover:text-white/70" href="https://github.com/sachindeepcleaning-coder/ai-tracker/issues" target="_blank" rel="noopener noreferrer">GitHub issues</a> — edit the CSV, run <span className="font-mono">npm run data</span>, and the integrity tests gate the deploy.</p>
           </div>
         </details>
-        Built from <span className="text-white/70">coding_benchmarks_july2026_final.csv (ranks 1-267, single source of truth)</span> + regenerated <span className="text-white/70">ai_coding_api_vs_local_summary.json + frontend/src/data.json</span>. ₹95.12/USD. Fact-checked {VERIFIED_AT} (HuggingFace / Cognition / Sakana / DeepSeek / Anthropic / Google / llm-releases / AA v4.3). Not vendor quotes — planning estimates. Source: GitHub repo `sachindeepcleaning-coder/ai-tracker`.
+        Built from <span className="text-white/70">coding_benchmarks_july2026_final.csv (ranks 1-267, single source of truth)</span> + regenerated <span className="text-white/70">ai_coding_api_vs_local_summary.json + frontend/src/data.json</span>. Data last refreshed: <span className="text-white/70">{dataMeta.data_regen_at ?? DATA_AS_OF}</span>. ₹95.12/USD. Fact-checked {VERIFIED_AT} (HuggingFace / Cognition / Sakana / DeepSeek / Anthropic / Google / llm-releases / AA v4.3). Not vendor quotes — planning estimates. Source: GitHub repo `sachindeepcleaning-coder/ai-tracker`.
       </footer>
     </div>
   )

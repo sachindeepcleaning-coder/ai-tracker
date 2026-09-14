@@ -1,0 +1,14 @@
+{
+  "name": "AI Coding Model Tracker — India",
+  "short_name": "AI Tracker",
+  "description": "267 coding models — benchmarks, Q4 VRAM, India pricing, hardware fit. Planning estimates, not vendor quotes.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0B1120",
+  "theme_color": "#0B1120",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icons.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

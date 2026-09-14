@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { HardDrive } from 'lucide-react'
 import { parseQ4, fmtDate } from '../lib/parse'
 import { hardwareTiers, fitsModel } from '../lib/hardware'
@@ -13,18 +13,50 @@ export default function HardwareFit({ hwModels }) {
   }).length
   const q4Count = hwModels.length
 
+  // "Fits on my hardware" quick filter: narrow the matrix to one tier (non-'no' fits only).
+  const [tierFilter, setTierFilter] = useState('all')
+  const activeTier = hardwareTiers.find((t) => t.id === tierFilter)
+  const matrixRows = activeTier
+    ? hwModels.filter((m) => fitsModel(parseQ4(m.full_q4_vram_gb), activeTier.vram) !== 'no')
+    : hwModels
+
   return (
     <div className="space-y-4">
       <div className="card p-4">
         <h2 className="font-bold flex items-center gap-2"><HardDrive size={16} aria-hidden="true" /> Hardware Fit Matrix (Q4 weights)</h2>
         <p className="text-sm text-white/60">All {hwModels.length} open-weight models with Q4 VRAM data, best SWE-V first. Closed / API-only models excluded (no local weights). Independent of Explorer filters.</p>
-        <div className="overflow-auto mt-4">
+        {activeTier && (
+          <p className="text-xs text-emerald-300/90 mt-1" aria-live="polite">{matrixRows.length} of {hwModels.length} models fit {activeTier.label} (✓ or ~)</p>
+        )}
+        <div className="mt-3 flex items-center gap-2 flex-wrap text-xs">
+          <span className="text-white/50 font-semibold">Fits on my hardware:</span>
+          <button
+            type="button"
+            onClick={() => setTierFilter('all')}
+            aria-pressed={tierFilter === 'all'}
+            className={`px-2.5 py-1 rounded-full border ${tierFilter === 'all' ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-200' : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10'}`}
+          >
+            All
+          </button>
+          {hardwareTiers.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              onClick={() => setTierFilter(t.id)}
+              aria-pressed={tierFilter === t.id}
+              className={`px-2.5 py-1 rounded-full border ${tierFilter === t.id ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-200' : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10'}`}
+            >
+              {t.label.replace(' RTX', '')}
+            </button>
+          ))}
+        </div>
+        <div className="overflow-auto mt-4 max-h-[70vh]">
           <table className="w-full text-xs">
-            <thead>
+            <thead className="sticky top-0 z-10 bg-[var(--bg-card)]">
               <tr className="border-b border-white/10">
-                <th className="text-left p-2 sticky left-0 bg-[var(--bg-card)]">Model (Q4)</th>
+                <th className="text-left p-2 sticky left-0 bg-[var(--bg-card)] z-20">Model (Q4)</th>
                 {hardwareTiers.map((h) => (
-                  <th key={h.id} className="p-2 text-center min-w-[110px]">
+                  <th key={h.id} className="p-2 text-center min-w-[110px] bg-[var(--bg-card)]">
                     <div className="font-bold">{h.label}</div>
                     <div className="font-normal text-white/50">{h.cost} · {h.vram}GB</div>
                   </th>
@@ -32,11 +64,11 @@ export default function HardwareFit({ hwModels }) {
               </tr>
             </thead>
             <tbody>
-              {hwModels.map((m) => {
+              {matrixRows.map((m) => {
                 const q4 = parseQ4(m.full_q4_vram_gb)
                 return (
                   <tr key={m.id} className="border-b border-white/5 hover:bg-white/[0.03]">
-                    <td className="p-2 sticky left-0 bg-[var(--bg-card)]"><div className="font-semibold">{m.model.slice(0, 28)}{m.released && <span className="ml-1 text-[10px] font-mono text-sky-300/80">{fmtDate(m.released)}</span>}</div><div className="text-white/50">{q4}GB · {m.provider}</div></td>
+                    <td className="p-2 sticky left-0 bg-[var(--bg-card)]"><div className="font-semibold">{m.model.slice(0, 28)}{m.released && <span className="ml-1 text-[10px] font-mono text-sky-300/80" title={m.released_est ? 'approximate' : 'released'}>{m.released_est ? '≈' : ''}{fmtDate(m.released)}</span>}</div><div className="text-white/50">{q4}GB · {m.provider}</div></td>
                     {hardwareTiers.map((h) => {
                       const fit = fitsModel(q4, h.vram)
                       const symbol = fit === 'fit' ? '✓' : fit === 'tight' ? '~' : '×'

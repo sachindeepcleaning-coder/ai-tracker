@@ -135,14 +135,17 @@ const out = rows.slice(1)
   const prev = curated.get(row.id)
   if (prev) {
     row.released = prev.released ?? null
+    row.released_est = Boolean(prev.released_est)
     row.is_free = Boolean(prev.is_free)
   } else {
     row.released = null
+    row.released_est = false
     row.is_free = false
   }
   return row
 })
 
-writeFileSync(OUT_PATH, JSON.stringify({ ...existing, all_coding_models: out }, null, 2) + '\n')
+// Regen timestamp — surfaced as "Data last refreshed" on the site.
+writeFileSync(OUT_PATH, JSON.stringify({ ...existing, data_regen_at: new Date().toISOString().slice(0, 10), all_coding_models: out }, null, 2) + '\n')
 const preserved = [...curated.keys()].filter((id) => out.some((m) => m.id === id)).length
 console.log(`regen-data: wrote ${out.length} models -> ${OUT_PATH} (preserved ${preserved} curated rows)`)

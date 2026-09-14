@@ -1,5 +1,6 @@
 import React from 'react'
-import { Search, Filter, ChevronDown, Check, X, ArrowUpRight } from 'lucide-react'
+import { useState } from 'react'
+import { Search, Filter, ChevronDown, Check, X, ArrowUpRight, Download } from 'lucide-react'
 import { parsePct, parseQ4, paramsLabel, fmtDate, fmtDateFull, daysOld, DATA_AS_OF } from '../lib/parse'
 import { licenseBadge } from '../lib/license'
 import { SORT_OPTIONS, RELEASE_WINDOWS } from '../hooks/useModels'
@@ -61,10 +62,23 @@ export default function Explorer({
   onViewCompare,
 }) {
   const { q, provider, license, openOnly, maxQ4, sort, releaseWindow } = filters
-  // Show the full catalog — no pagination; every matching model renders at once.
   const set = (patch) => setFilters((f) => ({ ...f, ...patch }))
 
   const clearAll = () => setFilters({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: 'all' })
+
+  // Incremental rendering: 48 cards initially, "Load more" in 48-card pages.
+  // Keeps the desktop "show all" feel (few clicks to reach 267) while first paint
+  // stays light on mobile/low-end devices. Resets whenever filters change
+  // (adjust-state-during-render pattern — no effect, no cascading render).
+  const PAGE = 48
+  const filterKey = [q, provider, license, openOnly, maxQ4, sort, releaseWindow].join('|')
+  const [state, setState] = useState({ key: filterKey, visible: PAGE })
+  if (state.key !== filterKey) {
+    setState({ key: filterKey, visible: PAGE })
+  }
+  const visible = state.visible
+  const shown = filtered.slice(0, visible)
+  const hidden = filtered.length - shown.length
 
   return (
     <div className="space-y-4">
@@ -112,34 +126,57 @@ export default function Explorer({
         </div>
 
         {showFilters && (
-          <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3 pt-3 border-t border-white/5">
-            <label className="flex items-center gap-2 text-sm bg-white/5 rounded-xl px-3 py-2 border border-white/10 cursor-pointer">
-              <input type="checkbox" checked={openOnly} onChange={(e) => set({ openOnly: e.target.checked })} className="accent-emerald-500" />
-              Open-weight only
-            </label>
-            <Select label="Maximum Q4 VRAM" value={maxQ4} onChange={(e) => set({ maxQ4: e.target.value })}>
-              <option value="all">Any Q4 size</option>
-              <option value="16">Fits ≤16GB (5090 Q4)</option>
-              <option value="32">Fits ≤32GB (1×5090)</option>
-              <option value="96">Fits ≤96GB (1× Pro 6000)</option>
-              <option value="192">Fits ≤192GB (2× Pro)</option>
-              <option value="512">Fits ≤512GB (4× Spark)</option>
-            </Select>
-            <div className="text-xs text-white/50 flex items-center gap-2">
-              <Check size={12} className="text-emerald-400" aria-hidden="true" />
-              <span aria-live="polite">{filtered.length} / {models.length} shown</span>
+          <>
+            {/* Mobile: bottom sheet with backdrop. Desktop (lg+): inline panel, unchanged. */}
+            <div className="fixed inset-0 z-30 bg-black/60 lg:hidden" onClick={() => setShowFilters(false)} aria-hidden="true" />
+            <div
+              role="dialog"
+              aria-label="Advanced filters"
+              className="fixed inset-x-0 bottom-0 z-40 max-h-[85vh] overflow-y-auto rounded-t-2xl bg-[var(--bg-card)] border-t border-white/10 p-4 pb-6 shadow-2xl
+                         lg:static lg:z-auto lg:max-h-none lg:overflow-visible lg:rounded-none lg:bg-transparent lg:border-0 lg:shadow-none lg:p-0 lg:mt-3 lg:pt-3 lg:border-t lg:border-white/5"
+            >
+              <div className="flex items-center justify-between mb-3 lg:hidden">
+                <span className="text-sm font-bold">Filters</span>
+                <button
+                  onClick={() => setShowFilters(false)}
+                  aria-label="Close filters"
+                  className="w-8 h-8 rounded-full bg-white/5 border border-white/10 grid place-items-center hover:bg-white/10"
+                >
+                  <X size={14} aria-hidden="true" />
+                </button>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:border-0">
+                <label className="flex items-center gap-2 text-sm bg-white/5 rounded-xl px-3 py-2 border border-white/10 cursor-pointer">
+                  <input type="checkbox" checked={openOnly} onChange={(e) => set({ openOnly: e.target.checked })} className="accent-emerald-500" />
+                  Open-weight only
+                </label>
+                <Select label="Maximum Q4 VRAM" value={maxQ4} onChange={(e) => set({ maxQ4: e.target.value })}>
+                  <option value="all">Any Q4 size</option>
+                  <option value="16">Fits ≤16GB (5090 Q4)</option>
+                  <option value="32">Fits ≤32GB (1×5090)</option>
+                  <option value="96">Fits ≤96GB (1× Pro 6000)</option>
+                  <option value="192">Fits ≤192GB (2× Pro)</option>
+                  <option value="512">Fits ≤512GB (4× Spark)</option>
+                </Select>
+                <div className="text-xs text-white/50 flex items-center gap-2">
+                  <Check size={12} className="text-emerald-400" aria-hidden="true" />
+                  <span aria-live="polite">{filtered.length} / {models.length} shown</span>
+                </div>
+                <div className="flex items-center gap-3 flex-wrap text-xs">
+                  <button onClick={() => exportModels(filtered, 'csv')} className="inline-flex items-center gap-1 text-white/70 underline" type="button"><Download size={11} aria-hidden="true" />Export CSV</button>
+                  <button onClick={() => exportModels(filtered, 'json')} className="text-white/70 underline" type="button">JSON</button>
+                  <button onClick={clearAll} className="text-white/70 underline" type="button">Clear all</button>
+                </div>
+              </div>
             </div>
-            <button onClick={() => exportModels(filtered, 'csv')} className="text-xs text-white/70 underline" type="button">Export CSV</button>
-            <button onClick={() => exportModels(filtered, 'json')} className="text-xs text-white/70 underline" type="button">JSON</button>
-            <button onClick={clearAll} className="text-xs text-white/70 underline" type="button">Clear all</button>
-          </div>
+          </>
         )}
       </div>
 
       {/* Compare bar */}
       {compare.length > 0 && (
         <div className="card p-3 flex items-center gap-2 flex-wrap" aria-label="Models selected for comparison">
-          <span className="text-sm font-semibold">Compare ({compare.length}/4):</span>
+          <span className="text-sm font-semibold">Compare ({compare.length}/6):</span>
           {compareModels.map((m) => (
             <span key={m.id} className="inline-flex items-center gap-2 bg-white/10 border border-white/10 rounded-full pl-3 pr-1 py-1 text-sm">
               {m.model}{' '}
@@ -171,7 +208,7 @@ export default function Explorer({
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {filtered.map((m, idx) => {
+            {shown.map((m, idx) => {
               const swe = parsePct(m.swe_bench_verified)
               const tb = parsePct(m.terminal_bench)
               const lcb = parsePct(m.livecodebench_v6)
@@ -189,9 +226,9 @@ export default function Explorer({
                         <span className={`badge ${lic.cls}`}>{lic.label}</span>
                         {m.is_free && <span className="badge bg-emerald-500/15 text-emerald-400 border-emerald-500/30">Free</span>}
                         {m.released && (
-                          <span className={`badge ${isNew ? 'bg-sky-500/20 text-sky-300 border-sky-400/40' : 'bg-white/5 text-white/50 border-white/10'}`} title={`Released ${m.released} (data as-of ${fmtDateFull(DATA_AS_OF)})`}>
+                          <span className={`badge ${isNew ? 'bg-sky-500/20 text-sky-300 border-sky-400/40' : 'bg-white/5 text-white/50 border-white/10'}`} title={`${m.released_est ? 'Approximate release' : 'Released'} ${m.released}${m.released_est ? ' (inferred from family/provider release window)' : ''} (data as-of ${fmtDateFull(DATA_AS_OF)})`}>
                             {isNew && <span className="inline-block w-1.5 h-1.5 rounded-full bg-sky-400 mr-1" aria-hidden="true" />}
-                            {isNew ? 'NEW · ' : ''}{fmtDate(m.released)}
+                            {isNew ? 'NEW · ' : ''}{m.released_est ? '≈' : ''}{fmtDate(m.released)}
                           </span>
                         )}
                       </div>
@@ -244,6 +281,14 @@ export default function Explorer({
               )
             })}
           </div>
+          {hidden > 0 && (
+            <div className="flex flex-col items-center gap-2 pt-2">
+              <button type="button" onClick={() => setState((s) => ({ ...s, visible: s.visible + PAGE }))} className="btn btn-ghost text-sm" aria-label={`Load ${Math.min(PAGE, hidden)} more models`}>
+                Load more ({hidden} hidden)
+              </button>
+              <span className="text-xs text-white/40">Showing {shown.length} of {filtered.length}</span>
+            </div>
+          )}
         </>
       )}
     </div>

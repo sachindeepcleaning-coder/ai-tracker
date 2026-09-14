@@ -1,15 +1,60 @@
-import React from 'react'
-import { Zap, Award, BarChart3, BrainCircuit } from 'lucide-react'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
-import { parsePct, scoreSource, fmtDate, fmtDateFull, DATA_AS_OF } from '../lib/parse'
-import { licenseBadge } from '../lib/license'
-import { BENCHMARKS } from '../hooks/useModels'
+import React, { useState } from 'react'
+import { Zap, Award, BarChart3, BrainCircuit, ScatterChart as ScatterIcon } from 'lucide-react'
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, ScatterChart, Scatter as ScatterPoints, Cell } from 'recharts'
+import { parsePct, parseQ4, scoreSource, fmtDate, fmtDateFull, DATA_AS_OF } from '../lib/parse'
+import { licenseBadge, isOpenWeight } from '../lib/license'
+import { BENCHMARKS, allModels } from '../hooks/useModels'
 
 const ICONS = { zap: Zap, award: Award, chart: BarChart3, brain: BrainCircuit }
 
+/** Analytics scatter: performance vs Q4 VRAM or vs input price, open vs closed. */
+const SCATTER_METRICS = [
+  { id: 'vram', label: 'SWE-V vs Q4 VRAM', y: (m) => parsePct(m.swe_bench_verified), x: (m) => parseQ4(m.full_q4_vram_gb), xLabel: 'Q4 GB' },
+  { id: 'price', label: 'SWE-V vs input price', y: (m) => parsePct(m.swe_bench_verified), x: (m) => m.price_in_usd_per_mtok, xLabel: '$ in / Mtok' },
+]
+
 export default function Leaderboards({ leaderboards }) {
+  const [scatterId, setScatterId] = useState('vram')
+  const metric = SCATTER_METRICS.find((s) => s.id === scatterId) || SCATTER_METRICS[0]
+  const scatterData = allModels
+    .map((m) => ({ name: m.model, x: metric.x(m), y: metric.y(m), open: isOpenWeight(m.license) }))
+    .filter((p) => p.x != null && p.y != null)
+
   return (
     <div className="space-y-4">
+      <div className="card p-4">
+        <div className="flex items-center gap-2 flex-wrap">
+          <h3 className="font-bold flex items-center gap-2"><ScatterIcon size={16} className="text-violet-400" aria-hidden="true" /> Value frontier (analytics)</h3>
+          <div className="ml-auto flex gap-1">
+            {SCATTER_METRICS.map((s) => (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => setScatterId(s.id)}
+                aria-pressed={scatterId === s.id}
+                className={`text-xs px-2.5 py-1 rounded-full border ${scatterId === s.id ? 'bg-violet-500/20 border-violet-500/40 text-violet-200' : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10'}`}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <p className="text-xs text-white/50 mt-1">{scatterData.length} models with both metrics · green = open-weight · violet = closed/API · Pareto-friendly: up-left is better.</p>
+        <div className="mt-3 h-[300px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <ScatterChart>
+              <CartesianGrid stroke="rgba(255,255,255,0.06)" />
+              <XAxis type="number" dataKey="x" name={metric.xLabel} tick={{ fontSize: 10, fill: '#94A3B8' }} domain={[0, 'auto']} />
+              <YAxis type="number" dataKey="y" name="SWE-V %" tick={{ fontSize: 10, fill: '#94A3B8' }} domain={[0, 100]} />
+              <Tooltip contentStyle={{ background: '#131C2E', border: '1px solid rgba(255,255,255,0.1)' }} cursor={{ strokeDasharray: '3 3' }} />
+              <ScatterPoints data={scatterData} fill="#10B981">
+                {scatterData.map((p) => <Cell key={p.name} fill={p.open ? '#10B981' : '#8B5CF6'} />)}
+              </ScatterPoints>
+            </ScatterChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
       <div className="grid lg:grid-cols-3 gap-4">
         {BENCHMARKS.map((bench) => {
           const Icon = ICONS[bench.icon] || BarChart3
@@ -25,15 +70,17 @@ export default function Leaderboards({ leaderboards }) {
                     <div className="min-w-0 flex-1">
                       <div className="text-sm font-semibold truncate">
                         {m.model}
-                        {m.released && <span className="ml-1.5 text-[10px] font-mono text-sky-300/80 align-middle">{fmtDate(m.released)}</span>}
+                        {m.released && <span className="ml-1.5 text-[10px] font-mono text-sky-300/80 align-middle" title={m.released_est ? 'Approximate release (inferred from family/provider window)' : 'Released'}>{m.released_est ? '≈' : ''}{fmtDate(m.released)}</span>}
                       </div>
                       <div className="text-xs text-white/50">{m.provider} · {licenseBadge(m.license).label}</div>
                     </div>
                     <div className="text-sm font-mono font-bold text-emerald-400 shrink-0">
                       {m[bench.key]}
-                      {scoreSource(m[bench.key]) === 'vendor' && (
+                      {scoreSource(m[bench.key]) === 'vendor' ? (
                         <span className="ml-1 align-middle text-[9px] font-sans font-semibold uppercase tracking-wide text-amber-400/80" title="Vendor-reported score (own harness) — not independently standardized">V</span>
-                      )}
+                      ) : scoreSource(m[bench.key]) ? (
+                        <span className="ml-1 align-middle text-[9px] font-sans font-semibold uppercase tracking-wide text-sky-300/90" title={`Independently standardized (${scoreSource(m[bench.key]).toUpperCase()}) — apples-to-apples`}>i</span>
+                      ) : null}
                     </div>
                   </div>
                 ))}

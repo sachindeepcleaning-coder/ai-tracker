@@ -1,16 +1,36 @@
 import React from 'react'
-import { Scale, Zap, BarChart3 } from 'lucide-react'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, ScatterChart, Scatter, Cell } from 'recharts'
+import { Scale, Zap, BarChart3, Radar } from 'lucide-react'
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, ScatterChart, Scatter, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar as RadarSeries, Legend } from 'recharts'
 import { parsePct, parseQ4, fmtDate } from '../lib/parse'
 
-const COLORS = ['#10B981', '#8B5CF6', '#F59E0B', '#06B6D4']
+const COLORS = ['#10B981', '#8B5CF6', '#06B6D4', '#F59E0B', '#EF4444', '#3B82F6']
+
+/** Radar data: per-benchmark values for each selected model (unscored → 0). */
+const RADAR_BENCHES = [
+  { key: 'swe_bench_verified', label: 'SWE-V' },
+  { key: 'terminal_bench', label: 'TB 2.1' },
+  { key: 'livecodebench_v6', label: 'LCB V6' },
+  { key: 'swe_bench_pro', label: 'SWE-Pro' },
+  { key: 'gpqa_diamond', label: 'GPQA-D' },
+  { key: 'aime_2026', label: 'AIME' },
+]
+
+function radarData(compareModels) {
+  return RADAR_BENCHES.map((b) => {
+    const point = { bench: b.label }
+    for (const m of compareModels) {
+      point[m.model.split(' ')[0]] = parsePct(m[b.key]) || 0
+    }
+    return point
+  })
+}
 
 export default function Compare({ compareModels, onBack, onClear }) {
   if (compareModels.length < 2) {
     return (
       <div className="card p-10 text-center">
         <Scale className="mx-auto text-white/30" aria-hidden="true" />
-        <p className="mt-3 font-semibold">Select 2-4 models in Explorer to compare</p>
+        <p className="mt-3 font-semibold">Select 2-6 models in Explorer to compare</p>
         <button onClick={onBack} className="mt-3 btn btn-primary" type="button">Go to Explorer</button>
       </div>
     )
@@ -22,6 +42,33 @@ export default function Compare({ compareModels, onBack, onClear }) {
         <h2 className="text-lg font-bold">Comparison</h2>
         <button onClick={onBack} className="ml-auto btn btn-ghost text-xs" type="button">Back</button>
         <button onClick={onClear} className="btn btn-ghost text-xs" type="button">Clear</button>
+      </div>
+
+      <div className="card p-4">
+        <h3 className="font-bold mb-3 flex items-center gap-2"><Radar size={16} aria-hidden="true" /> Benchmark profile (radar)</h3>
+        <div className="h-[320px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <RadarChart data={radarData(compareModels)} outerRadius="75%">
+              <PolarGrid stroke="rgba(255,255,255,0.1)" />
+              <PolarAngleAxis dataKey="bench" tick={{ fontSize: 10, fill: '#94A3B8' }} />
+              <PolarRadiusAxis domain={[0, 100]} tick={{ fontSize: 9, fill: '#64748B' }} />
+              {compareModels.map((m, i) => (
+                <RadarSeries
+                  key={m.id}
+                  name={m.model}
+                  dataKey={m.model.split(' ')[0]}
+                  stroke={COLORS[i % COLORS.length]}
+                  fill={COLORS[i % COLORS.length]}
+                  fillOpacity={0.15}
+                  strokeWidth={2}
+                />
+              ))}
+              <Legend wrapperStyle={{ fontSize: 11 }} />
+              <Tooltip contentStyle={{ background: '#131C2E', border: '1px solid rgba(255,255,255,0.1)' }} />
+            </RadarChart>
+          </ResponsiveContainer>
+        </div>
+        <p className="text-[11px] text-white/40 mt-1">Unscored benchmarks plot at 0 — a missing axis is "no data", not a zero score.</p>
       </div>
       <div className="grid md:grid-cols-2 gap-4">
         <div className="card p-4">
