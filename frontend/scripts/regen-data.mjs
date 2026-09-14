@@ -68,6 +68,10 @@ function q4(v) {
 function price(v) {
   const s = clean(v)
   if (s == null) return null
+  // Non-per-M-token units (per-page doc pricing, per-request, etc.) carry no
+  // $/Mtok meaning: null them instead of parsing a garbage number
+  // (e.g. '$1.50/1k pages' must not become 1.5 $/Mtok).
+  if (/\/\s*1k\b/i.test(s)) return null
   const n = parseFloat(s.replace(/[$₹,]/g, ''))
   return Number.isNaN(n) ? null : n
 }

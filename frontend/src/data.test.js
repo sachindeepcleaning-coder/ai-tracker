@@ -93,4 +93,44 @@ describe('data.json integrity (regen gate)', () => {
     expect(swe2.gpqa_diamond).toBeNull() // TB4 27.3% was misattributed here in the CSV
     expect(swe2.arc_agi_2).toBeNull() // FrontierCode 50.0% was misattributed here
   })
+
+  it('no cross-harness scores in benchmark columns (misattribution gate)', () => {
+    // Same class of bug as the SWE-2 GPQA/ARC fix, found by full-catalog sweep:
+    // TB4.0/TB-Science/TB3.0 must never sit in the TB2.1 column; SWE-Pro vendor
+    // numbers must never sit in the SWE-V column; AIME25 must never win the
+    // first-% parse in MATH/AIME26 columns.
+    const tbBad = models.filter((m) => m.terminal_bench && /TB\s*(4\.0|3\.0)|TB-Science/i.test(m.terminal_bench))
+    expect(tbBad.map((m) => `${m.rank} ${m.model}`), 'TB2.1 column must hold TB2.1 only').toEqual([])
+    const swevBad = models.filter((m) => m.swe_bench_verified && /SWE-Pro vendor/i.test(m.swe_bench_verified))
+    expect(swevBad.map((m) => `${m.rank} ${m.model}`), 'SWE-V column must hold SWE-V only').toEqual([])
+    const aimeBad = models.filter((m) => [m.math, m.aime_2026].some((v) => v && /AIME\s*25/i.test(v)))
+    expect(aimeBad.map((m) => `${m.rank} ${m.model}`), 'AIME25 must not sit in MATH/AIME26 columns').toEqual([])
+    // MAI-Thinking-1 keeps its real numbers in the right columns
+    const mai = models.find((m) => m.model === 'MAI-Thinking-1')
+    expect(mai.aime_2026).toContain('94.5')
+    expect(mai.terminal_bench).toMatch(/46\.0/)
+  })
+
+  it('prices are numbers-or-null with per-Mtok meaning; Q4 units are GB-or-null', () => {
+    for (const m of models) {
+      for (const k of ['price_in_usd_per_mtok', 'price_out_usd_per_mtok', 'price_in_inr_per_mtok', 'price_out_inr_per_mtok']) {
+        const v = m[k]
+        expect(v === null || typeof v === 'number', `${m.rank} ${m.model}.${k} got ${typeof v}`).toBe(true)
+      }
+      const q = m.full_q4_vram_gb
+      // number, null, or '~N' approx-GB string (Kimi K3 '~1400' — display keeps
+      // the tilde; parseQ4 normalizes it for sort/filter). Grams ('G' suffix)
+      // are banned: that was the Kimi K3 '~1400G' unit bug.
+      expect(q === null || typeof q === 'number' || /^~\d/.test(String(q)), `${m.rank} ${m.model} Q4 unit`).toBeTruthy()
+      expect(String(q ?? ''), `${m.rank} ${m.model} Q4 must be GB, not grams`).not.toMatch(/G$/)
+    }
+    // Cohere Parse 5 is per-PAGE pricing: must be null $/Mtok, not 1.5
+    const parse5 = models.find((m) => m.model === 'Cohere Parse 5')
+    expect(parse5.price_in_usd_per_mtok).toBeNull()
+    expect(parse5.price_out_usd_per_mtok).toBeNull()
+    // North-Micro-Vision column-shift fix: 128K is context, not a price
+    const nmv = models.find((m) => m.model === 'North-Micro-Vision-Instruct')
+    expect(nmv.context_window).toBe('128K')
+    expect(nmv.price_out_inr_per_mtok).toBeNull()
+  })
 })

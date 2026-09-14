@@ -1,5 +1,14 @@
 # Changelog — coding_benchmarks_july2026_final.csv
 
+## Sep 14, 2026 — Deep data audit: cross-harness misattribution + unit/column fixes
+- Nulled non-TB2.1 scores sitting in the Terminal-Bench (TB2.1) column: r247/248 TB4.0+TB-Science, r249 TB3.0 29.0%, r254 TB4.0 vendor 57.7% (numbers preserved here; TB4.0 57.7% also in r254 license prose)
+- Nulled SWE-Pro vendor numbers in the SWE-V column: r196 64.7% (SWE-Pro vendor), r197 72.9% (SWE-Pro vendor); real TB2.1 numbers kept in Terminal-Bench with vendor tags (82%/80%)
+- Moved MAI-Thinking-1 r34 AIME26 94.5% from MATH to AIME 2026 column (AIME25 97.0% dropped — AIME 2026 column must hold AIME26); tagged TB cell 46.0% as TB2.0-not-TB2.1
+- Fixed Kimi K3 r12 Q4 unit: `~1400G` (grams) → `~1400` (GB, ≈1400GB for 2.8T)
+- Fixed North-Micro-Vision r231 column shift: `128K` moved from Price Output INR/1M to Context Window
+- Pipeline: `price()` now nulls non-per-Mtok units (`$1.50/1k pages` no longer parses as 1.5 $/Mtok — Cohere Parse 5 r237 prices now null)
+- Gates: new `data.test.js` misattribution + price/Q4-unit tests (TB4/SWE-Pro/AIME25 re-entry blocked, per-page-price re-entry blocked)
+
 ## Sep 13, 2026 — Fact-check & fix verified issues
 - Deleted GLM-5.2 Turbo (ghost row; no primary source confirms existence)
 - Fixed DeepSeek V4.1 Flash: 763B → 552B backbone; Undisc. → 8B prefill/16B decode; 382 → 280 GB Q4; MoE → Causal Encoder-Decoder (HuggingFace model card)

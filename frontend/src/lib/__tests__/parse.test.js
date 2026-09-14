@@ -48,6 +48,7 @@ describe('parseQ4', () => {
     expect(parseQ4('~111 GB')).toBe(111)
     expect(parseQ4('17 GB')).toBe(17)
     expect(parseQ4(' 244GB ')).toBe(244)
+    expect(parseQ4('~1400')).toBe(1400) // Kimi K3: GB units, tilde = approx
   })
   it('returns null for unknown', () => {
     expect(parseQ4(null)).toBeNull()
