@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { renderHook } from './test-utils.jsx'
-import { useModels, allModels, providers, licenseGroups, BENCHMARKS } from '../useModels.js'
-import { parsePct, parseQ4 } from '../../lib/parse.js'
+import { useModels, compare, allModels, providers, licenseGroups, BENCHMARKS } from '../useModels.js'
+import { parsePct, parseQ4, isValidRelease } from '../../lib/parse.js'
 import { isOpenWeight } from '../../lib/license.js'
 
 function renderUseModels(filters = { q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'rank', releaseWindow: 'all' }) {
@@ -27,7 +27,8 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
     expect(stats).toHaveProperty('dated')
     expect(stats.total).toBe(267)
     expect(stats.withQ4).toBe(allModels.filter(m => parseQ4(m.full_q4_vram_gb) != null).length)
-    expect(stats.dated).toBe(allModels.filter(m => m.released).length)
+    // dated counts valid releases only — future/invalid dates never inflate it
+    expect(stats.dated).toBe(allModels.filter(m => isValidRelease(m.released)).length)
     expect(stats.withSWE).toBe(allModels.filter(m => parsePct(m.swe_bench_verified) != null).length)
   })
 
@@ -64,7 +65,30 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
   it('latestModels respects released field (data-completeness edge)', () => {
     const { latestModels } = renderUseModels()
     expect(latestModels.length).toBe(3)
-    for (const m of latestModels) expect(m.released).toBeTruthy()
+    for (const m of latestModels) expect(isValidRelease(m.released)).toBe(true)
+  })
+
+  it('latest sort: real recent dates first, invalid/future/missing sink (rank tiebreak)', () => {
+    // Real September releases must beat the previously-broken future/invalid dates.
+    const swe2 = { model: 'SWE-2', rank: '265', released: '2026-09-15' }
+    const flash = { model: 'DeepSeek V4.1 Flash', rank: '256', released: '2026-09-10' }
+    expect(compare(swe2, flash, 'latest')).toBeLessThan(0)
+    const future = { model: 'Gemini 3.7 Flash', rank: '99', released: '2026-12-31' }
+    const invalid = { model: 'Gemini 3.1 Pro', rank: '98', released: '2026-10-66' }
+    const missing = { model: 'No Date', rank: '1', released: null }
+    for (const bad of [future, invalid, missing]) {
+      expect(compare(flash, bad, 'latest')).toBeLessThan(0)
+      expect(compare(bad, flash, 'latest')).toBeGreaterThan(0)
+    }
+    // Equal dates fall back to rank order.
+    expect(compare({ rank: '265', released: '2026-09-15' }, { rank: '266', released: '2026-09-15' }, 'latest')).toBeLessThan(0)
+  })
+
+  it('release windows never treat future/invalid dates as recent', () => {
+    for (const window of ['7', '30', '90', 'dated']) {
+      const { filtered } = renderUseModels({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: window })
+      for (const m of filtered) expect(isValidRelease(m.released)).toBe(true)
+    }
   })
 
   it('bestFit: dynamic best open-weight ≤32GB by SWE-V (not hardcoded Qwen 27B)', async () => {

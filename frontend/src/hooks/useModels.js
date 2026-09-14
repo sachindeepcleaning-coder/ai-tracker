@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import raw from '../data.json'
-import { parsePct, parseQ4, DATA_AS_OF } from '../lib/parse'
+import { parsePct, parseQ4, DATA_AS_OF, isValidRelease } from '../lib/parse'
 import { isOpenWeight, licenseBadge } from '../lib/license'
 
 /**
@@ -96,10 +96,22 @@ export const RELEASE_WINDOWS = [
   { value: 'dated', label: 'Released: has date only' },
 ]
 
-function compare(a, b, sort) {
+/** Row comparator for every Explorer sort key (exported for unit tests). */
+export function compare(a, b, sort) {
   switch (sort) {
     case 'latest': {
-      // Newest first; models with no release date sink to the bottom.
+      // Newest valid release first. Only structurally valid ISO dates inside
+      // the as-of month (isValidRelease) count as "recent" — invalid, future,
+      // coarse/approximate, and missing dates all sink below real releases.
+      // (The backfill script guards at the source; this keeps the sort correct
+      // even if a bad date is ever reintroduced.) Rank breaks date ties.
+      const aValid = isValidRelease(a.released)
+      const bValid = isValidRelease(b.released)
+      if (aValid && !bValid) return -1
+      if (!aValid && bValid) return 1
+      if (aValid && bValid) {
+        return b.released.localeCompare(a.released) || parseInt(a.rank, 10) - parseInt(b.rank, 10)
+      }
       const ar = a.released || ''
       const br = b.released || ''
       if (!ar && !br) return 0
@@ -138,7 +150,9 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
     const open = allModels.filter((m) => isOpenWeight(m.license)).length
     const withSWE = allModels.filter((m) => parsePct(m.swe_bench_verified) != null).length
     const withQ4 = allModels.filter((m) => parseQ4(m.full_q4_vram_gb) != null).length
-    const dated = allModels.filter((m) => m.released).length
+    // Valid releases only (isValidRelease): future/invalid dates never inflate
+    // the coverage KPI or leak into "latest" windows — matches 'dated' filter.
+    const dated = allModels.filter((m) => isValidRelease(m.released)).length
     return { total: allModels.length, open, closed: allModels.length - open, withSWE, withQ4, dated }
   }, [])
 
@@ -160,21 +174,23 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
     }
     if (releaseWindow && releaseWindow !== 'all') {
       if (releaseWindow === 'dated') {
-        out = out.filter((m) => m.released)
+        out = out.filter((m) => isValidRelease(m.released))
       } else {
         const days = parseInt(releaseWindow, 10)
         const cutoff = new Date(DATA_AS_OF + 'T00:00:00Z')
         cutoff.setUTCDate(cutoff.getUTCDate() - days)
-        out = out.filter((m) => m.released && new Date(m.released + 'T00:00:00Z') >= cutoff)
+        // isValidRelease first: future/invalid dates must never count as "recent".
+        out = out.filter((m) => isValidRelease(m.released) && new Date(m.released + 'T00:00:00Z') >= cutoff)
       }
     }
     out.sort((a, b) => compare(a, b, sort))
     return out
   }, [q, provider, license, openOnly, maxQ4, sort, releaseWindow])
 
-  // Newest catalog entries (for the "New frontier releases" pointer card).
+  // Newest catalog entries (for the "New frontier releases" pointer card) —
+  // valid releases only, so a future/invalid date can never surface here.
   const latestModels = useMemo(
-    () => allModels.filter((m) => m.released).sort((a, b) => b.released.localeCompare(a.released)).slice(0, 3),
+    () => allModels.filter((m) => isValidRelease(m.released)).sort((a, b) => compare(a, b, 'latest')).slice(0, 3),
     [],
   )
 

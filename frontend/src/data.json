@@ -355,6 +355,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-01",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -384,6 +385,7 @@
       "price_out_inr_per_mtok": 2378,
       "released": "2026-09-01",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -413,6 +415,7 @@
       "price_out_inr_per_mtok": 2378,
       "released": "2026-09-01",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -442,6 +445,7 @@
       "price_out_inr_per_mtok": 1902.4,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -469,8 +473,9 @@
       "context_window": "1M",
       "price_in_inr_per_mtok": 190.24,
       "price_out_inr_per_mtok": 1141.44,
-      "released": "2026-10-66",
+      "released": "2026-09-02",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -500,6 +505,7 @@
       "price_out_inr_per_mtok": 188.34,
       "released": "2026-09-14",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -529,6 +535,7 @@
       "price_out_inr_per_mtok": 760.96,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -558,6 +565,7 @@
       "price_out_inr_per_mtok": 2853.6,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -587,6 +595,7 @@
       "price_out_inr_per_mtok": 951.2,
       "released": "2026-09-01",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -616,6 +625,7 @@
       "price_out_inr_per_mtok": 1331.68,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -645,6 +655,7 @@
       "price_out_inr_per_mtok": 114.14,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -674,6 +685,7 @@
       "price_out_inr_per_mtok": 1426.8,
       "released": "2026-07-27",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -701,8 +713,9 @@
       "context_window": "262K",
       "price_in_inr_per_mtok": 71.34,
       "price_out_inr_per_mtok": 332.92,
-      "released": "2026-08-16",
+      "released": "2026-07-27",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -732,6 +745,7 @@
       "price_out_inr_per_mtok": 356.7,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -761,6 +775,7 @@
       "price_out_inr_per_mtok": 1426.8,
       "released": "2026-09-01",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -790,6 +805,7 @@
       "price_out_inr_per_mtok": 57.07,
       "released": "2026-09-10",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -819,6 +835,7 @@
       "price_out_inr_per_mtok": 285.36,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -848,6 +865,7 @@
       "price_out_inr_per_mtok": 82.75,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -875,8 +893,9 @@
       "context_window": "1M",
       "price_in_inr_per_mtok": 47.56,
       "price_out_inr_per_mtok": 285.36,
-      "released": "2026-10-66",
+      "released": "2026-09-02",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -906,6 +925,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -935,6 +955,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -964,6 +985,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -991,8 +1013,9 @@
       "context_window": "200K",
       "price_in_inr_per_mtok": 95.12,
       "price_out_inr_per_mtok": 418.53,
-      "released": "2026-08-26",
+      "released": "2026-08-25",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1022,6 +1045,7 @@
       "price_out_inr_per_mtok": 285.36,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1049,8 +1073,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": null,
-      "released": "2026-08-16",
+      "released": "2026-07-27",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1080,6 +1105,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1109,6 +1135,7 @@
       "price_out_inr_per_mtok": 114.14,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1138,6 +1165,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1167,6 +1195,7 @@
       "price_out_inr_per_mtok": 713.4,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1196,6 +1225,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-02",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1225,6 +1255,7 @@
       "price_out_inr_per_mtok": 342.43,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1254,6 +1285,7 @@
       "price_out_inr_per_mtok": 475.6,
       "released": "2026-09-01",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1283,6 +1315,7 @@
       "price_out_inr_per_mtok": 39.95,
       "released": "2026-08-13",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1312,6 +1345,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-11",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1341,6 +1375,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1370,6 +1405,7 @@
       "price_out_inr_per_mtok": 27.58,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1399,6 +1435,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -1426,8 +1463,9 @@
       "context_window": "200K",
       "price_in_inr_per_mtok": 38.05,
       "price_out_inr_per_mtok": 166.46,
-      "released": "2026-08-26",
+      "released": "2026-08-25",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1457,6 +1495,7 @@
       "price_out_inr_per_mtok": 209.26,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1486,6 +1525,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-01",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1515,6 +1555,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-01",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1544,6 +1585,7 @@
       "price_out_inr_per_mtok": 104.63,
       "released": "2026-08-13",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1573,6 +1615,7 @@
       "price_out_inr_per_mtok": 570.72,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1602,6 +1645,7 @@
       "price_out_inr_per_mtok": 570.72,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1629,8 +1673,9 @@
       "context_window": "1M",
       "price_in_inr_per_mtok": 118.9,
       "price_out_inr_per_mtok": 951.2,
-      "released": "2026-10-66",
+      "released": "2026-09-02",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1660,6 +1705,7 @@
       "price_out_inr_per_mtok": 142.68,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1689,6 +1735,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1718,6 +1765,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1747,6 +1795,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-01",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1776,6 +1825,7 @@
       "price_out_inr_per_mtok": 28.54,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1805,6 +1855,7 @@
       "price_out_inr_per_mtok": 228.29,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1832,8 +1883,9 @@
       "context_window": "262K",
       "price_in_inr_per_mtok": 12.37,
       "price_out_inr_per_mtok": 36.15,
-      "released": "2026-10-15",
-      "released_est": true,
+      "released": null,
+      "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1863,6 +1915,7 @@
       "price_out_inr_per_mtok": 85.61,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1890,8 +1943,9 @@
       "context_window": "262K",
       "price_in_inr_per_mtok": 12.37,
       "price_out_inr_per_mtok": 38.05,
-      "released": "2026-10-15",
-      "released_est": true,
+      "released": null,
+      "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -1921,6 +1975,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -1950,6 +2005,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -1979,6 +2035,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -2008,6 +2065,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2037,6 +2095,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -2066,6 +2125,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2095,6 +2155,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -2124,6 +2185,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -2153,6 +2215,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -2180,8 +2243,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": null,
-      "released": "2026-10-15",
-      "released_est": true,
+      "released": null,
+      "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -2211,6 +2275,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -2240,6 +2305,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -2269,6 +2335,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -2298,6 +2365,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -2327,6 +2395,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -2354,8 +2423,9 @@
       "context_window": "200K",
       "price_in_inr_per_mtok": 0,
       "price_out_inr_per_mtok": 0,
-      "released": "2026-08-26",
+      "released": "2026-08-25",
       "released_est": true,
+      "released_src": "curated",
       "is_free": true
     },
     {
@@ -2385,6 +2455,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -2414,6 +2485,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -2443,6 +2515,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -2472,6 +2545,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -2501,6 +2575,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -2530,6 +2605,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -2559,6 +2635,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2588,6 +2665,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2617,6 +2695,7 @@
       "price_out_inr_per_mtok": 22.83,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -2646,6 +2725,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2675,6 +2755,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2704,6 +2785,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2733,6 +2815,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2762,6 +2845,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2791,6 +2875,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2820,6 +2905,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2847,8 +2933,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": null,
-      "released": "2026-08-16",
+      "released": "2026-07-27",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2876,8 +2963,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": null,
-      "released": "2026-10-15",
-      "released_est": true,
+      "released": null,
+      "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -2907,6 +2995,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -2936,6 +3025,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2965,6 +3055,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -2992,8 +3083,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": null,
-      "released": "2026-10-15",
-      "released_est": true,
+      "released": null,
+      "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3023,6 +3115,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -3052,6 +3145,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -3081,6 +3175,7 @@
       "price_out_inr_per_mtok": 26.63,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3110,6 +3205,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3139,6 +3235,7 @@
       "price_out_inr_per_mtok": 57.07,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3168,6 +3265,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3197,6 +3295,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3226,6 +3325,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3255,6 +3355,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3284,6 +3385,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3313,6 +3415,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3342,6 +3445,7 @@
       "price_out_inr_per_mtok": 9.51,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -3371,6 +3475,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3400,6 +3505,7 @@
       "price_out_inr_per_mtok": 41.85,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -3429,6 +3535,7 @@
       "price_out_inr_per_mtok": 28.54,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -3458,6 +3565,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-15",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -3487,6 +3595,7 @@
       "price_out_inr_per_mtok": 39.95,
       "released": "2026-08-13",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -3516,6 +3625,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-13",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -3545,6 +3655,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-13",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -3574,6 +3685,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-13",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -3603,6 +3715,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-13",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -3632,6 +3745,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3661,6 +3775,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3690,6 +3805,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3719,6 +3835,7 @@
       "price_out_inr_per_mtok": 237.8,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3748,6 +3865,7 @@
       "price_out_inr_per_mtok": 71.34,
       "released": "2026-09-08",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -3777,6 +3895,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3806,6 +3925,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3835,6 +3955,7 @@
       "price_out_inr_per_mtok": 1426.8,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3864,6 +3985,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3893,6 +4015,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3922,6 +4045,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3951,6 +4075,7 @@
       "price_out_inr_per_mtok": 47.56,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -3980,6 +4105,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -4009,6 +4135,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -4038,6 +4165,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4065,8 +4193,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": null,
-      "released": "2026-10-15",
-      "released_est": true,
+      "released": null,
+      "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -4096,6 +4225,7 @@
       "price_out_inr_per_mtok": 152.19,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4125,6 +4255,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4154,6 +4285,7 @@
       "price_out_inr_per_mtok": 78.95,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -4183,6 +4315,7 @@
       "price_out_inr_per_mtok": 281.56,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -4212,6 +4345,7 @@
       "price_out_inr_per_mtok": 951.2,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4241,6 +4375,7 @@
       "price_out_inr_per_mtok": 1331.68,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4270,6 +4405,7 @@
       "price_out_inr_per_mtok": 1331.68,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4299,6 +4435,7 @@
       "price_out_inr_per_mtok": 1331.68,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4328,6 +4465,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4357,6 +4495,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4386,6 +4525,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4415,6 +4555,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4444,6 +4585,7 @@
       "price_out_inr_per_mtok": 1426.8,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4473,6 +4615,7 @@
       "price_out_inr_per_mtok": 17121.6,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4502,6 +4645,7 @@
       "price_out_inr_per_mtok": 17121.6,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4529,8 +4673,9 @@
       "context_window": "1M",
       "price_in_inr_per_mtok": 142.68,
       "price_out_inr_per_mtok": 856.08,
-      "released": "2026-10-66",
+      "released": "2026-09-02",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4558,8 +4703,9 @@
       "context_window": "1M",
       "price_in_inr_per_mtok": 190.24,
       "price_out_inr_per_mtok": 1141.44,
-      "released": "2026-10-66",
+      "released": "2026-09-02",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4587,8 +4733,9 @@
       "context_window": "1M",
       "price_in_inr_per_mtok": 47.56,
       "price_out_inr_per_mtok": 285.36,
-      "released": "2026-10-66",
+      "released": "2026-09-02",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4616,8 +4763,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": 190.24,
       "price_out_inr_per_mtok": 190.24,
-      "released": null,
-      "released_est": false,
+      "released": "2026-07-21",
+      "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4645,8 +4793,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": null,
-      "released": null,
-      "released_est": false,
+      "released": "2026-07-21",
+      "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4676,6 +4825,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -4705,6 +4855,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -4734,6 +4885,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -4763,6 +4915,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-04",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4792,6 +4945,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -4821,6 +4975,7 @@
       "price_out_inr_per_mtok": 23.78,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -4848,8 +5003,9 @@
       "context_window": "1M",
       "price_in_inr_per_mtok": 133.17,
       "price_out_inr_per_mtok": 418.53,
-      "released": "2026-08-26",
+      "released": "2026-08-25",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4877,8 +5033,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": null,
-      "released": "2026-08-26",
+      "released": "2026-08-25",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4906,8 +5063,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": null,
-      "released": "2026-08-26",
+      "released": "2026-08-25",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4937,6 +5095,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4966,6 +5125,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -4995,6 +5155,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -5024,6 +5185,7 @@
       "price_out_inr_per_mtok": 190.24,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -5053,6 +5215,7 @@
       "price_out_inr_per_mtok": 190.24,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5082,6 +5245,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -5111,6 +5275,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -5140,6 +5305,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -5169,6 +5335,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -5198,6 +5365,7 @@
       "price_out_inr_per_mtok": 114.14,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -5227,6 +5395,7 @@
       "price_out_inr_per_mtok": 114.14,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -5256,6 +5425,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -5285,6 +5455,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -5314,6 +5485,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -5343,6 +5515,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -5372,6 +5545,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5401,6 +5575,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5430,6 +5605,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5459,6 +5635,7 @@
       "price_out_inr_per_mtok": 108.44,
       "released": "2026-03-24",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5488,6 +5665,7 @@
       "price_out_inr_per_mtok": 208.31,
       "released": "2026-05-28",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5517,6 +5695,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-13",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5546,6 +5725,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-15",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5573,8 +5753,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": null,
-      "released": "2026-08-26",
+      "released": "2026-08-25",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5604,6 +5785,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-19",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5633,6 +5815,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-19",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5662,6 +5845,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-19",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5691,6 +5875,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -5720,6 +5905,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5749,6 +5935,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-01",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5778,6 +5965,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-01",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5805,8 +5993,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": null,
-      "released": "2026-08-16",
+      "released": "2026-07-27",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5836,6 +6025,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-05",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5863,8 +6053,9 @@
       "context_window": "262K",
       "price_in_inr_per_mtok": 90.36,
       "price_out_inr_per_mtok": 380.48,
-      "released": "2026-08-16",
+      "released": "2026-07-27",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5894,6 +6085,7 @@
       "price_out_inr_per_mtok": 188.34,
       "released": "2026-08-13",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5923,6 +6115,7 @@
       "price_out_inr_per_mtok": 57.07,
       "released": "2026-08-13",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5950,8 +6143,9 @@
       "context_window": "1M",
       "price_in_inr_per_mtok": 142.68,
       "price_out_inr_per_mtok": 856.08,
-      "released": "2026-10-66",
+      "released": "2026-09-02",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -5979,8 +6173,9 @@
       "context_window": "1M",
       "price_in_inr_per_mtok": 190.24,
       "price_out_inr_per_mtok": 1141.44,
-      "released": "2026-10-66",
+      "released": "2026-09-02",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6010,6 +6205,7 @@
       "price_out_inr_per_mtok": 1141.44,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6039,6 +6235,7 @@
       "price_out_inr_per_mtok": 114.14,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6068,6 +6265,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -6097,6 +6295,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -6126,6 +6325,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -6155,6 +6355,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -6182,8 +6383,9 @@
       "context_window": "1M",
       "price_in_inr_per_mtok": 71.34,
       "price_out_inr_per_mtok": 356.7,
-      "released": "2026-12-31",
-      "released_est": false,
+      "released": "2026-09-02",
+      "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6213,6 +6415,7 @@
       "price_out_inr_per_mtok": 404.26,
       "released": "2026-09-02",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6242,6 +6445,7 @@
       "price_out_inr_per_mtok": 114.14,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6269,8 +6473,9 @@
       "context_window": "1M",
       "price_in_inr_per_mtok": 28.54,
       "price_out_inr_per_mtok": 237.8,
-      "released": "2026-10-66",
+      "released": "2026-09-02",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6300,6 +6505,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -6327,8 +6533,9 @@
       "context_window": "262K",
       "price_in_inr_per_mtok": 9.51,
       "price_out_inr_per_mtok": 19.02,
-      "released": null,
+      "released": "2026-07-21",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6358,6 +6565,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -6387,6 +6595,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -6416,6 +6625,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -6445,6 +6655,7 @@
       "price_out_inr_per_mtok": 2378,
       "released": "2026-09-01",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6474,6 +6685,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-04",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6503,6 +6715,7 @@
       "price_out_inr_per_mtok": 133.17,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -6532,6 +6745,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -6561,6 +6775,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -6590,6 +6805,7 @@
       "price_out_inr_per_mtok": 0,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -6619,6 +6835,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -6648,6 +6865,7 @@
       "price_out_inr_per_mtok": 304.38,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6677,6 +6895,7 @@
       "price_out_inr_per_mtok": 188.34,
       "released": "2026-08-13",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6706,6 +6925,7 @@
       "price_out_inr_per_mtok": 17.12,
       "released": "2026-09-04",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6735,6 +6955,7 @@
       "price_out_inr_per_mtok": 418.53,
       "released": "2026-08-27",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6762,8 +6983,9 @@
       "context_window": "1M",
       "price_in_inr_per_mtok": 71.34,
       "price_out_inr_per_mtok": 356.7,
-      "released": "2026-12-31",
-      "released_est": false,
+      "released": "2026-09-02",
+      "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6793,6 +7015,7 @@
       "price_out_inr_per_mtok": 404.26,
       "released": "2026-09-02",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6822,6 +7045,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-02",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6849,8 +7073,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": 40.9,
       "price_out_inr_per_mtok": 196.9,
-      "released": null,
+      "released": "2026-08-12",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6880,6 +7105,7 @@
       "price_out_inr_per_mtok": 47.56,
       "released": "2026-08-25",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6909,6 +7135,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6938,6 +7165,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-19",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6967,6 +7195,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-26",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -6996,6 +7225,7 @@
       "price_out_inr_per_mtok": 114.14,
       "released": "2026-08-11",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7023,8 +7253,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": 128,
-      "released": null,
+      "released": "2026-08-12",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7054,6 +7285,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-19",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7083,6 +7315,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-19",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7112,6 +7345,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-19",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7141,6 +7375,7 @@
       "price_out_inr_per_mtok": 0,
       "released": "2026-08-24",
       "released_est": false,
+      "released_src": "curated",
       "is_free": true
     },
     {
@@ -7170,6 +7405,7 @@
       "price_out_inr_per_mtok": 44.71,
       "released": "2026-08-26",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7199,6 +7435,7 @@
       "price_out_inr_per_mtok": 142.68,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -7228,6 +7465,7 @@
       "price_out_inr_per_mtok": 17.12,
       "released": "2026-09-04",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7257,6 +7495,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -7286,6 +7525,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -7315,6 +7555,7 @@
       "price_out_inr_per_mtok": null,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": true
     },
     {
@@ -7344,6 +7585,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-08-19",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7371,8 +7613,9 @@
       "context_window": "1M",
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": null,
-      "released": null,
+      "released": "2026-08-11",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7402,6 +7645,7 @@
       "price_out_inr_per_mtok": 380.48,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -7431,6 +7675,7 @@
       "price_out_inr_per_mtok": 114.14,
       "released": null,
       "released_est": false,
+      "released_src": null,
       "is_free": false
     },
     {
@@ -7460,6 +7705,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-03",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7489,6 +7735,7 @@
       "price_out_inr_per_mtok": 4756,
       "released": "2026-09-01",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7518,6 +7765,7 @@
       "price_out_inr_per_mtok": 4756,
       "released": "2026-09-01",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7547,6 +7795,7 @@
       "price_out_inr_per_mtok": 570.72,
       "released": "2026-09-02",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7576,6 +7825,7 @@
       "price_out_inr_per_mtok": 62.78,
       "released": "2026-08-13",
       "released_est": true,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7605,6 +7855,7 @@
       "price_out_inr_per_mtok": 356.7,
       "released": "2026-09-02",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7634,6 +7885,7 @@
       "price_out_inr_per_mtok": 404.26,
       "released": "2026-09-02",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7663,6 +7915,7 @@
       "price_out_inr_per_mtok": 71.34,
       "released": "2026-09-08",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7692,6 +7945,7 @@
       "price_out_inr_per_mtok": 4756,
       "released": "2026-09-03",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7721,6 +7975,7 @@
       "price_out_inr_per_mtok": 4756,
       "released": "2026-09-03",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7750,6 +8005,7 @@
       "price_out_inr_per_mtok": 57.07,
       "released": "2026-09-10",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7779,6 +8035,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-07",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7808,6 +8065,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-03",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7837,6 +8095,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-02",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7866,6 +8125,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-04",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7895,6 +8155,7 @@
       "price_out_inr_per_mtok": null,
       "released": "2026-09-10",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7924,6 +8185,7 @@
       "price_out_inr_per_mtok": 356.7,
       "released": "2026-09-02",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7953,6 +8215,7 @@
       "price_out_inr_per_mtok": 237.9,
       "released": "2026-08-28",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -7982,6 +8245,7 @@
       "price_out_inr_per_mtok": 570.72,
       "released": "2026-08-13",
       "released_est": false,
+      "released_src": "curated",
       "is_free": false
     },
     {
@@ -8011,6 +8275,7 @@
       "price_out_inr_per_mtok": 9512,
       "released": "2026-09-15",
       "released_est": true,
+      "released_src": "curated-coarse",
       "is_free": false
     },
     {
@@ -8040,6 +8305,7 @@
       "price_out_inr_per_mtok": 570.72,
       "released": "2026-09-15",
       "released_est": true,
+      "released_src": "curated-coarse",
       "is_free": false
     },
     {
@@ -8069,6 +8335,7 @@
       "price_out_inr_per_mtok": 2853.6,
       "released": "2026-09-15",
       "released_est": true,
+      "released_src": "curated-coarse",
       "is_free": false
     }
   ],

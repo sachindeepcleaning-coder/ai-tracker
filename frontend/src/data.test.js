@@ -41,6 +41,29 @@ describe('data.json integrity (regen gate)', () => {
     expect(flash.released).toBe('2026-09-10')
   })
 
+  it('no invalid or future release dates (latest-sort regression gate)', () => {
+    // Guards the "Latest release" sort: invalid days (e.g. 2026-10-66) and
+    // future dates past the as-of month (e.g. 2026-12-31 pricing prose) must
+    // never sit in `released` — they belong as nulls.
+    for (const m of models) {
+      const r = m.released
+      if (r == null) continue
+      expect(r, `${m.rank} ${m.model} released must be ISO`).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+      const mo = parseInt(r.slice(5, 7), 10)
+      const dy = parseInt(r.slice(8, 10), 10)
+      expect(mo, `${m.rank} ${m.model} month`).toBeGreaterThanOrEqual(1)
+      expect(mo, `${m.rank} ${m.model} month`).toBeLessThanOrEqual(12)
+      expect(dy, `${m.rank} ${m.model} day`).toBeGreaterThanOrEqual(1)
+      expect(dy, `${m.rank} ${m.model} day`).toBeLessThanOrEqual(31)
+      expect(r <= '2026-09-30', `${m.rank} ${m.model} released ${r} is future`).toBe(true)
+    }
+    // The real September releases stay at the top of a valid-date sort.
+    const top = [...models]
+      .filter((m) => m.released)
+      .sort((a, b) => b.released.localeCompare(a.released))[0].released
+    expect(top).toBe('2026-09-15')
+  })
+
   it('release-date coverage >= 60% with released_est tiering (regen gate)', () => {
     const dated = models.filter((m) => m.released)
     expect(dated.length / models.length).toBeGreaterThanOrEqual(0.6)

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parsePct, parseQ4, fmtDate, fmtDateFull, daysOld, scoreSource, DATA_AS_OF } from '../parse.js'
+import { parsePct, parseQ4, fmtDate, fmtDateFull, daysOld, scoreSource, isValidRelease, DATA_AS_OF, RELEASE_MONTH_END } from '../parse.js'
 
 describe('parsePct', () => {
   it('prefers %-anchored number over year in annotated cells', () => {
@@ -68,5 +68,28 @@ describe('fmtDate / fmtDateFull / daysOld', () => {
     expect(daysOld('2026-09-10')).toBe(3)
     expect(daysOld(null)).toBe(Infinity)
     expect(daysOld('bad')).toBe(Infinity)
+  })
+  it('daysOld ignores invalid/future dates; within-month estimates clamp to 0', () => {
+    expect(daysOld('2026-10-66')).toBe(Infinity) // invalid day can never be "recent"
+    expect(daysOld('2026-12-31')).toBe(Infinity) // future pricing-window prose
+    expect(daysOld('2026-10-15')).toBe(Infinity) // future month
+    expect(daysOld('2026-09-15')).toBe(0) // within-month estimate, clamped
+  })
+})
+
+describe('isValidRelease', () => {
+  it('accepts real dated releases (exact + within-month estimates)', () => {
+    expect(isValidRelease('2026-09-10')).toBe(true)
+    expect(isValidRelease('2026-09-15')).toBe(true)
+    expect(isValidRelease(DATA_AS_OF)).toBe(true)
+    expect(isValidRelease(RELEASE_MONTH_END)).toBe(true)
+  })
+  it('rejects invalid, future, coarse, and missing dates', () => {
+    expect(isValidRelease('2026-10-66')).toBe(false)
+    expect(isValidRelease('2026-12-31')).toBe(false)
+    expect(isValidRelease('2026-10-15')).toBe(false)
+    expect(isValidRelease('Sep 2026')).toBe(false)
+    expect(isValidRelease(null)).toBe(false)
+    expect(isValidRelease('')).toBe(false)
   })
 })

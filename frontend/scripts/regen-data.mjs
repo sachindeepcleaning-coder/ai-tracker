@@ -6,8 +6,9 @@
  * Run: `npm run data` (from frontend/).
  *
  * Derives every row from the CSV using the canonical column mapping, then
- * MERGES curated fields (`released`, `is_free`) from the existing data.json
- * by rank id so hand-researched dates/tiers survive regeneration.
+ * MERGES curated fields (`released`, `released_est`, `released_src`, `is_free`)
+ * from the existing data.json by rank id so hand-researched dates/tiers
+ * (and backfill provenance) survive regeneration.
  * Normalizes: '-' -> null, plain-numeric cells -> numbers, "$"/"₹" stripped
  * from prices (fixes string-price rows that break numeric sort / CostCalc).
  */
@@ -136,10 +137,12 @@ const out = rows.slice(1)
   if (prev) {
     row.released = prev.released ?? null
     row.released_est = Boolean(prev.released_est)
+    row.released_src = prev.released_src ?? (row.released ? 'curated' : null)
     row.is_free = Boolean(prev.is_free)
   } else {
     row.released = null
     row.released_est = false
+    row.released_src = null
     row.is_free = false
   }
   return row
