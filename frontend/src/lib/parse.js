@@ -35,14 +35,18 @@ export function daysOld(iso) {
 
 /** Extract a score from a "93.4%"-style cell. Returns null when absent.
     Prefers a %-anchored number so annotated prose ("USAMO 2026: 99.8%")
-    doesn't rank on the year; falls back to the first bare number. */
+    doesn't rank on the year; falls back to the *last* bare number so
+    a rare "USAMO 2026: 99.8" (no %) still ranks on 99.8, not the year. */
 export function parsePct(v) {
   if (!v || v === '-') return null
   const s = String(v)
   const pct = s.match(/(\d+(?:\.\d+)?)\s*%/)
   if (pct) return parseFloat(pct[1])
-  const m = s.match(/(\d+(?:\.\d+)?)/)
-  return m ? parseFloat(m[1]) : null
+  const all = [...s.matchAll(/(\d+(?:\.\d+)?)/g)]
+  if (all.length === 0) return null
+  // If multiple numbers and no %, the score is almost always the last
+  // (e.g. "USAMO 2026: 99.8" -> 99.8, not 2026). Single-value cells are unaffected.
+  return parseFloat(all[all.length - 1][1])
 }
 
 /** Normalise a "~111 GB"-style Q4 cell into a number. Returns null when unknown. */

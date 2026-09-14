@@ -3,9 +3,13 @@ name: Deploy frontend to GitHub Pages
 on:
   push:
     branches: [master]
+    # `frontend/**` covers data.json + all UI; root CSVs/docs also affect the built site via data.json regeneration.
     paths:
       - 'frontend/**'
       - '.github/workflows/deploy.yml'
+      - 'coding_benchmarks*.csv'
+      - '*.md'
+      - '*.json'
   workflow_dispatch:
 
 # Allow only one concurrent deployment; cancel superseded runs.
@@ -52,6 +56,9 @@ jobs:
 
       - name: Lint
         run: npm run lint
+
+      - name: Tests (would have caught #1, #2, #5–#7 before Pages went blank)
+        run: npm run test
 
       - name: Build (base=/ai-tracker/)
         run: npm run build

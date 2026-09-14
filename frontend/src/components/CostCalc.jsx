@@ -21,8 +21,31 @@ const COST_SAMPLES = [
   { model: 'Qwen3.8-27B', label: 'Qwen3.8-27B (local-like)', cache: 0.02 },
 ]
 
-function resolveSample(s) {
-  const model = allModels.find((m) => m.model === s.model)
+// shared for tests — oxlint: CostCalc is the default component export; this helper is test-only
+// eslint-disable-next-line react/only-export-components -- helper exported for vitest
+function normalizeModelName(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '').trim()
+}
+
+// eslint-disable-next-line react/only-export-components -- helper exported for vitest
+export function resolveSample(s, catalog = allModels) {
+  // 1) exact
+  let model = catalog.find((m) => m.model === s.model)
+  // 2) exact by id (defensive: survives renames if caller passes {id})
+  if (!model && s.id) model = catalog.find((m) => m.id === s.id)
+  // 3) normalized (case/punctuation-insensitive) — handles "Claude Fable 5.1" vs "Fable 5.1", hyphens, etc.
+  if (!model) {
+    const want = normalizeModelName(s.model)
+    model = catalog.find((m) => normalizeModelName(m.model) === want)
+  }
+  // 4) suffix / includes fallback — last resort for alias mismatches
+  if (!model) {
+    const want = normalizeModelName(s.model)
+    model = catalog.find((m) => {
+      const have = normalizeModelName(m.model)
+      return have.includes(want) || want.includes(have)
+    })
+  }
   if (!model) console.warn(`CostCalc: sample model "${s.model}" not found in catalog — prices fall back to 0`)
   return {
     name: s.label,

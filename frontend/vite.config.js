@@ -10,4 +10,9 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   base: '/ai-tracker/',
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./src/test-setup.js'],
+  },
 })
