@@ -3,7 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGri
 
 /** Sep 2-10 curated release tracker + frontier tightness / Q4 fit notes. */
 const RELEASES = [
-  { date: 'Sep 10', name: 'DeepSeek V4.1 Flash (open weights)', badge: 'MIT', desc: 'HF deepseek-ai/DeepSeek-V4.1-Flash — MIT weights, 763B (~382GB Q4), 48 shards ~510GB FP8, KV-cache compression, vision. Vendor evals @1M ctx: TB2.1 90.6, DeepSWE v1.1 74.2, GPQA-D 90.9, HLE-tools 63.9. API deepseek-flash off-peak $0.15/$0.60 cache $0.003; peak $0.30/$1.20 cache $0.006; Novita live ~126 tok/s $1.20 out. Legacy V4 Flash/Vision retired+routed (billed Flash); V4 Pro routed Sep 14 12:00 Beijing.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
+  { date: 'Sep 10', name: 'DeepSeek V4.1 Flash (open weights)', badge: 'MIT', desc: 'HF deepseek-ai/DeepSeek-V4.1-Flash — MIT weights, 552B backbone Causal Encoder-Decoder (8B prefill / 16B decode active, 384 experts, 890 bytes/tok KV, Engram 196B), ~280GB Q4, 48 shards ~510GB FP8, KV-cache compression, vision. Vendor evals @1M ctx: TB2.1 90.6, DeepSWE v1.1 74.2, GPQA-D 90.9, HLE-tools 63.9. API deepseek-flash off-peak $0.15/$0.60 cache $0.003; peak $0.30/$1.20 cache $0.006; Novita live ~126 tok/s $1.20 out. Legacy V4 Flash/Vision retired+routed (billed Flash); V4 Pro routed Sep 14 12:00 Beijing.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
   { date: 'Sep 10', name: 'Ling-3.0-flash-VL (AA)', badge: 'Open*', desc: 'Vision variant of Ling-3.0-flash, AA-evaluated Sep 10. Sante-style weights unconfirmed; base family MIT.', cls: 'border-white/10 bg-white/5' },
   { date: 'Sep 8', name: 'Mercury 2.5 (GA)', badge: 'Proprietary', desc: 'Preview Aug 31 → GA Sep 8. Diffusion LM, 260K $0.20/$0.75. AA-evaluated Sep 8.', cls: 'border-white/10 bg-white/5' },
   { date: 'Sep 7', name: 'MiniCPM5-2B', badge: 'Apache 2.0', desc: '~2.5B dense, 131K, text+vision, ~2GB Q4. Avg 53.9 over 34 benchmarks — strongest open <4B. AA-evaluated Sep 7.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
@@ -24,7 +24,7 @@ export default function Tracker() {
   return (
     <div className="space-y-4">
       <div className="card p-4">
-        <h2 className="font-bold flex items-center gap-2"><Sparkles size={16} className="text-violet-400" aria-hidden="true" /> Sep 2-10 Release Tracker (online re-verified Sep 10, 2026)</h2>
+        <h2 className="font-bold flex items-center gap-2"><Sparkles size={16} className="text-violet-400" aria-hidden="true" /> Sep 2-10 Release Tracker (fact-checked Sep 13, 2026)</h2>
         <p className="text-sm text-white/60">DeepSeek docs + Anthropic docs + Google AI docs + llm-releases.com (349) + AA v4.3. All scores vendor-reported unless AA/Scale.</p>
         <div className="mt-4 grid md:grid-cols-2 gap-3 text-sm">
           {RELEASES.map((item) => (
@@ -43,13 +43,13 @@ export default function Tracker() {
       <div className="grid md:grid-cols-2 gap-4">
         <div className="card p-4">
           <h3 className="font-bold">Frontier tightness</h3>
-          <p className="text-sm text-white/60 mt-1">TB2.1 88.3≈88.2≈87.9&gt;86.6&gt;86.1&gt;84.3; gaps 0-2 pts at 5-10× hardware. Giants not worth it for single-user — spend on infra for models that fit 512GB.</p>
+          <p className="text-sm text-white/60 mt-1">TB2.1 90.6 (V4.1 Flash) &gt; 88.3 (K3) ≈ 88.2 (GLM-5.3) ≈ 87.9 (V4 Pro 0813) &gt; 86.6 (QMax) &gt; 86.1 (Ornith); top-to-6th gap ~4.5 pts across 5-10× hardware. Giants not worth it for single-user — spend on infra for models that fit 512GB.</p>
           <div className="mt-3 h-[160px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={[{ n: 'K3', tb: 88.3 }, { n: 'GLM5.3', tb: 88.2 }, { n: 'V4 Pro', tb: 87.9 }, { n: 'QMax', tb: 86.6 }, { n: 'Ornith', tb: 86.1 }, { n: 'Flash', tb: 84.3 }]}>
+              <BarChart data={[{ n: 'V4.1 Flash', tb: 90.6 }, { n: 'K3', tb: 88.3 }, { n: 'GLM5.3', tb: 88.2 }, { n: 'V4 Pro', tb: 87.9 }, { n: 'QMax', tb: 86.6 }, { n: 'Ornith', tb: 86.1 }]}>
                 <CartesianGrid stroke="rgba(255,255,255,0.06)" />
                 <XAxis dataKey="n" tick={{ fontSize: 10, fill: '#94A3B8' }} />
-                <YAxis domain={[80, 90]} tick={{ fill: '#94A3B8' }} />
+                <YAxis domain={[80, 92]} tick={{ fill: '#94A3B8' }} />
                 <Tooltip contentStyle={{ background: '#131C2E', border: '1px solid rgba(255,255,255,0.1)' }} />
                 <Bar dataKey="tb" fill="#8B5CF6" radius={[6, 6, 0, 0]} />
               </BarChart>
@@ -62,7 +62,7 @@ export default function Tracker() {
             {[
               ['Qwen27B 17GB', 'Fits 1×5090 ✅ ~200 tok/s'],
               ['Qwen Flash-Next 111GB', 'Fits 1× Pro 6000 or 3×5090'],
-              ['V4 Flash 155GB', '2× Pro 6000 243 tok/s FP8'],
+              ['V4.1 Flash 280GB', '4× Spark (512GB) or 8×80GB; 8B/16B active'],
               ['Ornith 397B 244GB', 'Needs 8×80GB or 4× Spark Q3'],
               ['GLM-5.3/Hy4 372/385GB', 'Needs 8×96GB or B300'],
               ['V4 Pro 800GB+', 'Multi-node / B300 Q2 tight'],

@@ -3,11 +3,14 @@ import { parseQ4, fmtDate } from '../lib/parse'
 import { hardwareTiers, fitsModel } from '../lib/hardware'
 
 /** All open-weight models with Q4 VRAM data, best SWE-V first. Independent of Explorer filters. */
-export default function HardwareFit({ models, stats, hwModels }) {
-  const fitsCount = (vram) => models.filter((m) => {
+export default function HardwareFit({ hwModels }) {
+  // Count basis = the same open-weight Q4 set the matrix renders (hwModels),
+  // so summary cards agree with the "open-weight only" narrative.
+  const fitsCount = (vram) => hwModels.filter((m) => {
     const q4 = parseQ4(m.full_q4_vram_gb)
     return q4 != null && q4 <= vram
   }).length
+  const q4Count = hwModels.length
 
   return (
     <div className="space-y-4">
@@ -18,7 +21,7 @@ export default function HardwareFit({ models, stats, hwModels }) {
           <table className="w-full text-xs">
             <thead>
               <tr className="border-b border-white/10">
-                <th className="text-left p-2 sticky left-0 bg-[#131C2E]">Model (Q4)</th>
+                <th className="text-left p-2 sticky left-0 bg-[var(--bg-card)]">Model (Q4)</th>
                 {hardwareTiers.map((h) => (
                   <th key={h.id} className="p-2 text-center min-w-[110px]">
                     <div className="font-bold">{h.label}</div>
@@ -32,7 +35,7 @@ export default function HardwareFit({ models, stats, hwModels }) {
                 const q4 = parseQ4(m.full_q4_vram_gb)
                 return (
                   <tr key={m.id} className="border-b border-white/5 hover:bg-white/[0.03]">
-                    <td className="p-2 sticky left-0 bg-[#131C2E]"><div className="font-semibold">{m.model.slice(0, 28)}{m.released && <span className="ml-1 text-[10px] font-mono text-sky-300/80">{fmtDate(m.released)}</span>}</div><div className="text-white/50">{q4}GB · {m.provider}</div></td>
+                    <td className="p-2 sticky left-0 bg-[var(--bg-card)]"><div className="font-semibold">{m.model.slice(0, 28)}{m.released && <span className="ml-1 text-[10px] font-mono text-sky-300/80">{fmtDate(m.released)}</span>}</div><div className="text-white/50">{q4}GB · {m.provider}</div></td>
                     {hardwareTiers.map((h) => {
                       const fit = fitsModel(q4, h.vram)
                       const symbol = fit === 'fit' ? '✓' : fit === 'tight' ? '~' : '×'
@@ -59,12 +62,12 @@ export default function HardwareFit({ models, stats, hwModels }) {
       <div className="grid md:grid-cols-3 gap-3">
         {hardwareTiers.map((h) => {
           const n = fitsCount(h.vram)
-          const pct = Math.round((n / stats.avgQ4) * 100)
+          const pct = Math.round((n / q4Count) * 100)
           return (
             <div key={h.id} className="card p-4">
               <div className="text-sm font-bold">{h.label}</div>
               <div className="text-xs text-white/50">{h.vram}GB VRAM/unified · {h.cost} India street · {h.tok}</div>
-              <div className="mt-2 text-xs">Fits {n} / {stats.avgQ4} Q4 models</div>
+              <div className="mt-2 text-xs">Fits {n} / {q4Count} open-weight Q4 models</div>
               <div className="mt-2 h-2 bg-white/10 rounded-full overflow-hidden" role="img" aria-label={`${pct}% of Q4 models fit`}>
                 <div className="h-full bg-emerald-500" style={{ width: `${pct}%` }} />
               </div>

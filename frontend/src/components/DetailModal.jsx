@@ -5,7 +5,7 @@ import { fmtDateFull } from '../lib/parse'
 
 const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
 
-export default function DetailModal({ detail, onClose, onToggleCompare }) {
+export default function DetailModal({ detail, onClose, onToggleCompare, inCompare }) {
   const panelRef = useRef(null)
 
   useEffect(() => {
@@ -102,7 +102,7 @@ export default function DetailModal({ detail, onClose, onToggleCompare }) {
         </div>
 
         <div className="mt-4 flex gap-2">
-          <button type="button" onClick={() => { onToggleCompare(detail.id); onClose() }} className="btn btn-primary text-sm">Add to compare</button>
+          <button type="button" onClick={() => { onToggleCompare(detail.id); onClose() }} className="btn btn-primary text-sm">{inCompare ? 'Remove from compare' : 'Add to compare'}</button>
           <button type="button" onClick={onClose} className="btn btn-ghost text-sm">Close</button>
           <a href={`https://huggingface.co/models?search=${encodeURIComponent(detail.model)}`} target="_blank" rel="noopener noreferrer" className="ml-auto btn btn-ghost text-sm">Open HF <ArrowUpRight size={12} aria-hidden="true" /></a>
         </div>

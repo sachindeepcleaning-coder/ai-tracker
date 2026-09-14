@@ -46,8 +46,11 @@ export default function Compare({ compareModels, onBack, onClear }) {
                 <XAxis type="number" dataKey="q4" name="Q4 GB" tick={{ fill: '#94A3B8' }} domain={[0, 'auto']} />
                 <YAxis type="number" dataKey="price" name="$ in/M" tick={{ fill: '#94A3B8' }} />
                 <Tooltip contentStyle={{ background: '#131C2E', border: '1px solid rgba(255,255,255,0.1)' }} cursor={{ strokeDasharray: '3 3' }} />
-                <Scatter data={compareModels.map((m) => ({ q4: parseQ4(m.full_q4_vram_gb) || 0, price: m.price_in_usd_per_mtok || 0, name: m.model }))}>
-                  {compareModels.map((_, i) => <Cell key={i} fill={COLORS[i % 4]} />)}
+                <Scatter data={compareModels
+                  .map((m) => ({ q4: parseQ4(m.full_q4_vram_gb), price: m.price_in_usd_per_mtok, name: m.model }))
+                  .filter((p) => p.q4 != null && p.price != null)
+                }>
+                  {compareModels.filter((m) => parseQ4(m.full_q4_vram_gb) != null && m.price_in_usd_per_mtok != null).map((m, i) => <Cell key={m.id} fill={COLORS[i % 4]} />)}
                 </Scatter>
               </ScatterChart>
             </ResponsiveContainer>

@@ -4,25 +4,26 @@ import { allModels } from '../hooks/useModels'
 import { INR_PER_USD } from '../lib/parse'
 
 /**
- * Representative API plans. Prices (in/out $/M) resolve from data.json by rank id
- * so the calculator stays aligned with the Explorer catalog; only the cache-read
- * multiplier is a curated field (data.json stores it in prose, not as a column).
+ * Representative API plans. Prices (in/out $/M) resolve from data.json by MODEL
+ * NAME (stable across CSV re-ranks; rank ids shift when rows are added/removed);
+ * only the cache-read tier is a curated field (data.json stores it in prose).
  */
 const COST_SAMPLES = [
-  { id: 'rank-259', label: 'DeepSeek V4.1 Flash (off-peak)', cache: 0.003 },
-  { id: 'rank-259', label: 'DeepSeek V4.1 Flash (peak)', in: 0.3, out: 1.2, cache: 0.006 },
-  { id: 'rank-4', label: 'GPT-5.6 Sol (promo)', cache: 0.4 },
-  { id: 'rank-12', label: 'Kimi K3', cache: 0.3 },
-  { id: 'rank-228', label: 'GLM-5.3-Flash', cache: 0.03 },
-  { id: 'rank-254', label: 'Gemini 3.8 Flash (intro)', cache: 0.075 },
-  { id: 'rank-255', label: 'Muse Spark 1.3', cache: 0.15 },
-  { id: 'rank-250', label: 'Fable 5.1', cache: 0.25 },
-  { id: 'rank-257', label: 'GPT-6 Astra', cache: 1.0 },
-  { id: 'rank-219', label: 'Qwen3.8-27B (local-like)', cache: 0.02 },
+  { model: 'DeepSeek V4.1 Flash', label: 'DeepSeek V4.1 Flash (off-peak)', cache: 0.003 },
+  { model: 'DeepSeek V4.1 Flash', label: 'DeepSeek V4.1 Flash (peak)', in: 0.3, out: 1.2, cache: 0.006 },
+  { model: 'GPT-5.6 Sol', label: 'GPT-5.6 Sol (promo)', cache: 0.4 },
+  { model: 'Kimi K3', label: 'Kimi K3', cache: 0.3 },
+  { model: 'GLM-5.3-Flash', label: 'GLM-5.3-Flash', cache: 0.03 },
+  { model: 'Gemini 3.8 Flash', label: 'Gemini 3.8 Flash (intro)', cache: 0.075 },
+  { model: 'Muse Spark 1.3', label: 'Muse Spark 1.3', cache: 0.15 },
+  { model: 'Claude Fable 5.1', label: 'Fable 5.1', cache: 0.25 },
+  { model: 'GPT-6 Astra', label: 'GPT-6 Astra', cache: 1.0 },
+  { model: 'Qwen3.8-27B', label: 'Qwen3.8-27B (local-like)', cache: 0.02 },
 ]
 
 function resolveSample(s) {
-  const model = allModels.find((m) => m.id === s.id)
+  const model = allModels.find((m) => m.model === s.model)
+  if (!model) console.warn(`CostCalc: sample model "${s.model}" not found in catalog — prices fall back to 0`)
   return {
     name: s.label,
     in: s.in ?? model?.price_in_usd_per_mtok ?? 0,

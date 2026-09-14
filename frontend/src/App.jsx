@@ -49,7 +49,7 @@ export default function App() {
           { k: 'Total models', v: stats.total, s: 'CSV 1-267, fact-checked Sep 13', icon: Database },
           { k: 'Open-weight', v: stats.open, s: `${Math.round((stats.open / stats.total) * 100)}% open`, icon: Layers },
           { k: 'With SWE-V', v: stats.withSWE, s: 'have SWE-bench Verified', icon: Award },
-          { k: 'With Q4 size', v: stats.avgQ4, s: 'have Q4 VRAM', icon: Cpu },
+          { k: 'With Q4 size', v: stats.withQ4, s: 'have Q4 VRAM', icon: Cpu },
           { k: 'Best Q4 fit', v: 'Qwen 27B', s: '17 GB → 200 tok/s on 1×5090', icon: Zap },
         ].map((card) => {
           const Icon = card.icon
@@ -112,7 +112,7 @@ export default function App() {
           )}
           <Suspense fallback={<TabFallback />}>
             {tab === 'leaderboards' && <Leaderboards leaderboards={leaderboards} />}
-            {tab === 'hardware' && <HardwareFit models={allModels} stats={stats} hwModels={hwModels} />}
+            {tab === 'hardware' && <HardwareFit hwModels={hwModels} />}
             {tab === 'cost' && <CostCalc />}
             {tab === 'compare' && <Compare compareModels={compareModels} onBack={() => setTab('explorer')} onClear={() => setCompare([])} />}
             {tab === 'tracker' && <Tracker />}
@@ -120,7 +120,7 @@ export default function App() {
         </ErrorBoundary>
       </main>
 
-      {detail && <DetailModal detail={detail} onClose={() => setDetail(null)} onToggleCompare={toggleCompare} />}
+      {detail && <DetailModal detail={detail} onClose={() => setDetail(null)} onToggleCompare={toggleCompare} inCompare={compare.includes(detail.id)} />}
 
       <footer className="max-w-[1400px] mx-auto px-4 md:px-6 py-6 text-xs text-white/40 border-t border-white/5 mt-6">
         Built from <span className="text-white/70">coding_benchmarks_july2026_final.csv (ranks 1-267, single source of truth)</span> + regenerated <span className="text-white/70">ai_coding_api_vs_local_summary.json + frontend/src/data.json</span>. ₹95.12/USD. Fact-checked {VERIFIED_AT} (HuggingFace / Cognition / Sakana / DeepSeek / Anthropic / Google / llm-releases / AA v4.3). Not vendor quotes — planning estimates. Source: GitHub repo `sachindeepcleaning-coder/ai-tracker`.

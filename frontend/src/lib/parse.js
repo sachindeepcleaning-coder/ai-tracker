@@ -33,10 +33,15 @@ export function daysOld(iso) {
   return Math.round((new Date(DATA_AS_OF + 'T00:00:00Z') - d) / 86400000)
 }
 
-/** Extract the first number from a "93.4%"-style cell. Returns null when absent. */
+/** Extract a score from a "93.4%"-style cell. Returns null when absent.
+    Prefers a %-anchored number so annotated prose ("USAMO 2026: 99.8%")
+    doesn't rank on the year; falls back to the first bare number. */
 export function parsePct(v) {
   if (!v || v === '-') return null
-  const m = String(v).match(/([\d.]+)/)
+  const s = String(v)
+  const pct = s.match(/(\d+(?:\.\d+)?)\s*%/)
+  if (pct) return parseFloat(pct[1])
+  const m = s.match(/(\d+(?:\.\d+)?)/)
   return m ? parseFloat(m[1]) : null
 }
 

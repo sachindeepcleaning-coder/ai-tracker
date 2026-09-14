@@ -97,7 +97,7 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
     const open = allModels.filter((m) => isOpenWeight(m.license)).length
     const withSWE = allModels.filter((m) => parsePct(m.swe_bench_verified) != null).length
     const withQ4 = allModels.filter((m) => parseQ4(m.full_q4_vram_gb) != null).length
-    return { total: allModels.length, open, closed: allModels.length - open, withSWE, avgQ4: withQ4 }
+    return { total: allModels.length, open, closed: allModels.length - open, withSWE, withQ4 }
   }, [])
 
   const filtered = useMemo(() => {
