@@ -66,7 +66,7 @@ describe('fmtDate / fmtDateFull / daysOld', () => {
   })
   it('daysOld against DATA_AS_OF', () => {
     expect(daysOld(DATA_AS_OF)).toBe(0)
-    expect(daysOld('2026-09-10')).toBe(3)
+    expect(daysOld('2026-09-10')).toBe(5)
     expect(daysOld(null)).toBe(Infinity)
     expect(daysOld('bad')).toBe(Infinity)
   })
