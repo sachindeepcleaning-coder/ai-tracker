@@ -1,5 +1,13 @@
 # Changelog — coding_benchmarks_july2026_final.csv
 
+## Sep 15, 2026 — Deep audit sync: Koa, V4.1 Flash pricing, Astra enrichment, Grok delay
+- Added Salesforce Koa (rank 268) – enterprise agentic CRM model announced 15 Sep 2026; post-trained Nemotron 3 Super base; Salesforce-hosted pilot; GA winter 2026; specialized; weights controlled
+- Updated DeepSeek V4.1 Flash (rank 256) pricing to peak $0.30/$1.20 off-peak $0.15/$0.60; INR updated to ₹28.54/₹114.14; license note added for peak/off-peak and cache-hit
+- Enriched GPT-6 Astra (rank 254) license with DeepSWE v1.1 74.1% vendor and Critical cyber threshold note
+- Marked Grok 4.7 delayed – missed ~Sep 12 target as of 15 Sep; additional RL needed; roadmap notes added to ai_model_tracker_aug29_2026.md
+- Updated README verification date to Sep 15 2026; ai_model_tracker changelog appended
+- CSV rank count now 268 (+1); data.json will be regenerated
+
 ## Sep 14, 2026 — Deep data audit: cross-harness misattribution + unit/column fixes
 - Nulled non-TB2.1 scores sitting in the Terminal-Bench (TB2.1) column: r247/248 TB4.0+TB-Science, r249 TB3.0 29.0%, r254 TB4.0 vendor 57.7% (numbers preserved here; TB4.0 57.7% also in r254 license prose)
 - Nulled SWE-Pro vendor numbers in the SWE-V column: r196 64.7% (SWE-Pro vendor), r197 72.9% (SWE-Pro vendor); real TB2.1 numbers kept in Terminal-Bench with vendor tags (82%/80%)

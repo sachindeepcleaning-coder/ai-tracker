@@ -51,7 +51,7 @@ B. [₹ Pricing Quick Reference](#appendix-b--pricing-quick-reference-aug-29-951
 
 | Model | Provider | Expected | Params (est.) | Key Claims | Source |
 |---|---|---|---|---|---|
-| **Grok 4.7** | xAI | **~Sep 12, 2026** | **~2.1T total** | "Better than 4.6 in every way, except slightly slower; better token efficiency." Fed with massive SpaceX engineering data during supplemental training. | Elon Musk X post Jul 28 & Aug 12, 2026; Manifold 85% probability; techjournal.org Aug 23 |
+| **Grok 4.7** | xAI | **Delayed – missed ~Sep 12 target** | **~2.1T total** | "Better than 4.6 in every way, except slightly slower; better token efficiency." Fed with massive SpaceX engineering data during supplemental training. Additional RL needed for response-length / task-completion issues per 12–14 Sep reports. | Elon Musk X post Jul 28 & Aug 12, 2026; delayed Sep 12–15 2026; Musk posts Sep 2026 |
 | **Qwen4 family** | Alibaba | Sep–Fall 2026 | Unknown (Qwen3.8-Flash-Next is the architecture preview) | Qwen3.8-Flash-Next (125B/6B, Aug 26) described as "early preview of the architecture that will underpin Qwen4." Advanced 3D coding & design capabilities leaked. | Geeky Gadgets / World of AI leak Jul 20; yottalabs.ai Aug 28; "Rumors point to fall 2026" |
 | **Kimi K4** | Moonshot AI | 2026 (no date) | Unknown | The Information (Jul 29) reports Moonshot seeking additional Nvidia Blackwell chips for next-gen model. No name, params, or timeline from Moonshot itself. **Treat as rumor.** | The Information ~Jul 29 (one report, unconfirmed by Moonshot) |
 | **Claude Haiku 5** | Anthropic | Unknown | Unknown | SkillBoss tracker lists as forthcoming; described as "next-gen ultra-fast, low-cost Claude tier, targeting sub-200ms TTFT for high-volume agent traffic." Unconfirmed. | SkillBoss upcoming-models page (Aug 2026) |
@@ -916,7 +916,7 @@ See `single_user_india_local_ai.md` §Post-Session Update Sep 1 2026 for full ta
 
 | Model | Provider | Evidence | Why It Matters |
 |---|---|---|---|
-| **Grok 4.7** | xAI | Elon Musk Aug 12: "3–4 weeks"; training done + SpaceX data added. Grok 4.7 expected ~Sep 12, 2026. Manifold: 85% by end-Sep. | **~2.1T, likely best closed-model on TB2.1 if 4.6 gains extrapolate. Price unknown.** Watch for $2–3/$6–10 range. |
+| **Grok 4.7** | xAI | Elon Musk Aug 12: "3–4 weeks"; training done + SpaceX data added. **Missed ~Sep 12 target as of 15 Sep 2026**; additional RL needed for response-length / task-completion issues. Roadmap: Grok 4.8 (~2.5T, new C++ stack, training finishing this week → RL next), 4.9 expected Astra/Fable-class, 5 as AGI claim. | **~2.1T, likely best closed-model on TB2.1 if 4.6 gains extrapolate. Price unknown.** Watchlist / delayed; unconfirmed. |
 | **Tencent Hy4 (full)** | Tencent | Preview shipped Aug 28; "next Hy4 batch expected soon; official release not far off" | Full Hy4 may add missing TB2.1 / AA Coding Index data, improve blind-eval scores. Apache 2.0. |
 | **GLM-5.3-Flash promo end** | Z.ai | Promo expires Sep 9, 2026 | $0.075/$0.25 → $0.15/$0.50 effective Sep 10. Lock in deployments before pricing doubles. |
 | **MAI-Code-1-Flash retirement** | Microsoft | GitHub changelog: Sep 10, 2026 | Migrate Copilot pipelines from MAI-Code-1-Flash to 1.1-Flash before Sept 10 or they break. |
@@ -1042,10 +1042,14 @@ See `single_user_india_local_ai.md` §Post-Session Update Sep 1 2026 for full ta
 | Sep 8, 2026 | **Added** | **K2 Horizon family** | IFM/MBZUAI, 6 models 0.9B→375B-A23B, Apache 2.0, **fully open (weights+data+code+checkpoints+logs)**; flagship ~47 AA Index (vendor) | IFM release + trackers (Sep 3) |
 | Sep 8, 2026 | **Added** | **Quasar 438B** | Multiverse Computing, Sep 2 listed on BenchLM/ThursdAI; sparse public details — Announced-but-unconfirmed | BenchLM + ThursdAI only |
 | Sep 8, 2026 | **Corrected** | **Muse Spark 1.3 AA Index** | Launch-day **61 (xhigh) / 62 (max)** → **live AA v4.3 re-score = 48 (max, #13/202)**; cost/task $1.60, 236.8 tok/s, TTFT 26.9s, 170M idx tokens (very verbose). New index adds Terminal-Bench v4.0, GDP.pdf, CritPt, AA-LCR v1.1. All downstream tables (tracker §2/§4e, cost-per-task, README, local_ai_coding_models, data.json) updated to 48 | `artificialanalysis.ai/models/muse-spark-1-3` (live, Sep 8) + `research.meta.ai` (Sep 2) |
+| Sep 15, 2026 | **Added** | **Salesforce Koa** | Enterprise agentic CRM model announced 15 Sep 2026; post-trained NVIDIA Nemotron 3 Super base on synthetic CRM workflow data; Salesforce-hosted pilot; GA winter 2026; specialized multi-step reasoning + tool-use for Agentforce; weights controlled | Salesforce press 15 Sep 2026 |
+| Sep 15, 2026 | **Updated** | **Grok 4.7** | Delayed – missed ~Sep 12 target as of 15 Sep; additional RL needed for response-length / task-completion. Roadmap notes: Grok 4.8 (~2.5T, new C++ stack), 4.9 Astra/Fable-class, 5 AGI claim | xAI / Musk posts Sep 12-15 2026 |
+| Sep 15, 2026 | **Updated** | **DeepSeek V4.1 Flash pricing** | Peak pricing $0.30/$1.20; off-peak $0.15/$0.60; cache-hit $0.003/$0.006; INR updated; legacy V4 Flash/Pro routes to it | DeepSeek API docs Sep 10-15 2026 |
+| Sep 15, 2026 | **Updated** | **GPT-6 Astra / Astra Pro** | Enriched cards with DeepSWE v1.1 74.1% vendor; TB4.0 57.7%; OSWorld 72.6%; first Critical cyber threshold; pricing $10/$50 cache $1; 1.05M ctx | OpenAI Sep 3-4 2026 + vendor notes |
 
 *Sep 2 is first commit with llm-releases.com-synced taxonomy. Next sync: Sep 5–7.*
 
 ---
 
 *All figures are planning estimates. Not vendor quotes. Verify before committing to infrastructure spend.*
-*Generated: Aug 29, 2026 | Synced: Sep 2, 2026 | **Updated: Sep 10, 2026 (DeepSeek V4.1 Flash GA, Mercury 2.5 GA, GPT-6 Astra Pro)**. Next recommended update: Sep 12–14, 2026 (Grok 4.7 if it lands, GLM-5.3 AA entry, promo expiry Sep 9).*
+*Generated: Aug 29, 2026 | Synced: Sep 2, 2026 | **Updated: Sep 15, 2026 (Salesforce Koa added; Grok 4.7 delayed; DeepSeek V4.1 Flash pricing finalized; GPT-6 Astra enriched)**. Next recommended update: Sep 20-22 2026.*
