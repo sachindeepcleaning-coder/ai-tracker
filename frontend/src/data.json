@@ -8346,7 +8346,7 @@
       "total_parameters": "Unknown",
       "active_parameters": "Unknown",
       "full_q4_vram_gb": null,
-      "license": "Proprietary (Enterprise pilot 15 Sep 2026; Salesforce-hosted; Agentforce CRM workflow; post-trained NVIDIA Nemotron 3 Super base; weights controlled; GA winter 2026; specialized agentic)",
+      "license": "Proprietary (Enterprise pilot 15 Sep 2026; Salesforce-hosted only, not public API; post-trained NVIDIA Nemotron 3 Super base with proprietary synthetic CRM workflows, no customer data; pilot customers; GA winter 2026 US regions; specialized agentic CRM reasoning; vendor claims 3x fewer errors on internal CRM Bench vs general models; weights controlled by Salesforce)",
       "swe_bench_verified": null,
       "swe_bench_pro": null,
       "livecodebench_v6": null,

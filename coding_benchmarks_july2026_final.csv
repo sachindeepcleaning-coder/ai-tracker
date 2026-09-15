@@ -266,5 +266,5 @@ Rank,Model,Provider,Total Parameters,Active Parameters,Full Q4 VRAM (GB),License
 265,SWE-2,Cognition,Undisc.,Undisc.,?,Proprietary (Devin only; FrontierCode 50.0%; DeepSWE 73.0%; TB2.1 92.8%; TB4 27.3%),-,-,-,92.8% (TB2.1 vendor),-,-,-,-,-,-,-,$20.00,$100.00,1M,₹1902.40,₹9512.00
 266,Fugu Max,Sakana AI,Undisc.,Orchestration,?,Proprietary (Sakana AI; orchestration system; not EU/EEA),-,-,-,-,-,-,-,-,-,-,-,$2.00,$6.00,1M,₹190.24,₹570.72
 267,Fugu Ultra v2.0,Sakana AI,Undisc.,Orchestration,?,Proprietary (Sakana AI; v2.0; orchestration system; not EU/EEA),-,-,-,-,-,-,-,-,-,-,-,$5.00,$30.00,1M,₹475.60,₹2853.60
-268,Salesforce Koa,Salesforce,Unknown,Unknown,?,Proprietary (Enterprise pilot 15 Sep 2026; Salesforce-hosted; Agentforce CRM workflow; post-trained NVIDIA Nemotron 3 Super base; weights controlled; GA winter 2026; specialized agentic),-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+268,Salesforce Koa,Salesforce,Unknown,Unknown,?,"Proprietary (Enterprise pilot 15 Sep 2026; Salesforce-hosted only, not public API; post-trained NVIDIA Nemotron 3 Super base with proprietary synthetic CRM workflows, no customer data; pilot customers; GA winter 2026 US regions; specialized agentic CRM reasoning; vendor claims 3x fewer errors on internal CRM Bench vs general models; weights controlled by Salesforce)",-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
 # See CHANGELOG.md for update history
