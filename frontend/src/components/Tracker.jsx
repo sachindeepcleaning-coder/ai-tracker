@@ -2,8 +2,10 @@ import React from 'react'
 import { Sparkles } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
 
-/** Sep 2-10 curated release tracker + frontier tightness / Q4 fit notes. */
+/** Sep 2-15 curated release tracker + frontier tightness / Q4 fit notes. */
 const RELEASES = [
+  { date: 'Sep 15', name: 'Salesforce Koa (enterprise pilot)', badge: 'Proprietary', desc: 'Salesforce-hosted pilot announced Sep 15 2026. Nemotron 3 Super post-trained for Agentforce CRM workflows, multi-step reasoning + tool-use. Claims ~3× fewer errors on Salesforce CRM Bench vs frontier general models, higher precision/reliability/context retention, token-efficient. Enterprise deployment, weights controlled by Salesforce; GA winter 2026.', cls: 'border-violet-500/30 bg-violet-500/10' },
+  { date: 'Sep 15', name: 'Grok 4.7 delayed', badge: 'Proprietary', desc: 'Grok 4.7 expected ~Sep 12 but delayed due to additional RL for response-length / task-completion. Roadmap: Grok 4.8 ~2.5T new C++ stack training finishing → RL next; 4.9 Astra/Fable-class; 5 AGI claim.', cls: 'border-amber-500/20 bg-amber-500/5' },
   { date: 'Sep 10', name: 'DeepSeek V4.1 Flash (open weights)', badge: 'MIT', desc: 'HF deepseek-ai/DeepSeek-V4.1-Flash — MIT weights, 552B backbone Causal Encoder-Decoder (8B prefill / 16B decode active, 384 experts, 890 bytes/tok KV, Engram 196B), ~280GB Q4, 48 shards ~510GB FP8, KV-cache compression, vision. Vendor evals @1M ctx: TB2.1 90.6, DeepSWE v1.1 74.2, GPQA-D 90.9, HLE-tools 63.9. API deepseek-flash off-peak $0.15/$0.60 cache $0.003; peak $0.30/$1.20 cache $0.006; Novita live ~126 tok/s $1.20 out. Legacy V4 Flash/Vision retired+routed (billed Flash); V4 Pro routed Sep 14 12:00 Beijing.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
   { date: 'Sep 10', name: 'Ling-3.0-flash-VL (AA)', badge: 'Open*', desc: 'Vision variant of Ling-3.0-flash, AA-evaluated Sep 10. Sante-style weights unconfirmed; base family MIT.', cls: 'border-white/10 bg-white/5' },
   { date: 'Sep 8', name: 'Mercury 2.5 (GA)', badge: 'Proprietary', desc: 'Preview Aug 31 → GA Sep 8. Diffusion LM, 260K $0.20/$0.75. AA-evaluated Sep 8.', cls: 'border-white/10 bg-white/5' },
@@ -25,7 +27,7 @@ export default function Tracker() {
   return (
     <div className="space-y-4">
       <div className="card p-4">
-        <h2 className="font-bold flex items-center gap-2"><Sparkles size={16} className="text-violet-400" aria-hidden="true" /> Sep 2-10 Release Tracker (fact-checked Sep 13, 2026)</h2>
+        <h2 className="font-bold flex items-center gap-2"><Sparkles size={16} className="text-violet-400" aria-hidden="true" /> Sep 2-15 Release Tracker (fact-checked Sep 15, 2026)</h2>
         <p className="text-sm text-white/60">DeepSeek docs + Anthropic docs + Google AI docs + llm-releases.com (349) + AA v4.3. All scores vendor-reported unless AA/Scale.</p>
         <div className="mt-4 grid md:grid-cols-2 gap-3 text-sm">
           {RELEASES.map((item) => (
