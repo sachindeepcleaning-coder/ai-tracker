@@ -190,7 +190,7 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
   // Newest catalog entries (for the "New frontier releases" pointer card) —
   // valid releases only, so a future/invalid date can never surface here.
   const latestModels = useMemo(
-    () => allModels.filter((m) => isValidRelease(m.released)).sort((a, b) => compare(a, b, 'latest')).slice(0, 3),
+    () => allModels.filter((m) => isValidRelease(m.released)).sort((a, b) => compare(a, b, 'latest')).slice(0, 4),
     [],
   )
 

@@ -30,7 +30,7 @@ export default function Header({ tab, onTab, stats, explorerCount }) {
           <div className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-white" style={{ background: 'linear-gradient(135deg,#10B981,#8B5CF6)' }} aria-hidden="true">AI</div>
           <div className="min-w-0">
             <h1 className="text-[15px] md:text-[16px] font-extrabold leading-none tracking-tight">Local AI Coding Models — India</h1>
-            <p className="text-[11px] text-white/60 hidden sm:block">{stats.total} models (CSV ranks 1-267 single source of truth) · Fact-checked {VERIFIED_AT} · ₹95.12/USD · Private / local-first</p>
+            <p className="text-[11px] text-white/60 hidden sm:block">{stats.total} models (CSV ranks 1-{stats.total} single source of truth) · Fact-checked {VERIFIED_AT} · ₹95.12/USD · Private / local-first</p>
           </div>
         </div>
         <div className="flex items-center gap-2">

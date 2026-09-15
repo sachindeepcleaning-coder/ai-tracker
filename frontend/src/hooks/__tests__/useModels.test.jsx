@@ -64,7 +64,7 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
 
   it('latestModels respects released field (data-completeness edge)', () => {
     const { latestModels } = renderUseModels()
-    expect(latestModels.length).toBe(3)
+    expect(latestModels.length).toBe(4)
     for (const m of latestModels) expect(isValidRelease(m.released)).toBe(true)
   })
 

@@ -1,7 +1,7 @@
 {
   "conversation_summary": {
     "date": "2026-09-13 (fact-checked vs HuggingFace/Cognition/Sakana primary sources; GLM-5.2 Turbo deleted; V4.1 Flash fixed 552B/8B+16B/280GB/CED; SWE-2+Fugu Max+Fugu Ultra v2.0 added; Qwen3.8-Max-Preview retired; Nemotron 3.5 Lightning duplicate deduped)",
-    "currency_assumption": "1 USD = ₹95.12",
+    "currency_assumption": "1 USD = \u20b995.12",
     "goal": "Compare API costs versus local hardware for extremely high-volume agentic coding.",
     "workload": {
       "tokens_per_day": 1000000000,
@@ -175,12 +175,12 @@
           "SGLang",
           "llama.cpp depending on quantization/runtime support"
         ],
-        "estimated_india_total": "₹50-60 lakh"
+        "estimated_india_total": "\u20b950-60 lakh"
       },
       "alternative_build": {
         "gpu": "2 x RTX PRO 6000 Blackwell 96GB",
         "total_vram": "192GB",
-        "estimated_india_total": "roughly ₹39-56 lakh",
+        "estimated_india_total": "roughly \u20b939-56 lakh",
         "note": "Tighter memory headroom."
       },
       "consumer_gpu_alternative": {
@@ -191,16 +191,16 @@
       "illustrative_power": {
         "system_average": "2.0-2.5kW",
         "annual_energy_at_2.5kw": "21,900kWh",
-        "example_rate": "₹8/kWh",
-        "example_annual_electricity": "₹1.75 lakh"
+        "example_rate": "\u20b98/kWh",
+        "example_annual_electricity": "\u20b91.75 lakh"
       },
       "example_economics": {
-        "hardware": "roughly ₹50 lakh",
-        "DeepSeek_V4_Flash_uncached_api": "roughly ₹49 lakh/year under the 99% input / 1% output assumption",
+        "hardware": "roughly \u20b950 lakh",
+        "DeepSeek_V4_Flash_uncached_api": "roughly \u20b949 lakh/year under the 99% input / 1% output assumption",
         "caveat": "High cache-hit rates can make API substantially cheaper."
       }
     },
-    "conclusion": "For sustained 1B-token/day agentic coding, local open-weight inference can make economic sense, especially with high utilization and uncached API traffic. A hybrid setup—local open models for routine work and frontier APIs for difficult reasoning/review—may be optimal.",
+    "conclusion": "For sustained 1B-token/day agentic coding, local open-weight inference can make economic sense, especially with high utilization and uncached API traffic. A hybrid setup\u2014local open models for routine work and frontier APIs for difficult reasoning/review\u2014may be optimal.",
     "correction": "The conversation mentioned DeepSeek V4 Flash-0732 once; the model actually discussed was DeepSeek V4 Flash-0731 / DeepSeek V4 Flash. | Aug 15, 2026 fixes: Kimi K3 active params corrected to 104B (Kimi K3 License, custom, not Modified MIT/50B); DeepSeek V4 Flash Max (rank-16) repriced to official $0.14/$0.28; MiniMax M3 license = Modified MIT; KAT-Coder-Pro V2.5 repriced to $0.74/$2.96; added Qwen3.8-27B, DeepSeek V4 Pro 0813, Nemotron 3.5 Lightning, Ling 3.0 Tiny. | GLM-5.3 (Aug 14) added: same 743B/40B base as GLM-5.2, post-training only; TB2.1 88.2, HLE-tools 62.5, AutomationBench 48.2, CyberGym 84.5; API/Coding Plan live, open weights promised ~2 wks (safety-gated); per-Mtok pricing not yet published.",
     "model_name_mapping": {
       "Tencent Hy3": "Hy3",
@@ -235,7 +235,7 @@
       "currency_assumption_usd_to_inr": 95.12,
       "cross_file_rates": {
         "standardized_2026_08_14": 95.12,
-        "note": "all files standardized to 1 USD = ₹95.12 (previously 95.17 / 96.50 / 83 across files)"
+        "note": "all files standardized to 1 USD = \u20b995.12 (previously 95.17 / 96.50 / 83 across files)"
       },
       "aug_21_gpt56_sol_promo": {
         "GPT-5.6 Sol": [
@@ -1141,7 +1141,7 @@
     {
       "rank": "28",
       "id": "rank-28",
-      "model": "Inkling-Small 🆕 (Jul 30)",
+      "model": "Inkling-Small \ud83c\udd95 (Jul 30)",
       "provider": "Thinking Machines",
       "total_parameters": "276B",
       "active_parameters": "12B",
@@ -6631,7 +6631,7 @@
     {
       "rank": "211",
       "id": "rank-211",
-      "model": "Claude Opus 5 🆕🆕",
+      "model": "Claude Opus 5 \ud83c\udd95\ud83c\udd95",
       "provider": "Anthropic",
       "total_parameters": "Closed",
       "active_parameters": "Closed",
@@ -6661,7 +6661,7 @@
     {
       "rank": "212",
       "id": "rank-212",
-      "model": "Ling 3.0 Flash 🆕",
+      "model": "Ling 3.0 Flash \ud83c\udd95",
       "provider": "inclusionAI",
       "total_parameters": "124B",
       "active_parameters": "~5.1B",
@@ -6721,7 +6721,7 @@
     {
       "rank": "214",
       "id": "rank-214",
-      "model": "K-EXAONE 2.0 🆕",
+      "model": "K-EXAONE 2.0 \ud83c\udd95",
       "provider": "LG AI Research",
       "total_parameters": "750B",
       "active_parameters": "37B",
@@ -6751,7 +6751,7 @@
     {
       "rank": "215",
       "id": "rank-215",
-      "model": "openPangu-2.0-Pro 🆕",
+      "model": "openPangu-2.0-Pro \ud83c\udd95",
       "provider": "Huawei",
       "total_parameters": "505B",
       "active_parameters": "18B",
@@ -6781,7 +6781,7 @@
     {
       "rank": "216",
       "id": "rank-216",
-      "model": "Instella-MoE-16B-A3B-Think 🆕",
+      "model": "Instella-MoE-16B-A3B-Think \ud83c\udd95",
       "provider": "AMD",
       "total_parameters": "16B",
       "active_parameters": "2.8B",
@@ -6811,7 +6811,7 @@
     {
       "rank": "217",
       "id": "rank-217",
-      "model": "A.X K2 🆕",
+      "model": "A.X K2 \ud83c\udd95",
       "provider": "SK Telecom",
       "total_parameters": "688B",
       "active_parameters": "33B",
@@ -8363,9 +8363,9 @@
       "context_window": null,
       "price_in_inr_per_mtok": null,
       "price_out_inr_per_mtok": null,
-      "released": null,
+      "released": "2026-09-15",
       "released_est": false,
-      "released_src": null,
+      "released_src": "Salesforce press 15 Sep 2026",
       "is_free": false
     }
   ],
