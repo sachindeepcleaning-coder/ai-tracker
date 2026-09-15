@@ -9,11 +9,11 @@ const data = JSON.parse(raw)
 const models = data.all_coding_models
 
 describe('data.json integrity (regen gate)', () => {
-  it('has 267 rows with unique contiguous ranks 1-267', () => {
-    expect(models.length).toBe(267)
+  it('has 268 rows with unique contiguous ranks 1-268', () => {
+    expect(models.length).toBe(268)
     const ranks = models.map((m) => parseInt(m.rank, 10)).sort((a, b) => a - b)
-    expect(ranks).toEqual(Array.from({ length: 267 }, (_, i) => i + 1))
-    expect(new Set(models.map((m) => m.id)).size).toBe(267)
+    expect(ranks).toEqual(Array.from({ length: 268 }, (_, i) => i + 1))
+    expect(new Set(models.map((m) => m.id)).size).toBe(268)
   })
 
   it('has no string prices or string is_free (regression: rank-265/266/267)', () => {
