@@ -80,6 +80,7 @@ export default function Tracker() {
         <p className="text-sm text-white/60 mt-1">Upcoming changes already on record — plan around them, the catalog snapshot predates these.</p>
         <div className="mt-3 grid md:grid-cols-2 gap-3 text-xs">
           {[
+            ['Sep 15', 'Grok 4.7 delayed / 4.8 roadmap', 'Grok 4.7 delayed (missed ~Sep 12; additional RL required for response-length / task-completion). Grok 4.8 ~2.5T new C++ stack training finishing → RL next; 4.9 Astra/Fable-class; 5 AGI claim.'],
             ['Sep 14', 'V4 Pro routing', 'DeepSeek V4 Pro routed Sep 14 12:00 Beijing (after this snapshot); legacy V4 Flash/Vision already retired+routed, billed Flash.'],
             ['Oct 4', 'Ling-3.0-flash-Sante free tier ends', 'API-first free thru Oct 4 via Vercel; Sante-specific weights still unconfirmed, base family MIT.'],
             ['≥Nov 21', 'GPT-5.6 Sol promo ends', 'Sol $4/20 promo holds to ≥Nov 21, then reverts to $5/30.'],
