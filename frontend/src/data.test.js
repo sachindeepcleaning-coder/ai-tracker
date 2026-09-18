@@ -16,6 +16,16 @@ describe('data.json integrity (regen gate)', () => {
     expect(new Set(models.map((m) => m.id)).size).toBe(270)
   })
 
+  it('has new schema fields with allowed enums', () => {
+    for (const m of models) {
+      expect(['foundation','orchestrator','router','cascade','specialized', null]).toContain(m.model_type)
+      expect(['high','medium','low', null]).toContain(m.confidence)
+      expect(typeof m.is_orchestrator).toBe('boolean')
+      if (m.last_verified) expect(m.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+    }
+    expect(data.data_version).toBe('2026-09-18')
+  })
+
   it('has no string prices or string is_free (regression: rank-265/266/267)', () => {
     for (const m of models) {
       for (const k of ['price_in_usd_per_mtok', 'price_out_usd_per_mtok', 'price_in_inr_per_mtok', 'price_out_inr_per_mtok']) {

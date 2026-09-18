@@ -100,6 +100,12 @@ const HEADER_MAP = {
   'Context Window': 'context_window',
   'Price Input INR/1M': 'price_in_inr_per_mtok',
   'Price Output INR/1M': 'price_out_inr_per_mtok',
+  'Model Type': 'model_type',
+  'Last Verified': 'last_verified',
+  'Source': 'source',
+  'Confidence': 'confidence',
+  'Notes': 'notes',
+  'Is Orchestrator': 'is_orchestrator',
 }
 
 const rows = parseCsv(readFileSync(CSV_PATH, 'utf8'))
@@ -123,19 +129,33 @@ const out = rows.slice(1)
     if (key === 'full_q4_vram_gb') { row[key] = q4(raw); return }
     if (key.startsWith('price_')) { row[key] = price(raw); return }
     if (key === 'total_parameters' || key === 'active_parameters') {
-      // Preserve 'Unknown'/'Undisc.' verbatim (paramsLabel + UI expect these strings) — only null blanks/'-'.
       const s = String(raw ?? '').trim()
       row[key] = s === '' || s === '-' ? null : s
       return
     }
     if (key === 'license' || key === 'provider') {
-      // Catalog convention: missing license/provider is 'Unknown' (counts as populated, UI shows it).
       const s = String(raw ?? '').trim()
       row[key] = s === '' || s === '-' ? 'Unknown' : s
       return
     }
+    if (key === 'model_type') { const s = clean(raw); row[key] = s ? s.toLowerCase() : null; return }
+    if (key === 'confidence') { const s = clean(raw); row[key] = s ? s.toLowerCase() : null; return }
+    if (key === 'is_orchestrator') {
+      const s = String(raw ?? '').trim().toLowerCase()
+      if (s === 'true' || s === '1' || s === 'yes') row[key] = true
+      else if (s === 'false' || s === '0' || s === 'no' || s === '') row[key] = false
+      else row[key] = s === 'true'
+      return
+    }
     row[key] = clean(raw)
   })
+  // defaults for new fields
+  if (row.model_type == null) row.model_type = 'foundation'
+  if (row.confidence == null) row.confidence = 'low'
+  if (row.is_orchestrator == null) row.is_orchestrator = false
+  if (row.source == null) row.source = 'vendor'
+  if (row.last_verified == null) row.last_verified = null
+  if (row.notes == null) row.notes = null
   // Merge hand-researched curation (survives regeneration).
   const prev = curated.get(row.id)
   if (prev) {
@@ -152,7 +172,24 @@ const out = rows.slice(1)
   return row
 })
 
+// Validation gates — fail build on integrity issues
+{
+  const ranks = out.map(m => parseInt(m.rank,10)).sort((a,b)=>a-b)
+  const contiguous = ranks.every((r,i)=> r===i+1)
+  if (!contiguous) { console.error(`regen-data: rank continuity failed ${ranks.slice(0,5)}...${ranks.slice(-5)}`); process.exit(1) }
+  const ids = new Set(out.map(m=>m.id))
+  if (ids.size !== out.length) { console.error(`regen-data: duplicate ids ${out.length - ids.size}`); process.exit(1) }
+  const allowedTypes = new Set(['foundation','orchestrator','router','cascade','specialized'])
+  const allowedConf = new Set(['high','medium','low'])
+  for (const m of out) {
+    if (!allowedTypes.has(m.model_type)) { console.error(`regen-data: invalid model_type ${m.id} ${m.model_type}`); process.exit(1) }
+    if (!allowedConf.has(m.confidence)) { console.error(`regen-data: invalid confidence ${m.id} ${m.confidence}`); process.exit(1) }
+    if (typeof m.is_orchestrator !== 'boolean') { console.error(`regen-data: is_orchestrator must be boolean ${m.id}`); process.exit(1) }
+    if (m.last_verified && !/^\d{4}-\d{2}-\d{2}$/.test(m.last_verified)) { console.error(`regen-data: bad last_verified ${m.id} ${m.last_verified}`); process.exit(1) }
+  }
+}
 // Regen timestamp — surfaced as "Data last refreshed" on the site.
-writeFileSync(OUT_PATH, JSON.stringify({ ...existing, data_regen_at: new Date().toISOString().slice(0, 10), all_coding_models: out }, null, 2) + '\n')
+const today = new Date().toISOString().slice(0,10)
+writeFileSync(OUT_PATH, JSON.stringify({ ...existing, data_regen_at: today, data_version: '2026-09-18', all_coding_models: out }, null, 2) + '\n')
 const preserved = [...curated.keys()].filter((id) => out.some((m) => m.id === id)).length
 console.log(`regen-data: wrote ${out.length} models -> ${OUT_PATH} (preserved ${preserved} curated rows)`)

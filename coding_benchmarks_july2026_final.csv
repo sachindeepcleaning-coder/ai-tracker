@@ -1,272 +1,272 @@
-Rank,Model,Provider,Total Parameters,Active Parameters,Full Q4 VRAM (GB),License/Type,SWE-bench Verified,SWE-bench Pro,LiveCodeBench V6,Terminal-Bench,HumanEval,MMLU-Pro,GPQA Diamond,HLE,MATH,AIME 2026,ARC-AGI-2,Price Input/1M,Price Output/1M,Context Window,Price Input INR/1M,Price Output INR/1M
-1,Claude Mythos 5,Anthropic,Unknown,Unknown,?,Closed,95.5%,-,-,-,-,-,-,-,USAMO 2026: 99.8%,-,-,-,-,1M+,-,-
-2,Claude Opus 4.8,Anthropic,Unknown,Unknown,?,Closed,88.6%,-,-,58%,-,-,-,-,66.9%,95.7%,81%,$5.00,$25.00,1M,₹475.60,₹2378.00
-3,Claude Opus 4.7,Anthropic,Unknown,Unknown,?,Closed,87.6%,-,-,52%,-,-,-,-,-,-,-,$5.00,$25.00,1M,₹475.60,₹2378.00
-4,GPT-5.6 Sol,OpenAI,Unknown,Unknown,?,Closed,Unconfirmed,64.6%,-,88.8%,-,-,-,-,FrontierMath T1-3: 89%,-,92.5%,$4.00,$20.00,1.1M,₹380.48,₹1902.40
-5,Gemini 3.1 Pro,Google,Unknown,Unknown,?,Closed,80.6%,-,-,74.8%,-,-,-,-,85.3%,98.2%,77.1%,$2.00,$12.00,1M,₹190.24,₹1141.44
-6,DeepSeek V4 Pro Max,DeepSeek,1.6T,49B,800,Open weight (legacy; superseded by V4.1 Flash; V4 Pro routed to V4.1 Flash Sep 14),80.6%,-,93.5%,67.9%,-,-,-,-,84.1%,94.6%,68.5%,$0.66,$1.98,1M,₹62.78,₹188.34
-7,o3,OpenAI,Unknown,Unknown,?,Closed,71.7%,-,85.5%,-,-,-,87.7%,-,-,96.7%,87.5%,$2.00,$8.00,200K,₹190.24,₹760.96
-8,GPT-5.5,OpenAI,Unknown,Unknown,?,Closed,82.6%,-,-,61%,-,-,-,-,~85%,98.3%,85.0%,$5.00,$30.00,1M,₹475.60,₹2853.60
-9,Claude Sonnet 5,Anthropic,Unknown,Unknown,?,Closed ($2/$10 standard; Sep 1 rise to $3/$15 cancelled),85.2%,-,-,-,-,-,-,-,-,-,-,$2.00,$10.00,1M,₹190.24,₹951.20
-10,GPT-5.2,OpenAI,Unknown,Unknown,?,Closed,80.0%,-,89.4%,-,-,-,-,-,~80%,-,52.9%,$1.75,$14.00,1M,₹166.46,₹1331.68
-11,MiniMax M3,MiniMax,428B,23B,214,Modified MIT (open weights; H3 geo-exclusion N/A to coding M3),80.5%,-,-,-,-,-,-,-,-,-,-,$0.30,$1.20,1M,₹28.54,₹114.14
-12,Kimi K3,Moonshot AI,2.8T,104B,~1400,Kimi K3 License (custom; open weights Jul 27 2026),-,-,-,88.3%,-,-,93.5%,-,-,-,-,$3.00,$15.00,1M,₹285.36,₹1426.80
-13,Kimi K2.6,Moonshot AI,1T,32B,500,Modified MIT (open weights),80.2%,-,89.6%,-,-,-,-,-,72.3%,96.4%,-,$0.75,$3.50,262K,₹71.34,₹332.92
-14,Qwen3.7 Max,Alibaba,Unknown,Unknown,?,Closed,80.4%,-,91.6%,-,-,-,-,-,-,-,-,$1.25,$3.75,1M,₹118.90,₹356.70
-15,Claude Sonnet 4.6,Anthropic,Unknown,Unknown,?,Closed ($3/$15 standard; Sonnet 5 stays $2/$10),79.6%,-,-,59.1%,-,-,-,-,-,-,-,$3.00,$15.00,1M,₹285.36,₹1426.80
-16,DeepSeek V4 Flash Max,DeepSeek,284B,13B,142,Open weight (legacy; superseded by V4.1 Flash GA Sep 10),79.0%,-,91.6%,56.9%,-,-,-,-,57.4%,-,-,$0.15,$0.60,1M,₹14.27,₹57.07
-17,Qwen3.6 Plus,Alibaba,Unknown,Unknown,?,Closed,78.8%,-,87.1%,-,-,-,-,-,-,-,-,$0.50,$3.00,1M,₹47.56,₹285.36
-18,MiMo-V2.5-Pro,Xiaomi,1.02T,42B,510,Open weight,78.9%,-,-,-,-,-,-,-,-,-,-,$0.43,$0.87,1M,₹40.90,₹82.75
-19,Gemini 3 Flash,Google,Unknown,Unknown,?,Closed,78.0%,-,79.7%,-,-,-,-,-,-,-,-,$0.50,$3.00,1M,₹47.56,₹285.36
-20,North Mini Code 1.0,Cohere,30B,3B,15,Apache 2.0,67.6%,40.2%,-,63%,-,-,-,-,-,-,-,$0.00,$0.00,256K,₹0.00,₹0.00
-21,MiMo-V2-Pro,Xiaomi,1T,15B,500,Closed,78.0%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-22,Hy3,Tencent,295B,21B,148,Open weight,78.0%,57.9%,34.86%,-,-,-,90.4%,53.2%,-,-,-,Free,Free,256K,Free,Free
-23,GLM-5.1,Z.AI,744B,40B,372,Open weight,77.8%,-,-,56.2%,-,-,-,-,-,-,-,$1.00,$4.40,200K,₹95.12,₹418.53
-24,Seed 2.0 Pro,ByteDance,Unknown,Unknown,?,Closed,76.5%,-,87.8%,-,-,-,-,-,-,-,-,$0.50,$3.00,256K,₹47.56,₹285.36
-25,Kimi K2.5,Moonshot AI,1T,32B,500,Open weight,76.8%,-,85.0%,-,-,-,-,-,-,-,-,-,-,-,-,-
-26,Qwen3.5-397B,Alibaba,397B,17B,198,Open weight,76.4%,-,83.6%,52.5%,-,87.8,88.4%,-,-,91.3%,-,-,-,262K,-,-
-27,MiniMax M2.5,MiniMax,230B,10B,115,Open weight,75.8%,-,-,42.2%,-,76.5,85.2%,-,-,-,-,$0.30,$1.20,1M,₹28.54,₹114.14
-28,Inkling-Small 🆕 (Jul 30),Thinking Machines,276B,12B,~138,Apache 2.0,80.2%,55.9%,-,64.7%,-,-,-,-,-,-,-,-,-,1M,-,-
-29,Mistral Medium 3.5,Mistral,128B,Dense,64,Open weight,77.6%,-,-,-,-,-,-,-,-,AIME 2025: 86.3%,-,$1.50,$7.50,256K,₹142.68,₹713.40
-30,Muse Spark,Meta,Unknown,Unknown,?,Closed,77.4%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-31,Qwen3.6-27B,Alibaba,28B,27B,14,Open weight,77.2%,-,83.9%,-,-,-,-,-,-,94.1%,-,$0.60,$3.60,262K,₹57.07,₹342.43
-32,Claude Haiku 4.5,Anthropic,Unknown,Unknown,?,Closed,73.3%,-,-,-,-,-,-,-,-,-,-,$1.00,$5.00,1M,₹95.12,₹475.60
-33,DeepSeek V3.2,DeepSeek,685B,37B,342,Open weight,73.1%,-,83.3%,-,-,85.0,79.9%,-,-,-,-,$0.28,$0.42,128K,₹26.63,₹39.95
-34,MAI-Thinking-1,Microsoft,962B,34.7B,481,Proprietary (Preview; Foundry; 256K; SWE-Pro 52.8% / TB2.0 46.0%),-,52.8%,-,46.0% (TB2.0; not TB2.1),-,-,-,-,-,94.5% (AIME26),-,TBD,TBD,256K,TBD,TBD
-35,Qwen3.6-35B-A3B,Alibaba,35B,3B,18,Open weight,73.4%,-,80.4%,-,-,-,-,-,-,-,-,-,-,-,-,-
-36,MiMo-V2-Flash,Xiaomi,309B,15B,154,Open weight,73.4%,-,80.6%,38.5%,-,84.9,83.7%,-,-,-,-,$0.09,$0.29,262K,₹8.56,₹27.58
-37,Big Pickle,OpenCode,Unknown,Unknown,?,Open weight,73.8%,-,82.8%,-,-,84.3,-,42.8%,-,-,-,Free,Free,200K,Free,Free
-38,GLM-4.7,Z.AI,358B,32B,179,Open weight,73.8%,-,84.9%,-,-,-,-,-,-,-,-,$0.40,$1.75,200K,₹38.05,₹166.46
-39,Nemotron 3 Ultra,NVIDIA,550B,55B,275,Open weight,71.9%,-,89.0%,56.4%,-,86.8,87.0%,26.7%,-,-,-,$0.50,$2.20,1M,₹47.56,₹209.26
-40,Claude Sonnet 4,Anthropic,Unknown,Unknown,?,Closed,72.7%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-41,Claude Opus 4,Anthropic,Unknown,Unknown,?,Closed,72.5%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-42,DeepSeek V3,DeepSeek,671B,37B,336,Open weight,~50%,-,49.2%,-,-,81.2,68.4%,-,-,-,-,$0.28,$1.10,128K,₹26.63,₹104.63
-43,Grok 4.20,xAI,Unknown,Unknown,?,Closed,70.0%,-,-,-,-,-,-,-,-,-,-,$2.00,$6.00,2M,₹190.24,₹570.72
-44,Grok 4.5,xAI,Unknown,Unknown,?,Closed,-,64.7%,-,83.3%,-,-,-,-,-,-,-,$2.00,$6.00,500K,₹190.24,₹570.72
-45,Gemini 2.5 Pro,Google,Unknown,Unknown,?,Closed,-,-,80.1%,-,-,-,-,-,-,-,-,$1.25,$10.00,1M,₹118.90,₹951.20
-46,Grok Code Fast 1,xAI,Unknown,Unknown,?,Closed,49.0%,-,-,52.0%,-,-,-,-,-,-,-,$0.20,$1.50,-,₹19.02,₹142.68
-47,GPT-4.1,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-48,o3-mini,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-49,Claude 3.5 Sonnet,Anthropic,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-50,Step-3.5-Flash,StepFun,196B,Unknown,98,Open weight,74.4%,-,86.4%,-,-,85.8,-,-,-,-,-,$0.10,$0.30,66K,₹9.51,₹28.54
-51,Qwen3.5-27B,Alibaba,27B,27B,14,Open weight,-,-,80.7%,-,-,-,-,-,-,-,-,$0.30,$2.40,262K,₹28.54,₹228.29
-52,Gemma 4 31B,Google,31B,31B,16,Open weight (Apache 2.0),-,-,80.0%,-,-,-,-,-,-,-,-,$0.13,$0.38,262K,₹12.37,₹36.15
-53,Codestral 22B,Mistral,22B,22B,11,MNPL-0.1,40.0%,-,48.0%,-,86.6%,49.1%,34.9%,-,-,-,-,$0.30,$0.90,128K,₹28.54,₹85.61
-54,Gemma 4 26B-A4B,Google,25B,4B,12,Open weight (Apache 2.0),-,-,77.1%,-,-,-,-,-,-,-,-,$0.13,$0.40,262K,₹12.37,₹38.05
-55,StarCoder 3,BigCode,15B,15B,8,BigCode OpenRAIL-M,-,-,-,-,85.4%,-,-,-,-,-,-,$0.00,$0.00,16K,₹0.00,₹0.00
-56,Qwen3.5-122B-A10B,Alibaba,122B,10B,61,Open weight,-,-,78.9%,-,-,-,-,-,-,-,-,-,-,-,-,-
-57,ERNIE 4.5,Baidu,424B,47B,212,Apache 2.0,-,-,45.4%,-,92.1%,-,-,-,-,-,-,$0.00,$0.00,128K,₹0.00,₹0.00
-58,Qwen3.5-35B-A3B,Alibaba,35B,3B,18,Open weight,-,-,74.6%,-,-,-,-,-,-,-,-,-,-,-,-,-
-59,SenseNova-U1-8B-MoT,SenseTime,8B,8B,4,Apache 2.0,-,-,-,-,-,-,-,-,-,-,-,$0.00,$0.00,128K,₹0.00,₹0.00
-60,Qwen3-235B-A22B,Alibaba,235B,22B,118,Open weight,-,-,74.1%,-,-,-,-,-,-,-,-,-,-,-,-,-
-61,StarCoder2-15B,BigCode,15B,15B,8,BigCode OpenRAIL-M,18.3%,-,-,-,46.3%,-,-,-,-,-,-,$0.00,$0.00,16K,₹0.00,₹0.00
-62,AFM 3 Core,Apple,~3B,3B,2,Proprietary,-,-,-,-,-,-,-,-,-,-,-,$0.00,$0.00,32K,₹0.00,₹0.00
-63,StarCoder1-15B,BigCode,15.5B,15.5B,8,BigCode OpenRAIL-M,-,-,-,-,33.6%,-,-,-,-,-,-,$0.00,$0.00,8K,₹0.00,₹0.00
-64,Gemma 4 12B,Google,12B,12B,6,Open weight (Apache 2.0),-,-,72.0%,-,-,-,-,-,-,-,-,-,-,-,-,-
-65,Yi-Coder-9B,01.AI,9B,9B,4,Apache 2.0,-,-,23.4%,-,85.4%,-,-,-,-,-,-,$0.00,$0.00,128K,₹0.00,₹0.00
-66,AFM 3 Core Advanced,Apple,20B,1-4B,10,Proprietary,-,-,-,-,-,-,-,-,-,-,-,$0.00,$0.00,32K,₹0.00,₹0.00
-67,Yi-Coder-1.5B,01.AI,1.5B,1.5B,1,Apache 2.0,-,-,-,-,67.7%,-,-,-,-,-,-,$0.00,$0.00,128K,₹0.00,₹0.00
-68,Sarvam-105B,Sarvam AI,105B,105B,52,Open weight,-,-,71.7%,-,-,-,-,-,-,-,-,-,-,-,-,-
-69,CodeLlama-70B-Instruct,Meta,70B,70B,35,Llama 2 Community,-,-,-,-,67.8%,-,-,-,-,-,-,$0.00,$0.00,16K,₹0.00,₹0.00
-70,GLM-5,Z.AI,745B,44B,372,MIT,77.8%,-,71.6%,-,-,-,-,-,-,-,-,$0.00,$0.00,200K,₹0.00,₹0.00
-71,CodeLlama-34B-Instruct,Meta,34B,34B,17,Llama 2 Community,-,-,-,-,48.8%,-,-,-,-,-,-,$0.00,$0.00,16K,₹0.00,₹0.00
-72,CodeLlama-13B-Instruct,Meta,13B,13B,6,Llama 2 Community,-,-,-,-,42.7%,-,-,-,-,-,-,$0.00,$0.00,16K,₹0.00,₹0.00
-73,SPARK X2,iFlytek,293B,~30B,146,Proprietary,-,-,-,-,-,-,-,-,-,-,-,-,-,256K,-,-
-74,CodeLlama-7B-Instruct,Meta,7B,7B,4,Llama 2 Community,-,-,-,-,34.8%,-,-,-,-,-,-,$0.00,$0.00,16K,₹0.00,₹0.00
-75,Sarvam-30B,Sarvam AI,30B,30B,15,Open weight,-,-,70.0%,-,-,-,-,-,-,-,-,-,-,-,-,-
-76,ERNIE 4.5-21B-A3B,Baidu,28B,3B,14,Apache 2.0,-,-,-,-,-,-,-,-,-,-,-,$0.00,$0.00,128K,₹0.00,₹0.00
-77,Qwen3 Max,Alibaba,1T,Unknown,500,Closed,-,-,69.0%,-,-,-,-,-,-,-,-,-,-,-,-,-
-78,Qwen3-Next-80B-A3B,Alibaba,80B,3B,40,Open weight,-,-,68.7%,-,-,-,-,-,-,-,-,-,-,-,-,-
-79,Nemotron 3 Nano,NVIDIA,32B,3B,16,Open weight,-,-,68.3%,-,-,-,-,-,-,-,-,$0.06,$0.24,262K,₹5.71,₹22.83
-80,Qwen3.5-9B,Alibaba,9B,9B,4,Open weight,-,-,65.6%,-,-,-,-,-,-,-,-,-,-,-,-,-
-81,Qwen3 VL 32B,Alibaba,33B,33B,16,Open weight,-,-,65.6%,-,-,-,-,-,-,-,-,-,-,-,-,-
-82,Qwen3 VL 30B-A3B,Alibaba,31B,3B,16,Open weight,-,-,64.2%,-,-,-,-,-,-,-,-,-,-,-,-,-
-83,Qwen3 VL 8B,Alibaba,9B,9B,4,Open weight,-,-,58.6%,-,-,-,-,-,-,-,-,-,-,-,-,-
-84,Qwen3-Next-80B-A3B-Instruct,Alibaba,80B,3B,40,Open weight,-,-,56.6%,-,-,-,-,-,-,-,-,-,-,-,-,-
-85,Qwen3.5-4B,Alibaba,4B,4B,2,Open weight,-,-,55.8%,-,-,-,-,-,-,-,-,-,-,-,-,-
-86,Qwen3 VL 235B-A22B-Instruct,Alibaba,236B,22B,118,Open weight,-,-,54.3%,-,-,-,-,-,-,-,-,-,-,-,-,-
-87,Kimi K2 Instruct,Moonshot AI,1T,32B,500,Open weight,-,-,53.7%,-,-,-,-,-,-,-,-,-,-,-,-,-
-88,Gemma 4 E4B,Google,8B,4B,4,Open weight (Apache 2.0),-,-,52.0%,-,-,-,-,-,-,-,-,-,-,-,-,-
-89,MiniCPM-SALA,OpenBMB,9B,9B,4,Open weight,-,-,52.0%,-,-,-,-,-,-,-,-,-,-,-,-,-
-90,Qwen3-235B-A22B-Instruct,Alibaba,235B,22B,118,Open weight,-,-,51.8%,-,-,-,-,-,-,-,-,-,-,-,-,-
-91,Qwen3 VL 4B,Alibaba,4B,4B,2,Open weight,-,-,51.3%,-,-,-,-,-,-,-,-,-,-,-,-,-
-92,Gemma 4 E2B,Google,5B,2B,2,Open weight (Apache 2.0),-,-,44.0%,-,-,-,-,-,-,-,-,-,-,-,-,-
-93,Qwen3 VL 32B Instruct,Alibaba,33B,33B,16,Open weight,-,-,43.8%,-,-,-,-,-,-,-,-,-,-,-,-,-
-94,Qwen3 VL 30B-A3B Instruct,Alibaba,31B,3B,16,Open weight,-,-,42.6%,-,-,-,-,-,-,-,-,-,-,-,-,-
-95,MiMo-V2.5,Xiaomi,310B,15B,155,Open weight,-,-,35.5%,41.7%,-,-,-,25.2%,-,-,-,$0.10,$0.28,32K,₹9.51,₹26.63
-96,Devstral 2,Mistral,123B,123B,62,Modified MIT (revenue gate >$20M/mo),72.2%,-,-,-,-,-,-,-,-,-,-,-,-,256K,-,-
-97,Mistral Small 4,Mistral,119B,6.5B,60,Open weight,-,-,63.6%,-,-,-,-,-,-,AIME 2025: 84%,-,$0.15,$0.60,256K,₹14.27,₹57.07
-98,Ministral 3 14B,Mistral,14B,14B,7,Open weight,-,-,64.6%,-,-,-,-,-,-,-,-,-,-,-,-,-
-99,Ministral 3 8B,Mistral,8B,8B,4,Open weight,-,-,61.6%,-,-,-,-,-,-,-,-,-,-,-,-,-
-100,Ministral 3 3B,Mistral,3B,3B,2,Open weight,-,-,54.8%,-,-,-,-,-,-,-,-,-,-,-,-,-
-101,Magistral Small,Mistral,24B,24B,12,Open weight,-,-,51.3%,-,-,-,-,-,-,-,-,-,-,-,-,-
-102,Magistral Medium,Mistral,24B,24B,12,Open weight,-,-,50.3%,-,-,-,-,-,-,-,-,-,-,-,-,-
-103,Llama 4 Maverick,Meta,400B,17B,200,Closed,-,-,43.4%,-,62.0,-,-,-,78.4%,-,-,-,-,1M,-,-
-104,GPT-OSS-120B,OpenAI,117B,117B,58,Apache 2.0 (open weights),-,-,87.8%,-,-,90.0,80.9%,-,-,-,-,$0.037,$0.10,128K,₹3.52,₹9.51
-105,Llama 3.1 Nemotron Ultra 253B,NVIDIA,253B,253B,126,Open weight,-,-,66.3%,-,-,-,-,-,-,-,-,-,-,-,-,-
-106,Qwen3 32B,Alibaba,33B,33B,16,Open weight,-,-,65.7%,-,-,-,-,-,-,-,-,$0.10,$0.44,128K,₹9.51,₹41.85
-107,Qwen3 30B-A3B,Alibaba,31B,3B,16,Open weight,-,-,62.6%,-,-,-,-,-,-,-,-,$0.10,$0.30,128K,₹9.51,₹28.54
-108,QwQ-32B,Alibaba,33B,33B,16,Open weight,-,-,63.4%,-,-,-,-,-,-,-,-,-,-,-,-,-
-109,DeepSeek R1,DeepSeek,671B,37B,336,Open weight,-,-,73.3%,-,90.2,84.0,71.5%,-,-,-,-,$0.28,$0.42,128K,₹26.63,₹39.95
-110,DeepSeek R1 Distill Llama 70B,DeepSeek,71B,71B,36,Open weight,-,-,57.5%,-,-,-,-,-,-,-,-,-,-,-,-,-
-111,DeepSeek R1 Distill Qwen 32B,DeepSeek,33B,33B,16,Open weight,-,-,57.2%,-,-,-,-,-,-,-,-,-,-,-,-,-
-112,DeepSeek R1 Distill Qwen 14B,DeepSeek,15B,15B,8,Open weight,-,-,53.1%,-,-,-,-,-,-,-,-,-,-,-,-,-
-113,DeepSeek R1 Distill Llama 8B,DeepSeek,8B,8B,4,Open weight,-,-,39.6%,-,-,-,-,-,-,-,-,-,-,-,-,-
-114,Phi 4 Reasoning,Microsoft,14B,14B,7,Open weight,-,-,53.8%,-,-,-,-,-,-,-,-,-,-,-,-,-
-115,Phi 4 Reasoning Plus,Microsoft,14B,14B,7,Open weight,-,-,53.1%,-,-,-,-,-,-,-,-,-,-,-,-,-
-116,Nova 2 Pro,Amazon,Unknown,Unknown,?,Closed,-,-,74.6%,-,-,-,-,-,-,-,-,-,-,-,-,-
-117,Nova 2 Lite,Amazon,Unknown,Unknown,?,Closed,-,-,71.0%,-,-,-,-,-,-,-,-,$0.30,$2.50,1M,₹28.54,₹237.80
-118,Mercury 2,Inception,Unknown,Unknown,?,Closed,-,-,67.0%,-,-,-,-,-,-,-,-,$0.25,$0.75,128K,₹23.78,₹71.34
-119,LongCat-Flash-Thinking,Meituan,560B,Unknown,280,Open weight,-,-,79.4%,-,-,-,-,-,-,-,-,-,-,-,-,-
-120,LongCat-Flash-Thinking-2601,Meituan,560B,Unknown,280,Open weight,-,-,82.8%,-,-,-,-,-,-,-,-,-,-,-,-,-
-121,Grok 3,xAI,Unknown,Unknown,?,Closed,-,-,79.4%,-,94.5,-,-,-,-,-,-,$3.00,$15.00,128K,₹285.36,₹1426.80
-122,Grok 4,xAI,Unknown,Unknown,?,Closed,-,-,79.0%,-,-,-,-,-,96.9%,-,72.8%,-,-,-,-,-
-123,Grok-3 Mini,xAI,Unknown,Unknown,?,Closed,-,-,80.4%,-,-,-,-,-,-,-,-,-,-,-,-,-
-124,Grok-4 Heavy,xAI,Unknown,Unknown,?,Closed,-,-,79.4%,-,-,-,-,-,-,-,-,-,-,-,-,-
-125,Grok 4 Fast,xAI,Unknown,Unknown,?,Closed,-,-,80.0%,-,-,-,-,-,-,-,-,$0.20,$0.50,2M,₹19.02,₹47.56
-126,Seed 2.0 Lite,ByteDance,Unknown,Unknown,?,Closed,-,-,81.7%,-,-,-,-,-,-,-,-,-,-,-,-,-
-127,K-EXAONE-236B-A23B,LG AI,236B,23B,118,Open weight,-,-,80.7%,-,-,-,-,-,-,-,-,-,-,-,-,-
-128,Qwen3 VL 235B-A22B Thinking,Alibaba,236B,22B,118,Open weight,-,-,70.1%,-,-,-,-,-,-,-,-,-,-,-,-,-
-129,DiffusionGemma 26B-A4B,Google,25B,4B,12,Closed,-,-,69.1%,-,-,-,-,-,-,-,-,-,-,-,-,-
-130,Qwen3 Coder 480B-A35B,Alibaba,480B,35B,240,Open weight,-,-,-,-,-,-,-,-,-,-,-,$0.40,$1.60,262K,₹38.05,₹152.19
-131,Qwen3-Coder-30B-A3B,Alibaba,30B,3B,15,Apache 2.0,-,-,-,-,-,-,-,-,-,-,-,-,-,256K,-,-
-132,KAT-Coder-Pro V1,Unknown,Unknown,Unknown,?,Unknown,-,-,-,-,-,-,-,-,-,-,-,$0.21,$0.83,256K,₹19.98,₹78.95
-133,KAT-Coder-Pro V2.5,KwaiPilot (Kuaishou),Unknown,Unknown,?,API (closed),-,-,-,-,-,-,-,-,-,-,-,$0.74,$2.96,256K,₹70.39,₹281.56
-134,GPT-5.1,OpenAI,Unknown,Unknown,?,Closed,-,-,86.8%,-,-,-,-,-,-,-,-,$1.25,$10.00,400K,₹118.90,₹951.20
-135,GPT-5.1 Codex,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$1.75,$14.00,400K,₹166.46,₹1331.68
-136,GPT-5.2 Codex,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$1.75,$14.00,400K,₹166.46,₹1331.68
-137,GPT-5.3 Codex,OpenAI,Unknown,Unknown,?,Closed,73.7%,-,-,-,-,-,-,-,-,-,-,$1.75,$14.00,400K,₹166.46,₹1331.68
-138,GPT-5 Codex,OpenAI,Unknown,Unknown,?,Closed,74.5%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-139,GPT-5,OpenAI,Unknown,Unknown,?,Closed,74.9%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-140,GPT-5.1 Thinking,OpenAI,Unknown,Unknown,?,Closed,76.3%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-141,GPT-5.1 Instant,OpenAI,Unknown,Unknown,?,Closed,76.3%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-142,GPT-5.4,OpenAI,Unknown,Unknown,?,Closed,-,-,-,75.1%,-,-,-,-,-,-,-,$2.50,$15.00,1M,₹237.80,₹1426.80
-143,GPT-5.4 Pro,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$30.00,$180.00,1.1M,₹2853.60,₹17121.60
-144,GPT-5.5 Pro,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$5.00,$180.00,1M,₹475.60,₹17121.60
-145,Gemini 3.5 Flash,Google,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,MATH-500: 96.8%,93.3%,72.1%,$1.50,$9.00,1M,₹142.68,₹856.08
-146,Gemini 3 Pro Preview,Google,Unknown,Unknown,?,Closed,-,-,91.7%,-,-,-,-,-,-,-,-,$2.00,$12.00,1M,₹190.24,₹1141.44
-147,Gemini 3 Flash Preview,Google,Unknown,Unknown,?,Closed,-,-,90.8%,-,-,-,-,-,-,-,-,$0.50,$3.00,1M,₹47.56,₹285.36
-148,Laguna M.1,Poolside,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$2.00,$2.00,-,₹190.24,₹190.24
-149,Laguna XS.2,Poolside,Unknown,Unknown,?,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-150,ZAYA1-74B-Preview,Zyphra,74B,74B,37,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-151,ZAYA1-8B,Zyphra,8B,8B,4,Open weight,-,-,65.8%,-,-,-,-,-,-,-,-,-,-,-,-,-
-152,Step-3.7-Flash,StepFun,Unknown,Unknown,?,Unknown,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-153,Ling-2.6-1T,InclusionAI,1T,Unknown,500,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-154,Ring-2.6-1T,InclusionAI,1T,Unknown,500,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-155,Nex-N2-Pro,Unknown,Unknown,Unknown,?,Unknown,-,-,-,-,-,-,-,-,-,-,-,$0.25,$0.25,262K,₹23.78,₹23.78
-156,GLM-5.2,Z.AI,744B,40B,372,Open weight,80.0%,-,-,-,-,-,-,-,-,-,-,$1.40,$4.40,1M,₹133.17,₹418.53
-157,GLM-4.6,Z.AI,357B,32B,178,Open weight,-,-,82.8%,-,-,-,-,-,-,-,-,-,-,-,-,-
-158,GLM-4.7 Flash,Z.AI,Unknown,Unknown,?,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-159,Qwen3 Coder Plus,Alibaba,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-160,Qwen3 Coder Next,Alibaba,80B,3B,40,Apache 2.0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-161,Devstral Small 2,Mistral,24B,24B,12,Apache 2.0,68.0%,-,-,-,-,-,-,-,-,-,-,-,-,256K,-,-
-162,Devstral Medium 2507,Mistral,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$0.40,$2.00,128K,₹38.05,₹190.24
-163,GPT-5.1 Codex Mini,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$0.25,$2.00,400K,₹23.78,₹190.24
-164,Grok Build 0.1,xAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-165,Grok 4.3,xAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-166,Nemotron 3 Super,NVIDIA,120B,12B,60,Open weight,-,-,81.2%,-,-,-,-,-,-,-,-,-,-,-,-,-
-167,Nemotron Nano 9B v2,NVIDIA,9B,9B,4,Open weight,-,-,71.1%,-,-,-,-,-,-,-,-,-,-,-,-,-
-168,MiniMax M2,MiniMax,230B,10B,115,Open weight,-,-,83.0%,-,-,-,-,-,-,-,-,$0.30,$1.20,1M,₹28.54,₹114.14
-169,MiniMax M2.1,MiniMax,230B,10B,115,Open weight,-,-,78.0%,-,-,-,-,-,-,-,-,$0.30,$1.20,1M,₹28.54,₹114.14
-170,MiniMax M1 80K,MiniMax,456B,Unknown,228,Open weight,-,-,65.0%,-,-,-,-,-,-,-,-,-,-,-,-,-
-171,MiniMax M1 40K,MiniMax,456B,Unknown,228,Open weight,-,-,62.3%,-,-,-,-,-,-,-,-,-,-,-,-,-
-172,Llama 3.3 Nemotron Super 49B,NVIDIA,49B,49B,24,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-173,Llama 3.1 Nemotron Nano 8B,NVIDIA,8B,8B,4,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-174,Qwen2.5-Coder 32B Instruct,Alibaba,32B,32B,16,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,128K,-,-
-175,Qwen2.5 72B Instruct,Alibaba,73B,73B,36,Open weight,-,-,55.5%,-,-,-,-,-,-,-,-,-,-,-,-,-
-176,Qwen2.5 32B Instruct,Alibaba,32B,32B,16,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-177,DeepSeek-V3 0324,DeepSeek,671B,37B,336,Open weight,-,-,49.2%,-,-,-,-,-,-,-,-,$0.28,$1.14,164K,₹26.63,₹108.44
-178,DeepSeek-R1-0528,DeepSeek,671B,37B,336,Open weight,-,-,73.3%,-,-,-,-,-,-,-,-,$0.55,$2.19,131K,₹52.32,₹208.31
-179,DeepSeek R1 Zero,DeepSeek,671B,37B,336,Open weight,-,-,50.0%,-,-,-,-,-,-,-,-,-,-,-,-,-
-180,QwQ-32B-Preview,Alibaba,33B,33B,16,Open weight,-,-,50.0%,-,-,-,-,-,-,-,-,-,-,-,-,-
-181,GLM-4.5-Air,Z.AI,106B,10B,53,Open weight,-,-,70.7%,-,-,-,-,-,-,-,-,-,-,-,-,-
-182,Ornith-1.0-397B,DeepReinforce AI,397B,Unknown,198,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-183,Ornith-1.0-35B,DeepReinforce AI,35B,Unknown,18,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-184,Ornith-1.0-9B,DeepReinforce AI,9B,Unknown,4,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-185,Llama 4 Scout,Meta,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-186,GPT-4.1 mini,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-187,Claude 4.1 Opus,Anthropic,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-188,Claude 4 Sonnet,Anthropic,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-189,Kimi K2,Moonshot AI,1T,32B,500,Open weight,-,-,-,-,99.0,-,-,-,-,-,-,-,-,-,-,-
-190,Kimi K2-Thinking-0905,Moonshot AI,1T,32B,500,Open weight,-,-,83.1%,-,-,-,-,-,-,-,-,-,-,-,-,-
-191,Kimi K2.7 Code,Moonshot AI,1T,32B,500,Modified MIT (open weights; coding model),-,58.6%,-,-,-,-,-,-,-,-,-,$0.95,$4.00,262K,₹90.36,₹380.48
-192,DeepSeek V4 Pro,DeepSeek,1.6T,49B,800,Open weight (legacy; routed to V4.1 Flash from Sep 14 12:00 Beijing; V4.1 Pro TBD),-,-,-,-,-,-,-,-,-,-,-,$0.66,$1.98,1M,₹62.78,₹188.34
-193,"DeepSeek V4 Flash (official -0731, legacy; routed to V4.1 Flash, billed Flash)",DeepSeek,284B,13B,142,"Open weight (legacy alias; served by V4.1 Flash, billed Flash)",-,-,-,82.7%,-,-,-,-,-,-,-,$0.15,$0.60,1M,₹14.27,₹57.07
-194,Gemini 3.5 Flash Preview,Google,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$1.50,$9.00,1M,₹142.68,₹856.08
-195,Gemini 3.5 Pro Preview,Google,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$2.00,$12.00,1M,₹190.24,₹1141.44
-196,GPT-5.6 Terra,OpenAI,Unknown,Unknown,?,Closed,-,-,-,82% (TB2.1 vendor),-,-,-,-,-,-,-,$2.00,$12.00,1.1M,₹190.24,₹1141.44
-197,GPT-5.6 Luna,OpenAI,Unknown,Unknown,?,Closed,-,-,-,80% (TB2.1 vendor),-,-,-,-,-,-,-,$0.20,$1.20,1.1M,₹19.02,₹114.14
-198,Hy3 Preview,Tencent,295B,21B,148,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,256K,-,-
-199,MiniMax-M3-Base-2,MiniMax,428B,23B,214,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-200,MiniMax-M2.5-Base-2,MiniMax,230B,10B,115,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-201,LongCat-2.0,Meituan,1.6T,~48B,~800,MIT,-,59.5%,-,70.8%,-,-,-,-,-,-,-,-,-,1M,-,-
-202,Gemini 3.6 Flash,Google,Unknown,Unknown,?,Closed ($0.75/$3.75 intro to Dec 31 2026; then $1.50/$7.50),-,58.7%,-,-,-,-,-,-,-,-,-,$0.75,$3.75,1M,₹71.34,₹356.70
-203,Muse Spark 1.1,Meta,Unknown,Unknown,?,Closed,-,61.5%,-,-,-,-,-,-,-,-,-,$1.25,$4.25,1M,₹118.90,₹404.26
-204,GPT-5.6 Luna Pro,OpenAI,Unknown,Unknown,?,Closed (TB2.1 84.7% vendor),-,-,-,84.7%,-,-,-,-,-,-,-,$0.20,$1.20,1.1M,₹19.02,₹114.14
-205,Gemini 3.5 Flash-Lite,Google,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$0.30,$2.50,1M,₹28.54,₹237.80
-206,KAT-Coder-Air V2.5,Kuaishou,Unknown,Unknown,?,Unknown,-,-,-,-,-,-,-,-,-,-,-,Unknown,Unknown,256K,Unknown,Unknown
-207,Laguna S 2.1,Poolside,118B,8B,59,Open weight (OpenMDW-1.1; 262K; free OpenRouter),-,59.4%,-,70.2%,-,-,-,-,-,-,40.4%,$0.10,$0.20,262K,₹9.51,₹19.02
-208,Leanstral 1.5,Mistral AI,119B,6.5B,60,Apache 2.0,-,-,-,-,-,-,-,-,-,-,-,$0.00,$0.00,256K,₹0.00,₹0.00
-209,DeepSWE-Preview,Together AI / Agentica,32B,32B dense,16,Apache 2.0,42.2%,59%,-,-,-,-,-,-,-,-,-,-,-,128K,-,-
-210,SWE-Swiss-32B,Open Source Community,32B,32B dense,16,Apache 2.0 / MIT,60.2%,-,-,-,-,-,-,-,-,-,-,-,-,128K,-,-
-211,Claude Opus 5 🆕🆕,Anthropic,Closed,Closed,?,Closed,96.0%,79.2%,-,-,-,-,-,64.7%,-,-,90.4%,$5.00,$25.00,1M,₹475.60,₹2378.00
-212,Ling 3.0 Flash 🆕,inclusionAI,124B,~5.1B,~62,API-only (open weights coming),-,56.63%,-,-,-,-,-,-,-,-,-,Free (through Aug 3),Free,262K,Free (through Aug 3),Free
-213,Aion-3.0-Mini,AionLabs,Unknown,Unknown,?,Closed (API),-,-,-,-,-,-,-,-,-,-,-,$0.70,$1.40,131K,₹66.58,₹133.17
-214,K-EXAONE 2.0 🆕,LG AI Research,750B,37B,375,Apache 2.0,80.6%,-,-,64.0%,-,-,-,-,-,-,-,-,-,-,-,-
-215,openPangu-2.0-Pro 🆕,Huawei,505B,18B,253,OpenPangu License 2.0,68.5%,-,85.7%,-,-,-,-,-,-,-,-,$0.00,$0.00,512K,₹0.00,₹0.00
-216,Instella-MoE-16B-A3B-Think 🆕,AMD,16B,2.8B,8,ResearchRAIL,-,-,-,-,-,-,-,-,-,-,-,$0.00,$0.00,-,₹0.00,₹0.00
-217,A.X K2 🆕,SK Telecom,688B,33B,344,Apache 2.0,-,-,84.0%,-,-,-,85.6%,27.8%,-,97.1%,-,-,-,256K,-,-
-218,Qwen3.8-27B,Alibaba,27B,27B dense,14,Apache 2.0,-,-,90.3%,73.0%,-,-,89.2%,30.8%,-,-,-,$0.45,$3.20,262K,₹42.80,₹304.38
-219,DeepSeek V4 Pro 0813,DeepSeek,1.6T,49B,800,Open weight (legacy; superseded by V4.1 Flash GA Sep 10; routed to V4.1 Flash Sep 14),-,-,-,87.9%,-,-,-,-,-,-,-,$0.66,$1.98,1M,₹62.78,₹188.34
-220,Ling 3.0 Tiny,inclusionAI,7.9B,~1.3B,4,MIT,-,-,-,-,-,-,-,-,-,-,-,$0.06,$0.18,262K,₹5.71,₹17.12
-221,GLM-5.3,Z.AI,743B,40B,372,Custom (open weights released Aug 27; 141 shards ~756GB; >$10B review gate unconfirmed; API $1.40/$4.40),-,-,-,88.2%,-,-,-,62.5% (HLE tools vendor),-,-,-,$1.40,$4.40,1M,₹133.17,₹418.53
-222,Gemini 3.7 Flash,Google,Unknown,Unknown,?,Closed ($0.75/$3.75 intro to Dec 31 2026; then $1.50/$7.50),-,-,-,-,-,-,-,-,-,-,-,$0.75,$3.75,1M,₹71.34,₹356.70
-223,Muse Spark 1.2,Meta,Unknown,Unknown,?,Closed,-,-,-,80%,-,-,-,-,-,-,-,$1.25,$4.25,1M,₹118.90,₹404.26
-224,Muse Glimmer 30B,Meta,30B,30B dense,15,Apache 2.0 (open weights; 131K ctx; AA 35 independent),-,-,-,-,-,-,-,-,-,-,-,-,-,131K,-,-
-225,Seed 2.1 Turbo,ByteDance,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$0.43,$2.07,-,₹40.90,₹196.90
-226,GLM-5.3-Flash,Z.AI,320B,18B,160,MIT (open weights on HF; ~306 GiB FP8 ckpt),-,-,-,84.3%,-,-,-,55.3%,-,-,-,$0.15,$0.50,1M,₹14.27,₹47.56
-227,Granite 4.2 8B,IBM,8B,8B dense,4,Apache 2.0 (AA-evaluated Aug 26),-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-228,LFM2.5-2.6B,LiquidAI,2.6B,2.6B,2,Open weight (AA-evaluated Aug 19),-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-229,Qwen3.8-Flash-Next,Alibaba,180B,6B,111,Qwen Community 1.0 (open weights on HF),-,-,91.9%,-,-,-,-,-,-,-,-,TBD,TBD,1M,TBD,TBD
-230,MAI-Code-1.1-Flash,Microsoft,138B,5B,?,Closed (API-only; GitHub Copilot; no public weights),72.6%,-,-,62.9%,-,-,-,-,-,-,-,$0.20,$1.20,256K,₹19.02,₹114.14
-231,North-Micro-Vision-Instruct,Cohere Labs,2.4B,2.4B dense,5,Apache 2.0 (open weights on HF),-,-,-,-,-,-,-,-,-,-,-,-,-,128K,-,-,-
-232,Ornith-1.5-397B,DeepReinforce/Ornith,403B,?,244,MIT (open weights on HF),86.0%,65.1%,-,86.1%,-,-,92.8%,44.6%,-,-,-,Self-host,Self-host,1M,Self-host,Self-host
-233,Ornith-1.5-35B-A3B,DeepReinforce/Ornith,36B,3B,22,MIT (open weights on HF),79.0%,59.6%,-,67.8%,-,-,89.2%,25.6%,-,-,-,Self-host,Self-host,1M,Self-host,Self-host
-234,Ornith-1.5-9B,DeepReinforce/Ornith,10B,10B dense,6,MIT (open weights on HF),70.6%,47.5%,-,46.2%,-,-,86.4%,20.2%,-,-,-,Self-host,Self-host,1M,Self-host,Self-host
-235,Apodex 1.1-mini,Apodex AI,35B,3B,17,Apache 2.0 (open weights on HF),77.7%,-,-,70.8%,-,-,-,47.7%,-,-,-,$0.00,$0.00,262K,₹0.00,₹0.00
-236,Qwen3.8-Flash,Alibaba,125B,6B,111,Proprietary (Available; API-only; twin of Flash-Next),-,62.5%,91.9%,-,-,-,-,-,-,-,-,$0.15,$0.47,1M,₹14.27,₹44.71
-237,Cohere Parse 5,Cohere,2.3B,2.3B dense,2.3,Proprietary (Available; $1.50/1k pages doc-VLM),-,-,-,-,-,-,-,-,-,-,-,$1.50/1k pages,$1.50/1k pages,8K,₹142.68/1k pages,₹142.68/1k pages
-238,Ling-3.0-flash-Fin,inclusionAI (Ant Group),124B,5.1B,62,MIT (Available; weights posted Sep 4 HF inclusionAI/Ling-3.0-flash-Fin; DeepInfra $0.06/$0.18),-,-,-,-,-,-,-,-,-,-,-,$0.06,$0.18,262K,₹5.71,₹17.12
-239,Thomson,Thomson Reuters,Undisc.,Undisc.,?,Proprietary (Preview; gated CoCounsel; academic open variant),-,-,-,-,-,-,-,-,-,-,-,Gated,Gated,-,Gated,Gated
-240,Hy-MT2-30B-A3B,Tencent Hunyuan,30B,3B,15,Open weight (Available; translation specialist),-,-,-,-,-,-,-,-,-,-,-,Open weights,Open weights,8K,Open weights,Open weights
-241,Dots3-Note Preview,Dots Studio (Xiaohongshu),280B,16B,140,Apache 2.0 (Preview; free OpenRouter),-,-,-,-,-,-,-,-,-,-,-,Free,Free,512K,Free,Free
-242,LFM2.5-VL-3B,Liquid AI,3.1B,3.1B dense,2,Open weight (Available; edge VLM),-,-,-,-,-,-,-,-,-,-,-,Open weights,Open weights,-,Open weights,Open weights
-243,Nemotron 3.5 Lightning,NVIDIA,31.6B,3.6B,16,OpenMDW-1.1 (Available; 1M; hybrid Mamba-2+MoE+Attn),51.56%,-,-,-,-,-,75.44%,-,-,-,-,NIM,NIM,1M,NIM,NIM
-244,Namazu,Sakana AI,Undisc.,Undisc.,?,Proprietary (Available; Kimi K2.6 finetune; not in EU/UK/CH),-,-,-,-,-,-,-,-,-,-,-,$0.95,$4.00,262K,₹90.36,₹380.48
-245,Solar Pro 4,Upstage,Undisc.,Undisc.,?,Proprietary (Available; promo $0.03/$0.12),-,-,-,-,-,-,-,-,-,-,-,$0.30,$1.20,524K,₹28.54,₹114.14
-246,GPT-5.6-Cyber,OpenAI,Undisc.,Undisc.,?,Proprietary (Preview; Daybreak Red gated),-,-,-,-,-,-,-,-,-,-,-,Gated,Gated,-,Gated,Gated
-247,Claude Fable 5.1,Anthropic,Undisc.,Undisc.,?,Proprietary (Available; cache $0.25/M; 75% cut),-,-,-,-,-,-,-,65.0% (with tools; 60.9% no-tools),-,-,-,$10.00,$50.00,1M,₹951.20,₹4756.00
-248,Claude Mythos 5.1,Anthropic,Undisc.,Undisc.,?,Proprietary (Preview-gated; same weights as Fable 5.1; CVP/LSVP),-,-,-,-,-,-,-,65.0%,-,-,-,$10.00,$50.00,1M,₹951.20,₹4756.00
-249,Qwen3.8-Max-0902,Alibaba,2.4T,95B,1200,Proprietary (Available; Sep 2 refresh; 1M; $2/$6),-,-,-,-,-,-,-,-,-,-,69.3%,$2.00,$6.00,1M,₹190.24,₹570.72
-250,DeepSeek V4 Flash Vision Exp,DeepSeek,284B,13B,155,MIT (Available; Vision; 1.05M; off-peak $0.22/$0.66),-,-,-,83.9%,-,-,-,-,-,-,59.3%,$0.22,$0.66,1.05M,₹20.93,₹62.78
-251,Gemini 3.8 Flash,Google,Undisc.,Undisc.,?,Proprietary (Available; Sep 2; 1M; $0.75/$3.75 intro),-,-,-,-,-,-,-,-,-,-,-,$0.75,$3.75,1M,₹71.34,₹356.70
-252,Muse Spark 1.3,Meta,Undisc.,Undisc.,?,Proprietary (Available Sep 2; 1M; $1.25/$4.25; AA 48 v4.3 re-score Sep 8; launch 61/62 superseded),-,-,-,-,-,-,-,-,-,-,-,$1.25,$4.25,1M,₹118.90,₹404.26
-253,Mercury 2.5,Inception,Undisc.,Undisc.,?,Proprietary (GA Sep 8; 260K; $0.20/$0.75; diffusion LM; AA-evaluated Sep 8),-,-,-,-,-,-,-,-,-,-,-,$0.20,$0.75,260K,₹19.02,₹71.34
-254,GPT-6 Astra,OpenAI,Undisc.,Undisc.,?,Proprietary (Available Sep 3; 1M; $10/$50; cache $1.00; TB4.0 57.7%; OSWorld 72.6%; GPQA 96.0%; DeepSWE v1.1 74.1%; AA ~53 v4.3; first Critical cyber threshold),-,-,-,-,-,-,96.0%,57.2% (HLE tools vendor),-,-,-,$10.00,$50.00,1M,₹951.20,₹4756.00
-255,GPT-6 Astra Pro,OpenAI,Undisc.,Undisc.,?,Proprietary (Available Sep 4; 1.05M; $10/$50; cache $1.00; reasoning.mode pro),-,-,-,-,-,-,-,-,-,-,-,$10.00,$50.00,1.05M,₹951.20,₹4756.00
-256,DeepSeek V4.1 Flash,DeepSeek,552B,8B/16B,280,MIT (open weights Sep 10 HF; Causal Encoder-Decoder 40L; 384 experts; 8B prefill/16B decode; 890 bytes/tok KV; Engram 196B; 48 shards ~510GB FP8; KV-cache compression; vision; routes legacy V4 Flash/Pro; cache-hit $0.003 off-peak/$0.006 peak; peak $0.30/$1.20 off-peak $0.15/$0.60),-,-,-,90.6% (TB2.1 vendor),-,-,90.9% (GPQA-D vendor),63.9% (tools vendor),-,-,74.2% (DeepSWE v1.1 vendor),$0.30,$1.20,1M,₹28.54,₹114.14
-257,MiniCPM5-2B,OpenBMB,2.5B,2.5B dense,2,Apache 2.0 (Available Sep 7; 131K; avg 53.9 over 34 benchmarks vendor),-,-,-,-,-,-,-,-,-,-,-,-,-,131K,-,-
-258,K2 Horizon 375B-A23B,IFM (MBZUAI),375B,23B,200,Apache 2.0 (Available Sep 3; 6-model 0.9B-375B family; weights+data+code+checkpoints; AA-evaluated Sep 3),-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-259,Quasar 438B,Multiverse Computing,438B,Undisc.,?,TBD (Listed Sep 2 BenchLM/ThursdAI; sparse details; announced-but-unconfirmed),-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-260,Ling-3.0-flash-Sante,inclusionAI (Ant Group),124B,5.1B,62,Open weights announced-but-unconfirmed for Sante variant (base family MIT; API-first; free thru Oct 4 Vercel),-,-,-,-,-,-,-,-,-,-,-,-,-,262K,-,-
-261,Ling-3.0-flash-VL,inclusionAI (Ant Group),124B,5.1B,62,Open weights announced-but-unconfirmed (AA-evaluated Sep 10; vision variant of Ling-3.0-flash),-,-,-,-,-,-,-,-,-,-,-,-,-,262K,-,-
-262,Gemini 3.8 Flash Cyber,Google,Undisc.,Undisc.,?,Proprietary (Available Sep 2; Fairwind-gated vuln detection/patching; same base as 3.8 Flash),-,-,-,-,-,-,-,-,-,-,-,$0.75,$3.75,1M,₹71.34,₹356.70
-263,Tencent Hy4 preview,Tencent Hunyuan,770B,49B,385,Apache 2.0 (Available; preview Aug 28; 1M+ ctx; TB2.1 85.4 / DeepSWE 64.3 vendor),-,-,-,85.4% (TB2.1 vendor),-,-,-,-,-,-,64.3% (DeepSWE vendor),$0.834,$2.501,1M+,₹79.33,₹237.90
-264,Qwen3.8-Max,Alibaba,2.4T,95B,1200,Qwen License (custom; open weights Aug 13; attribution >100M MAU; MaaS >$50M/yr separate; TB2.1 86.6 / DeepSWE 56.6 vendor),-,67.7% (SWE-Pro vendor),-,86.6% (TB2.1 vendor),-,-,-,-,-,-,56.6% (DeepSWE vendor),$2.00,$6.00,1M,₹190.24,₹570.72
-265,SWE-2,Cognition,Undisc.,Undisc.,?,Proprietary (Devin only; FrontierCode 50.0%; DeepSWE 73.0%; TB2.1 92.8%; TB4 27.3%),-,-,-,92.8% (TB2.1 vendor),-,-,-,-,-,-,-,$20.00,$100.00,1M,₹1902.40,₹9512.00
-266,Fugu Max,Sakana AI,Undisc.,Orchestration,?,Proprietary (Sakana AI; orchestration system; not EU/EEA),-,-,-,-,-,-,-,-,-,-,-,$2.00,$6.00,1M,₹190.24,₹570.72
-267,Fugu Ultra v2.0,Sakana AI,Undisc.,Orchestration,?,Proprietary (Sakana AI; v2.0; orchestration system; not EU/EEA),-,-,-,-,-,-,-,-,-,-,-,$5.00,$30.00,1M,₹475.60,₹2853.60
-268,Salesforce Koa,Salesforce,Unknown,Unknown,?,"Proprietary (Enterprise pilot 15 Sep 2026; Salesforce-hosted only, not public API; post-trained NVIDIA Nemotron 3 Super base with proprietary synthetic CRM workflows, no customer data; pilot customers; GA winter 2026 US regions; specialized agentic CRM reasoning; vendor claims 3x fewer errors on internal CRM Bench vs general models; weights controlled by Salesforce)",-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
-269,Union Alpha,Stealth (OpenRouter / OpenCode Zen),Unknown,Unknown,?,Proprietary (Stealth preview Sep 16 2026; stealth/union-alpha on OpenRouter and union-alpha on OpenCode Zen; free for ~1 week; 262K ctx; 131K max output; text+image in; tool calling; no weights/HF; anonymous provider; zero-retention claim disputed; expiration placeholder 2098-12-31; community DeepSWE ~73% unverified),-,-,-,-,-,-,-,-,-,-,-,Free (preview),Free (preview),262K,Free (preview),Free (preview)
-270,ZGCM-1,Zhongguancun Academy,7.39B,7.39B dense,~4,"Apache 2.0 (fully open Sep 16 2026; paper arXiv Sep 11; weights + staged checkpoints + 5.44B-row dataset + recipes + W&B logs; hybrid gated SWA 27/32 + 5 global @ layers 6,12,18,24,30; Muon + FP8 + TWEO; mid-training 16K->64K->256K MDP; SFT 4.92M ex 10ep + GRPO RL)",-,-,-,-,-,-,-,-,-,75.0%,-,Free (self-host),Free (self-host),256K,Free (self-host),Free (self-host)
+Rank,Model,Provider,Total Parameters,Active Parameters,Full Q4 VRAM (GB),License/Type,SWE-bench Verified,SWE-bench Pro,LiveCodeBench V6,Terminal-Bench,HumanEval,MMLU-Pro,GPQA Diamond,HLE,MATH,AIME 2026,ARC-AGI-2,Price Input/1M,Price Output/1M,Context Window,Price Input INR/1M,Price Output INR/1M,Model Type,Last Verified,Source,Confidence,Notes,Is Orchestrator
+1,Claude Mythos 5,Anthropic,Unknown,Unknown,?,Closed,95.5%,-,-,-,-,-,-,-,USAMO 2026: 99.8%,-,-,-,-,1M+,-,-,foundation,2026-09-16,vendor,medium,,false
+2,Claude Opus 4.8,Anthropic,Unknown,Unknown,?,Closed,88.6%,-,-,58%,-,-,-,-,66.9%,95.7%,81%,$5.00,$25.00,1M,₹475.60,₹2378.00,foundation,2026-09-16,vendor,medium,,false
+3,Claude Opus 4.7,Anthropic,Unknown,Unknown,?,Closed,87.6%,-,-,52%,-,-,-,-,-,-,-,$5.00,$25.00,1M,₹475.60,₹2378.00,foundation,2026-09-16,vendor,medium,,false
+4,GPT-5.6 Sol,OpenAI,Unknown,Unknown,?,Closed,Unconfirmed,64.6%,-,88.8%,-,-,-,-,FrontierMath T1-3: 89%,-,92.5%,$4.00,$20.00,1.1M,₹380.48,₹1902.40,foundation,2026-09-16,vendor,medium,,false
+5,Gemini 3.1 Pro,Google,Unknown,Unknown,?,Closed,80.6%,-,-,74.8%,-,-,-,-,85.3%,98.2%,77.1%,$2.00,$12.00,1M,₹190.24,₹1141.44,foundation,2026-09-16,vendor,medium,,false
+6,DeepSeek V4 Pro Max,DeepSeek,1.6T,49B,800,Open weight (legacy; superseded by V4.1 Flash; V4 Pro routed to V4.1 Flash Sep 14),80.6%,-,93.5%,67.9%,-,-,-,-,84.1%,94.6%,68.5%,$0.66,$1.98,1M,₹62.78,₹188.34,foundation,2026-09-16,vendor,medium,,false
+7,o3,OpenAI,Unknown,Unknown,?,Closed,71.7%,-,85.5%,-,-,-,87.7%,-,-,96.7%,87.5%,$2.00,$8.00,200K,₹190.24,₹760.96,foundation,2026-09-16,vendor,medium,,false
+8,GPT-5.5,OpenAI,Unknown,Unknown,?,Closed,82.6%,-,-,61%,-,-,-,-,~85%,98.3%,85.0%,$5.00,$30.00,1M,₹475.60,₹2853.60,foundation,2026-09-16,vendor,medium,,false
+9,Claude Sonnet 5,Anthropic,Unknown,Unknown,?,Closed ($2/$10 standard; Sep 1 rise to $3/$15 cancelled),85.2%,-,-,-,-,-,-,-,-,-,-,$2.00,$10.00,1M,₹190.24,₹951.20,foundation,2026-09-16,vendor,medium,,false
+10,GPT-5.2,OpenAI,Unknown,Unknown,?,Closed,80.0%,-,89.4%,-,-,-,-,-,~80%,-,52.9%,$1.75,$14.00,1M,₹166.46,₹1331.68,foundation,2026-09-16,vendor,medium,,false
+11,MiniMax M3,MiniMax,428B,23B,214,Modified MIT (open weights; H3 geo-exclusion N/A to coding M3),80.5%,-,-,-,-,-,-,-,-,-,-,$0.30,$1.20,1M,₹28.54,₹114.14,foundation,2026-09-16,vendor,medium,,false
+12,Kimi K3,Moonshot AI,2.8T,104B,~1400,Kimi K3 License (custom; open weights Jul 27 2026),-,-,-,88.3%,-,-,93.5%,-,-,-,-,$3.00,$15.00,1M,₹285.36,₹1426.80,foundation,2026-09-16,vendor,medium,,false
+13,Kimi K2.6,Moonshot AI,1T,32B,500,Modified MIT (open weights),80.2%,-,89.6%,-,-,-,-,-,72.3%,96.4%,-,$0.75,$3.50,262K,₹71.34,₹332.92,foundation,2026-09-16,vendor,medium,,false
+14,Qwen3.7 Max,Alibaba,Unknown,Unknown,?,Closed,80.4%,-,91.6%,-,-,-,-,-,-,-,-,$1.25,$3.75,1M,₹118.90,₹356.70,foundation,2026-09-16,vendor,medium,,false
+15,Claude Sonnet 4.6,Anthropic,Unknown,Unknown,?,Closed ($3/$15 standard; Sonnet 5 stays $2/$10),79.6%,-,-,59.1%,-,-,-,-,-,-,-,$3.00,$15.00,1M,₹285.36,₹1426.80,foundation,2026-09-16,vendor,medium,,false
+16,DeepSeek V4 Flash Max,DeepSeek,284B,13B,142,Open weight (legacy; superseded by V4.1 Flash GA Sep 10),79.0%,-,91.6%,56.9%,-,-,-,-,57.4%,-,-,$0.15,$0.60,1M,₹14.27,₹57.07,foundation,2026-09-16,vendor,medium,,false
+17,Qwen3.6 Plus,Alibaba,Unknown,Unknown,?,Closed,78.8%,-,87.1%,-,-,-,-,-,-,-,-,$0.50,$3.00,1M,₹47.56,₹285.36,foundation,2026-09-16,vendor,medium,,false
+18,MiMo-V2.5-Pro,Xiaomi,1.02T,42B,510,Open weight,78.9%,-,-,-,-,-,-,-,-,-,-,$0.43,$0.87,1M,₹40.90,₹82.75,foundation,2026-09-16,vendor,medium,,false
+19,Gemini 3 Flash,Google,Unknown,Unknown,?,Closed,78.0%,-,79.7%,-,-,-,-,-,-,-,-,$0.50,$3.00,1M,₹47.56,₹285.36,foundation,2026-09-16,vendor,medium,,false
+20,North Mini Code 1.0,Cohere,30B,3B,15,Apache 2.0,67.6%,40.2%,-,63%,-,-,-,-,-,-,-,$0.00,$0.00,256K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+21,MiMo-V2-Pro,Xiaomi,1T,15B,500,Closed,78.0%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+22,Hy3,Tencent,295B,21B,148,Open weight,78.0%,57.9%,34.86%,-,-,-,90.4%,53.2%,-,-,-,Free,Free,256K,Free,Free,foundation,2026-09-16,vendor,medium,,false
+23,GLM-5.1,Z.AI,744B,40B,372,Open weight,77.8%,-,-,56.2%,-,-,-,-,-,-,-,$1.00,$4.40,200K,₹95.12,₹418.53,foundation,2026-09-16,vendor,medium,,false
+24,Seed 2.0 Pro,ByteDance,Unknown,Unknown,?,Closed,76.5%,-,87.8%,-,-,-,-,-,-,-,-,$0.50,$3.00,256K,₹47.56,₹285.36,foundation,2026-09-16,vendor,medium,,false
+25,Kimi K2.5,Moonshot AI,1T,32B,500,Open weight,76.8%,-,85.0%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+26,Qwen3.5-397B,Alibaba,397B,17B,198,Open weight,76.4%,-,83.6%,52.5%,-,87.8,88.4%,-,-,91.3%,-,-,-,262K,-,-,foundation,2026-09-16,vendor,medium,,false
+27,MiniMax M2.5,MiniMax,230B,10B,115,Open weight,75.8%,-,-,42.2%,-,76.5,85.2%,-,-,-,-,$0.30,$1.20,1M,₹28.54,₹114.14,foundation,2026-09-16,vendor,medium,,false
+28,Inkling-Small 🆕 (Jul 30),Thinking Machines,276B,12B,~138,Apache 2.0,80.2%,55.9%,-,64.7%,-,-,-,-,-,-,-,-,-,1M,-,-,foundation,2026-09-16,vendor,medium,,false
+29,Mistral Medium 3.5,Mistral,128B,Dense,64,Open weight,77.6%,-,-,-,-,-,-,-,-,AIME 2025: 86.3%,-,$1.50,$7.50,256K,₹142.68,₹713.40,foundation,2026-09-16,vendor,medium,,false
+30,Muse Spark,Meta,Unknown,Unknown,?,Closed,77.4%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+31,Qwen3.6-27B,Alibaba,28B,27B,14,Open weight,77.2%,-,83.9%,-,-,-,-,-,-,94.1%,-,$0.60,$3.60,262K,₹57.07,₹342.43,foundation,2026-09-16,vendor,medium,,false
+32,Claude Haiku 4.5,Anthropic,Unknown,Unknown,?,Closed,73.3%,-,-,-,-,-,-,-,-,-,-,$1.00,$5.00,1M,₹95.12,₹475.60,foundation,2026-09-16,vendor,medium,,false
+33,DeepSeek V3.2,DeepSeek,685B,37B,342,Open weight,73.1%,-,83.3%,-,-,85.0,79.9%,-,-,-,-,$0.28,$0.42,128K,₹26.63,₹39.95,foundation,2026-09-16,vendor,medium,,false
+34,MAI-Thinking-1,Microsoft,962B,34.7B,481,Proprietary (Preview; Foundry; 256K; SWE-Pro 52.8% / TB2.0 46.0%),-,52.8%,-,46.0% (TB2.0; not TB2.1),-,-,-,-,-,94.5% (AIME26),-,TBD,TBD,256K,TBD,TBD,foundation,2026-09-16,vendor,medium,,false
+35,Qwen3.6-35B-A3B,Alibaba,35B,3B,18,Open weight,73.4%,-,80.4%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+36,MiMo-V2-Flash,Xiaomi,309B,15B,154,Open weight,73.4%,-,80.6%,38.5%,-,84.9,83.7%,-,-,-,-,$0.09,$0.29,262K,₹8.56,₹27.58,foundation,2026-09-16,vendor,medium,,false
+37,Big Pickle,OpenCode,Unknown,Unknown,?,Open weight,73.8%,-,82.8%,-,-,84.3,-,42.8%,-,-,-,Free,Free,200K,Free,Free,foundation,2026-09-16,vendor,medium,,false
+38,GLM-4.7,Z.AI,358B,32B,179,Open weight,73.8%,-,84.9%,-,-,-,-,-,-,-,-,$0.40,$1.75,200K,₹38.05,₹166.46,foundation,2026-09-16,vendor,medium,,false
+39,Nemotron 3 Ultra,NVIDIA,550B,55B,275,Open weight,71.9%,-,89.0%,56.4%,-,86.8,87.0%,26.7%,-,-,-,$0.50,$2.20,1M,₹47.56,₹209.26,foundation,2026-09-16,vendor,medium,,false
+40,Claude Sonnet 4,Anthropic,Unknown,Unknown,?,Closed,72.7%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+41,Claude Opus 4,Anthropic,Unknown,Unknown,?,Closed,72.5%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+42,DeepSeek V3,DeepSeek,671B,37B,336,Open weight,~50%,-,49.2%,-,-,81.2,68.4%,-,-,-,-,$0.28,$1.10,128K,₹26.63,₹104.63,foundation,2026-09-16,vendor,medium,,false
+43,Grok 4.20,xAI,Unknown,Unknown,?,Closed,70.0%,-,-,-,-,-,-,-,-,-,-,$2.00,$6.00,2M,₹190.24,₹570.72,foundation,2026-09-16,vendor,medium,,false
+44,Grok 4.5,xAI,Unknown,Unknown,?,Closed,-,64.7%,-,83.3%,-,-,-,-,-,-,-,$2.00,$6.00,500K,₹190.24,₹570.72,foundation,2026-09-16,vendor,medium,,false
+45,Gemini 2.5 Pro,Google,Unknown,Unknown,?,Closed,-,-,80.1%,-,-,-,-,-,-,-,-,$1.25,$10.00,1M,₹118.90,₹951.20,foundation,2026-09-16,vendor,medium,,false
+46,Grok Code Fast 1,xAI,Unknown,Unknown,?,Closed,49.0%,-,-,52.0%,-,-,-,-,-,-,-,$0.20,$1.50,-,₹19.02,₹142.68,foundation,2026-09-16,vendor,medium,,false
+47,GPT-4.1,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+48,o3-mini,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+49,Claude 3.5 Sonnet,Anthropic,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+50,Step-3.5-Flash,StepFun,196B,Unknown,98,Open weight,74.4%,-,86.4%,-,-,85.8,-,-,-,-,-,$0.10,$0.30,66K,₹9.51,₹28.54,foundation,2026-09-16,vendor,medium,,false
+51,Qwen3.5-27B,Alibaba,27B,27B,14,Open weight,-,-,80.7%,-,-,-,-,-,-,-,-,$0.30,$2.40,262K,₹28.54,₹228.29,foundation,2026-09-16,vendor,medium,,false
+52,Gemma 4 31B,Google,31B,31B,16,Open weight (Apache 2.0),-,-,80.0%,-,-,-,-,-,-,-,-,$0.13,$0.38,262K,₹12.37,₹36.15,foundation,2026-09-16,vendor,medium,,false
+53,Codestral 22B,Mistral,22B,22B,11,MNPL-0.1,40.0%,-,48.0%,-,86.6%,49.1%,34.9%,-,-,-,-,$0.30,$0.90,128K,₹28.54,₹85.61,foundation,2026-09-16,vendor,medium,,false
+54,Gemma 4 26B-A4B,Google,25B,4B,12,Open weight (Apache 2.0),-,-,77.1%,-,-,-,-,-,-,-,-,$0.13,$0.40,262K,₹12.37,₹38.05,foundation,2026-09-16,vendor,medium,,false
+55,StarCoder 3,BigCode,15B,15B,8,BigCode OpenRAIL-M,-,-,-,-,85.4%,-,-,-,-,-,-,$0.00,$0.00,16K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+56,Qwen3.5-122B-A10B,Alibaba,122B,10B,61,Open weight,-,-,78.9%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+57,ERNIE 4.5,Baidu,424B,47B,212,Apache 2.0,-,-,45.4%,-,92.1%,-,-,-,-,-,-,$0.00,$0.00,128K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+58,Qwen3.5-35B-A3B,Alibaba,35B,3B,18,Open weight,-,-,74.6%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+59,SenseNova-U1-8B-MoT,SenseTime,8B,8B,4,Apache 2.0,-,-,-,-,-,-,-,-,-,-,-,$0.00,$0.00,128K,₹0.00,₹0.00,foundation,2026-09-16,vendor,low,,false
+60,Qwen3-235B-A22B,Alibaba,235B,22B,118,Open weight,-,-,74.1%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+61,StarCoder2-15B,BigCode,15B,15B,8,BigCode OpenRAIL-M,18.3%,-,-,-,46.3%,-,-,-,-,-,-,$0.00,$0.00,16K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+62,AFM 3 Core,Apple,~3B,3B,2,Proprietary,-,-,-,-,-,-,-,-,-,-,-,$0.00,$0.00,32K,₹0.00,₹0.00,foundation,2026-09-16,vendor,low,,false
+63,StarCoder1-15B,BigCode,15.5B,15.5B,8,BigCode OpenRAIL-M,-,-,-,-,33.6%,-,-,-,-,-,-,$0.00,$0.00,8K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+64,Gemma 4 12B,Google,12B,12B,6,Open weight (Apache 2.0),-,-,72.0%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+65,Yi-Coder-9B,01.AI,9B,9B,4,Apache 2.0,-,-,23.4%,-,85.4%,-,-,-,-,-,-,$0.00,$0.00,128K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+66,AFM 3 Core Advanced,Apple,20B,1-4B,10,Proprietary,-,-,-,-,-,-,-,-,-,-,-,$0.00,$0.00,32K,₹0.00,₹0.00,foundation,2026-09-16,vendor,low,,false
+67,Yi-Coder-1.5B,01.AI,1.5B,1.5B,1,Apache 2.0,-,-,-,-,67.7%,-,-,-,-,-,-,$0.00,$0.00,128K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+68,Sarvam-105B,Sarvam AI,105B,105B,52,Open weight,-,-,71.7%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+69,CodeLlama-70B-Instruct,Meta,70B,70B,35,Llama 2 Community,-,-,-,-,67.8%,-,-,-,-,-,-,$0.00,$0.00,16K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+70,GLM-5,Z.AI,745B,44B,372,MIT,77.8%,-,71.6%,-,-,-,-,-,-,-,-,$0.00,$0.00,200K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+71,CodeLlama-34B-Instruct,Meta,34B,34B,17,Llama 2 Community,-,-,-,-,48.8%,-,-,-,-,-,-,$0.00,$0.00,16K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+72,CodeLlama-13B-Instruct,Meta,13B,13B,6,Llama 2 Community,-,-,-,-,42.7%,-,-,-,-,-,-,$0.00,$0.00,16K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+73,SPARK X2,iFlytek,293B,~30B,146,Proprietary,-,-,-,-,-,-,-,-,-,-,-,-,-,256K,-,-,foundation,2026-09-16,vendor,low,,false
+74,CodeLlama-7B-Instruct,Meta,7B,7B,4,Llama 2 Community,-,-,-,-,34.8%,-,-,-,-,-,-,$0.00,$0.00,16K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+75,Sarvam-30B,Sarvam AI,30B,30B,15,Open weight,-,-,70.0%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+76,ERNIE 4.5-21B-A3B,Baidu,28B,3B,14,Apache 2.0,-,-,-,-,-,-,-,-,-,-,-,$0.00,$0.00,128K,₹0.00,₹0.00,foundation,2026-09-16,vendor,low,,false
+77,Qwen3 Max,Alibaba,1T,Unknown,500,Closed,-,-,69.0%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+78,Qwen3-Next-80B-A3B,Alibaba,80B,3B,40,Open weight,-,-,68.7%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+79,Nemotron 3 Nano,NVIDIA,32B,3B,16,Open weight,-,-,68.3%,-,-,-,-,-,-,-,-,$0.06,$0.24,262K,₹5.71,₹22.83,foundation,2026-09-16,vendor,medium,,false
+80,Qwen3.5-9B,Alibaba,9B,9B,4,Open weight,-,-,65.6%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+81,Qwen3 VL 32B,Alibaba,33B,33B,16,Open weight,-,-,65.6%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+82,Qwen3 VL 30B-A3B,Alibaba,31B,3B,16,Open weight,-,-,64.2%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+83,Qwen3 VL 8B,Alibaba,9B,9B,4,Open weight,-,-,58.6%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+84,Qwen3-Next-80B-A3B-Instruct,Alibaba,80B,3B,40,Open weight,-,-,56.6%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+85,Qwen3.5-4B,Alibaba,4B,4B,2,Open weight,-,-,55.8%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+86,Qwen3 VL 235B-A22B-Instruct,Alibaba,236B,22B,118,Open weight,-,-,54.3%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+87,Kimi K2 Instruct,Moonshot AI,1T,32B,500,Open weight,-,-,53.7%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+88,Gemma 4 E4B,Google,8B,4B,4,Open weight (Apache 2.0),-,-,52.0%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+89,MiniCPM-SALA,OpenBMB,9B,9B,4,Open weight,-,-,52.0%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+90,Qwen3-235B-A22B-Instruct,Alibaba,235B,22B,118,Open weight,-,-,51.8%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+91,Qwen3 VL 4B,Alibaba,4B,4B,2,Open weight,-,-,51.3%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+92,Gemma 4 E2B,Google,5B,2B,2,Open weight (Apache 2.0),-,-,44.0%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+93,Qwen3 VL 32B Instruct,Alibaba,33B,33B,16,Open weight,-,-,43.8%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+94,Qwen3 VL 30B-A3B Instruct,Alibaba,31B,3B,16,Open weight,-,-,42.6%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+95,MiMo-V2.5,Xiaomi,310B,15B,155,Open weight,-,-,35.5%,41.7%,-,-,-,25.2%,-,-,-,$0.10,$0.28,32K,₹9.51,₹26.63,foundation,2026-09-16,vendor,medium,,false
+96,Devstral 2,Mistral,123B,123B,62,Modified MIT (revenue gate >$20M/mo),72.2%,-,-,-,-,-,-,-,-,-,-,-,-,256K,-,-,foundation,2026-09-16,vendor,medium,,false
+97,Mistral Small 4,Mistral,119B,6.5B,60,Open weight,-,-,63.6%,-,-,-,-,-,-,AIME 2025: 84%,-,$0.15,$0.60,256K,₹14.27,₹57.07,foundation,2026-09-16,vendor,medium,,false
+98,Ministral 3 14B,Mistral,14B,14B,7,Open weight,-,-,64.6%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+99,Ministral 3 8B,Mistral,8B,8B,4,Open weight,-,-,61.6%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+100,Ministral 3 3B,Mistral,3B,3B,2,Open weight,-,-,54.8%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+101,Magistral Small,Mistral,24B,24B,12,Open weight,-,-,51.3%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+102,Magistral Medium,Mistral,24B,24B,12,Open weight,-,-,50.3%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+103,Llama 4 Maverick,Meta,400B,17B,200,Closed,-,-,43.4%,-,62.0,-,-,-,78.4%,-,-,-,-,1M,-,-,foundation,2026-09-16,vendor,medium,,false
+104,GPT-OSS-120B,OpenAI,117B,117B,58,Apache 2.0 (open weights),-,-,87.8%,-,-,90.0,80.9%,-,-,-,-,$0.037,$0.10,128K,₹3.52,₹9.51,foundation,2026-09-16,vendor,medium,,false
+105,Llama 3.1 Nemotron Ultra 253B,NVIDIA,253B,253B,126,Open weight,-,-,66.3%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+106,Qwen3 32B,Alibaba,33B,33B,16,Open weight,-,-,65.7%,-,-,-,-,-,-,-,-,$0.10,$0.44,128K,₹9.51,₹41.85,foundation,2026-09-16,vendor,medium,,false
+107,Qwen3 30B-A3B,Alibaba,31B,3B,16,Open weight,-,-,62.6%,-,-,-,-,-,-,-,-,$0.10,$0.30,128K,₹9.51,₹28.54,foundation,2026-09-16,vendor,medium,,false
+108,QwQ-32B,Alibaba,33B,33B,16,Open weight,-,-,63.4%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+109,DeepSeek R1,DeepSeek,671B,37B,336,Open weight,-,-,73.3%,-,90.2,84.0,71.5%,-,-,-,-,$0.28,$0.42,128K,₹26.63,₹39.95,foundation,2026-09-16,vendor,medium,,false
+110,DeepSeek R1 Distill Llama 70B,DeepSeek,71B,71B,36,Open weight,-,-,57.5%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+111,DeepSeek R1 Distill Qwen 32B,DeepSeek,33B,33B,16,Open weight,-,-,57.2%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+112,DeepSeek R1 Distill Qwen 14B,DeepSeek,15B,15B,8,Open weight,-,-,53.1%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+113,DeepSeek R1 Distill Llama 8B,DeepSeek,8B,8B,4,Open weight,-,-,39.6%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+114,Phi 4 Reasoning,Microsoft,14B,14B,7,Open weight,-,-,53.8%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+115,Phi 4 Reasoning Plus,Microsoft,14B,14B,7,Open weight,-,-,53.1%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+116,Nova 2 Pro,Amazon,Unknown,Unknown,?,Closed,-,-,74.6%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+117,Nova 2 Lite,Amazon,Unknown,Unknown,?,Closed,-,-,71.0%,-,-,-,-,-,-,-,-,$0.30,$2.50,1M,₹28.54,₹237.80,foundation,2026-09-16,vendor,medium,,false
+118,Mercury 2,Inception,Unknown,Unknown,?,Closed,-,-,67.0%,-,-,-,-,-,-,-,-,$0.25,$0.75,128K,₹23.78,₹71.34,foundation,2026-09-16,vendor,medium,,false
+119,LongCat-Flash-Thinking,Meituan,560B,Unknown,280,Open weight,-,-,79.4%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+120,LongCat-Flash-Thinking-2601,Meituan,560B,Unknown,280,Open weight,-,-,82.8%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+121,Grok 3,xAI,Unknown,Unknown,?,Closed,-,-,79.4%,-,94.5,-,-,-,-,-,-,$3.00,$15.00,128K,₹285.36,₹1426.80,foundation,2026-09-16,vendor,medium,,false
+122,Grok 4,xAI,Unknown,Unknown,?,Closed,-,-,79.0%,-,-,-,-,-,96.9%,-,72.8%,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+123,Grok-3 Mini,xAI,Unknown,Unknown,?,Closed,-,-,80.4%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+124,Grok-4 Heavy,xAI,Unknown,Unknown,?,Closed,-,-,79.4%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+125,Grok 4 Fast,xAI,Unknown,Unknown,?,Closed,-,-,80.0%,-,-,-,-,-,-,-,-,$0.20,$0.50,2M,₹19.02,₹47.56,foundation,2026-09-16,vendor,medium,,false
+126,Seed 2.0 Lite,ByteDance,Unknown,Unknown,?,Closed,-,-,81.7%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+127,K-EXAONE-236B-A23B,LG AI,236B,23B,118,Open weight,-,-,80.7%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+128,Qwen3 VL 235B-A22B Thinking,Alibaba,236B,22B,118,Open weight,-,-,70.1%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+129,DiffusionGemma 26B-A4B,Google,25B,4B,12,Closed,-,-,69.1%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+130,Qwen3 Coder 480B-A35B,Alibaba,480B,35B,240,Open weight,-,-,-,-,-,-,-,-,-,-,-,$0.40,$1.60,262K,₹38.05,₹152.19,foundation,2026-09-16,vendor,low,,false
+131,Qwen3-Coder-30B-A3B,Alibaba,30B,3B,15,Apache 2.0,-,-,-,-,-,-,-,-,-,-,-,-,-,256K,-,-,foundation,2026-09-16,vendor,low,,false
+132,KAT-Coder-Pro V1,Unknown,Unknown,Unknown,?,Unknown,-,-,-,-,-,-,-,-,-,-,-,$0.21,$0.83,256K,₹19.98,₹78.95,foundation,2026-09-16,vendor,low,,false
+133,KAT-Coder-Pro V2.5,KwaiPilot (Kuaishou),Unknown,Unknown,?,API (closed),-,-,-,-,-,-,-,-,-,-,-,$0.74,$2.96,256K,₹70.39,₹281.56,foundation,2026-09-16,vendor,low,,false
+134,GPT-5.1,OpenAI,Unknown,Unknown,?,Closed,-,-,86.8%,-,-,-,-,-,-,-,-,$1.25,$10.00,400K,₹118.90,₹951.20,foundation,2026-09-16,vendor,medium,,false
+135,GPT-5.1 Codex,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$1.75,$14.00,400K,₹166.46,₹1331.68,foundation,2026-09-16,vendor,low,,false
+136,GPT-5.2 Codex,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$1.75,$14.00,400K,₹166.46,₹1331.68,foundation,2026-09-16,vendor,low,,false
+137,GPT-5.3 Codex,OpenAI,Unknown,Unknown,?,Closed,73.7%,-,-,-,-,-,-,-,-,-,-,$1.75,$14.00,400K,₹166.46,₹1331.68,foundation,2026-09-16,vendor,medium,,false
+138,GPT-5 Codex,OpenAI,Unknown,Unknown,?,Closed,74.5%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+139,GPT-5,OpenAI,Unknown,Unknown,?,Closed,74.9%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+140,GPT-5.1 Thinking,OpenAI,Unknown,Unknown,?,Closed,76.3%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+141,GPT-5.1 Instant,OpenAI,Unknown,Unknown,?,Closed,76.3%,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+142,GPT-5.4,OpenAI,Unknown,Unknown,?,Closed,-,-,-,75.1%,-,-,-,-,-,-,-,$2.50,$15.00,1M,₹237.80,₹1426.80,foundation,2026-09-16,vendor,medium,,false
+143,GPT-5.4 Pro,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$30.00,$180.00,1.1M,₹2853.60,₹17121.60,foundation,2026-09-16,vendor,low,,false
+144,GPT-5.5 Pro,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$5.00,$180.00,1M,₹475.60,₹17121.60,foundation,2026-09-16,vendor,low,,false
+145,Gemini 3.5 Flash,Google,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,MATH-500: 96.8%,93.3%,72.1%,$1.50,$9.00,1M,₹142.68,₹856.08,foundation,2026-09-16,vendor,medium,,false
+146,Gemini 3 Pro Preview,Google,Unknown,Unknown,?,Closed,-,-,91.7%,-,-,-,-,-,-,-,-,$2.00,$12.00,1M,₹190.24,₹1141.44,foundation,2026-09-16,vendor,medium,,false
+147,Gemini 3 Flash Preview,Google,Unknown,Unknown,?,Closed,-,-,90.8%,-,-,-,-,-,-,-,-,$0.50,$3.00,1M,₹47.56,₹285.36,foundation,2026-09-16,vendor,medium,,false
+148,Laguna M.1,Poolside,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$2.00,$2.00,-,₹190.24,₹190.24,foundation,2026-09-16,vendor,low,,false
+149,Laguna XS.2,Poolside,Unknown,Unknown,?,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+150,ZAYA1-74B-Preview,Zyphra,74B,74B,37,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+151,ZAYA1-8B,Zyphra,8B,8B,4,Open weight,-,-,65.8%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+152,Step-3.7-Flash,StepFun,Unknown,Unknown,?,Unknown,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+153,Ling-2.6-1T,InclusionAI,1T,Unknown,500,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+154,Ring-2.6-1T,InclusionAI,1T,Unknown,500,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+155,Nex-N2-Pro,Unknown,Unknown,Unknown,?,Unknown,-,-,-,-,-,-,-,-,-,-,-,$0.25,$0.25,262K,₹23.78,₹23.78,foundation,2026-09-16,vendor,low,,false
+156,GLM-5.2,Z.AI,744B,40B,372,Open weight,80.0%,-,-,-,-,-,-,-,-,-,-,$1.40,$4.40,1M,₹133.17,₹418.53,foundation,2026-09-16,vendor,medium,,false
+157,GLM-4.6,Z.AI,357B,32B,178,Open weight,-,-,82.8%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+158,GLM-4.7 Flash,Z.AI,Unknown,Unknown,?,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+159,Qwen3 Coder Plus,Alibaba,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+160,Qwen3 Coder Next,Alibaba,80B,3B,40,Apache 2.0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+161,Devstral Small 2,Mistral,24B,24B,12,Apache 2.0,68.0%,-,-,-,-,-,-,-,-,-,-,-,-,256K,-,-,foundation,2026-09-16,vendor,medium,,false
+162,Devstral Medium 2507,Mistral,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$0.40,$2.00,128K,₹38.05,₹190.24,foundation,2026-09-16,vendor,low,,false
+163,GPT-5.1 Codex Mini,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$0.25,$2.00,400K,₹23.78,₹190.24,foundation,2026-09-16,vendor,low,,false
+164,Grok Build 0.1,xAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+165,Grok 4.3,xAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+166,Nemotron 3 Super,NVIDIA,120B,12B,60,Open weight,-,-,81.2%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+167,Nemotron Nano 9B v2,NVIDIA,9B,9B,4,Open weight,-,-,71.1%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+168,MiniMax M2,MiniMax,230B,10B,115,Open weight,-,-,83.0%,-,-,-,-,-,-,-,-,$0.30,$1.20,1M,₹28.54,₹114.14,foundation,2026-09-16,vendor,medium,,false
+169,MiniMax M2.1,MiniMax,230B,10B,115,Open weight,-,-,78.0%,-,-,-,-,-,-,-,-,$0.30,$1.20,1M,₹28.54,₹114.14,foundation,2026-09-16,vendor,medium,,false
+170,MiniMax M1 80K,MiniMax,456B,Unknown,228,Open weight,-,-,65.0%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+171,MiniMax M1 40K,MiniMax,456B,Unknown,228,Open weight,-,-,62.3%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+172,Llama 3.3 Nemotron Super 49B,NVIDIA,49B,49B,24,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+173,Llama 3.1 Nemotron Nano 8B,NVIDIA,8B,8B,4,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+174,Qwen2.5-Coder 32B Instruct,Alibaba,32B,32B,16,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,128K,-,-,foundation,2026-09-16,vendor,low,,false
+175,Qwen2.5 72B Instruct,Alibaba,73B,73B,36,Open weight,-,-,55.5%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+176,Qwen2.5 32B Instruct,Alibaba,32B,32B,16,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+177,DeepSeek-V3 0324,DeepSeek,671B,37B,336,Open weight,-,-,49.2%,-,-,-,-,-,-,-,-,$0.28,$1.14,164K,₹26.63,₹108.44,foundation,2026-09-16,vendor,medium,,false
+178,DeepSeek-R1-0528,DeepSeek,671B,37B,336,Open weight,-,-,73.3%,-,-,-,-,-,-,-,-,$0.55,$2.19,131K,₹52.32,₹208.31,foundation,2026-09-16,vendor,medium,,false
+179,DeepSeek R1 Zero,DeepSeek,671B,37B,336,Open weight,-,-,50.0%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+180,QwQ-32B-Preview,Alibaba,33B,33B,16,Open weight,-,-,50.0%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+181,GLM-4.5-Air,Z.AI,106B,10B,53,Open weight,-,-,70.7%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+182,Ornith-1.0-397B,DeepReinforce AI,397B,Unknown,198,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+183,Ornith-1.0-35B,DeepReinforce AI,35B,Unknown,18,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+184,Ornith-1.0-9B,DeepReinforce AI,9B,Unknown,4,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+185,Llama 4 Scout,Meta,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+186,GPT-4.1 mini,OpenAI,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+187,Claude 4.1 Opus,Anthropic,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+188,Claude 4 Sonnet,Anthropic,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+189,Kimi K2,Moonshot AI,1T,32B,500,Open weight,-,-,-,-,99.0,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+190,Kimi K2-Thinking-0905,Moonshot AI,1T,32B,500,Open weight,-,-,83.1%,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+191,Kimi K2.7 Code,Moonshot AI,1T,32B,500,Modified MIT (open weights; coding model),-,58.6%,-,-,-,-,-,-,-,-,-,$0.95,$4.00,262K,₹90.36,₹380.48,foundation,2026-09-16,vendor,medium,,false
+192,DeepSeek V4 Pro,DeepSeek,1.6T,49B,800,Open weight (legacy; routed to V4.1 Flash from Sep 14 12:00 Beijing; V4.1 Pro TBD),-,-,-,-,-,-,-,-,-,-,-,$0.66,$1.98,1M,₹62.78,₹188.34,foundation,2026-09-16,vendor,low,,false
+193,"DeepSeek V4 Flash (official -0731, legacy; routed to V4.1 Flash, billed Flash)",DeepSeek,284B,13B,142,"Open weight (legacy alias; served by V4.1 Flash, billed Flash)",-,-,-,82.7%,-,-,-,-,-,-,-,$0.15,$0.60,1M,₹14.27,₹57.07,foundation,2026-09-16,vendor,medium,,false
+194,Gemini 3.5 Flash Preview,Google,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$1.50,$9.00,1M,₹142.68,₹856.08,foundation,2026-09-16,vendor,low,,false
+195,Gemini 3.5 Pro Preview,Google,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$2.00,$12.00,1M,₹190.24,₹1141.44,foundation,2026-09-16,vendor,low,,false
+196,GPT-5.6 Terra,OpenAI,Unknown,Unknown,?,Closed,-,-,-,82% (TB2.1 vendor),-,-,-,-,-,-,-,$2.00,$12.00,1.1M,₹190.24,₹1141.44,foundation,2026-09-16,vendor,medium,,false
+197,GPT-5.6 Luna,OpenAI,Unknown,Unknown,?,Closed,-,-,-,80% (TB2.1 vendor),-,-,-,-,-,-,-,$0.20,$1.20,1.1M,₹19.02,₹114.14,foundation,2026-09-16,vendor,medium,,false
+198,Hy3 Preview,Tencent,295B,21B,148,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,256K,-,-,foundation,2026-09-16,vendor,low,,false
+199,MiniMax-M3-Base-2,MiniMax,428B,23B,214,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+200,MiniMax-M2.5-Base-2,MiniMax,230B,10B,115,Open weight,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+201,LongCat-2.0,Meituan,1.6T,~48B,~800,MIT,-,59.5%,-,70.8%,-,-,-,-,-,-,-,-,-,1M,-,-,foundation,2026-09-16,vendor,medium,,false
+202,Gemini 3.6 Flash,Google,Unknown,Unknown,?,Closed ($0.75/$3.75 intro to Dec 31 2026; then $1.50/$7.50),-,58.7%,-,-,-,-,-,-,-,-,-,$0.75,$3.75,1M,₹71.34,₹356.70,foundation,2026-09-16,vendor,medium,,false
+203,Muse Spark 1.1,Meta,Unknown,Unknown,?,Closed,-,61.5%,-,-,-,-,-,-,-,-,-,$1.25,$4.25,1M,₹118.90,₹404.26,foundation,2026-09-16,vendor,medium,,false
+204,GPT-5.6 Luna Pro,OpenAI,Unknown,Unknown,?,Closed (TB2.1 84.7% vendor),-,-,-,84.7%,-,-,-,-,-,-,-,$0.20,$1.20,1.1M,₹19.02,₹114.14,foundation,2026-09-16,vendor,medium,,false
+205,Gemini 3.5 Flash-Lite,Google,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$0.30,$2.50,1M,₹28.54,₹237.80,foundation,2026-09-16,vendor,low,,false
+206,KAT-Coder-Air V2.5,Kuaishou,Unknown,Unknown,?,Unknown,-,-,-,-,-,-,-,-,-,-,-,Unknown,Unknown,256K,Unknown,Unknown,foundation,2026-09-16,vendor,low,,false
+207,Laguna S 2.1,Poolside,118B,8B,59,Open weight (OpenMDW-1.1; 262K; free OpenRouter),-,59.4%,-,70.2%,-,-,-,-,-,-,40.4%,$0.10,$0.20,262K,₹9.51,₹19.02,foundation,2026-09-16,vendor,medium,,false
+208,Leanstral 1.5,Mistral AI,119B,6.5B,60,Apache 2.0,-,-,-,-,-,-,-,-,-,-,-,$0.00,$0.00,256K,₹0.00,₹0.00,foundation,2026-09-16,vendor,low,,false
+209,DeepSWE-Preview,Together AI / Agentica,32B,32B dense,16,Apache 2.0,42.2%,59%,-,-,-,-,-,-,-,-,-,-,-,128K,-,-,foundation,2026-09-16,vendor,medium,,false
+210,SWE-Swiss-32B,Open Source Community,32B,32B dense,16,Apache 2.0 / MIT,60.2%,-,-,-,-,-,-,-,-,-,-,-,-,128K,-,-,foundation,2026-09-16,vendor,medium,,false
+211,Claude Opus 5 🆕🆕,Anthropic,Closed,Closed,?,Closed,96.0%,79.2%,-,-,-,-,-,64.7%,-,-,90.4%,$5.00,$25.00,1M,₹475.60,₹2378.00,foundation,2026-09-16,vendor,medium,,false
+212,Ling 3.0 Flash 🆕,inclusionAI,124B,~5.1B,~62,API-only (open weights coming),-,56.63%,-,-,-,-,-,-,-,-,-,Free (through Aug 3),Free,262K,Free (through Aug 3),Free,foundation,2026-09-16,vendor,medium,,false
+213,Aion-3.0-Mini,AionLabs,Unknown,Unknown,?,Closed (API),-,-,-,-,-,-,-,-,-,-,-,$0.70,$1.40,131K,₹66.58,₹133.17,foundation,2026-09-16,vendor,low,,false
+214,K-EXAONE 2.0 🆕,LG AI Research,750B,37B,375,Apache 2.0,80.6%,-,-,64.0%,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,medium,,false
+215,openPangu-2.0-Pro 🆕,Huawei,505B,18B,253,OpenPangu License 2.0,68.5%,-,85.7%,-,-,-,-,-,-,-,-,$0.00,$0.00,512K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+216,Instella-MoE-16B-A3B-Think 🆕,AMD,16B,2.8B,8,ResearchRAIL,-,-,-,-,-,-,-,-,-,-,-,$0.00,$0.00,-,₹0.00,₹0.00,foundation,2026-09-16,vendor,low,,false
+217,A.X K2 🆕,SK Telecom,688B,33B,344,Apache 2.0,-,-,84.0%,-,-,-,85.6%,27.8%,-,97.1%,-,-,-,256K,-,-,foundation,2026-09-16,vendor,medium,,false
+218,Qwen3.8-27B,Alibaba,27B,27B dense,14,Apache 2.0,-,-,90.3%,73.0%,-,-,89.2%,30.8%,-,-,-,$0.45,$3.20,262K,₹42.80,₹304.38,foundation,2026-09-16,vendor,medium,,false
+219,DeepSeek V4 Pro 0813,DeepSeek,1.6T,49B,800,Open weight (legacy; superseded by V4.1 Flash GA Sep 10; routed to V4.1 Flash Sep 14),-,-,-,87.9%,-,-,-,-,-,-,-,$0.66,$1.98,1M,₹62.78,₹188.34,foundation,2026-09-16,vendor,medium,,false
+220,Ling 3.0 Tiny,inclusionAI,7.9B,~1.3B,4,MIT,-,-,-,-,-,-,-,-,-,-,-,$0.06,$0.18,262K,₹5.71,₹17.12,foundation,2026-09-16,vendor,low,,false
+221,GLM-5.3,Z.AI,743B,40B,372,Custom (open weights released Aug 27; 141 shards ~756GB; >$10B review gate unconfirmed; API $1.40/$4.40),-,-,-,88.2%,-,-,-,62.5% (HLE tools vendor),-,-,-,$1.40,$4.40,1M,₹133.17,₹418.53,foundation,2026-09-16,vendor,medium,,false
+222,Gemini 3.7 Flash,Google,Unknown,Unknown,?,Closed ($0.75/$3.75 intro to Dec 31 2026; then $1.50/$7.50),-,-,-,-,-,-,-,-,-,-,-,$0.75,$3.75,1M,₹71.34,₹356.70,foundation,2026-09-16,vendor,low,,false
+223,Muse Spark 1.2,Meta,Unknown,Unknown,?,Closed,-,-,-,80%,-,-,-,-,-,-,-,$1.25,$4.25,1M,₹118.90,₹404.26,foundation,2026-09-16,vendor,medium,,false
+224,Muse Glimmer 30B,Meta,30B,30B dense,15,Apache 2.0 (open weights; 131K ctx; AA 35 independent),-,-,-,-,-,-,-,-,-,-,-,-,-,131K,-,-,foundation,2026-09-16,vendor,low,,false
+225,Seed 2.1 Turbo,ByteDance,Unknown,Unknown,?,Closed,-,-,-,-,-,-,-,-,-,-,-,$0.43,$2.07,-,₹40.90,₹196.90,foundation,2026-09-16,vendor,low,,false
+226,GLM-5.3-Flash,Z.AI,320B,18B,160,MIT (open weights on HF; ~306 GiB FP8 ckpt),-,-,-,84.3%,-,-,-,55.3%,-,-,-,$0.15,$0.50,1M,₹14.27,₹47.56,foundation,2026-09-16,vendor,medium,,false
+227,Granite 4.2 8B,IBM,8B,8B dense,4,Apache 2.0 (AA-evaluated Aug 26),-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+228,LFM2.5-2.6B,LiquidAI,2.6B,2.6B,2,Open weight (AA-evaluated Aug 19),-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+229,Qwen3.8-Flash-Next,Alibaba,180B,6B,111,Qwen Community 1.0 (open weights on HF),-,-,91.9%,-,-,-,-,-,-,-,-,TBD,TBD,1M,TBD,TBD,foundation,2026-09-16,vendor,medium,,false
+230,MAI-Code-1.1-Flash,Microsoft,138B,5B,?,Closed (API-only; GitHub Copilot; no public weights),72.6%,-,-,62.9%,-,-,-,-,-,-,-,$0.20,$1.20,256K,₹19.02,₹114.14,foundation,2026-09-16,vendor,medium,,false
+231,North-Micro-Vision-Instruct,Cohere Labs,2.4B,2.4B dense,5,Apache 2.0 (open weights on HF),-,-,-,-,-,-,-,-,-,-,-,-,-,128K,-,-,-,2026-09-16,vendor,low,,false
+232,Ornith-1.5-397B,DeepReinforce/Ornith,403B,?,244,MIT (open weights on HF),86.0%,65.1%,-,86.1%,-,-,92.8%,44.6%,-,-,-,Self-host,Self-host,1M,Self-host,Self-host,foundation,2026-09-16,vendor,medium,,false
+233,Ornith-1.5-35B-A3B,DeepReinforce/Ornith,36B,3B,22,MIT (open weights on HF),79.0%,59.6%,-,67.8%,-,-,89.2%,25.6%,-,-,-,Self-host,Self-host,1M,Self-host,Self-host,foundation,2026-09-16,vendor,medium,,false
+234,Ornith-1.5-9B,DeepReinforce/Ornith,10B,10B dense,6,MIT (open weights on HF),70.6%,47.5%,-,46.2%,-,-,86.4%,20.2%,-,-,-,Self-host,Self-host,1M,Self-host,Self-host,foundation,2026-09-16,vendor,medium,,false
+235,Apodex 1.1-mini,Apodex AI,35B,3B,17,Apache 2.0 (open weights on HF),77.7%,-,-,70.8%,-,-,-,47.7%,-,-,-,$0.00,$0.00,262K,₹0.00,₹0.00,foundation,2026-09-16,vendor,medium,,false
+236,Qwen3.8-Flash,Alibaba,125B,6B,111,Proprietary (Available; API-only; twin of Flash-Next),-,62.5%,91.9%,-,-,-,-,-,-,-,-,$0.15,$0.47,1M,₹14.27,₹44.71,foundation,2026-09-16,vendor,medium,,false
+237,Cohere Parse 5,Cohere,2.3B,2.3B dense,2.3,Proprietary (Available; $1.50/1k pages doc-VLM),-,-,-,-,-,-,-,-,-,-,-,$1.50/1k pages,$1.50/1k pages,8K,₹142.68/1k pages,₹142.68/1k pages,foundation,2026-09-16,vendor,low,,false
+238,Ling-3.0-flash-Fin,inclusionAI (Ant Group),124B,5.1B,62,MIT (Available; weights posted Sep 4 HF inclusionAI/Ling-3.0-flash-Fin; DeepInfra $0.06/$0.18),-,-,-,-,-,-,-,-,-,-,-,$0.06,$0.18,262K,₹5.71,₹17.12,foundation,2026-09-16,vendor,low,,false
+239,Thomson,Thomson Reuters,Undisc.,Undisc.,?,Proprietary (Preview; gated CoCounsel; academic open variant),-,-,-,-,-,-,-,-,-,-,-,Gated,Gated,-,Gated,Gated,foundation,2026-09-16,vendor,low,,false
+240,Hy-MT2-30B-A3B,Tencent Hunyuan,30B,3B,15,Open weight (Available; translation specialist),-,-,-,-,-,-,-,-,-,-,-,Open weights,Open weights,8K,Open weights,Open weights,foundation,2026-09-16,vendor,low,,false
+241,Dots3-Note Preview,Dots Studio (Xiaohongshu),280B,16B,140,Apache 2.0 (Preview; free OpenRouter),-,-,-,-,-,-,-,-,-,-,-,Free,Free,512K,Free,Free,foundation,2026-09-16,vendor,low,,false
+242,LFM2.5-VL-3B,Liquid AI,3.1B,3.1B dense,2,Open weight (Available; edge VLM),-,-,-,-,-,-,-,-,-,-,-,Open weights,Open weights,-,Open weights,Open weights,foundation,2026-09-16,vendor,low,,false
+243,Nemotron 3.5 Lightning,NVIDIA,31.6B,3.6B,16,OpenMDW-1.1 (Available; 1M; hybrid Mamba-2+MoE+Attn),51.56%,-,-,-,-,-,75.44%,-,-,-,-,NIM,NIM,1M,NIM,NIM,foundation,2026-09-16,vendor,medium,,false
+244,Namazu,Sakana AI,Undisc.,Undisc.,?,Proprietary (Available; Kimi K2.6 finetune; not in EU/UK/CH),-,-,-,-,-,-,-,-,-,-,-,$0.95,$4.00,262K,₹90.36,₹380.48,foundation,2026-09-16,vendor,low,,false
+245,Solar Pro 4,Upstage,Undisc.,Undisc.,?,Proprietary (Available; promo $0.03/$0.12),-,-,-,-,-,-,-,-,-,-,-,$0.30,$1.20,524K,₹28.54,₹114.14,foundation,2026-09-16,vendor,low,,false
+246,GPT-5.6-Cyber,OpenAI,Undisc.,Undisc.,?,Proprietary (Preview; Daybreak Red gated),-,-,-,-,-,-,-,-,-,-,-,Gated,Gated,-,Gated,Gated,foundation,2026-09-16,vendor,low,,false
+247,Claude Fable 5.1,Anthropic,Undisc.,Undisc.,?,Proprietary (Available; cache $0.25/M; 75% cut),-,-,-,-,-,-,-,65.0% (with tools; 60.9% no-tools),-,-,-,$10.00,$50.00,1M,₹951.20,₹4756.00,foundation,2026-09-16,vendor,medium,,false
+248,Claude Mythos 5.1,Anthropic,Undisc.,Undisc.,?,Proprietary (Preview-gated; same weights as Fable 5.1; CVP/LSVP),-,-,-,-,-,-,-,65.0%,-,-,-,$10.00,$50.00,1M,₹951.20,₹4756.00,foundation,2026-09-16,vendor,medium,,false
+249,Qwen3.8-Max-0902,Alibaba,2.4T,95B,1200,Proprietary (Available; Sep 2 refresh; 1M; $2/$6),-,-,-,-,-,-,-,-,-,-,69.3%,$2.00,$6.00,1M,₹190.24,₹570.72,foundation,2026-09-16,vendor,medium,,false
+250,DeepSeek V4 Flash Vision Exp,DeepSeek,284B,13B,155,MIT (Available; Vision; 1.05M; off-peak $0.22/$0.66),-,-,-,83.9%,-,-,-,-,-,-,59.3%,$0.22,$0.66,1.05M,₹20.93,₹62.78,foundation,2026-09-16,vendor,medium,,false
+251,Gemini 3.8 Flash,Google,Undisc.,Undisc.,?,Proprietary (Available; Sep 2; 1M; $0.75/$3.75 intro),-,-,-,-,-,-,-,-,-,-,-,$0.75,$3.75,1M,₹71.34,₹356.70,foundation,2026-09-16,vendor,low,,false
+252,Muse Spark 1.3,Meta,Undisc.,Undisc.,?,Proprietary (Available Sep 2; 1M; $1.25/$4.25; AA 48 v4.3 re-score Sep 8; launch 61/62 superseded),-,-,-,-,-,-,-,-,-,-,-,$1.25,$4.25,1M,₹118.90,₹404.26,foundation,2026-09-16,vendor,low,,false
+253,Mercury 2.5,Inception,Undisc.,Undisc.,?,Proprietary (GA Sep 8; 260K; $0.20/$0.75; diffusion LM; AA-evaluated Sep 8),-,-,-,-,-,-,-,-,-,-,-,$0.20,$0.75,260K,₹19.02,₹71.34,foundation,2026-09-16,vendor,low,,false
+254,GPT-6 Astra,OpenAI,Undisc.,Undisc.,?,Proprietary (Available Sep 3; 1M; $10/$50; cache $1.00; TB4.0 57.7%; OSWorld 72.6%; GPQA 96.0%; DeepSWE v1.1 74.1%; AA ~53 v4.3; first Critical cyber threshold),-,-,-,-,-,-,96.0%,57.2% (HLE tools vendor),-,-,-,$10.00,$50.00,1M,₹951.20,₹4756.00,foundation,2026-09-16,vendor,medium,,false
+255,GPT-6 Astra Pro,OpenAI,Undisc.,Undisc.,?,Proprietary (Available Sep 4; 1.05M; $10/$50; cache $1.00; reasoning.mode pro),-,-,-,-,-,-,-,-,-,-,-,$10.00,$50.00,1.05M,₹951.20,₹4756.00,foundation,2026-09-16,vendor,low,,false
+256,DeepSeek V4.1 Flash,DeepSeek,552B,8B/16B,280,MIT (open weights Sep 10 HF; Causal Encoder-Decoder 40L; 384 experts; 8B prefill/16B decode; 890 bytes/tok KV; Engram 196B; 48 shards ~510GB FP8; KV-cache compression; vision; routes legacy V4 Flash/Pro; cache-hit $0.003 off-peak/$0.006 peak; peak $0.30/$1.20 off-peak $0.15/$0.60),-,-,-,90.6% (TB2.1 vendor),-,-,90.9% (GPQA-D vendor),63.9% (tools vendor),-,-,74.2% (DeepSWE v1.1 vendor),$0.30,$1.20,1M,₹28.54,₹114.14,foundation,2026-09-16,vendor,medium,,false
+257,MiniCPM5-2B,OpenBMB,2.5B,2.5B dense,2,Apache 2.0 (Available Sep 7; 131K; avg 53.9 over 34 benchmarks vendor),-,-,-,-,-,-,-,-,-,-,-,-,-,131K,-,-,foundation,2026-09-16,vendor,low,,false
+258,K2 Horizon 375B-A23B,IFM (MBZUAI),375B,23B,200,Apache 2.0 (Available Sep 3; 6-model 0.9B-375B family; weights+data+code+checkpoints; AA-evaluated Sep 3),-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+259,Quasar 438B,Multiverse Computing,438B,Undisc.,?,TBD (Listed Sep 2 BenchLM/ThursdAI; sparse details; announced-but-unconfirmed),-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+260,Ling-3.0-flash-Sante,inclusionAI (Ant Group),124B,5.1B,62,Open weights announced-but-unconfirmed for Sante variant (base family MIT; API-first; free thru Oct 4 Vercel),-,-,-,-,-,-,-,-,-,-,-,-,-,262K,-,-,foundation,2026-09-16,vendor,low,,false
+261,Ling-3.0-flash-VL,inclusionAI (Ant Group),124B,5.1B,62,Open weights announced-but-unconfirmed (AA-evaluated Sep 10; vision variant of Ling-3.0-flash),-,-,-,-,-,-,-,-,-,-,-,-,-,262K,-,-,foundation,2026-09-16,vendor,low,,false
+262,Gemini 3.8 Flash Cyber,Google,Undisc.,Undisc.,?,Proprietary (Available Sep 2; Fairwind-gated vuln detection/patching; same base as 3.8 Flash),-,-,-,-,-,-,-,-,-,-,-,$0.75,$3.75,1M,₹71.34,₹356.70,foundation,2026-09-16,vendor,low,,false
+263,Tencent Hy4 preview,Tencent Hunyuan,770B,49B,385,Apache 2.0 (Available; preview Aug 28; 1M+ ctx; TB2.1 85.4 / DeepSWE 64.3 vendor),-,-,-,85.4% (TB2.1 vendor),-,-,-,-,-,-,64.3% (DeepSWE vendor),$0.834,$2.501,1M+,₹79.33,₹237.90,foundation,2026-09-16,vendor,medium,,false
+264,Qwen3.8-Max,Alibaba,2.4T,95B,1200,Qwen License (custom; open weights Aug 13; attribution >100M MAU; MaaS >$50M/yr separate; TB2.1 86.6 / DeepSWE 56.6 vendor),-,67.7% (SWE-Pro vendor),-,86.6% (TB2.1 vendor),-,-,-,-,-,-,56.6% (DeepSWE vendor),$2.00,$6.00,1M,₹190.24,₹570.72,foundation,2026-09-16,vendor,medium,,false
+265,SWE-2,Cognition,Undisc.,Undisc.,?,Proprietary (Devin only; FrontierCode 50.0%; DeepSWE 73.0%; TB2.1 92.8%; TB4 27.3%),-,-,-,92.8% (TB2.1 vendor),-,-,-,-,-,-,-,$20.00,$100.00,1M,₹1902.40,₹9512.00,foundation,2026-09-16,vendor,medium,,false
+266,Fugu Max,Sakana AI,Undisc.,Orchestration,?,Proprietary (Sakana AI; orchestration system; not EU/EEA),-,-,-,-,-,-,-,-,-,-,-,$2.00,$6.00,1M,₹190.24,₹570.72,orchestrator,2026-09-16,vendor,low,,true
+267,Fugu Ultra v2.0,Sakana AI,Undisc.,Orchestration,?,Proprietary (Sakana AI; v2.0; orchestration system; not EU/EEA),-,-,-,-,-,-,-,-,-,-,-,$5.00,$30.00,1M,₹475.60,₹2853.60,orchestrator,2026-09-16,vendor,low,,true
+268,Salesforce Koa,Salesforce,Unknown,Unknown,?,"Proprietary (Enterprise pilot 15 Sep 2026; Salesforce-hosted only, not public API; post-trained NVIDIA Nemotron 3 Super base with proprietary synthetic CRM workflows, no customer data; pilot customers; GA winter 2026 US regions; specialized agentic CRM reasoning; vendor claims 3x fewer errors on internal CRM Bench vs general models; weights controlled by Salesforce)",-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,foundation,2026-09-16,vendor,low,,false
+269,Union Alpha,Stealth (OpenRouter / OpenCode Zen),Unknown,Unknown,?,Proprietary (Stealth preview Sep 16 2026; stealth/union-alpha on OpenRouter and union-alpha on OpenCode Zen; free for ~1 week; 262K ctx; 131K max output; text+image in; tool calling; no weights/HF; anonymous provider; zero-retention claim disputed; expiration placeholder 2098-12-31; community DeepSWE ~73% unverified),-,-,-,-,-,-,-,-,-,-,-,Free (preview),Free (preview),262K,Free (preview),Free (preview),orchestrator,2026-09-16,vendor,low,,true
+270,ZGCM-1,Zhongguancun Academy,7.39B,7.39B dense,~4,"Apache 2.0 (fully open Sep 16 2026; paper arXiv Sep 11; weights + staged checkpoints + 5.44B-row dataset + recipes + W&B logs; hybrid gated SWA 27/32 + 5 global @ layers 6,12,18,24,30; Muon + FP8 + TWEO; mid-training 16K->64K->256K MDP; SFT 4.92M ex 10ep + GRPO RL)",-,-,-,-,-,-,-,-,-,75.0%,-,Free (self-host),Free (self-host),256K,Free (self-host),Free (self-host),foundation,2026-09-16,vendor,medium,,false
 # See CHANGELOG.md for update history
