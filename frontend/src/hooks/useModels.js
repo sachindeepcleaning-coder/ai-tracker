@@ -56,6 +56,8 @@ function licLabel(lic) {
   return label.length > 28 ? label.slice(0, 26) + '…' : label
 }
 export const licenseGroups = [...new Set(allModels.map((m) => licLabel(m.license)))].sort()
+export const modelTypeGroups = [...new Set(allModels.map((m) => m.model_type || 'foundation'))].sort()
+export const confidenceGroups = ['high','medium','low']
 
 /** Every benchmark column tracked in the catalog — coding first, then reasoning/math.
     Drives the Leaderboards tab (one board per benchmark). */
@@ -145,7 +147,7 @@ export function compare(a, b, sort) {
  * summary stats, the filter/sort pipeline, leaderboards, and the
  * Hardware Fit matrix rows.
  */
-export function useModels({ q, provider, license, openOnly, maxQ4, sort, releaseWindow }) {
+export function useModels({ q, provider, license, openOnly, maxQ4, sort, releaseWindow, modelType = 'all', confidence = 'all', hideSparse = false, freeOnly = false }) {
   const stats = useMemo(() => {
     const open = allModels.filter((m) => isOpenWeight(m.license)).length
     const withSWE = allModels.filter((m) => parsePct(m.swe_bench_verified) != null).length
@@ -179,13 +181,16 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
         const days = parseInt(releaseWindow, 10)
         const cutoff = new Date(DATA_AS_OF + 'T00:00:00Z')
         cutoff.setUTCDate(cutoff.getUTCDate() - days)
-        // isValidRelease first: future/invalid dates must never count as "recent".
         out = out.filter((m) => isValidRelease(m.released) && new Date(m.released + 'T00:00:00Z') >= cutoff)
       }
     }
+    if (modelType && modelType !== 'all') out = out.filter((m) => (m.model_type || 'foundation') === modelType)
+    if (confidence && confidence !== 'all') out = out.filter((m) => (m.confidence || 'low') === confidence)
+    if (hideSparse) out = out.filter((m) => parsePct(m.swe_bench_verified) != null || parsePct(m.terminal_bench) != null)
+    if (freeOnly) out = out.filter((m) => m.is_free)
     out.sort((a, b) => compare(a, b, sort))
     return out
-  }, [q, provider, license, openOnly, maxQ4, sort, releaseWindow])
+  }, [q, provider, license, openOnly, maxQ4, sort, releaseWindow, modelType, confidence, hideSparse, freeOnly])
 
   // Newest catalog entries (for the "New frontier releases" pointer card) —
   // valid releases only, so a future/invalid date can never surface here.

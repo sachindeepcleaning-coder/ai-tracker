@@ -27,7 +27,7 @@ function TabFallback() {
   )
 }
 
-const DEFAULT_FILTERS = { q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: 'all' }
+const DEFAULT_FILTERS = { q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: 'all', modelType: 'all', confidence: 'all', hideSparse: false, freeOnly: false }
 
 /** Shareable views: filters + tab hydrate from the URL query string, then stay
     in sync via replaceState so any filtered view can be pasted as a link. */
@@ -42,6 +42,10 @@ function filtersFromUrl() {
       maxQ4: p.get('q4') || DEFAULT_FILTERS.maxQ4,
       sort: p.get('sort') || DEFAULT_FILTERS.sort,
       releaseWindow: p.get('rel') || DEFAULT_FILTERS.releaseWindow,
+      modelType: p.get('type') || DEFAULT_FILTERS.modelType,
+      confidence: p.get('conf') || DEFAULT_FILTERS.confidence,
+      hideSparse: p.get('hideSparse') === '1',
+      freeOnly: p.get('free') === '1',
     }
   } catch {
     return { ...DEFAULT_FILTERS }
@@ -70,6 +74,10 @@ export default function App() {
     if (filters.maxQ4 !== 'all') p.set('q4', filters.maxQ4)
     if (filters.sort !== 'latest') p.set('sort', filters.sort)
     if (filters.releaseWindow !== 'all') p.set('rel', filters.releaseWindow)
+    if (filters.modelType && filters.modelType !== 'all') p.set('type', filters.modelType)
+    if (filters.confidence && filters.confidence !== 'all') p.set('conf', filters.confidence)
+    if (filters.hideSparse) p.set('hideSparse', '1')
+    if (filters.freeOnly) p.set('free', '1')
     const qs = p.toString()
     window.history.replaceState(null, '', `${window.location.pathname}${qs ? `?${qs}` : ''}${window.location.hash}`)
   }, [tab, filters])

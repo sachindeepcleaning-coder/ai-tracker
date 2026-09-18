@@ -3,7 +3,7 @@ import { useState, useRef } from 'react'
 import { Search, Filter, ChevronDown, Check, X, ArrowUpRight, Download } from 'lucide-react'
 import { parsePct, parseQ4, paramsLabel, fmtDate, fmtDateFull, daysOld, DATA_AS_OF } from '../lib/parse'
 import { licenseBadge } from '../lib/license'
-import { SORT_OPTIONS, RELEASE_WINDOWS } from '../hooks/useModels'
+import { SORT_OPTIONS, RELEASE_WINDOWS, modelTypeGroups, confidenceGroups } from '../hooks/useModels'
 import { DataQualityBadge } from './DataQualityBadge'
 import { useVirtualizer } from '@tanstack/react-virtual'
 
@@ -63,17 +63,17 @@ export default function Explorer({
   onDetail,
   onViewCompare,
 }) {
-  const { q, provider, license, openOnly, maxQ4, sort, releaseWindow } = filters
+  const { q, provider, license, openOnly, maxQ4, sort, releaseWindow, modelType, confidence, hideSparse, freeOnly } = filters
   const set = (patch) => setFilters((f) => ({ ...f, ...patch }))
 
-  const clearAll = () => setFilters({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: 'all' })
+  const clearAll = () => setFilters({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: 'all', modelType: 'all', confidence: 'all', hideSparse: false, freeOnly: false })
 
   // Incremental rendering: 48 cards initially, "Load more" in 48-card pages.
   // Keeps the desktop "show all" feel (few clicks to reach 267) while first paint
   // stays light on mobile/low-end devices. Resets whenever filters change
   // (adjust-state-during-render pattern — no effect, no cascading render).
   const PAGE = 48
-  const filterKey = [q, provider, license, openOnly, maxQ4, sort, releaseWindow].join('|')
+  const filterKey = [q, provider, license, openOnly, maxQ4, sort, releaseWindow, modelType, confidence, hideSparse, freeOnly].join('|')
   const [state, setState] = useState({ key: filterKey, visible: PAGE })
   if (state.key !== filterKey) {
     setState({ key: filterKey, visible: PAGE })
@@ -168,6 +168,22 @@ export default function Explorer({
                   <option value="192">Fits ≤192GB (2× Pro)</option>
                   <option value="512">Fits ≤512GB (4× Spark)</option>
                 </Select>
+                <Select label="Model type" value={modelType} onChange={(e) => set({ modelType: e.target.value })}>
+                  <option value="all">All types</option>
+                  {modelTypeGroups.map((t) => <option key={t} value={t}>{t}</option>)}
+                </Select>
+                <Select label="Confidence" value={confidence} onChange={(e) => set({ confidence: e.target.value })}>
+                  <option value="all">All confidence</option>
+                  {confidenceGroups.map((c) => <option key={c} value={c}>{c}</option>)}
+                </Select>
+                <label className="flex items-center gap-2 text-sm bg-white/5 rounded-xl px-3 py-2 border border-white/10 cursor-pointer">
+                  <input type="checkbox" checked={hideSparse} onChange={(e) => set({ hideSparse: e.target.checked })} className="accent-amber-500" />
+                  Hide sparse
+                </label>
+                <label className="flex items-center gap-2 text-sm bg-white/5 rounded-xl px-3 py-2 border border-white/10 cursor-pointer">
+                  <input type="checkbox" checked={freeOnly} onChange={(e) => set({ freeOnly: e.target.checked })} className="accent-emerald-500" />
+                  Free only
+                </label>
                 <div className="text-xs text-white/50 flex items-center gap-2">
                   <Check size={12} className="text-emerald-400" aria-hidden="true" />
                   <span aria-live="polite">{filtered.length} / {models.length} shown</span>
