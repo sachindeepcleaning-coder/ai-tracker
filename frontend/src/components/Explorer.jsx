@@ -279,7 +279,7 @@ export default function Explorer({
                         {[{ label: 'SWE-V', v: swe }, { label: 'TB 2.1', v: tb }, { label: 'LCB V6', v: lcb }].map((b) => (
                           <div key={b.label} className="bg-white/[0.04] rounded-xl p-2 border border-white/5">
                             <div className="text-[11px] tracking-widest font-bold text-white/40">{b.label}</div>
-                            <div className="text-sm font-extrabold">{b.v != null ? b.v.toFixed(1) + '%' : '—'}</div>
+                            <div className="text-sm font-extrabold" title={b.v != null ? `${b.v.toFixed(1)}%` : 'No data — awaiting vendor/AA verification'}>{b.v != null ? b.v.toFixed(1) + '%' : '—'}</div>
                             <div className="h-1 bg-white/10 rounded-full mt-1 overflow-hidden" role="img" aria-label={`${b.label} ${b.v != null ? b.v.toFixed(1) + '%' : 'no data'}`}><div className="h-full bg-emerald-500" style={{ width: b.v != null ? `${b.v}%` : '0%' }} /></div>
                           </div>
                         ))}
@@ -354,9 +354,9 @@ export default function Explorer({
                       { label: 'TB 2.1', v: tb },
                       { label: 'LCB V6', v: lcb },
                     ].map((b) => (
-                      <div key={b.label} className="bg-white/[0.04] rounded-xl p-2 border border-white/5">
+                       <div key={b.label} className="bg-white/[0.04] rounded-xl p-2 border border-white/5">
                         <div className="text-[11px] tracking-widest font-bold text-white/40">{b.label}</div>
-                        <div className="text-sm font-extrabold">{b.v != null ? b.v.toFixed(1) + '%' : '—'}</div>
+                        <div className="text-sm font-extrabold" title={b.v != null ? `${b.v.toFixed(1)}%` : 'No data — awaiting vendor/AA verification'}>{b.v != null ? b.v.toFixed(1) + '%' : '—'}</div>
                         <div className="h-1 bg-white/10 rounded-full mt-1 overflow-hidden" role="img" aria-label={`${b.label} ${b.v != null ? b.v.toFixed(1) + '%' : 'no data'}`}>
                           <div className="h-full bg-emerald-500" style={{ width: b.v != null ? `${b.v}%` : '0%' }} />
                         </div>

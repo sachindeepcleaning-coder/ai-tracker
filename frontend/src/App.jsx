@@ -82,6 +82,7 @@ export default function App() {
     window.history.replaceState(null, '', `${window.location.pathname}${qs ? `?${qs}` : ''}${window.location.hash}`)
   }, [tab, filters])
 
+  useEffect(() => { document.title = `Local AI Coding Models — India Tracker (${stats.total} models)` }, [stats.total])
   const toggleCompare = (id) => setCompare((c) => c.includes(id) ? c.filter((x) => x !== id) : c.length >= 6 ? c : [...c, id])
   const compareModels = allModels.filter((m) => compare.includes(m.id))
 
