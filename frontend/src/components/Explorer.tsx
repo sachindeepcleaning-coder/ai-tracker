@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Search, Filter, ChevronDown, Check, X, ArrowUpRight, Download } from 'lucide-react'
 import { parsePct, parseQ4, paramsLabel, fmtDate, fmtDateFull, daysOld, DATA_AS_OF } from '../lib/parse'
 import { licenseBadge } from '../lib/license'
@@ -82,13 +82,20 @@ export default function Explorer({
   const shown = filtered.slice(0, visible)
   const hidden = filtered.length - shown.length
 
-  const parentRef = useRef(null)
+  const parentRef = useRef<HTMLDivElement>(null)
+  const filterRef = useRef<HTMLDivElement>(null)
   const rowVirtualizer = useVirtualizer({
     count: shown.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 340,
     overscan: 5,
   })
+  useEffect(() => {
+    if (showFilters && filterRef.current) {
+      const first = filterRef.current.querySelector<HTMLElement>('input, select, button')
+      first?.focus()
+    }
+  }, [showFilters])
 
   return (
     <div className="space-y-4">
@@ -140,8 +147,12 @@ export default function Explorer({
             {/* Mobile: bottom sheet with backdrop. Desktop (lg+): inline panel, unchanged. */}
             <div className="fixed inset-0 z-30 bg-black/60 lg:hidden" onClick={() => setShowFilters(false)} aria-hidden="true" />
             <div
+              ref={filterRef}
               role="dialog"
               aria-label="Advanced filters"
+              aria-modal="true"
+              tabIndex={-1}
+              onKeyDown={(e) => { if (e.key === 'Escape') setShowFilters(false) }}
               className="fixed inset-x-0 bottom-0 z-40 max-h-[85vh] overflow-y-auto rounded-t-2xl bg-[var(--bg-card)] border-t border-white/10 p-4 pb-6 shadow-2xl
                          lg:static lg:z-auto lg:max-h-none lg:overflow-visible lg:rounded-none lg:bg-transparent lg:border-0 lg:shadow-none lg:p-0 lg:mt-3 lg:pt-3 lg:border-t lg:border-white/5"
             >
@@ -236,7 +247,7 @@ export default function Explorer({
         </div>
       ) : shown.length > 24 ? (
         <>
-          <div ref={parentRef} className="overflow-auto rounded-xl" style={{ height: '70vh', contain: 'strict' }}>
+          <div ref={parentRef} className="overflow-auto rounded-xl" style={{ height: '70vh', contain: 'strict' }} role="list" aria-label="Model list — virtualized">
             <div style={{ height: `${rowVirtualizer.getTotalSize()}px`, position: 'relative', width: '100%' }}>
               {rowVirtualizer.getVirtualItems().map((virtualRow) => {
                 const m = shown[virtualRow.index]
@@ -253,6 +264,7 @@ export default function Explorer({
                   <div
                     key={m.id}
                     data-index={virtualRow.index}
+                    role="listitem"
                     ref={rowVirtualizer.measureElement}
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', transform: `translateY(${virtualRow.start}px)` }}
                     className="p-1"
@@ -263,7 +275,7 @@ export default function Explorer({
                           <div className="flex items-center gap-2 flex-wrap">
                             <span className="text-[11px] font-mono bg-white/10 border border-white/10 rounded-md px-1.5 py-0.5">#{m.rank}</span>
                             <span className={`badge ${lic.cls}`}>{lic.label}</span>
-                            {m.is_orchestrator && <span className="badge bg-sky-500/15 text-sky-300 border-sky-500/30">Orchestrator</span>}
+                            {m.is_orchestrator && <span className="badge bg-sky-500/15 text-sky-300 border-sky-500/30" role="status" aria-label="Orchestrator model — routes to multiple models">Orchestrator</span>}
                             <DataQualityBadge confidence={m.confidence} />
                             {m.is_free && <span className="badge bg-emerald-500/15 text-emerald-400 border-emerald-500/30">Free</span>}
                             {m.released && (
@@ -312,7 +324,7 @@ export default function Explorer({
         </>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" role="list" aria-label="Model grid">
             {shown.map((m, idx) => {
               const swe = parsePct(m.swe_bench_verified)
               const tb = parsePct(m.terminal_bench)
@@ -323,13 +335,13 @@ export default function Explorer({
               const age = daysOld(m.released)
               const isNew = age <= 7
               return (
-                <article key={m.id} className={`card card-enter p-4 hover:border-white/15 transition group ${isSel ? 'ring-1 ring-emerald-500 border-emerald-500/30' : ''}`} style={{ animationDelay: `${Math.min(idx, 11) * 35}ms` }}>
+                <article key={m.id} role="listitem" className={`card card-enter p-4 hover:border-white/15 transition group ${isSel ? 'ring-1 ring-emerald-500 border-emerald-500/30' : ''}`} style={{ animationDelay: `${Math.min(idx, 11) * 35}ms` }}>
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-[11px] font-mono bg-white/10 border border-white/10 rounded-md px-1.5 py-0.5">#{m.rank}</span>
                         <span className={`badge ${lic.cls}`}>{lic.label}</span>
-                        {m.is_orchestrator && <span className="badge bg-sky-500/15 text-sky-300 border-sky-500/30">Orchestrator</span>}
+                        {m.is_orchestrator && <span className="badge bg-sky-500/15 text-sky-300 border-sky-500/30" role="status" aria-label="Orchestrator model — routes to multiple models">Orchestrator</span>}
                         <DataQualityBadge confidence={m.confidence} />
                         {m.is_free && <span className="badge bg-emerald-500/15 text-emerald-400 border-emerald-500/30">Free</span>}
                         {m.released && (

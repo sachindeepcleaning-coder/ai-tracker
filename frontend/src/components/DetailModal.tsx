@@ -62,7 +62,7 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-xs font-mono bg-white/10 border border-white/10 rounded-md px-1.5 py-0.5">#{detail.rank}</span>
               <span className={`badge ${licenseBadge(detail.license).cls}`}>{licenseBadge(detail.license).label}</span>
-              {detail.is_orchestrator && <span className="badge bg-sky-500/15 text-sky-300 border-sky-500/30">Orchestrator</span>}
+              {detail.is_orchestrator && <span className="badge bg-sky-500/15 text-sky-300 border-sky-500/30" role="status" aria-label="Orchestrator model">Orchestrator</span>}
               <DataQualityBadge confidence={detail.confidence} />
               <span className="text-xs text-white/50">{detail.provider}</span>
               {detail.model_type && <span className="badge bg-white/5 text-white/50 border-white/10">{detail.model_type}</span>}
