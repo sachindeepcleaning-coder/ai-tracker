@@ -33,7 +33,7 @@ describe('data.json integrity (regen gate)', () => {
     expect(orch.length).toBeGreaterThanOrEqual(3)
     for (const m of orch) expect(m.notes, `${m.model} orchestrator needs notes`).toBeTruthy()
     const withNotes = models.filter(m=>m.notes)
-    expect(withNotes.length).toBeGreaterThanOrEqual(15)
+    expect(withNotes.length).toBeGreaterThanOrEqual(80)
   })
 
   it('has no string prices or string is_free (regression: rank-265/266/267)', () => {
