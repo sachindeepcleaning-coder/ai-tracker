@@ -176,7 +176,7 @@ export default function Explorer({
                   <option value="all">All confidence</option>
                   {confidenceGroups.map((c) => <option key={c} value={c}>{c}</option>)}
                 </Select>
-                <label className="flex items-center gap-2 text-sm bg-white/5 rounded-xl px-3 py-2 border border-white/10 cursor-pointer">
+                <label className="flex items-center gap-2 text-sm bg-white/5 rounded-xl px-3 py-2 border border-white/10 cursor-pointer" title="Hide sparse = models without SWE-bench Verified and without Terminal-Bench 2.1">
                   <input type="checkbox" checked={hideSparse} onChange={(e) => set({ hideSparse: e.target.checked })} className="accent-amber-500" />
                   Hide sparse
                 </label>
@@ -193,6 +193,9 @@ export default function Explorer({
                   <button onClick={() => exportModels(filtered, 'json')} className="text-white/70 underline" type="button">JSON</button>
                   <button onClick={clearAll} className="text-white/70 underline" type="button">Clear all</button>
                 </div>
+              </div>
+              <div className="mt-3 text-[11px] text-white/40 leading-relaxed border-t border-white/5 pt-2">
+                <span className="font-bold text-white/60">Data quality:</span> <span className="badge bg-zinc-500/15 text-zinc-400 border-white/10 text-[10px]">LOW</span> no/sparse coding bench; <span className="badge bg-amber-500/15 text-amber-400 border-amber-500/30 text-[10px]">MEDIUM</span> 1 coding bench (SWE-V/LCB/TB); <span className="badge bg-emerald-500/15 text-emerald-400 border-emerald-500/30 text-[10px]">HIGH</span> ≥2 coding benches + recent (<span className="font-mono">2026-08-01</span>+) + independent source (AA/BenchLM/HF). <span className="text-white/50">Hide sparse</span> hides models without SWE-V and without TB 2.1.
               </div>
             </div>
           </>
@@ -271,7 +274,8 @@ export default function Explorer({
                             )}
                           </div>
                           <h3 className="font-bold leading-tight mt-2 line-clamp-2">{m.model}</h3>
-                          <p className="text-xs text-white/50">{m.provider} · {paramsLabel(m)} · {m.context_window}</p>
+                          <p className="text-xs text-white/50">{m.provider} · {paramsLabel(m)} · {m.context_window} · {m.source} · {m.last_verified ?? "—"}</p>
+                          {m.notes && <p className="text-[11px] text-amber-200/60 mt-1 line-clamp-2" title={m.notes}>Note: {m.notes}</p>}
                         </div>
                         <button onClick={() => toggleCompare(m.id)} aria-pressed={isSel} aria-label={isSel ? `Remove ${m.model} from compare` : `Add ${m.model} to compare`} className={`w-8 h-8 rounded-full grid place-items-center border text-xs shrink-0 ${isSel ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10'}`}>{isSel ? <Check size={14} aria-hidden="true" /> : <span aria-hidden="true">+</span>}</button>
                       </div>
@@ -336,7 +340,8 @@ export default function Explorer({
                         )}
                       </div>
                       <h3 className="font-bold leading-tight mt-2 line-clamp-2">{m.model}</h3>
-                      <p className="text-xs text-white/50">{m.provider} · {paramsLabel(m)} · {m.context_window}</p>
+                      <p className="text-xs text-white/50">{m.provider} · {paramsLabel(m)} · {m.context_window} · {m.source} · {m.last_verified ?? "—"}</p>
+                          {m.notes && <p className="text-[11px] text-amber-200/60 mt-1 line-clamp-2" title={m.notes}>Note: {m.notes}</p>}
                     </div>
                     <button
                       onClick={() => toggleCompare(m.id)}

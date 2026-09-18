@@ -26,6 +26,16 @@ describe('data.json integrity (regen gate)', () => {
     expect(data.data_version).toBe('2026-09-18')
   })
 
+  it('has at least 10 high-confidence models and notes for orchestrators', () => {
+    const high = models.filter(m=>m.confidence==='high')
+    expect(high.length).toBeGreaterThanOrEqual(10)
+    const orch = models.filter(m=>m.is_orchestrator)
+    expect(orch.length).toBeGreaterThanOrEqual(3)
+    for (const m of orch) expect(m.notes, `${m.model} orchestrator needs notes`).toBeTruthy()
+    const withNotes = models.filter(m=>m.notes)
+    expect(withNotes.length).toBeGreaterThanOrEqual(15)
+  })
+
   it('has no string prices or string is_free (regression: rank-265/266/267)', () => {
     for (const m of models) {
       for (const k of ['price_in_usd_per_mtok', 'price_out_usd_per_mtok', 'price_in_inr_per_mtok', 'price_out_inr_per_mtok']) {

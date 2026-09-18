@@ -151,11 +151,26 @@ const out = rows.slice(1)
   })
   // defaults for new fields
   if (row.model_type == null) row.model_type = 'foundation'
-  if (row.confidence == null) row.confidence = 'low'
   if (row.is_orchestrator == null) row.is_orchestrator = false
   if (row.source == null) row.source = 'vendor'
   if (row.last_verified == null) row.last_verified = null
   if (row.notes == null) row.notes = null
+  if (row.confidence == null) {
+    const codingBenches = [row.swe_bench_verified, row.terminal_bench, row.livecodebench_v6].filter(v=>v!=null).length
+    const recency = row.last_verified && row.last_verified >= '2026-08-01'
+    const independent = ['artificial-analysis','benchlm','huggingface','lmsys'].includes((row.source||'').toLowerCase())
+    if (row.is_orchestrator) {
+      row.confidence = codingBenches >=1 ? 'medium' : 'low'
+    } else if (codingBenches >=2 && recency && independent) {
+      row.confidence = 'high'
+    } else if (codingBenches >=3) {
+      row.confidence = 'high'
+    } else if (codingBenches >=1) {
+      row.confidence = 'medium'
+    } else {
+      row.confidence = 'low'
+    }
+  }
   // Merge hand-researched curation (survives regeneration).
   const prev = curated.get(row.id)
   if (prev) {
