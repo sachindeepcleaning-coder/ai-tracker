@@ -1046,10 +1046,12 @@ See `single_user_india_local_ai.md` §Post-Session Update Sep 1 2026 for full ta
 | Sep 15, 2026 | **Updated** | **Grok 4.7** | Delayed – missed ~Sep 12 target as of 15 Sep; additional RL needed for response-length / task-completion. Roadmap notes: Grok 4.8 (~2.5T, new C++ stack), 4.9 Astra/Fable-class, 5 AGI claim | xAI / Musk posts Sep 12-15 2026 |
 | Sep 15, 2026 | **Updated** | **DeepSeek V4.1 Flash pricing** | Peak pricing $0.30/$1.20; off-peak $0.15/$0.60; cache-hit $0.003/$0.006; INR updated; legacy V4 Flash/Pro routes to it | DeepSeek API docs Sep 10-15 2026 |
 | Sep 15, 2026 | **Updated** | **GPT-6 Astra / Astra Pro** | Enriched cards with DeepSWE v1.1 74.1% vendor; TB4.0 57.7%; OSWorld 72.6%; first Critical cyber threshold; pricing $10/$50 cache $1; 1.05M ctx | OpenAI Sep 3-4 2026 + vendor notes |
+| Sep 16, 2026 | **Added** | **Union Alpha** | Stealth preview Sep 16; stealth/union-alpha (OpenRouter) + union-alpha (OpenCode Zen); free ~1 week; 262K ctx 131K max output text+image in tool calling; anonymous provider; zero-retention disputed; no weights/HF; expiry placeholder 2098-12-31; community DeepSWE ~73% unverified | OpenRouter + OpenCode Sep 16 2026 |
+| Sep 16, 2026 | **Added** | **ZGCM-1** | Zhongguancun Academy 7.39B dense fully open; Apache 2.0; paper arXiv Sep 11 + release Sep 16; weights+checkpoints+5.44B-row dataset+recipes+W&B logs; hybrid gated SWA 27/32 +5 global; Muon+FP8+TWEO ~585 TFLOP/s/GPU; mid-training 16K→64K→256K MDP; SFT 4.92M 10ep + GRPO RL; 256K ctx ~4GB Q4; AIME 2026 75.0% vendor | arXiv Sep 11 + paperscode Sep 16 2026 |
 
 *Sep 2 is first commit with llm-releases.com-synced taxonomy. Next sync: Sep 5–7.*
 
 ---
 
 *All figures are planning estimates. Not vendor quotes. Verify before committing to infrastructure spend.*
-*Generated: Aug 29, 2026 | Synced: Sep 2, 2026 | **Updated: Sep 15, 2026 (Salesforce Koa added; Grok 4.7 delayed; DeepSeek V4.1 Flash pricing finalized; GPT-6 Astra enriched)**. Next recommended update: Sep 20-22 2026.*
+*Generated: Aug 29, 2026 | Synced: Sep 2, 2026 | **Updated: Sep 16, 2026 (Union Alpha stealth + ZGCM-1 fully open added; Salesforce Koa added; Grok 4.7 delayed)**. Next recommended update: Sep 20-22 2026.*

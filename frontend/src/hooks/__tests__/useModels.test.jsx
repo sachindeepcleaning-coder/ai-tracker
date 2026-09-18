@@ -14,7 +14,7 @@ import * as React from 'react'
 
 describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
   it('exports expected catalog singletons', () => {
-    expect(allModels.length).toBe(268)
+    expect(allModels.length).toBe(270)
     expect(providers.length).toBeGreaterThan(5)
     expect(licenseGroups.length).toBeGreaterThan(3)
     expect(BENCHMARKS.length).toBe(11)
@@ -25,7 +25,7 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
     expect(stats).toHaveProperty('withQ4')
     expect(stats).not.toHaveProperty('avgQ4')
     expect(stats).toHaveProperty('dated')
-    expect(stats.total).toBe(268)
+    expect(stats.total).toBe(270)
     expect(stats.withQ4).toBe(allModels.filter(m => parseQ4(m.full_q4_vram_gb) != null).length)
     // dated counts valid releases only — future/invalid dates never inflate it
     expect(stats.dated).toBe(allModels.filter(m => isValidRelease(m.released)).length)

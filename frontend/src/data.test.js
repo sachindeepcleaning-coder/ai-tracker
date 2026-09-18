@@ -9,11 +9,11 @@ const data = JSON.parse(raw)
 const models = data.all_coding_models
 
 describe('data.json integrity (regen gate)', () => {
-  it('has 268 rows with unique contiguous ranks 1-268', () => {
-    expect(models.length).toBe(268)
+  it('has 270 rows with unique contiguous ranks 1-270', () => {
+    expect(models.length).toBe(270)
     const ranks = models.map((m) => parseInt(m.rank, 10)).sort((a, b) => a - b)
-    expect(ranks).toEqual(Array.from({ length: 268 }, (_, i) => i + 1))
-    expect(new Set(models.map((m) => m.id)).size).toBe(268)
+    expect(ranks).toEqual(Array.from({ length: 270 }, (_, i) => i + 1))
+    expect(new Set(models.map((m) => m.id)).size).toBe(270)
   })
 
   it('has no string prices or string is_free (regression: rank-265/266/267)', () => {
@@ -61,7 +61,7 @@ describe('data.json integrity (regen gate)', () => {
     const top = [...models]
       .filter((m) => m.released)
       .sort((a, b) => b.released.localeCompare(a.released))[0].released
-    expect(top).toBe('2026-09-15')
+    expect(top).toBe('2026-09-16')
   })
 
   it('release-date coverage >= 60% with released_est tiering (regen gate)', () => {

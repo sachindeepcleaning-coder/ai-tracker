@@ -8,6 +8,11 @@
 - Updated README verification date to Sep 15 2026; ai_model_tracker changelog appended
 - CSV rank count now 268 (+1); data.json will be regenerated
 
+## Sep 16, 2026 — Stealth + fully-open additions (Union Alpha, ZGCM-1)
+- Added Union Alpha (rank 269) – stealth preview Sep 16 2026; stealth/union-alpha (OpenRouter) + union-alpha (OpenCode Zen); free for ~1 week; 262K ctx 131K max output text+image in tool calling; anonymous provider; zero-retention claim disputed; no weights/HF; placeholder expiry 2098-12-31; community DeepSWE ~73% unverified – tagged as community not vendor
+- Added ZGCM-1 (rank 270) – Zhongguancun Academy 7.39B dense fully open foundation; Apache 2.0; paper arXiv Sep 11 + release Sep 16; weights + checkpoints + 5.44B-row dataset + recipes + W&B logs; hybrid gated SWA 27/32 + 5 global; Muon + FP8 + TWEO ≈585 TFLOP/s/GPU; mid-training 16K→64K→256K MDP; SFT 4.92M ex 10ep + GRPO RL; 256K ctx ~4GB Q4; AIME 2026 75.0% vendor; self-host Free
+- CSV rank count now 270 (+2); data.json regenerated with released 2026-09-16 for both
+
 ## Sep 14, 2026 — Deep data audit: cross-harness misattribution + unit/column fixes
 - Nulled non-TB2.1 scores sitting in the Terminal-Bench (TB2.1) column: r247/248 TB4.0+TB-Science, r249 TB3.0 29.0%, r254 TB4.0 vendor 57.7% (numbers preserved here; TB4.0 57.7% also in r254 license prose)
 - Nulled SWE-Pro vendor numbers in the SWE-V column: r196 64.7% (SWE-Pro vendor), r197 72.9% (SWE-Pro vendor); real TB2.1 numbers kept in Terminal-Bench with vendor tags (82%/80%)
