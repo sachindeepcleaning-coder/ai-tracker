@@ -85,7 +85,7 @@ export default function App() {
       {/* KPI strip */}
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-4 grid grid-cols-2 md:grid-cols-6 gap-3">
         {[
-          { k: 'Total models', v: stats.total, s: `CSV 1-${stats.total ?? 0} · refreshed ${dataMeta.data_regen_at ?? DATA_AS_OF} · fact-checked ${VERIFIED_AT}`, icon: Database },
+          { k: 'Total models', v: stats.total, s: `v${dataMeta.data_version ?? '2026-09-18'} · CSV 1-${stats.total ?? 0} · refreshed ${dataMeta.data_regen_at ?? DATA_AS_OF} · fact-checked ${VERIFIED_AT}`, icon: Database },
           { k: 'Open-weight', v: stats.open, s: `${Math.round((stats.open / stats.total) * 100)}% open`, icon: Layers },
           { k: 'With SWE-V', v: stats.withSWE, s: 'have SWE-bench Verified', icon: Award },
           { k: 'With Q4 size', v: stats.withQ4, s: 'have Q4 VRAM', icon: Cpu },
@@ -178,7 +178,7 @@ export default function App() {
             <p><b className="text-white/70">Contribute:</b> corrections and new rows welcome via <a className="underline hover:text-white/70" href="https://github.com/sachindeepcleaning-coder/ai-tracker/issues" target="_blank" rel="noopener noreferrer">GitHub issues</a> — edit the CSV, run <span className="font-mono">npm run data</span>, and the integrity tests gate the deploy.</p>
           </div>
         </details>
-        Built from <span className="text-white/70">coding_benchmarks_july2026_final.csv (ranks 1-{stats.total}, single source of truth)</span> + regenerated <span className="text-white/70">ai_coding_api_vs_local_summary.json + frontend/src/data.json</span>. Data last refreshed: <span className="text-white/70">{dataMeta.data_regen_at ?? DATA_AS_OF}</span>. ₹95.12/USD. Fact-checked {VERIFIED_AT} (HuggingFace / Cognition / Sakana / DeepSeek / Anthropic / Google / llm-releases / AA v4.3). Not vendor quotes — planning estimates. Source: GitHub repo `sachindeepcleaning-coder/ai-tracker`.
+        Built from <span className="text-white/70">coding_benchmarks_july2026_final.csv (ranks 1-{stats.total}, single source of truth)</span> + regenerated <span className="text-white/70">ai_coding_api_vs_local_summary.json + frontend/src/data.json</span>. <span className="text-white/70">Data v{dataMeta.data_version ?? '2026-09-18'} · last refreshed {dataMeta.data_regen_at ?? DATA_AS_OF}</span>. ₹95.12/USD. Fact-checked {VERIFIED_AT} (HuggingFace / Cognition / Sakana / DeepSeek / Anthropic / Google / llm-releases / AA v4.3). Not vendor quotes — planning estimates. Source: GitHub repo `sachindeepcleaning-coder/ai-tracker`. <span className="text-amber-300/70">Planning estimates only. Benchmarks are mostly vendor-reported. Not official rankings or financial advice.</span>
       </footer>
     </div>
   )

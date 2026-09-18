@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import { X, ArrowUpRight } from 'lucide-react'
 import { licenseBadge } from '../lib/license'
 import { fmtDateFull, scoreSource } from '../lib/parse'
+import { DataQualityBadge } from './DataQualityBadge'
 
 const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
 
@@ -58,13 +59,17 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
       >
         <div className="flex items-start justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <span className="text-xs font-mono bg-white/10 border border-white/10 rounded-md px-1.5 py-0.5">#{detail.rank}</span>
               <span className={`badge ${licenseBadge(detail.license).cls}`}>{licenseBadge(detail.license).label}</span>
+              {detail.is_orchestrator && <span className="badge bg-sky-500/15 text-sky-300 border-sky-500/30">Orchestrator</span>}
+              <DataQualityBadge confidence={detail.confidence} />
               <span className="text-xs text-white/50">{detail.provider}</span>
+              {detail.model_type && <span className="badge bg-white/5 text-white/50 border-white/10">{detail.model_type}</span>}
             </div>
             <h3 id="model-detail-title" className="text-lg font-extrabold mt-2">{detail.model}</h3>
             <p className="text-sm text-white/60">{detail.total_parameters} {detail.active_parameters !== 'Unknown' && detail.active_parameters ? `/ ${detail.active_parameters} active` : ''} · {detail.context_window} · Q4 {detail.full_q4_vram_gb ?? '—'} GB</p>
+            <p className="text-xs text-white/40 mt-1">Source: {detail.source ?? '—'} · Last verified: {detail.last_verified ?? '—'} · Confidence: {detail.confidence ?? '—'} {detail.notes ? `· ${detail.notes}` : ''}</p>
           </div>
           <button onClick={onClose} aria-label="Close model details" title="Close (Esc)" className="w-8 h-8 rounded-full bg-white/5 border border-white/10 grid place-items-center hover:bg-white/10">
             <X size={14} aria-hidden="true" />

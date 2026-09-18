@@ -4,6 +4,7 @@ import { Search, Filter, ChevronDown, Check, X, ArrowUpRight, Download } from 'l
 import { parsePct, parseQ4, paramsLabel, fmtDate, fmtDateFull, daysOld, DATA_AS_OF } from '../lib/parse'
 import { licenseBadge } from '../lib/license'
 import { SORT_OPTIONS, RELEASE_WINDOWS } from '../hooks/useModels'
+import { DataQualityBadge } from './DataQualityBadge'
 
 /** Download the current filtered view as CSV or JSON (client-side blob). */
 const EXPORT_COLS = ['rank', 'model', 'provider', 'total_parameters', 'active_parameters', 'full_q4_vram_gb', 'license', 'swe_bench_verified', 'swe_bench_pro', 'livecodebench_v6', 'terminal_bench', 'context_window', 'price_in_usd_per_mtok', 'price_out_usd_per_mtok', 'released']
@@ -224,6 +225,8 @@ export default function Explorer({
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-[11px] font-mono bg-white/10 border border-white/10 rounded-md px-1.5 py-0.5">#{m.rank}</span>
                         <span className={`badge ${lic.cls}`}>{lic.label}</span>
+                        {m.is_orchestrator && <span className="badge bg-sky-500/15 text-sky-300 border-sky-500/30">Orchestrator</span>}
+                        <DataQualityBadge confidence={m.confidence} />
                         {m.is_free && <span className="badge bg-emerald-500/15 text-emerald-400 border-emerald-500/30">Free</span>}
                         {m.released && (
                           <span className={`badge ${isNew ? 'bg-sky-500/20 text-sky-300 border-sky-400/40' : 'bg-white/5 text-white/50 border-white/10'}`} title={`${m.released_est ? 'Approximate release' : 'Released'} ${m.released}${m.released_est ? ' (inferred from family/provider release window)' : ''} (data as-of ${fmtDateFull(DATA_AS_OF)})`}>
