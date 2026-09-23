@@ -1,56 +1,325 @@
-import React from 'react'
-import { Sparkles } from 'lucide-react'
+import React, { useEffect, useMemo, useState } from 'react'
+import { Sparkles, Newspaper, Eye, LayoutGrid, Search, ArrowUpRight } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
+import {
+  WATCH_ITEMS, WATCH_STATUSES, WATCH_STATUS_META, flag, watchCounts, type WatchStatus,
+} from '../lib/watchlist'
+import {
+  CHANGE_ITEMS, CHANGE_TYPES, CHANGE_TYPE_META, changeCounts, groupByMonth, fmtDay, type ChangeType,
+} from '../lib/changelog'
+import { timeAgo, DATA_AS_OF } from '../lib/parse'
 
-/** Sep 2-23 curated release tracker + frontier tightness / Q4 fit notes. */
-const RELEASES = [
-  { date: 'Sep 22', name: 'Claude Opus 5.5', badge: 'Proprietary', desc: 'GA Sep 22. $4/$20 + $0.20 cache (20% cut vs $5/$25). Secondary reports claim TB4.0 66.4% record + GDPval 1846 + FrontierCode 54.4% — all unverified, single secondary source. 30% faster inference. Sonnet/Haiku 5.5 coming.', cls: 'border-amber-500/30 bg-amber-500/10' },
-  { date: 'Sep 22', name: 'GPT-6 Sol / Luna', badge: 'Proprietary', desc: 'GA Sep 22 on API/Codex/ChatGPT/Copilot. Sol $2/$10 balanced agentic coding; Luna $0.10/$0.50 + $0.01 cache cheapest GPT-6 for high-volume work. ~50% below GPT-5.6 promo pricing.', cls: 'border-violet-500/30 bg-violet-500/10' },
-  { date: 'Sep 21', name: 'Grok 4.7', badge: 'Proprietary', desc: 'GA Sep 21 (missed ~Sep 12 target, extra RL). $2/$6 + $0.50 cache; fast variant 2x speed at 2x price. Larger base + longer RL on multi-hour tasks. Closed weights.', cls: 'border-white/10 bg-white/5' },
-  { date: 'Sep 21', name: 'MiMo-V2.6-Pro / Flash (MIT)', badge: 'MIT', desc: 'Open weights Sep 21 (HF + ModelScope). Pro 1.02T/42B AA 46 — top open-weight, tied Grok 4.7 — at $0.435/$0.87 (~$0.13/task). Flash 309B/15B $0.14/$0.28. 1M multimodal, 7k+ RL envs + framework open. ~510/155GB Q4.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
-  { date: 'Sep 21', name: 'AliceAI Foundation 80B', badge: 'Apache 2.0', desc: 'Yandex ungated HF Sep 21. 80B/3B hybrid MoE trained from scratch, 262K ctx. ~40GB Q4. No coding leaderboard scores yet.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
-  { date: 'Sep 16', name: 'Union Alpha (stealth)', badge: 'Proprietary', desc: 'Stealth preview Sep 16 on OpenRouter/OpenCode Zen, free ~1 week. 262K ctx, community DeepSWE ~73% unverified. No weights.', cls: 'border-white/10 bg-white/5' },
-  { date: 'Sep 16', name: 'ZGCM-1 (fully open)', badge: 'Apache 2.0', desc: 'Zhongguancun Academy 7.39B dense Sep 16. Weights + checkpoints + 5.44B-row dataset + recipes + logs. AIME 75.0% vendor, 256K, ~4GB Q4.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
-  { date: 'Sep 12', name: 'Atria Dawn Preview', badge: 'Preview', desc: 'Preview Sep 12, listed on LLM Gateway Sep 14. Details thin — track for GA pricing and weights.', cls: 'border-white/10 bg-white/5' },
-  { date: 'Sep 15', name: 'Salesforce Koa (enterprise pilot)', badge: 'Proprietary', desc: 'Salesforce-hosted pilot announced Sep 15 2026. Nemotron 3 Super post-trained for Agentforce CRM workflows, multi-step reasoning + tool-use. Claims ~3× fewer errors on Salesforce CRM Bench vs frontier general models, higher precision/reliability/context retention, token-efficient. Enterprise deployment, weights controlled by Salesforce; GA winter 2026.', cls: 'border-violet-500/30 bg-violet-500/10' },
-  { date: 'Sep 15', name: 'Grok 4.7 delayed', badge: 'Proprietary', desc: 'Grok 4.7 expected ~Sep 12 but delayed due to additional RL for response-length / task-completion. Roadmap: Grok 4.8 ~2.5T new C++ stack training finishing → RL next; 4.9 Astra/Fable-class; 5 AGI claim.', cls: 'border-amber-500/20 bg-amber-500/5' },
-  { date: 'Sep 10', name: 'DeepSeek V4.1 Flash (open weights)', badge: 'MIT', desc: 'HF deepseek-ai/DeepSeek-V4.1-Flash — MIT weights, 552B backbone Causal Encoder-Decoder (8B prefill / 16B decode active, 384 experts, 890 bytes/tok KV, Engram 196B), ~280GB Q4, 48 shards ~510GB FP8, KV-cache compression, vision. Vendor evals @1M ctx: TB2.1 90.6, DeepSWE v1.1 74.2, GPQA-D 90.9, HLE-tools 63.9. API deepseek-flash off-peak $0.15/$0.60 cache $0.003; peak $0.30/$1.20 cache $0.006; Novita live ~126 tok/s $1.20 out. Legacy V4 Flash/Vision retired+routed (billed Flash); V4 Pro routed Sep 14 12:00 Beijing.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
-  { date: 'Sep 10', name: 'Ling-3.0-flash-VL (AA)', badge: 'Open*', desc: 'Vision variant of Ling-3.0-flash, AA-evaluated Sep 10. Sante-style weights unconfirmed; base family MIT.', cls: 'border-white/10 bg-white/5' },
-  { date: 'Sep 8', name: 'Mercury 2.5 (GA)', badge: 'Proprietary', desc: 'Preview Aug 31 → GA Sep 8. Diffusion LM, 260K $0.20/$0.75. AA-evaluated Sep 8.', cls: 'border-white/10 bg-white/5' },
-  { date: 'Sep 7', name: 'MiniCPM5-2B', badge: 'Apache 2.0', desc: '~2.5B dense, 131K, text+vision, ~2GB Q4. Avg 53.9 over 34 benchmarks — strongest open <4B. AA-evaluated Sep 7.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
-  { date: 'Sep 3-4', name: 'GPT-6 Astra / Astra Pro', badge: 'Proprietary', desc: 'Astra 1M $10/$50 (TB4.0 57.7%, OSWorld 72.6%, GPQA 96.0%, HLE-tools 57.2%); Pro 1.05M same $10/$50 cache $1.00 reasoning.mode pro. AA v4.3 max/xhigh ~53. Daybreak-gated cyber.', cls: 'border-violet-500/30 bg-violet-500/10' },
-  { date: 'Sep 4', name: 'Ling-3.0-flash-Sante', badge: 'Open*', desc: '124B/5.1B MoE 262K medical-tuned. API-first (free thru Oct 4 Vercel); Sante-specific weights unconfirmed, base MIT.', cls: 'border-white/10 bg-white/5' },
-  { date: 'Sep 4', name: 'Ling-3.0-flash-Fin weights', badge: 'MIT', desc: 'Weights posted Sep 4 HF inclusionAI/Ling-3.0-flash-Fin. DeepInfra $0.06/$0.18.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
-  { date: 'Sep 3', name: 'K2 Horizon 375B-A23B', badge: 'Apache 2.0', desc: 'Flagship of 6-model 0.9B→375B family (IFM/MBZUAI). Fully open: weights+data+code+checkpoints+logs. ~200GB Q4. AA-evaluated Sep 3.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
-  { date: 'Sep 2', name: 'Gemini 3.8 Flash Cyber', badge: 'Proprietary', desc: 'Fairwind-gated vuln detection/patching twin of 3.8 Flash. Same $0.75/$3.75 intro base.', cls: 'border-white/10 bg-white/5' },
-  { date: 'Sep 2', name: 'Quasar 438B', badge: 'TBD', desc: '438B listed Sep 2 on BenchLM/ThursdAI (Multiverse Computing). Sparse details — announced-but-unconfirmed.', cls: 'border-white/10 bg-white/5' },
-  { date: 'Sep 2', name: 'Qwen3.8-Max-0902', badge: 'Proprietary', desc: 'Same 2.4T/95B 1M, TB3.0 29.0% (+17.7 vs 11.3% 2.6×), DeepSWE 69.3% vs 56.6%, NL2Repo 64.9%. Refresh, $2/$6 unchanged. API-only.', cls: 'border-violet-500/30 bg-violet-500/10' },
-  { date: 'Sep 2', name: 'Muse Spark 1.3', badge: 'Proprietary', desc: '1M ctx $1.25/$4.25. Launch AA 61/62 superseded by AA v4.3 re-score 48. $1.60/task, 236.8 tok/s, verbose (170M idx tokens).', cls: 'border-blue-500/30 bg-blue-500/10' },
-  { date: 'Sep 2', name: 'Gemini 3.8 Flash', badge: 'Proprietary', desc: '1M $0.75/$3.75 intro to Dec 31 2026 → $1.50/$7.50. DeepSWE 73.7%, AA HIGH 59. Cyber twin Fairwind-gated.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
-  { date: 'Sep 1', name: 'Fable 5.1 / Mythos 5.1', badge: 'Proprietary', desc: '1M $10/$50 + cache-read $0.25 (0.025x, 75% cut per Anthropic docs) → ~25% typical / ~45% agentic cheaper. TB4.0 55.8%/60.9%, TB-Science 52.6%, HLE-tools 65.0%. AA v4.3 max/xhigh ~53.', cls: 'border-amber-500/30 bg-amber-500/10' },
-  { date: 'Aug 28', name: 'Tencent Hy4 preview', badge: 'Apache 2.0', desc: '770B/49B MoE 1M+ ctx, TB2.1 85.4 tie Opus 5, DeepSWE 64.3, $0.834/2.501. ~385GB Q4. HF tencent/Hy4-preview.', cls: 'border-white/10 bg-white/5' },
+type TView = 'changelog' | 'rumors' | 'highlights'
+
+const VIEWS: { value: TView; label: string; icon: typeof Newspaper }[] = [
+  { value: 'changelog', label: 'Changelog', icon: Newspaper },
+  { value: 'rumors', label: 'Rumor watch', icon: Eye },
+  { value: 'highlights', label: 'Highlights', icon: LayoutGrid },
 ]
 
-export default function Tracker() {
+function tviewFromUrl(): TView {
+  try {
+    const v = new URLSearchParams(window.location.search).get('tview')
+    if (v === 'rumors' || v === 'highlights' || v === 'changelog') return v
+  } catch { /* ignore */ }
+  return 'changelog'
+}
+
+function Source({ label, url }: { label: string; url?: string }) {
+  if (!url) return <span className="text-white/40">Source: {label}</span>
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sky-300/90 underline hover:text-sky-200">
+      Source: {label} <ArrowUpRight size={11} aria-hidden="true" />
+    </a>
+  )
+}
+
+function RankLink({ rank, onOpenModel }: { rank?: number; onOpenModel?: (rankId: string) => void }) {
+  if (rank == null || !onOpenModel) return null
+  return (
+    <button
+      type="button"
+      onClick={() => onOpenModel(`rank-${rank}`)}
+      className="inline-flex items-center gap-1 text-[11px] font-mono bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 rounded-full px-2 py-0.5 hover:bg-emerald-500/20"
+      title="Open model detail"
+    >
+      Rank #{rank}
+    </button>
+  )
+}
+
+/* ---------------- Changelog view (mirrors llm-releases.com/changelog) ---------------- */
+
+function ChangelogView({ onOpenModel }: { onOpenModel?: (rankId: string) => void }) {
+  const [type, setType] = useState<ChangeType | 'all'>('all')
+  const [q, setQ] = useState('')
+  const counts = useMemo(() => changeCounts(CHANGE_ITEMS), [])
+
+  const filtered = useMemo(() => {
+    const qq = q.trim().toLowerCase()
+    return CHANGE_ITEMS
+      .filter((i) => type === 'all' || i.type === type)
+      .filter((i) => !qq || `${i.title} ${i.summary} ${i.provider}`.toLowerCase().includes(qq))
+      .sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title))
+  }, [type, q])
+
+  const months = useMemo(() => groupByMonth(filtered), [filtered])
+
   return (
     <div className="space-y-4">
       <div className="card p-4">
-        <h2 className="font-bold flex items-center gap-2"><Sparkles size={16} className="text-violet-400" aria-hidden="true" /> Sep 2-23 Release Tracker (fact-checked Sep 23, 2026)</h2>
-        <p className="text-sm text-white/60">DeepSeek docs + Anthropic docs + Google AI docs + xAI + OpenAI + Xiaomi + llm-releases.com + AA v4.3. All scores vendor-reported unless AA/Scale.</p>
-        <div className="mt-4 grid md:grid-cols-2 gap-3 text-sm">
-          {RELEASES.map((item) => (
-            <div key={item.name} className={`rounded-xl border p-3 ${item.cls}`}>
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-mono bg-black/20 border border-white/10 rounded-full px-2 py-0.5">{item.date}</span>
-                <span className="font-bold">{item.name}</span>
-                <span className="ml-auto badge bg-black/20 border-white/10 text-[10px]">{item.badge}</span>
-              </div>
-              <p className="text-xs text-white/70 mt-1 leading-relaxed">{item.desc}</p>
+        <h2 className="font-bold flex items-center gap-2">
+          <Newspaper size={16} className="text-emerald-400" aria-hidden="true" /> Everything, in order
+        </h2>
+        <p className="text-sm text-white/60 mt-1">
+          A single feed of releases, updates, deprecations, and retractions. Each item links to its catalog rank where applicable. Fact-checked {DATA_AS_OF === '2026-09-23' ? 'Sep 23, 2026' : DATA_AS_OF}.
+        </p>
+        <div className="mt-3 flex flex-col md:flex-row gap-2 md:items-center">
+          <div className="relative flex-1">
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" aria-hidden="true" />
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Filter changelog (e.g. DeepSeek, retired, MIT)"
+              aria-label="Filter changelog"
+              className="w-full pl-9 pr-3 py-2 rounded-xl bg-white/5 border border-white/10 text-sm placeholder:text-white/40 focus:outline-none focus:border-emerald-500/50"
+            />
+          </div>
+        </div>
+        <div className="mt-3 flex gap-2 flex-wrap" role="group" aria-label="Filter by change type">
+          {(['all', ...CHANGE_TYPES] as const).map((t) => {
+            const active = type === t
+            const n = t === 'all' ? CHANGE_ITEMS.length : counts[t]
+            const label = t === 'all' ? 'All' : CHANGE_TYPE_META[t].label
+            return (
+              <button
+                key={t}
+                type="button"
+                onClick={() => setType(t)}
+                aria-pressed={active}
+                className={`px-2.5 py-1 rounded-full border text-xs ${active ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-200' : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10'}`}
+              >
+                {label} · {n}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      {months.length === 0 && (
+        <div className="card p-10 text-center">
+          <p className="font-semibold">No changelog entries match.</p>
+          <button type="button" onClick={() => { setType('all'); setQ('') }} className="mt-3 btn btn-ghost text-sm">Clear filters</button>
+        </div>
+      )}
+
+      {months.map((m) => (
+        <section key={m.key} aria-label={m.label}>
+          <h3 className="font-bold text-sm tracking-widest uppercase text-white/50 px-1 mb-2">{m.label}</h3>
+          <ol className="space-y-3">
+            {m.items.map((item, idx) => {
+              const meta = CHANGE_TYPE_META[item.type]
+              return (
+                <li key={item.id} className="card p-4">
+                  <div className="flex items-start gap-3">
+                    <span className="text-xs font-mono text-white/30 mt-1 w-6 shrink-0" aria-hidden="true">{idx + 1}.</span>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-xs font-mono bg-black/20 border border-white/10 rounded-full px-2 py-0.5" title={timeAgo(item.date)}>
+                          {fmtDay(item.date)} · {timeAgo(item.date)}
+                        </span>
+                        <span className={`badge ${meta.cls}`}>{meta.label}</span>
+                        <RankLink rank={item.rank} onOpenModel={onOpenModel} />
+                      </div>
+                      <h4 className="font-bold leading-snug mt-2">{item.title}</h4>
+                      <p className="text-xs text-white/50 mt-0.5">
+                        <span aria-hidden="true">{flag(item.country)} </span>{item.provider} · <Source label={item.source.label} url={item.source.url} />
+                      </p>
+                      <p className="text-sm text-white/70 mt-1.5 leading-relaxed">{item.summary}</p>
+                    </div>
+                  </div>
+                </li>
+              )
+            })}
+          </ol>
+        </section>
+      ))}
+    </div>
+  )
+}
+
+/* ---------------- Rumor watch view (mirrors llm-releases.com/rumored-releases) ---------------- */
+
+const RUMOR_SECTIONS: { key: string; title: string; blurb: string; statuses: WatchStatus[] }[] = [
+  {
+    key: 'official',
+    title: 'Announced or previewed',
+    blurb: 'Models with a vendor announcement, public preview, or clear launch signal, but not yet a normal broadly available release.',
+    statuses: ['announced', 'preview'],
+  },
+  {
+    key: 'restricted',
+    title: 'Restricted or unavailable',
+    blurb: 'Models reported as real but gated, suspended, or limited to vetted partners rather than the broader public.',
+    statuses: ['restricted'],
+  },
+  {
+    key: 'rumored',
+    title: 'Rumored releases',
+    blurb: 'Reports, executive comments, codenames, and launch-window claims that have not yet become public release records.',
+    statuses: ['rumored'],
+  },
+]
+
+function RumorsView() {
+  const [status, setStatus] = useState<WatchStatus | 'all'>('all')
+  const [provider, setProvider] = useState('all')
+  const [sort, setSort] = useState<'new' | 'old' | 'name'>('new')
+  const counts = useMemo(() => watchCounts(WATCH_ITEMS), [])
+  const providers = useMemo(() => [...new Set(WATCH_ITEMS.map((i) => i.provider))].sort(), [])
+
+  const filtered = useMemo(() => {
+    const out = WATCH_ITEMS.filter((i) => status === 'all' || i.status === status)
+      .filter((i) => provider === 'all' || i.provider === provider)
+    out.sort((a, b) => {
+      if (sort === 'name') return a.name.localeCompare(b.name)
+      const ad = a.date ?? (sort === 'new' ? '' : '9999')
+      const bd = b.date ?? (sort === 'new' ? '' : '9999')
+      return sort === 'new' ? bd.localeCompare(ad) : ad.localeCompare(bd)
+    })
+    return out
+  }, [status, provider, sort])
+
+  const announcedPreview = counts.announced + counts.preview
+
+  return (
+    <div className="space-y-4">
+      <div className="card p-4">
+        <h2 className="font-bold flex items-center gap-2">
+          <Eye size={16} className="text-violet-400" aria-hidden="true" /> Rumor watch
+        </h2>
+        <p className="text-sm text-white/60 mt-1">
+          Publicly announced models not yet broadly available, limited-access tiers, and speculative reports. Rumors stay labeled until a primary source or public release confirms them.
+        </p>
+        <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3" role="list" aria-label="Watchlist counts">
+          {[
+            ['Watchlist', WATCH_ITEMS.length],
+            ['Announced', announcedPreview],
+            ['Restricted', counts.restricted],
+            ['Rumored', counts.rumored],
+          ].map(([label, n]) => (
+            <div key={label as string} role="listitem" className="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+              <div className="text-2xl font-extrabold">{n}</div>
+              <div className="text-xs text-white/50">{label}</div>
             </div>
           ))}
         </div>
-        <div className="mt-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200">Pricing that broke single-number models Aug 16-21: DeepSeek V4 Pro flat $0.435/0.87 → $0.66/1.98 off-peak $1.32/3.96 peak (price increase), V4 Flash $0.14/0.28 → $0.22/0.66 off / $0.44/1.32 peak, Sol $5/30 → $4/20 promo to ≥Nov21, Sonnet 5 $3/15 rise cancelled `$2/10 standard`, Gemini intro $0.75/3.75 → doubles $1.50/7.50 Jan 1 2027 `README.md:113`.</div>
+        <div className="mt-3 flex gap-2 flex-wrap items-center">
+          <div className="flex gap-2 flex-wrap" role="group" aria-label="Filter by status">
+            {(['all', ...WATCH_STATUSES] as const).map((s) => {
+              const active = status === s
+              const n = s === 'all' ? WATCH_ITEMS.length : counts[s]
+              const label = s === 'all' ? 'All' : WATCH_STATUS_META[s].label
+              return (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => setStatus(s)}
+                  aria-pressed={active}
+                  className={`px-2.5 py-1 rounded-full border text-xs ${active ? 'bg-violet-500/20 border-violet-500/40 text-violet-200' : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10'}`}
+                >
+                  {label} · {n}
+                </button>
+              )
+            })}
+          </div>
+          <label className="text-xs text-white/50 flex items-center gap-1.5">
+            Provider
+            <select
+              value={provider}
+              onChange={(e) => setProvider(e.target.value)}
+              aria-label="Filter by provider"
+              className="appearance-none px-2.5 py-1 rounded-full bg-[#131C2E] border border-white/10 text-xs text-white/70 cursor-pointer"
+            >
+              <option value="all">All providers</option>
+              {providers.map((p) => <option key={p} value={p}>{p}</option>)}
+            </select>
+          </label>
+          <label className="text-xs text-white/50 flex items-center gap-1.5">
+            Sort
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as typeof sort)}
+              aria-label="Sort watchlist"
+              className="appearance-none px-2.5 py-1 rounded-full bg-[#131C2E] border border-white/10 text-xs text-white/70 cursor-pointer"
+            >
+              <option value="new">Newest signal</option>
+              <option value="old">Oldest signal</option>
+              <option value="name">Name A–Z</option>
+            </select>
+          </label>
+        </div>
       </div>
+
+      {filtered.length === 0 && (
+        <div className="card p-10 text-center">
+          <p className="font-semibold">No watchlist entries match.</p>
+          <button type="button" onClick={() => { setStatus('all'); setProvider('all') }} className="mt-3 btn btn-ghost text-sm">Clear filters</button>
+        </div>
+      )}
+
+      {RUMOR_SECTIONS.map((sec) => {
+        const items = filtered.filter((i) => sec.statuses.includes(i.status))
+        if (items.length === 0) return null
+        return (
+          <section key={sec.key} aria-label={sec.title}>
+            <h3 className="font-bold mt-2">{sec.title}</h3>
+            <p className="text-sm text-white/60 mb-2">{sec.blurb}</p>
+            <div className="grid md:grid-cols-2 gap-3">
+              {items.map((item) => {
+                const meta = WATCH_STATUS_META[item.status]
+                return (
+                  <article key={item.id} className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className={`badge ${meta.cls}`}>{meta.label}</span>
+                      <span className="text-xs text-white/50 font-mono">
+                        {item.date ? <span title={timeAgo(item.date)}>{fmtDay(item.date)} · {timeAgo(item.date)}</span> : 'date TBD'}
+                      </span>
+                    </div>
+                    <h4 className="font-bold leading-snug mt-2">{item.name}</h4>
+                    <p className="text-xs text-white/50 mt-0.5">
+                      <span aria-hidden="true">{flag(item.country)} </span>{item.provider} · {item.countryName}
+                    </p>
+                    <p className="text-sm text-white/70 mt-1.5 leading-relaxed">{item.summary}</p>
+                    <dl className="mt-3 grid grid-cols-3 gap-2 text-xs">
+                      {[
+                        ['Access', item.access ?? '—'],
+                        ['Context', item.context ?? '—'],
+                        ['Params', item.params ?? '—'],
+                      ].map(([k, v]) => (
+                        <div key={k} className="bg-white/[0.04] rounded-lg p-2 border border-white/5">
+                          <dt className="text-[10px] tracking-widest font-bold text-white/40 uppercase">{k}</dt>
+                          <dd className="font-semibold mt-0.5 leading-snug">{v}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                    <p className="text-xs mt-2"><Source label={item.source.label} url={item.source.url} /></p>
+                  </article>
+                )
+              })}
+            </div>
+          </section>
+        )
+      })}
+    </div>
+  )
+}
+
+/* ---------------- Highlights view (existing curated panels) ---------------- */
+
+function HighlightsView() {
+  return (
+    <div className="space-y-4">
       <div className="grid md:grid-cols-2 gap-4">
         <div className="card p-4">
           <h3 className="font-bold">Frontier tightness</h3>
@@ -92,7 +361,7 @@ export default function Tracker() {
         <p className="text-sm text-white/60 mt-1">Upcoming changes already on record — plan around them, the catalog snapshot predates these.</p>
         <div className="mt-3 grid md:grid-cols-2 gap-3 text-xs">
           {[
-            ['Sep 21-22', 'Grok 4.7 shipped / Opus 5.5 + GPT-6 Sol-Luna', 'Grok 4.7 GA Sep 21 ($2/$6). Claude Opus 5.5 + GPT-6 Sol ($2/$10) / Luna ($0.10/$0.50) GA Sep 22. MiMo-V2.6-Pro MIT (AA 46, top open) Sep 21. All in catalog ranks 271-278.'],
+            ['Sep 21-22', 'Grok 4.7 shipped / Opus 5.5 + GPT-6 Sol-Luna', 'Grok 4.7 GA Sep 21 ($2/$6). Claude Opus 5.5 + GPT-6 Sol ($2/$10) / Luna ($0.10/$0.50) GA Sep 22. MiMo-V2.6-Pro MIT (AA 46, top open) Sep 21. All in catalog ranks 271-279.'],
             ['Sep 14', 'V4 Pro routing', 'DeepSeek V4 Pro routed Sep 14 12:00 Beijing (after this snapshot); legacy V4 Flash/Vision already retired+routed, billed Flash.'],
             ['Oct 4', 'Ling-3.0-flash-Sante free tier ends', 'API-first free thru Oct 4 via Vercel; Sante-specific weights still unconfirmed, base family MIT.'],
             ['≥Nov 21', 'GPT-5.6 Sol promo ends', 'Sol $4/20 promo holds to ≥Nov 21, then reverts to $5/30.'],
@@ -108,6 +377,53 @@ export default function Tracker() {
           ))}
         </div>
       </div>
+      <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200">Pricing that broke single-number models Aug 16-21: DeepSeek V4 Pro flat $0.435/0.87 → $0.66/1.98 off-peak $1.32/3.96 peak (price increase), V4 Flash $0.14/0.28 → $0.22/0.66 off / $0.44/1.32 peak, Sol $5/30 → $4/20 promo to ≥Nov21, Sonnet 5 $3/15 rise cancelled `$2/10 standard`, Gemini intro $0.75/3.75 → doubles $1.50/7.50 Jan 1 2027.</div>
+    </div>
+  )
+}
+
+/* ---------------- Tracker shell ---------------- */
+
+export default function Tracker({ onOpenModel }: { onOpenModel?: (rankId: string) => void }) {
+  const [view, setView] = useState<TView>(tviewFromUrl)
+
+  useEffect(() => {
+    try {
+      const url = new URL(window.location.href)
+      if (view === 'changelog') url.searchParams.delete('tview')
+      else url.searchParams.set('tview', view)
+      window.history.replaceState(null, '', url.toString())
+    } catch { /* ignore */ }
+  }, [view ])
+
+  return (
+    <div className="space-y-4">
+      <div className="card p-3 flex items-center gap-2 flex-wrap" role="tablist" aria-label="Tracker views">
+        <span className="inline-flex items-center gap-1.5 text-sm font-bold px-1">
+          <Sparkles size={14} className="text-violet-400" aria-hidden="true" /> Sep tracker
+        </span>
+        {VIEWS.map((v) => {
+          const Icon = v.icon
+          const active = view === v.value
+          return (
+            <button
+              key={v.value}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              onClick={() => setView(v.value)}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs ${active ? 'bg-violet-500/20 border-violet-500/40 text-violet-200' : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10'}`}
+            >
+              <Icon size={13} aria-hidden="true" /> {v.label}
+            </button>
+          )
+        })}
+        <span className="ml-auto text-xs text-white/40">All scores vendor-reported unless AA / Scale / BenchLM</span>
+      </div>
+
+      {view === 'changelog' && <ChangelogView onOpenModel={onOpenModel} />}
+      {view === 'rumors' && <RumorsView />}
+      {view === 'highlights' && <HighlightsView />}
     </div>
   )
 }

@@ -55,6 +55,20 @@ export function daysOld(iso) {
   return Math.max(0, Math.round((new Date(DATA_AS_OF + 'T00:00:00Z') - d) / 86400000))
 }
 
+/** Relative age vs the as-of anchor: '3d ago', '2mo ago', '1y ago'.
+ * Null/invalid dates -> 'date TBD'; within-month future estimates -> 'soon'. */
+export function timeAgo(iso) {
+  if (!iso || typeof iso !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return 'date TBD'
+  const d = new Date(iso + 'T00:00:00Z')
+  if (isNaN(d.getTime())) return 'date TBD'
+  const n = Math.round((new Date(DATA_AS_OF + 'T00:00:00Z') - d) / 86400000)
+  if (n < 0) return 'soon'
+  if (n < 1) return 'today'
+  if (n < 30) return `${n}d ago`
+  if (n < 365) return `${Math.round(n / 30)}mo ago`
+  return `${Math.round(n / 365)}y ago`
+}
+
 /** Extract a score from a "93.4%"-style cell. Returns null when absent.
     Prefers a %-anchored number so annotated prose ("USAMO 2026: 99.8%")
     doesn't rank on the year; falls back to the *last* bare number so

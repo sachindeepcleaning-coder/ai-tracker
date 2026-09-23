@@ -78,6 +78,13 @@ export default function App() {
     if (filters.confidence && filters.confidence !== 'all') p.set('conf', filters.confidence)
     if (filters.hideSparse) p.set('hideSparse', '1')
     if (filters.freeOnly) p.set('free', '1')
+    // Preserve the Tracker sub-view (?tab=tracker&tview=rumors) across filter changes.
+    if (tab === 'tracker') {
+      try {
+        const cur = new URLSearchParams(window.location.search).get('tview')
+        if (cur) p.set('tview', cur)
+      } catch { /* ignore */ }
+    }
     const qs = p.toString()
     window.history.replaceState(null, '', `${window.location.pathname}${qs ? `?${qs}` : ''}${window.location.hash}`)
   }, [tab, filters])
@@ -169,7 +176,7 @@ export default function App() {
             {tab === 'hardware' && <HardwareFit hwModels={hwModels} />}
             {tab === 'cost' && <CostCalc />}
             {tab === 'compare' && <Compare compareModels={compareModels} onBack={() => setTab('explorer')} onClear={() => setCompare([])} />}
-            {tab === 'tracker' && <Tracker />}
+            {tab === 'tracker' && <Tracker onOpenModel={(id) => { const m = allModels.find((x) => x.id === id); if (m) setDetail(m) }} />}
           </Suspense>
         </ErrorBoundary>
       </main>
