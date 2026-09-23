@@ -1,6 +1,14 @@
-# AI Knowledge Base — India Local & Private AI (Verified Sep 15, 2026)
+# AI Knowledge Base — India Local & Private AI (Verified Sep 23, 2026)
 
-**Scope:** Open-weight coding models for local/private deployment in India — models, benchmarks, pricing, hardware, and cost to serve. All file prices use **₹95.12/USD** (standardized Aug 14, 2026). All benchmark scores are **vendor-reported** unless marked `AA` / `Scale` / `BenchLM` independent. Verified via live search **Aug 29-30, 2026** + synced **Sep 2, 2026** to `llm-releases.com` (339-model catalog, methodology + changelog taxonomy). Deep audit sync completed **Sep 15, 2026**.
+**Scope:** Open-weight coding models for local/private deployment in India — models, benchmarks, pricing, hardware, and cost to serve. All file prices use **₹95.12/USD** (standardized Aug 14, 2026). All benchmark scores are **vendor-reported** unless marked `AA` / `Scale` / `BenchLM` independent. Verified via live search **Aug 29-30, 2026** + synced **Sep 2, 2026** to `llm-releases.com` (339-model catalog, methodology + changelog taxonomy). Deep audit sync completed **Sep 15, 2026**. Frontier wave **Sep 12-22** added **Sep 23, 2026** (279 models).
+
+> **Sep 23, 2026 Frontier Wave (ranks 271-279, fact-checked via live search Sep 23)**
+> - **Grok 4.7** (xAI, GA Sep 21, $2/$6 + $0.50 cache, fast 2x variant) — was delayed past ~Sep 12, now shipped.
+> - **GPT-6 Sol / Luna** (OpenAI, GA Sep 22, $2/$10 and $0.10/$0.50) — ~50% below GPT-5.6 promo, on API/Codex/ChatGPT/Copilot.
+> - **Claude Opus 5.5** (Anthropic, GA Sep 22, $4/$20 + $0.20 cache) — secondary-only TB4.0 66.4% claim kept in notes, NOT in the TB2.1 column.
+> - **MiMo-V2.6-Pro / Flash / Distill** (Xiaomi, MIT Sep 21) — Pro 1.02T/42B at **AA 46, top open-weight** ($0.435/$0.87); Flash 309B/15B ($0.14/$0.28); Distill 9B SFT with SWE-Pro 44.6% vendor claim in the correct column.
+> - **AliceAI Foundation 80B** (Yandex, Apache 2.0 ungated Sep 21, 80B/3B, 262K) + **Atria Dawn Preview** (Sep 12, details thin).
+> - Frontend sync: Explorer virtualized list → responsive grid, hardware tiers added (4×Pro 6000 384GB, Mac Studio M5, Vera Rubin NVL72), `VERIFIED_AT`/`DATA_AS_OF` → Sep 23, `data.json` v2026-09-23 (279 models, 173 dated).
 
 > **Sep 15, 2026 Deep Audit Sync**
 > - **Salesforce Koa** added rank 268 — Nemotron 3 Super post-train for Agentforce CRM workflows, Salesforce-hosted pilot announced Sep 15, GA winter 2026, weights controlled, vendor claims 3× fewer errors on internal CRM Bench.

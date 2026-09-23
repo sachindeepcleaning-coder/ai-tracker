@@ -205,6 +205,6 @@ const out = rows.slice(1)
 }
 // Regen timestamp — surfaced as "Data last refreshed" on the site.
 const today = new Date().toISOString().slice(0,10)
-writeFileSync(OUT_PATH, JSON.stringify({ ...existing, data_regen_at: today, data_version: '2026-09-18', all_coding_models: out }, null, 2) + '\n')
+writeFileSync(OUT_PATH, JSON.stringify({ ...existing, data_regen_at: today, data_version: '2026-09-23', all_coding_models: out }, null, 2) + '\n')
 const preserved = [...curated.keys()].filter((id) => out.some((m) => m.id === id)).length
 console.log(`regen-data: wrote ${out.length} models -> ${OUT_PATH} (preserved ${preserved} curated rows)`)

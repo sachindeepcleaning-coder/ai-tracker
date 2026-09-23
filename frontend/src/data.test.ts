@@ -9,11 +9,11 @@ const data = JSON.parse(raw)
 const models = data.all_coding_models
 
 describe('data.json integrity (regen gate)', () => {
-  it('has 270 rows with unique contiguous ranks 1-270', () => {
-    expect(models.length).toBe(270)
+  it('has 279 rows with unique contiguous ranks 1-279', () => {
+    expect(models.length).toBe(279)
     const ranks = models.map((m) => parseInt(m.rank, 10)).sort((a, b) => a - b)
-    expect(ranks).toEqual(Array.from({ length: 270 }, (_, i) => i + 1))
-    expect(new Set(models.map((m) => m.id)).size).toBe(270)
+    expect(ranks).toEqual(Array.from({ length: 279 }, (_, i) => i + 1))
+    expect(new Set(models.map((m) => m.id)).size).toBe(279)
   })
 
   it('has new schema fields with allowed enums', () => {
@@ -23,7 +23,7 @@ describe('data.json integrity (regen gate)', () => {
       expect(typeof m.is_orchestrator).toBe('boolean')
       if (m.last_verified) expect(m.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/)
     }
-    expect(data.data_version).toBe('2026-09-18')
+    expect(data.data_version).toBe('2026-09-23')
   })
 
   it('has at least 10 high-confidence models and notes for orchestrators', () => {
@@ -81,7 +81,7 @@ describe('data.json integrity (regen gate)', () => {
     const top = [...models]
       .filter((m) => m.released)
       .sort((a, b) => b.released.localeCompare(a.released))[0].released
-    expect(top).toBe('2026-09-16')
+    expect(top).toBe('2026-09-22')
   })
 
   it('release-date coverage >= 60% with released_est tiering (regen gate)', () => {

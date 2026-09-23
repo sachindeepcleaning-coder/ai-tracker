@@ -40,4 +40,4 @@ export interface Model {
   notes: string | null
   is_orchestrator: boolean
 }
-export const DATA_VERSION = '2026-09-18'
+export const DATA_VERSION = '2026-09-23'

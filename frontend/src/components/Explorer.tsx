@@ -5,7 +5,6 @@ import { parsePct, parseQ4, paramsLabel, fmtDate, fmtDateFull, daysOld, DATA_AS_
 import { licenseBadge } from '../lib/license'
 import { SORT_OPTIONS, RELEASE_WINDOWS, modelTypeGroups, confidenceGroups } from '../hooks/useModels'
 import { DataQualityBadge } from './DataQualityBadge'
-import { useVirtualizer } from '@tanstack/react-virtual'
 
 /** Download the current filtered view as CSV or JSON (client-side blob). */
 const EXPORT_COLS = ['rank', 'model', 'provider', 'total_parameters', 'active_parameters', 'full_q4_vram_gb', 'license', 'swe_bench_verified', 'swe_bench_pro', 'livecodebench_v6', 'terminal_bench', 'context_window', 'price_in_usd_per_mtok', 'price_out_usd_per_mtok', 'released']
@@ -69,7 +68,7 @@ export default function Explorer({
   const clearAll = () => setFilters({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: 'all', modelType: 'all', confidence: 'all', hideSparse: false, freeOnly: false })
 
   // Incremental rendering: 48 cards initially, "Load more" in 48-card pages.
-  // Keeps the desktop "show all" feel (few clicks to reach 267) while first paint
+  // Keeps the desktop "show all" feel (few clicks to reach 279) while first paint
   // stays light on mobile/low-end devices. Resets whenever filters change
   // (adjust-state-during-render pattern — no effect, no cascading render).
   const PAGE = 48
@@ -84,12 +83,6 @@ export default function Explorer({
 
   const parentRef = useRef<HTMLDivElement>(null)
   const filterRef = useRef<HTMLDivElement>(null)
-  const rowVirtualizer = useVirtualizer({
-    count: shown.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 340,
-    overscan: 5,
-  })
   useEffect(() => {
     if (showFilters && filterRef.current) {
       const first = filterRef.current.querySelector<HTMLElement>('input, select, button')
@@ -239,92 +232,16 @@ export default function Explorer({
         </div>
       )}
 
-      {/* Grid */}
+      {/* Grid — every visible card renders in a responsive multi-column grid
+          (no nested scroll pane, no virtualization) with "Load more" paging. */}
       {filtered.length === 0 ? (
         <div className="card p-10 text-center">
           <p className="font-semibold">No models match your filters.</p>
           <button onClick={clearAll} className="mt-3 btn btn-ghost text-sm" type="button">Clear all filters</button>
         </div>
-      ) : shown.length > 24 ? (
-        <>
-          <div ref={parentRef} className="overflow-auto rounded-xl" style={{ height: '70vh', contain: 'strict' }} role="list" aria-label="Model list — virtualized">
-            <div style={{ height: `${rowVirtualizer.getTotalSize()}px`, position: 'relative', width: '100%' }}>
-              {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-                const m = shown[virtualRow.index]
-                const idx = virtualRow.index
-                const swe = parsePct(m.swe_bench_verified)
-                const tb = parsePct(m.terminal_bench)
-                const lcb = parsePct(m.livecodebench_v6)
-                const q4 = parseQ4(m.full_q4_vram_gb)
-                const lic = licenseBadge(m.license)
-                const isSel = compare.includes(m.id)
-                const age = daysOld(m.released)
-                const isNew = age <= 7
-                return (
-                  <div
-                    key={m.id}
-                    data-index={virtualRow.index}
-                    role="listitem"
-                    ref={rowVirtualizer.measureElement}
-                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', transform: `translateY(${virtualRow.start}px)` }}
-                    className="p-1"
-                  >
-                    <article className={`card p-4 hover:border-white/15 transition group ${isSel ? 'ring-1 ring-emerald-500 border-emerald-500/30' : ''}`}>
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="min-w-0">
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <span className="text-[11px] font-mono bg-white/10 border border-white/10 rounded-md px-1.5 py-0.5">#{m.rank}</span>
-                            <span className={`badge ${lic.cls}`}>{lic.label}</span>
-                            {m.is_orchestrator && <span className="badge bg-sky-500/15 text-sky-300 border-sky-500/30" role="status" aria-label="Orchestrator model — routes to multiple models">Orchestrator</span>}
-                            <DataQualityBadge confidence={m.confidence} />
-                            {m.is_free && <span className="badge bg-emerald-500/15 text-emerald-400 border-emerald-500/30">Free</span>}
-                            {m.released && (
-                              <span className={`badge ${isNew ? 'bg-sky-500/20 text-sky-300 border-sky-400/40' : 'bg-white/5 text-white/50 border-white/10'}`} title={`${m.released_est ? 'Approximate release' : 'Released'} ${m.released}${m.released_est ? ' (inferred)' : ''} (as-of ${fmtDateFull(DATA_AS_OF)})`}>
-                                {isNew && <span className="inline-block w-1.5 h-1.5 rounded-full bg-sky-400 mr-1" aria-hidden="true" />}
-                                {isNew ? 'NEW · ' : ''}{m.released_est ? '≈' : ''}{fmtDate(m.released)}
-                              </span>
-                            )}
-                          </div>
-                          <h3 className="font-bold leading-tight mt-2 line-clamp-2">{m.model}</h3>
-                          <p className="text-xs text-white/50">{m.provider} · {paramsLabel(m)} · {m.context_window} · {m.source} · {m.last_verified ?? "—"}</p>
-                          {m.notes && <p className="text-[11px] text-amber-200/60 mt-1 line-clamp-2" title={m.notes}>Note: {m.notes}</p>}
-                        </div>
-                        <button onClick={() => toggleCompare(m.id)} aria-pressed={isSel} aria-label={isSel ? `Remove ${m.model} from compare` : `Add ${m.model} to compare`} className={`w-8 h-8 rounded-full grid place-items-center border text-xs shrink-0 ${isSel ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10'}`}>{isSel ? <Check size={14} aria-hidden="true" /> : <span aria-hidden="true">+</span>}</button>
-                      </div>
-                      <div className="mt-3 grid grid-cols-3 gap-2">
-                        {[{ label: 'SWE-V', v: swe }, { label: 'TB 2.1', v: tb }, { label: 'LCB V6', v: lcb }].map((b) => (
-                          <div key={b.label} className="bg-white/[0.04] rounded-xl p-2 border border-white/5">
-                            <div className="text-[11px] tracking-widest font-bold text-white/40">{b.label}</div>
-                            <div className="text-sm font-extrabold" title={b.v != null ? `${b.v.toFixed(1)}%` : 'No data — awaiting vendor/AA verification'}>{b.v != null ? b.v.toFixed(1) + '%' : '—'}</div>
-                            <div className="h-1 bg-white/10 rounded-full mt-1 overflow-hidden" role="img" aria-label={`${b.label} ${b.v != null ? b.v.toFixed(1) + '%' : 'no data'}`}><div className="h-full bg-emerald-500" style={{ width: b.v != null ? `${b.v}%` : '0%' }} /></div>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="mt-3 flex flex-wrap gap-1.5 text-xs">
-                        <span className="px-2 py-1 rounded-full bg-white/5 border border-white/10">Q4 {q4 != null ? q4 + ' GB' : '—'}</span>
-                        {m.price_in_usd_per_mtok != null && <span className="px-2 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300">${m.price_in_usd_per_mtok}/$ {m.price_out_usd_per_mtok} /M</span>}
-                        {q4 != null && q4 <= 32 && <span className="px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">Fits 1×5090</span>}
-                      </div>
-                      <div className="mt-3 flex gap-2">
-                        <button type="button" onClick={() => onDetail(m)} className="flex-1 btn btn-ghost text-xs py-2">Details</button>
-                        <a href={`https://huggingface.co/models?search=${encodeURIComponent(m.model)}`} target="_blank" rel="noopener noreferrer" aria-label={`Search ${m.model} on Hugging Face`} className="btn btn-ghost text-xs py-2 px-3"><ArrowUpRight size={12} aria-hidden="true" /> HF</a>
-                      </div>
-                    </article>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-          {hidden > 0 && (
-            <div className="flex flex-col items-center gap-2 pt-2">
-              <button type="button" onClick={() => setState((s) => ({ ...s, visible: s.visible + PAGE }))} className="btn btn-ghost text-sm" aria-label={`Load ${Math.min(PAGE, hidden)} more models`}>Load more ({hidden} hidden)</button>
-              <span className="text-xs text-white/40">Showing {shown.length} of {filtered.length} · virtualized</span>
-            </div>
-          )}
-        </>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" role="list" aria-label="Model grid">
+          <div ref={parentRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" role="list" aria-label="Model grid">
             {shown.map((m, idx) => {
               const swe = parsePct(m.swe_bench_verified)
               const tb = parsePct(m.terminal_bench)

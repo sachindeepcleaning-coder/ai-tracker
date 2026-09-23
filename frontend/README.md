@@ -1,7 +1,7 @@
 # AI Tracker — Frontend
 
 Single-page dashboard for local/private AI coding models (India-focused pricing, Q4 VRAM, hardware tiers).
-Built with **Vite + React 19 + Tailwind 3 + Recharts**, data baked into `src/data.json` (~267 models).
+Built with **Vite + React 19 + Tailwind 3 + Recharts**, data baked into `src/data.json` (~279 models).
 
 Live site: https://sachindeepcleaning-coder.github.io/ai-tracker/
 
@@ -12,35 +12,35 @@ Live site: https://sachindeepcleaning-coder.github.io/ai-tracker/
 | Build | Vite 8 (`@vitejs/plugin-react`) |
 | UI | React 19, Tailwind 3, Lucide icons |
 | Charts | Recharts 3 |
-| Data | Static `src/data.json` (ranks 1-267, single source of truth = `coding_benchmarks_july2026_final.csv`, regenerated via `npm run data`) |
+| Data | Static `src/data.json` (ranks 1-279, single source of truth = `coding_benchmarks_july2026_final.csv`, regenerated via `npm run data`) |
 | Lint | Oxlint |
-| Tests | Vitest 3 + jsdom (`src/**/__tests__/`, `src/App.test.jsx`, `src/data.test.js`) |
+| Tests | Vitest 5 + jsdom (`src/**/__tests__/`, `src/App.test.tsx`, `src/data.test.ts`) |
 | Fonts | Self-hosted Inter + JetBrains Mono (woff2 in `src/assets/fonts/`) |
 
 ## Layout
 
 ```
 src/
-  main.jsx                 entry (imports index.css)
-  App.jsx                  tab orchestrator + KPI strip + footer
+  main.tsx                 entry (imports index.css)
+  App.tsx                  tab orchestrator + KPI strip + footer
   data.json                model catalog
   index.css                Tailwind + @font-face + shared .card/.badge/.btn styles
   lib/
-    parse.js               parsePct / parseQ4 / INR_PER_USD / formatting
-    license.js             isOpenWeight / licenseBadge heuristics
-    hardware.js            hardwareTiers + fitsModel (Q4 fit heuristic)
+    parse.ts               parsePct / parseQ4 / INR_PER_USD / formatting
+    license.ts             isOpenWeight / licenseBadge heuristics
+    hardware.ts            hardwareTiers + fitsModel (Q4 fit heuristic)
   hooks/
-    useModels.js           filter/sort pipeline, stats, leaderboards, HW matrix rows
+    useModels.ts           filter/sort pipeline, stats, leaderboards, HW matrix rows
   components/
-    Header.jsx             sticky header + section tabs
-    Explorer.jsx           search/filters/compare bar + full card grid (all 267 at once, no pagination)
-    Leaderboards.jsx       11 benchmark boards (coding + reasoning/math) + top-12 charts
-    HardwareFit.jsx        Q4 fit matrix (open-weight only) + tier cards
-    CostCalc.jsx           API vs local cost calculator (prices resolved by model name from data.json)
-    Compare.jsx            up to 4-model charts + side-by-side table
-    Tracker.jsx            Sep 2026 release tracker + frontier tightness
-    DetailModal.jsx        accessible dialog (focus trap, Esc, aria-modal, compare toggle)
-    ErrorBoundary.jsx      crash guard around tab content
+    Header.tsx             sticky header + section tabs
+    Explorer.tsx           search/filters/compare bar + full card grid (Load-more paging, no pagination)
+    Leaderboards.tsx       11 benchmark boards (coding + reasoning/math) + top-12 charts
+    HardwareFit.tsx        Q4 fit matrix (open-weight only) + tier cards
+    CostCalc.tsx           API vs local cost calculator (prices resolved by model name from data.json)
+    Compare.tsx            up to 4-model charts + side-by-side table
+    Tracker.tsx            Sep 2026 release tracker + frontier tightness
+    DetailModal.tsx        accessible dialog (focus trap, Esc, aria-modal, compare toggle)
+    ErrorBoundary.tsx      crash guard around tab content
   scripts/
     regen-data.mjs         CSV -> data.json regeneration (preserves curated released/is_free)
 ```
@@ -100,12 +100,12 @@ git subtree push --prefix frontend/dist origin gh-pages
 
 1. Edit `coding_benchmarks_july2026_final.csv` (repo root), then run `npm run data` — this regenerates `src/data.json` using the canonical column mapping and **preserves curated `released` / `is_free`** from the existing data.json (matched by rank id).
 2. Keep the `rank-<n>` id scheme — `CostCalc` resolves sample prices by **model name** (with normalized/fuzzy fallback), so re-ranks are safe.
-3. If a cost sample references a new model, add `{ model: '<exact catalog name>' }` to `COST_SAMPLES` in `components/CostCalc.jsx`.
+3. If a cost sample references a new model, add `{ model: '<exact catalog name>' }` to `COST_SAMPLES` in `components/CostCalc.tsx`.
 4. Run `npm run test && npm run lint && npm run build` — the data integrity tests catch string prices, rank gaps, and missing ids before deploy.
 
 ## Notes
 
-- No router, no TypeScript — one page, tabbed. Split is per-tab components + shared lib/hook helpers. JSDoc `Model` typedef in `hooks/useModels.js` documents the row shape.
+- No router — one page, tabbed (strict TypeScript throughout). Split is per-tab components + shared lib/hook helpers.
 - All benchmark scores are vendor-reported unless marked `AA` / `Scale` / `BenchLM`; figures are planning estimates, not vendor quotes.
 - Currency assumption: 1 USD = ₹95.12 (standardized Aug 14, 2026).
 - Vitest note: components rendered in tests carry `import React from 'react'` (vitest classic-JSX path); the Vite build uses the automatic runtime either way.

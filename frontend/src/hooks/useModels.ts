@@ -7,7 +7,7 @@ import { isOpenWeight, licenseBadge } from '../lib/license'
  * One catalog row (from data.json, regenerated from the CSV via `npm run data`).
  * @typedef {Object} Model
  * @property {string} id         Stable key "rank-N" (survives re-ranks better than index).
- * @property {string} rank       CSV rank "1".."267" (1 = top frontier).
+ * @property {string} rank       CSV rank "1".."279" (1 = top frontier).
  * @property {string} model      Display name — the join key for CostCalc samples.
  * @property {string} provider
  * @property {string|null} total_parameters  "770B" / "Unknown" / "Undisc."
@@ -34,7 +34,7 @@ import { isOpenWeight, licenseBadge } from '../lib/license'
  * @property {string|null} released  ISO "2026-09-10" or coarse "Sep 2026" — curated (not in CSV).
  */
 
-/** @type {Model[]} Catalog singleton — 267 rows from data.json. */
+/** @type {Model[]} Catalog singleton — 279 rows from data.json. */
 export const allModels = raw.all_coding_models || raw
 
 // Dev-only invariant check: catches malformed regens (duplicate ids, rank gaps) at startup.

@@ -1,8 +1,10 @@
 # AI Model Tracker — Upcoming & Recent Releases
 
-**Updated:** Sep 2, 2026 (synced to llm-releases.com 339-model catalog) | **Currency:** ₹95.12/USD | **Exchange rate locked:** Aug 14, 2026
+**Updated:** Sep 23, 2026 (frontier wave Sep 12-22 added: Grok 4.7, GPT-6 Sol/Luna, Opus 5.5, MiMo-V2.6 trio, AliceAI 80B, Atria Dawn — ranks 271-279, 279 models) | **Currency:** ₹95.12/USD | **Exchange rate locked:** Aug 14, 2026
 **All benchmark scores vendor-reported unless marked `(AA)` `(Scale)` `(BenchLM)` `(tbench.ai)`**
-**⚠️ Ultra/multi-agent scores flagged separately. Verified via live web search Aug 29, 2026 + llm-releases.com Sep 2 cross-check.**
+**⚠️ Ultra/multi-agent scores flagged separately. Verified via live web search Aug 29, 2026 + llm-releases.com Sep 2 cross-check + live search Sep 23, 2026.**
+
+> **Sep 23, 2026 Frontier Wave** (9 models, ranks 271-279) — **Grok 4.7** (xAI GA Sep 21, $2/$6); **GPT-6 Sol** ($2/$10) + **Luna** ($0.10/$0.50) (OpenAI GA Sep 22); **Claude Opus 5.5** (Anthropic GA Sep 22, $4/$20, TB4.0 66.4% secondary-only, kept out of TB2.1 column); **MiMo-V2.6-Pro** (Xiaomi MIT Sep 21, 1.02T/42B, AA 46 top open) + **Flash** (309B/15B) + **Distill-Qwen-9B** (SWE-Pro 44.6% vendor SFT claim); **AliceAI-Foundation-80B-A3B** (Yandex Apache 2.0 Sep 21, 262K); **Atria Dawn Preview** (Sep 12, thin). Full rows in `coding_benchmarks_july2026_final.csv:271-279` + `CHANGELOG.md` Sep 23 entry.
 
 > **Sep 2, 2026 Sync vs llm-releases.com** (339 models, 35 new/30d) — 10 gap models (§2 Gap-fill: Parse 5, Ling-Fin, Thomson, Hy-MT2, Dots3-Note, LFM2.5-VL, Nemotron Lightning, Namazu, Solar Pro 4, GPT-5.6-Cyber) + **Sep 1 frontier Fable 5.1/Mythos 5.1** (same weights, $10/$50 + $0.25 cache, TB-Science 52.6% 2×) + **Sep 2 refresh Qwen3.8-Max-0902** (2.4T/1M, TB3 29% 2.6×, DeepSWE 69.3%); Qwen3.8-Flash split; GLM-5.2 Turbo reconciled; MAI-Thinking-1 →Preview (Aug 12); Laguna S 2.1 detailed (70.2% TB2.1); Vision benchmarks filled; dots3 IMO harness nuance. Added §0 Methodology + §7 Changelog + Status taxonomy. `Fable 5.1 §2` + `Qwen0902 §2 top`.
 

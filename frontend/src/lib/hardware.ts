@@ -8,8 +8,12 @@ export const hardwareTiers = [
   { id: '4x5090', label: '4× 5090 128GB', vram: 128, cost: '₹25-30L', tok: 'Q3 ~60-80' },
   { id: '1xPro6000', label: '1× Pro 6000 96GB', vram: 96, cost: '₹40-48L', tok: 'Qwen ~200' },
   { id: '2xPro6000', label: '2× Pro 6000 192GB', vram: 192, cost: '₹85L-1Cr', tok: 'V4 Flash 243 tok/s FP8' },
+  { id: '4xPro6000', label: '4× Pro 6000 384GB', vram: 384, cost: '₹1.7-2.1Cr', tok: 'GLM-5.3/Hy4 tight' },
   { id: '4xSpark', label: '4× DGX Spark 512GB', vram: 512, cost: '₹22-30L', tok: 'GLM-5.3 25-35' },
+  { id: '1xMacM5', label: '1× Mac Studio M5 512GB', vram: 512, cost: '₹5-7.5L', tok: 'unified mem' },
+  { id: '4xMacM5', label: '4× Mac Studio M5 2TB', vram: 2048, cost: '₹20-30L', tok: 'unified mem' },
   { id: 'B300', label: 'DGX B300 2.1TB', vram: 2100, cost: '₹5.5Cr', tok: 'All models' },
+  { id: 'rubin', label: 'Vera Rubin NVL72 20.7TB', vram: 20700, cost: '₹47-65Cr', tok: 'rack-scale' },
 ]
 
 /**

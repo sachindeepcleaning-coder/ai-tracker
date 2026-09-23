@@ -1,5 +1,18 @@
 # Changelog — coding_benchmarks_july2026_final.csv
 
+## Sep 23, 2026 — Frontier wave Sep 12-22: Grok 4.7, GPT-6 Sol/Luna, Opus 5.5, MiMo-V2.6, AliceAI 80B, Atria Dawn
+- Added Grok 4.7 (rank 271) – xAI GA Sep 21 2026 (delayed past ~Sep 12); $2/$6 + $0.50 cache; fast variant 2x speed at 2x price; closed weights
+- Added GPT-6 Sol (rank 272) – OpenAI GA Sep 22 2026; $2/$10; API/Codex/ChatGPT/Copilot; ~50% below GPT-5.6 promo; closed weights
+- Added GPT-6 Luna (rank 273) – OpenAI GA Sep 22 2026; $0.10/$0.50 + $0.01 cache; cheapest GPT-6; closed weights
+- Added Claude Opus 5.5 (rank 274) – Anthropic GA Sep 22 2026; $4/$20 + $0.20 cache (20% cut); secondary-only claims TB4.0 66.4% + GDPval 1846 kept in notes, NOT in TB2.1 column (cross-harness gate)
+- Added MiMo-V2.6-Pro (rank 275) – Xiaomi MIT Sep 21 2026; 1.02T/42B 1M multimodal; AA 46 top open-weight; $0.435/$0.87; ~510GB Q4
+- Added MiMo-V2.6-Flash (rank 276) – Xiaomi MIT Sep 21 2026; 309B/15B; $0.14/$0.28; ~155GB Q4
+- Added MiMo-V2.6-Distill-Qwen-9B (rank 277) – Xiaomi MIT Sep 21 2026; SFT of Qwen3.5-9B; SWE-Pro 44.6% vendor SFT claim in correct column; ~6GB Q4
+- Added AliceAI-Foundation-80B-A3B (rank 278) – Yandex Apache 2.0 ungated HF Sep 21 2026; 80B/3B hybrid MoE; 262K ctx; ~40GB Q4
+- Added Atria Dawn Preview (rank 279) – Preview Sep 12 2026; details thin; secondary source only
+- CSV rank count now 279 (+9); data.json regenerated v2026-09-23 with released dates 2026-09-12..2026-09-22
+- Frontend: Explorer virtualized single-column list replaced with responsive grid (all result sizes); hardware tiers added (4xPro6000 384GB, Mac Studio M5 512GB/2TB, Vera Rubin NVL72); vite setupFiles .js->.ts; VERIFIED_AT/DATA_AS_OF Sep 23
+
 ## Sep 15, 2026 — Deep audit sync: Koa, V4.1 Flash pricing, Astra enrichment, Grok delay
 - Added Salesforce Koa (rank 268) – enterprise agentic CRM model announced 15 Sep 2026; post-trained Nemotron 3 Super base; Salesforce-hosted pilot; GA winter 2026; specialized; weights controlled
 - Updated DeepSeek V4.1 Flash (rank 256) pricing to peak $0.30/$1.20 off-peak $0.15/$0.60; INR updated to ₹28.54/₹114.14; license note added for peak/off-peak and cache-hit

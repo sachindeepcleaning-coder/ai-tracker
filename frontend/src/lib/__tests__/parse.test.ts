@@ -66,7 +66,10 @@ describe('fmtDate / fmtDateFull / daysOld', () => {
   })
   it('daysOld against DATA_AS_OF', () => {
     expect(daysOld(DATA_AS_OF)).toBe(0)
-    expect(daysOld('2026-09-10')).toBe(5)
+    // anchor-relative: 5 days before the as-of date is 5 days old
+    const five = new Date(DATA_AS_OF + 'T00:00:00Z')
+    five.setUTCDate(five.getUTCDate() - 5)
+    expect(daysOld(five.toISOString().slice(0, 10))).toBe(5)
     expect(daysOld(null)).toBe(Infinity)
     expect(daysOld('bad')).toBe(Infinity)
   })
@@ -74,7 +77,9 @@ describe('fmtDate / fmtDateFull / daysOld', () => {
     expect(daysOld('2026-10-66')).toBe(Infinity) // invalid day can never be "recent"
     expect(daysOld('2026-12-31')).toBe(Infinity) // future pricing-window prose
     expect(daysOld('2026-10-15')).toBe(Infinity) // future month
-    expect(daysOld('2026-09-15')).toBe(0) // within-month estimate, clamped
+    // month-end estimate sits after the anchor but inside the as-of month → clamped
+    expect(RELEASE_MONTH_END > DATA_AS_OF).toBe(true)
+    expect(daysOld(RELEASE_MONTH_END)).toBe(0)
   })
 })
 

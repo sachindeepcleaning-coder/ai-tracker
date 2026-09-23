@@ -2,8 +2,16 @@ import React from 'react'
 import { Sparkles } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
 
-/** Sep 2-15 curated release tracker + frontier tightness / Q4 fit notes. */
+/** Sep 2-23 curated release tracker + frontier tightness / Q4 fit notes. */
 const RELEASES = [
+  { date: 'Sep 22', name: 'Claude Opus 5.5', badge: 'Proprietary', desc: 'GA Sep 22. $4/$20 + $0.20 cache (20% cut vs $5/$25). Secondary reports claim TB4.0 66.4% record + GDPval 1846 + FrontierCode 54.4% — all unverified, single secondary source. 30% faster inference. Sonnet/Haiku 5.5 coming.', cls: 'border-amber-500/30 bg-amber-500/10' },
+  { date: 'Sep 22', name: 'GPT-6 Sol / Luna', badge: 'Proprietary', desc: 'GA Sep 22 on API/Codex/ChatGPT/Copilot. Sol $2/$10 balanced agentic coding; Luna $0.10/$0.50 + $0.01 cache cheapest GPT-6 for high-volume work. ~50% below GPT-5.6 promo pricing.', cls: 'border-violet-500/30 bg-violet-500/10' },
+  { date: 'Sep 21', name: 'Grok 4.7', badge: 'Proprietary', desc: 'GA Sep 21 (missed ~Sep 12 target, extra RL). $2/$6 + $0.50 cache; fast variant 2x speed at 2x price. Larger base + longer RL on multi-hour tasks. Closed weights.', cls: 'border-white/10 bg-white/5' },
+  { date: 'Sep 21', name: 'MiMo-V2.6-Pro / Flash (MIT)', badge: 'MIT', desc: 'Open weights Sep 21 (HF + ModelScope). Pro 1.02T/42B AA 46 — top open-weight, tied Grok 4.7 — at $0.435/$0.87 (~$0.13/task). Flash 309B/15B $0.14/$0.28. 1M multimodal, 7k+ RL envs + framework open. ~510/155GB Q4.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
+  { date: 'Sep 21', name: 'AliceAI Foundation 80B', badge: 'Apache 2.0', desc: 'Yandex ungated HF Sep 21. 80B/3B hybrid MoE trained from scratch, 262K ctx. ~40GB Q4. No coding leaderboard scores yet.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
+  { date: 'Sep 16', name: 'Union Alpha (stealth)', badge: 'Proprietary', desc: 'Stealth preview Sep 16 on OpenRouter/OpenCode Zen, free ~1 week. 262K ctx, community DeepSWE ~73% unverified. No weights.', cls: 'border-white/10 bg-white/5' },
+  { date: 'Sep 16', name: 'ZGCM-1 (fully open)', badge: 'Apache 2.0', desc: 'Zhongguancun Academy 7.39B dense Sep 16. Weights + checkpoints + 5.44B-row dataset + recipes + logs. AIME 75.0% vendor, 256K, ~4GB Q4.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
+  { date: 'Sep 12', name: 'Atria Dawn Preview', badge: 'Preview', desc: 'Preview Sep 12, listed on LLM Gateway Sep 14. Details thin — track for GA pricing and weights.', cls: 'border-white/10 bg-white/5' },
   { date: 'Sep 15', name: 'Salesforce Koa (enterprise pilot)', badge: 'Proprietary', desc: 'Salesforce-hosted pilot announced Sep 15 2026. Nemotron 3 Super post-trained for Agentforce CRM workflows, multi-step reasoning + tool-use. Claims ~3× fewer errors on Salesforce CRM Bench vs frontier general models, higher precision/reliability/context retention, token-efficient. Enterprise deployment, weights controlled by Salesforce; GA winter 2026.', cls: 'border-violet-500/30 bg-violet-500/10' },
   { date: 'Sep 15', name: 'Grok 4.7 delayed', badge: 'Proprietary', desc: 'Grok 4.7 expected ~Sep 12 but delayed due to additional RL for response-length / task-completion. Roadmap: Grok 4.8 ~2.5T new C++ stack training finishing → RL next; 4.9 Astra/Fable-class; 5 AGI claim.', cls: 'border-amber-500/20 bg-amber-500/5' },
   { date: 'Sep 10', name: 'DeepSeek V4.1 Flash (open weights)', badge: 'MIT', desc: 'HF deepseek-ai/DeepSeek-V4.1-Flash — MIT weights, 552B backbone Causal Encoder-Decoder (8B prefill / 16B decode active, 384 experts, 890 bytes/tok KV, Engram 196B), ~280GB Q4, 48 shards ~510GB FP8, KV-cache compression, vision. Vendor evals @1M ctx: TB2.1 90.6, DeepSWE v1.1 74.2, GPQA-D 90.9, HLE-tools 63.9. API deepseek-flash off-peak $0.15/$0.60 cache $0.003; peak $0.30/$1.20 cache $0.006; Novita live ~126 tok/s $1.20 out. Legacy V4 Flash/Vision retired+routed (billed Flash); V4 Pro routed Sep 14 12:00 Beijing.', cls: 'border-emerald-500/30 bg-emerald-500/10' },
@@ -27,8 +35,8 @@ export default function Tracker() {
   return (
     <div className="space-y-4">
       <div className="card p-4">
-        <h2 className="font-bold flex items-center gap-2"><Sparkles size={16} className="text-violet-400" aria-hidden="true" /> Sep 2-15 Release Tracker (fact-checked Sep 15, 2026)</h2>
-        <p className="text-sm text-white/60">DeepSeek docs + Anthropic docs + Google AI docs + llm-releases.com (349) + AA v4.3. All scores vendor-reported unless AA/Scale.</p>
+        <h2 className="font-bold flex items-center gap-2"><Sparkles size={16} className="text-violet-400" aria-hidden="true" /> Sep 2-23 Release Tracker (fact-checked Sep 23, 2026)</h2>
+        <p className="text-sm text-white/60">DeepSeek docs + Anthropic docs + Google AI docs + xAI + OpenAI + Xiaomi + llm-releases.com + AA v4.3. All scores vendor-reported unless AA/Scale.</p>
         <div className="mt-4 grid md:grid-cols-2 gap-3 text-sm">
           {RELEASES.map((item) => (
             <div key={item.name} className={`rounded-xl border p-3 ${item.cls}`}>
@@ -64,10 +72,14 @@ export default function Tracker() {
           <div className="mt-2 space-y-2 text-xs">
             {[
               ['Qwen27B 17GB', 'Fits 1×5090 ✅ ~200 tok/s'],
+              ['MiMo Distill 9B ~6GB', 'Fits 1×5090 ✅ single-GPU'],
+              ['AliceAI 80B ~40GB', 'Fits 1×5090 w/ offload or 2×5090'],
               ['Qwen Flash-Next 111GB', 'Fits 1× Pro 6000 or 3×5090'],
+              ['MiMo Flash 309B ~155GB', 'Needs 2× Pro 6000 or 4× Spark'],
               ['V4.1 Flash 280GB', '4× Spark (512GB) or 8×80GB; 8B/16B active'],
               ['Ornith 397B 244GB', 'Needs 8×80GB or 4× Spark Q3'],
               ['GLM-5.3/Hy4 372/385GB', 'Needs 8×96GB or B300'],
+              ['MiMo Pro 1.02T ~510GB', 'Needs 4× Spark Q3 or B300'],
               ['V4 Pro 800GB+', 'Multi-node / B300 Q2 tight'],
             ].map(([a, b]) => (
               <div key={a} className="flex justify-between bg-white/5 rounded-lg px-3 py-2 border border-white/5"><span className="font-mono">{a}</span><span className="text-white/70">{b}</span></div>
@@ -80,7 +92,7 @@ export default function Tracker() {
         <p className="text-sm text-white/60 mt-1">Upcoming changes already on record — plan around them, the catalog snapshot predates these.</p>
         <div className="mt-3 grid md:grid-cols-2 gap-3 text-xs">
           {[
-            ['Sep 15', 'Grok 4.7 delayed / 4.8 roadmap', 'Grok 4.7 delayed (missed ~Sep 12; additional RL required for response-length / task-completion). Grok 4.8 ~2.5T new C++ stack training finishing → RL next; 4.9 Astra/Fable-class; 5 AGI claim.'],
+            ['Sep 21-22', 'Grok 4.7 shipped / Opus 5.5 + GPT-6 Sol-Luna', 'Grok 4.7 GA Sep 21 ($2/$6). Claude Opus 5.5 + GPT-6 Sol ($2/$10) / Luna ($0.10/$0.50) GA Sep 22. MiMo-V2.6-Pro MIT (AA 46, top open) Sep 21. All in catalog ranks 271-278.'],
             ['Sep 14', 'V4 Pro routing', 'DeepSeek V4 Pro routed Sep 14 12:00 Beijing (after this snapshot); legacy V4 Flash/Vision already retired+routed, billed Flash.'],
             ['Oct 4', 'Ling-3.0-flash-Sante free tier ends', 'API-first free thru Oct 4 via Vercel; Sante-specific weights still unconfirmed, base family MIT.'],
             ['≥Nov 21', 'GPT-5.6 Sol promo ends', 'Sol $4/20 promo holds to ≥Nov 21, then reverts to $5/30.'],
