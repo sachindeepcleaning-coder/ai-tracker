@@ -247,3 +247,48 @@ Break-even **₹2,450/mo (top-10) → ₹10,200/mo (all-models Rubin)** per conc
 *Sources: `Qwen/Qwen3.8-Flash-Next` HF, `Qwen/Qwen3.8-Flash-Next-GGUF` Unsloth, `qwencloud.com/models/qwen3.8-flash` pricing, `microsoft.ai/pdf/MAI-Code-1.1-Flash-Model-Card.PDF`, `microsoft.ai/news/mai-code-1-1-flash-br-better-faster-at-a-quarter-of-the-cost/`, `github.com/microsoft/MAI-Code`, `CohereLabs/North-Micro-Vision-Instruct` HF, `ornith.ai/ornith_1_5.html`, `ornith-ai/Ornith-1.5-397B` HF, `huggingface.co/datasets/harborframework/terminal-bench-2.1` (Ornith 397B #5), `huggingface.co/datasets/SWE-bench/SWE-bench_Verified` (Ornith 397B #1), `apodex/Apodex-1.1-mini` HF, `www.apodex.com/blog/apodex-1-1-scaling-agentic-intelligence-for-complex-work`, `arxiv.org/abs/2608.23283`, `platform.apodex.ai/docs/pricing`, `techpillow.co/blog/zai-glm-52-turbo` (sole Turbo source, NOT confirmed).*
 
 *Generated: Aug 29-30, 2026. All figures are planning estimates, not vendor quotes.*
+
+---
+
+## Chat Summary — Sep 26, 2026 (Best Open Coding + V4.1 HW Sizing)
+
+### 1. Best open-source coding (catalog 279, 159 open)
+- Highest TB: DeepSeek V4.1 Flash MIT TB 90.6 / DeepSWE 74.2
+- Best verified MIT: Ornith-1.5-397B TB 86.1 / SWE-V 86.0 (#1 HF) / SWE-Pro 65.1 — 5-run Harbor+OpenHands
+- Best Apache 2.0: Tencent Hy4 770B/49B TB 85.4 / DeepSWE 64.3 / SWE-Pro 65.7
+- Best AA composite: MiMo-V2.6-Pro MIT 1.02T/42B AA 46 #1 open, TB 89.9 / DeepSWE 71.9
+- Practical: Qwen3.8-27B Apache 14GB Q4 TB 73 / LCB 90.3 (1x5090); Flash-Next 111GB LCB 91.9; GLM-5.3-Flash MIT 160GB TB 84.3
+
+### 2. Online verification
+- Ornith: ornith.ai/ornith_1_5.html + huggingface.co/ornith-ai/Ornith-1.5-397B — beats GLM-5.2/V4-Flash-0731, par Opus 4.8
+- Hy4: tencent.com Aug 28 + huggingface.co/tencent/Hy4-preview — Apache 2.0 confirmed
+- MiMo: artificialanalysis.ai/models/mimo-v2-6-pro AA 46 + mimo.mi.com Sep 21 + VentureBeat Sep 22 + Raschka Sep 22
+- V4.1: huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash Sep 10 MIT 552B CED 8B/16B 1M; TB 90.6 / DeepSWE 74.2 mini-SWE (commit fb2764a); API $0.15/$0.60 off-peak
+
+### 3. Hard new benchmarks (vendor unless AA/Scale)
+- DeepSWE v1.1 indep: Spark 1.3 75.4 closed #1, V4.1-Flash 74.2 #2/#1 open, Kimi K3 69.0
+- TB2.1 indep llm-stats: V4.1-Flash 0.906 #1 overall/open; AA top closed Fable 5.1 91.4
+- TB4.0 AA harder: Opus 5.5/Astra 59.6 closed; best open GLM-5.3 41.9 (#19), Qwen-Max-0902 38.9, MiMo-Pro 34.9(v), V4-Flash 12.1
+- SWE-Pro vendor agg Sep 23: Qwen-Max 67.7 (#5), Hy4 65.7 (#6 best Apache), Ornith 65.1, Flash-Next 62.5; Scale std: open 38.7 vs closed 59.1
+
+### 4. All open @FP16 1M — which machine?
+- 159 open ~46.3T params = 92.6TB FP16 + 3-5TB KV = ~98TB
+- One-at-a-time: B300 2.1TB fails giants (K3 5.6TB, Max 4.8TB); 1x Rubin 20.7TB / Helios 31TB YES any single
+- All-at-once: 5x Rubin (103TB) or 4x Helios (124TB); old 3-rack math was 69 models
+
+### 5. B300 11.7Cr (5.7Cr upfront) @FP16/@FP8?
+- FP16: all Q4 yes, FP16 only ~144/159 (fails 15x 1T+); max ~1152B per vera_rubin_all_models.md:421
+- FP8: 157/159 fit (fails K3 2.86TB, Max 2.46TB); 1.6T 1.66TB YES
+- 288GB = 1x B300, 2.1TB = 8x + NVSwitch (2304GB raw minus overhead)
+
+### 6. tok/s B300 single-user batch=1
+- 3B/262K 300-500; 13-18B/1M 40-80 (80-150 short); 40-50B/1M 30-60 Q4; 95-104B/1M 15-30 Q4
+- V4.1-FP8 @1M: ~100-180 decode, 1M prefill 60-120s; vendor API 333-400 short-ctx batched, AA 232-243, LithosAI 564-660 optimized
+
+### 7. Cheapest V4.1 8-bit (511GB disk, 614GB VRAM min = x1.2)
+- Full resident: 8x Pro 6000 768GB ~3.4-4Cr (cheapest proper) vs 8xH200/GB200 tray
+- Offload: 314GB VRAM + 196GB RAM or 307GB + NVMe
+- Boot only: 128GB Mac + DwarfStar Q2 340GB SSD-stream single-digit
+- 4x Spark 512GB <614GB no; 1x Mac 512GB no stock runner; 6x Spark 768GB yes ~20-40 short; 2x Mac 1TB memory yes but no vLLM/RDMA practical
+- M5 Ultra 512GB: 36CPU/80GPU, 1.2TB/s (+50% vs M3U), late Oct >$10k; DwarfStar Q2/Q4 yes, official FP8 no, llama.cpp #28696 draft + Ollama cloud-only; roof 75 tok/s, real 10-20 resident
+- 2x M5 Ultra 1TB: fits Q4 resident TP via DwarfStar RDMA, ~20-40 est

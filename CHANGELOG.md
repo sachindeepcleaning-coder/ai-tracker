@@ -1,5 +1,13 @@
 # Changelog — coding_benchmarks_july2026_final.csv
 
+## Sep 27, 2026 — This-week gap-fill: K2.8 Preview, Omni-Flash, Xing4.0, M3.1-Flash-Preview
+- Added Kimi K2.8 Preview (rank 280) – Moonshot long-horizon/agent-swarm line, listed Sep 11 alongside Atria Dawn; weights/license unconfirmed, secondary source only
+- Added Qwen3.8-Omni-Flash (rank 281) – Alibaba multimodal Omni-Flash Sep 18 per Sep 25 roundup; HF repo/ctx/bench unverified
+- Added Xing4.0-29B-A4B (rank 282) – XingChen-AGI Apache 2.0 ungated HF Sep 24; 29B/4B MoE 256K→512K, Ascend/MindSpore, mHC + MLA + MTP; vLLM/SGLang PRs unmerged, use prebuilt Docker; ~15GB Q4
+- Added M3.1-Flash-Preview (rank 283) – MiniMax quiet Sep 27 inside MiniMax Code only, gated API, no card/bench/price
+- Refreshed Kimi K2.6 (rank 13) released Jul 27 → Sep 24 per Moonshot Sep 24 release coverage (4k tool-call demo, HF modified MIT)
+- CSV rank count now 283 (+4); data.json v2026-09-27; parse VERIFIED_AT/DATA_AS_OF → Sep 27
+
 ## Sep 23, 2026 — Frontier wave Sep 12-22: Grok 4.7, GPT-6 Sol/Luna, Opus 5.5, MiMo-V2.6, AliceAI 80B, Atria Dawn
 - Added Grok 4.7 (rank 271) – xAI GA Sep 21 2026 (delayed past ~Sep 12); $2/$6 + $0.50 cache; fast variant 2x speed at 2x price; closed weights
 - Added GPT-6 Sol (rank 272) – OpenAI GA Sep 22 2026; $2/$10; API/Codex/ChatGPT/Copilot; ~50% below GPT-5.6 promo; closed weights
