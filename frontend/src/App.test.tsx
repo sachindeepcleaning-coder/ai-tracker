@@ -15,9 +15,9 @@ describe('App shell smoke test', () => {
   })
   afterAll(() => { act(() => root.unmount()); container.remove() })
 
-  it('renders KPI strip with total=283', () => {
+  it('renders KPI strip with total=288', () => {
     const text = container.textContent
-    expect(text).toContain('283')
+    expect(text).toContain('288')
     expect(text).toContain('Total models')
   })
   it('shows data-completeness card (dated=173)', () => {
@@ -29,7 +29,7 @@ describe('App shell smoke test', () => {
   it('footer shows fact-check date', () => {
     const text = container.textContent
     expect(text).toContain('Fact-checked')
-    expect(text).toContain('Sep 27')
+    expect(text).toContain('Sep 29')
   })
   it('skip-to-content link present', () => {
     expect(container.querySelector('a[href="#main"]')).not.toBeNull()

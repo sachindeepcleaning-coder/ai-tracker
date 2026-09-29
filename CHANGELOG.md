@@ -1,5 +1,14 @@
 # Changelog — coding_benchmarks_july2026_final.csv
 
+## Sep 29, 2026 — DevDay-day gap-fill: Sonnet 5.5, Holo4 family, Step 5 Preview
+- Added Claude Sonnet 5.5 (rank 284) – Anthropic GA Sep 28; 30% faster than Sonnet 5, up to 30% less/task; coding + computer-use + visual; AWS/GCP/Azure; Haiku 5.5 coming weeks; pricing unconfirmed
+- Added Holo4-27B (rank 285) – Hcompany Sep 28; 27B dense computer-use agents; open weights HF (BF16/FP8/NVFP4/GGUF); license to verify; ~14GB Q4
+- Added Holo4-35B-A3B (rank 286) – Hcompany Sep 28; 35B/3B MoE computer-use agents; same HF weight formats; ~18GB Q4
+- Added Holotron4 Nano (rank 287) – Hcompany Sep 28; updated small companion to Holo4; specs thin
+- Added Step 5 Preview (rank 288) – StepFun announced Sep 20 per BenchLM; details thin
+- Noted but NOT added: GPT-6.1 Astra (scrapped pre-DevDay over safety, WSJ/NYT Sep 28), DevDay agent "o" (unconfirmed leaks), JEV-27B + CLM-8B (decision-only, no coding benches), Gemini TTS/Live + GPT-Live-1 (voice/audio, out of coding scope)
+- CSV rank count now 288 (+5); data.json v2026-09-29; parse VERIFIED_AT/DATA_AS_OF → Sep 29
+
 ## Sep 27, 2026 — This-week gap-fill: K2.8 Preview, Omni-Flash, Xing4.0, M3.1-Flash-Preview
 - Added Kimi K2.8 Preview (rank 280) – Moonshot long-horizon/agent-swarm line, listed Sep 11 alongside Atria Dawn; weights/license unconfirmed, secondary source only
 - Added Qwen3.8-Omni-Flash (rank 281) – Alibaba multimodal Omni-Flash Sep 18 per Sep 25 roundup; HF repo/ctx/bench unverified
