@@ -1,5 +1,11 @@
 # Changelog — coding_benchmarks_july2026_final.csv
 
+## Sep 30, 2026 — Post-DevDay: GPT-6.1 Sol, IQuest-Q1, K2-Horizon-MoVA
+- Added GPT-6.1 Sol (rank 289) – OpenAI GA Sep 29 DevDay; Sol upgrade for coding/computer-use/pro work at ~1/5 Astra price (pricing unconfirmed); API + Work + Codex; 6.1 Astra scrapped pre-launch over safety; Ultrafast tier + Pro 500 + Dots (Astra-powered agent product, not a model) same day
+- Added IQuest-Q1 (rank 290) – IQuest Sep 30; 320B/15B MoE (256 experts, 8 active) 512K text-only; open safetensors HF + SGLang/vLLM Docker; Claude Code + Codex CLI parsers; license to verify; early-stage accuracy caveats; ~160GB Q4
+- Added K2-Horizon-MoVA-36B-A4B (rank 291) – IFM Sep 29 Apache 2.0; 36B/4B MoE MoVA attention native 512K; release benches GPQA 80.8 / TB2.1 58.6 / Tau3-Banking 26.8; ~18GB Q4
+- CSV rank count now 291 (+3); data.json v2026-09-30; parse VERIFIED_AT/DATA_AS_OF → Sep 30
+
 ## Sep 29, 2026 — DevDay-day gap-fill: Sonnet 5.5, Holo4 family, Step 5 Preview
 - Added Claude Sonnet 5.5 (rank 284) – Anthropic GA Sep 28; 30% faster than Sonnet 5, up to 30% less/task; coding + computer-use + visual; AWS/GCP/Azure; Haiku 5.5 coming weeks; pricing unconfirmed
 - Added Holo4-27B (rank 285) – Hcompany Sep 28; 27B dense computer-use agents; open weights HF (BF16/FP8/NVFP4/GGUF); license to verify; ~14GB Q4

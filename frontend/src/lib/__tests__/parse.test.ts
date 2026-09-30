@@ -77,8 +77,8 @@ describe('fmtDate / fmtDateFull / daysOld', () => {
     expect(daysOld('2026-10-66')).toBe(Infinity) // invalid day can never be "recent"
     expect(daysOld('2026-12-31')).toBe(Infinity) // future pricing-window prose
     expect(daysOld('2026-10-15')).toBe(Infinity) // future month
-    // month-end estimate sits after the anchor but inside the as-of month → clamped
-    expect(RELEASE_MONTH_END > DATA_AS_OF).toBe(true)
+    // month-end estimate sits at/after the anchor but inside the as-of month → clamped
+    expect(RELEASE_MONTH_END >= DATA_AS_OF).toBe(true)
     expect(daysOld(RELEASE_MONTH_END)).toBe(0)
   })
 })
