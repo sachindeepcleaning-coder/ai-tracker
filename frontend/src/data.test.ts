@@ -97,10 +97,10 @@ describe('data.json integrity (regen gate)', () => {
     const est = dated.filter((m) => m.released_est)
     expect(exact.length).toBeGreaterThanOrEqual(30)
     expect(est.length).toBeGreaterThan(0)
-    // SWE-2 coarse 'Sep 2026' normalized to estimated mid-month ISO
+    // SWE-2 verified Sep 10 via Cognition blog (was coarse mid-month est)
     const swe2 = models.find((m) => m.model === 'SWE-2')
-    expect(swe2.released).toBe('2026-09-15')
-    expect(swe2.released_est).toBe(true)
+    expect(swe2.released).toBe('2026-09-10')
+    expect(swe2.released_est).toBe(false)
   })
 
   it('data_regen_at timestamp present (drives "Data last refreshed")', () => {
