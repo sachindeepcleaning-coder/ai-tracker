@@ -9,11 +9,11 @@ const data = JSON.parse(raw)
 const models = data.all_coding_models
 
 describe('data.json integrity (regen gate)', () => {
-  it('has 291 rows with unique contiguous ranks 1-291', () => {
-    expect(models.length).toBe(291)
+  it('has 292 rows with unique contiguous ranks 1-292', () => {
+    expect(models.length).toBe(292)
     const ranks = models.map((m) => parseInt(m.rank, 10)).sort((a, b) => a - b)
-    expect(ranks).toEqual(Array.from({ length: 291 }, (_, i) => i + 1))
-    expect(new Set(models.map((m) => m.id)).size).toBe(291)
+    expect(ranks).toEqual(Array.from({ length: 292 }, (_, i) => i + 1))
+    expect(new Set(models.map((m) => m.id)).size).toBe(292)
   })
 
   it('has new schema fields with allowed enums', () => {
@@ -23,7 +23,7 @@ describe('data.json integrity (regen gate)', () => {
       expect(typeof m.is_orchestrator).toBe('boolean')
       if (m.last_verified) expect(m.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/)
     }
-    expect(data.data_version).toBe('2026-09-30')
+    expect(data.data_version).toBe('2026-10-01')
   })
 
   it('has at least 10 high-confidence models and notes for orchestrators', () => {

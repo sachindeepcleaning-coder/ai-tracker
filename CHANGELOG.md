@@ -1,5 +1,10 @@
 # Changelog — coding_benchmarks_july2026_final.csv
 
+## Oct 1, 2026 — Gemini 4 Argon frontier wave
+- Added Gemini 4 Argon (rank 292) – Google Sep 30; frontier SWE + legal/finance + cyber-defense; Fairwind trusted-defender phased rollout; intro $2/$10 (cache 95% off) → $4/$20; guardrails pending before paid API/Ultra
+- Noted but NOT added: Cohere Embed 5 (embeddings), NVIDIA Kumo Tabular (tabular 28M-215M), MAI-Transcribe-2/Voice-2.1 (voice), TypeSafe Jev + Cloudflare Clef (decision-only, no text gen), North-Mini-Code FP8 + K2.7 DFlash (quant/draft variants, not new models), OpenHands LM 32B (no current release-date evidence)
+- CSV rank count now 292 (+1); data.json v2026-10-01; parse VERIFIED_AT → Oct 1 (DATA_AS_OF stays Sep 30 month-end)
+
 ## Sep 30, 2026 — Post-DevDay: GPT-6.1 Sol, IQuest-Q1, K2-Horizon-MoVA
 - Added GPT-6.1 Sol (rank 289) – OpenAI GA Sep 29 DevDay; Sol upgrade for coding/computer-use/pro work at ~1/5 Astra price (pricing unconfirmed); API + Work + Codex; 6.1 Astra scrapped pre-launch over safety; Ultrafast tier + Pro 500 + Dots (Astra-powered agent product, not a model) same day
 - Added IQuest-Q1 (rank 290) – IQuest Sep 30; 320B/15B MoE (256 experts, 8 active) 512K text-only; open safetensors HF + SGLang/vLLM Docker; Claude Code + Codex CLI parsers; license to verify; early-stage accuracy caveats; ~160GB Q4

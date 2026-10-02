@@ -4,7 +4,7 @@
  */
 
 export const INR_PER_USD = 95.12
-export const VERIFIED_AT = 'Sep 30, 2026'
+export const VERIFIED_AT = 'Oct 1, 2026'
 /** Data as-of anchor (from data.json conversation_summary) — used for "latest" windows. */
 export const DATA_AS_OF = '2026-09-30'
 /** End of the as-of month — the newest date a release may claim before it is
