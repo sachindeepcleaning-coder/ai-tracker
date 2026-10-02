@@ -10185,7 +10185,7 @@
       "last_verified": "2026-09-23",
       "source": "secondary",
       "confidence": "low",
-      "notes": "Opus 5.5 GA Sep 22; secondary reports TB4.0 66.4% record + GDPval 1846 + FrontierCode 54.4% (all unverified); 30% faster inference; Sonnet/Haiku 5.5 coming",
+      "notes": "Opus 5.5 GA Sep 22; official line: Fable-5.1-level on most work at 40pct lower run-cost vs Opus 5; secondary reports TB4.0 66.4pct record + GDPval 1846 + FrontierCode 54.4pct (all unverified); 30pct faster inference; Sonnet/Haiku 5.5 coming",
       "is_orchestrator": false,
       "released": "2026-09-22",
       "released_est": false,
