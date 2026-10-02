@@ -1,5 +1,17 @@
 # Changelog — coding_benchmarks_july2026_final.csv
 
+## Oct 2, 2026 — Full fact-check pass (agents + local audit)
+- Fixed Qwen3.8-Omni-Flash (281): API-only (open weights is Flash-Next); pricing $0.15/$0.47 confirmed
+- Fixed K2-Horizon-MoVA (291): released Sep 3 (was Sep 29); rest confirmed incl. Apache 2.0 + benches
+- Fixed IQuest-Q1 (290): released Sep 29 (weights fill Oct 1); license = custom iquest-q1 Modified-MIT + attribution UI clause
+- Fixed Xing4.0 (282): weights Sep 16 (press Sep 22-24)
+- Enriched Step 5 Preview (288): 600B/27B, 1M, $1/$2.70, weights Oct 15; Sonnet 5.5 (284): $2/$10 + 1M; GPT-6.1 Sol (289): $2/$10 + 1.05M + DeepSWE 75.22 #2; M3.1 (283): 1M ctx
+- Fixed Holo licenses (285-287): 27B = CC-BY-NC 4.0 non-commercial, 35B = Apache 2.0, Nano = NVIDIA Open Model Agreement
+- Reverted Kimi K2.6 to Jul 27 (Sep 24 was press coverage; HF shows Jul 27)
+- Harness-gap notes: V4.1 Vals TB 74.5 vs 90.6 vendor; Hy4 Vals 55.1; GLM-Flash Vals 62.9; K3 indep DeepSWE 69.0; MiMo indep 71.9 exact; Spark speed 151.6 live (was 236.8); GLM-Flash AA 42 v4.3.2 (was 57)
+- Helios timeline corrected (volume 2H 2026, late-Q3 shipments) in README + vera_rubin; INR ₹95.12 kept (within 1.2% of Oct ~96.1)
+- Local audit: ranks contiguous, no future dates, INR math exact, Q4 units clean, misattribution gates pass; 4 pre-existing Unknown licenses (132/152/155/206)
+
 ## Oct 2, 2026 — AREX-2 agent + October month-rollover
 - Added AREX-2 (rank 293) – BAAI Oct 1; 27B dense Qwen3.8-compatible long-horizon agent via iterative test-time refinement; MLE-bench Lite 81.8, Frontier-CS 70.7, GAIA 92.2, HLE 52.6 vendor; HF + GitHub, license to verify; ~14GB Q4
 - Month rollover: parse DATA_AS_OF → Oct 2, RELEASE_MONTH_END → Oct 31; future-gate → Oct 31; Meta Spark 1.2 open-weights plan (announced, not shipped) to rumor watch

@@ -202,7 +202,7 @@ DeepSeek = price increase (cheapest hour 2.3× old output; cache-hit +10×). Gem
 | US price (est) | $4-8M (varies) | $5-5.5M (Futurum estimate) |
 | India landed (est) | ₹47-65 Cr | ₹45-55 Cr |
 | 5-yr TCO | ~₹122 Cr | ~₹117 Cr |
-| Availability | H2 2026 (fall shipments) | H2 2026 samples, Q2 2027 mass (in production) |
+| Availability | H2 2026 (fall shipments, shipping Sep 2026) | Volume 2H 2026 (late-Q3 shipments, in production) |
 | Software | CUDA mature | ROCm 7 catching up |
 
 Both launch Advancing AI / GTC 2026: Helios 2.9 EF dense FP4, 1.4 EF FP8, 260 TB/s scale-up, 43 TB/s scale-out `amd.com/newsroom 2026-07-23`; Rubin 3.6 EF FP4, NVLink 6, 260 TB/s scale-up `nvidia.com`. Helios = 50% more memory, open standards; Rubin = higher per-GPU BW, FP4, efficiency, maturity.
@@ -257,7 +257,7 @@ Break-even **₹2,450/mo (top-10) → ₹10,200/mo (all-models Rubin)** per conc
 - Best verified MIT: Ornith-1.5-397B TB 86.1 / SWE-V 86.0 (#1 HF) / SWE-Pro 65.1 — 5-run Harbor+OpenHands
 - Best Apache 2.0: Tencent Hy4 770B/49B TB 85.4 / DeepSWE 64.3 / SWE-Pro 65.7
 - Best AA composite: MiMo-V2.6-Pro MIT 1.02T/42B AA 46 #1 open, TB 89.9 / DeepSWE 71.9
-- Practical: Qwen3.8-27B Apache 14GB Q4 TB 73 / LCB 90.3 (1x5090); Flash-Next 111GB LCB 91.9; GLM-5.3-Flash MIT 160GB TB 84.3
+- Practical: Qwen3.8-27B Apache 14GB Q4 TB 73 / LCB 90.3 (1x5090); Flash-Next 111GB LCB 91.9; GLM-5.3-Flash MIT 160GB TB 84.3, AA 42 v4.3.2 (was 57 v4.1.1)
 
 ### 2. Online verification
 - Ornith: ornith.ai/ornith_1_5.html + huggingface.co/ornith-ai/Ornith-1.5-397B — beats GLM-5.2/V4-Flash-0731, par Opus 4.8
@@ -266,7 +266,7 @@ Break-even **₹2,450/mo (top-10) → ₹10,200/mo (all-models Rubin)** per conc
 - V4.1: huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash Sep 10 MIT 552B CED 8B/16B 1M; TB 90.6 / DeepSWE 74.2 mini-SWE (commit fb2764a); API $0.15/$0.60 off-peak
 
 ### 3. Hard new benchmarks (vendor unless AA/Scale)
-- DeepSWE v1.1 indep: Spark 1.3 75.4 closed #1, V4.1-Flash 74.2 #2/#1 open, Kimi K3 69.0
+- DeepSWE v1.1 indep Oct 2: Spark 1.3 75.4 closed #1, GPT-6.1 Sol 75.22 #2, V4.1-Flash 74.2 tied #3/#1 open, Kimi K3 69.0; Spark speed live 151.6 (was 236.8 launch)
 - TB2.1 indep llm-stats: V4.1-Flash 0.906 #1 overall/open; AA top closed Fable 5.1 91.4
 - TB4.0 AA harder: Opus 5.5/Astra 59.6 closed; best open GLM-5.3 41.9 (#19), Qwen-Max-0902 38.9, MiMo-Pro 34.9(v), V4-Flash 12.1
 - SWE-Pro vendor agg Sep 23: Qwen-Max 67.7 (#5), Hy4 65.7 (#6 best Apache), Ornith 65.1, Flash-Next 62.5; Scale std: open 38.7 vs closed 59.1

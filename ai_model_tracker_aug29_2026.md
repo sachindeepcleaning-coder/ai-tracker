@@ -126,7 +126,7 @@ B. [₹ Pricing Quick Reference](#appendix-b--pricing-quick-reference-aug-29-951
 - **AA live details (max variant, `artificialanalysis.ai/models/muse-spark-1-3`):**
   - AA Intelligence Index: **48** (#13/202)
   - Cost per Intelligence Index task: **$1.60**
-  - Output speed: **236.8 tok/s** (fast); **TTFT 26.9s** (high — think-heavy)
+  - Output speed: **151.6 tok/s live (Meta API, Oct 2)** — launch-day 236.8 superseded; **TTFT 26.9s** (high — think-heavy)
   - **170M output tokens** on the index (very verbose; median 90M) — verbosity is a real cost drag
   - 1M ctx; text/image/video in → text out
 - **Benchmarks (Meta, launch-day):**

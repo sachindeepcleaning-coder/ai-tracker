@@ -22,7 +22,7 @@ Both are 72-GPU racks with HBM4. AMD Helios was announced July 22-23, 2026 at AM
 | TDP | **~200 kW** | ~235 kW† (17% more) |
 | US Price | $4-8M (varies by source) | **$5-5.5M** |
 | India Landed (est.) | ₹47-65 Cr | **₹45-55 Cr** |
-| Availability | H2 2026 | H2 2026 samples, Q2 2027 mass prod. |
+| Availability | H2 2026 (shipping Sep 2026) | Volume 2H 2026 (late-Q3 shipments, in production) |
 | Software | CUDA (mature) | ROCm 7 (catching up) |
 | India Partner | — | **TCS partnership announced** |
 
@@ -148,7 +148,7 @@ All prices in ₹. US$1 = ₹95.12 (standardized Aug 14, 2026; previously ₹96.
 | tok/s (large model, 50B active @ 1M) | **~80-150** | **~30-60** | **Helios (2-3× BW)** |
 | Software maturity | ❌ ROCm 7 — catching up | ✅ CUDA — mature | **NVIDIA** |
 | Interconnect latency | ⚠️ UALink over Eth — higher latency | ✅ NVLink 6 — lower latency | **NVIDIA** |
-| Availability | ⚠️ Q2 2027 mass prod. | ✅ H2 2026 | **NVIDIA** |
+| Availability | ⚠️ Volume ramp 2H 2026 | ✅ H2 2026 (shipping) | **NVIDIA** |
 | Vendor lock-in | ✅ Open standards | ❌ Proprietary stack | **Helios** |
 
 ### The Helios Advantage for "All Models" Use Case
@@ -392,7 +392,7 @@ A single DGX B300 (8× B300 GPUs, 2.1 TB total VRAM) can't load all ~86 models s
 | tok/s (small 3B model) | **~300** | ~800-1,200 | ~5,000-8,000 |
 | tok/s (large 50B @ 1M ctx) | **~30** | ~30-60 | ~80-150 |
 | Software | ✅ CUDA mature | ✅ CUDA mature | ⚠️ ROCm |
-| Availability | **✅ Now** | H2 2026 | Q2 2027 |
+| Availability | **✅ Now** | H2 2026 (shipping) | Volume 2H 2026 |
 | Power per user | **~₹1.7 L** | ~₹9.2 L | ~₹3.2 L |
 | TCO per user | **~₹39 L** | ~₹40-80 L | ~₹16-23 L |
 

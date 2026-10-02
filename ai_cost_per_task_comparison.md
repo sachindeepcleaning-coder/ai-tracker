@@ -32,7 +32,7 @@ After the July 2026 model releases, the landscape shifted dramatically. This doc
 | **GPT-6 Astra** | OpenAI | **Sep 3-4** | **$10.00 / $50.00** | ~$1.67 | **1-source** | Flagship; AA Index 61.2 (ties Sol), TB4.0 57.9, OSWorld 2.0 72.6; ~3× more token-efficient than Sol at max effort; cache $1/M (90% off); Fast mode 2× speed @ 2× price. Cost/task est. not AA-measured yet |
 | **Claude Fable 5.1** | Anthropic | Sep 1 | **$10.00 / $50.00** | **$11.71** † | **1-source** | Same weights as Fable 5, cache reads cut 75% ($1 → $0.25) |
 | **Gemini 3.8 Flash** | Google | Sep 2 | **$0.75 / $3.75** | ~$0.58 | **1-source** | Same intro pricing as 3.7 Flash; AA Index 59 (HIGH) vs 56; TB4.0 19.1%, DeepSWE 73.7 (vendor); ~30% more tokens/task |
-| **Muse Spark 1.3** | Meta | Sep 2 | **$1.25 / $4.25** | $1.60 | **1-source** | **AA Index 48 (v4.3 re-score, ⚠️ launch-day 61/62 superseded)**; contributor tier $0.10/$0.20; 236.8 tok/s but very verbose (170M idx tokens); TTFT 26.9s |
+| **Muse Spark 1.3** | Meta | Sep 2 | **$1.25 / $4.25** | $1.60 | **1-source** | **AA Index 48 (v4.3 re-score, ⚠️ launch-day 61/62 superseded)**; contributor tier $0.10/$0.20; 151.6 tok/s live (was 236.8 launch-day) but very verbose (170M idx tokens); TTFT 26.9s |
 | Gemini 3.1 Pro | Google | 2026 | $2.00 / $12.00 | **$2.00** † | AA | Google's flagship |
 | Gemini 3 Flash | Google | 2026 | $0.50 / $3.00 | ~$1.00 | Hypoth. | Google's cost leader |
 
