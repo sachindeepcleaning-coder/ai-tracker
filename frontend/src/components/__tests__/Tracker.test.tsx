@@ -90,7 +90,7 @@ describe('Tracker — llm-releases-style views', () => {
       expect(text).toContain('Mythos 5.1')
       expect(text).toContain('Grok 4.8')
 
-      clickPill(container, 'Rumor · 12')
+      clickPill(container, 'Rumor · 16')
       text = container.textContent
       expect(text).toContain('Grok 4.8')
       expect(text).not.toContain('Mythos 5.1')
