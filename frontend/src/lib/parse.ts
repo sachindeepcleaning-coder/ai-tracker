@@ -4,13 +4,13 @@
  */
 
 export const INR_PER_USD = 95.12
-export const VERIFIED_AT = 'Oct 1, 2026'
+export const VERIFIED_AT = 'Oct 2, 2026'
 /** Data as-of anchor (from data.json conversation_summary) — used for "latest" windows. */
-export const DATA_AS_OF = '2026-09-30'
+export const DATA_AS_OF = '2026-10-02'
 /** End of the as-of month — the newest date a release may claim before it is
     treated as future/invalid (pricing-window prose like "intro to Dec 31" must
     never leak into release dates). Mid-month estimates (≈) stay within it. */
-export const RELEASE_MONTH_END = '2026-09-30'
+export const RELEASE_MONTH_END = '2026-10-31'
 
 /** A "real recent" release date: valid ISO YYYY-MM-DD, not future relative to
     the as-of month. Approximate (est) dates qualify — they carry the ≈ marker. */

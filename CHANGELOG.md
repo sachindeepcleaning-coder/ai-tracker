@@ -1,5 +1,11 @@
 # Changelog — coding_benchmarks_july2026_final.csv
 
+## Oct 2, 2026 — AREX-2 agent + October month-rollover
+- Added AREX-2 (rank 293) – BAAI Oct 1; 27B dense Qwen3.8-compatible long-horizon agent via iterative test-time refinement; MLE-bench Lite 81.8, Frontier-CS 70.7, GAIA 92.2, HLE 52.6 vendor; HF + GitHub, license to verify; ~14GB Q4
+- Month rollover: parse DATA_AS_OF → Oct 2, RELEASE_MONTH_END → Oct 31; future-gate → Oct 31; Meta Spark 1.2 open-weights plan (announced, not shipped) to rumor watch
+- Noted but NOT added: Strands Decider 2B + Clef + Jev (decision-only), MAI voice (audio), PixelUMM (license-blocked research artifact, non-coding), OpenHands LM 32B (no current date evidence)
+- CSV rank count now 293 (+1); data.json v2026-10-02; parse VERIFIED_AT → Oct 2
+
 ## Oct 1, 2026 — Gemini 4 Argon frontier wave
 - Added Gemini 4 Argon (rank 292) – Google Sep 30; frontier SWE + legal/finance + cyber-defense; Fairwind trusted-defender phased rollout; intro $2/$10 (cache 95% off) → $4/$20; guardrails pending before paid API/Ultra
 - Noted but NOT added: Cohere Embed 5 (embeddings), NVIDIA Kumo Tabular (tabular 28M-215M), MAI-Transcribe-2/Voice-2.1 (voice), TypeSafe Jev + Cloudflare Clef (decision-only, no text gen), North-Mini-Code FP8 + K2.7 DFlash (quant/draft variants, not new models), OpenHands LM 32B (no current release-date evidence)

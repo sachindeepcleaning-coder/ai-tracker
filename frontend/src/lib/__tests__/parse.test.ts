@@ -76,7 +76,7 @@ describe('fmtDate / fmtDateFull / daysOld', () => {
   it('daysOld ignores invalid/future dates; within-month estimates clamp to 0', () => {
     expect(daysOld('2026-10-66')).toBe(Infinity) // invalid day can never be "recent"
     expect(daysOld('2026-12-31')).toBe(Infinity) // future pricing-window prose
-    expect(daysOld('2026-10-15')).toBe(Infinity) // future month
+    expect(daysOld('2026-11-15')).toBe(Infinity) // future month
     // month-end estimate sits at/after the anchor but inside the as-of month → clamped
     expect(RELEASE_MONTH_END >= DATA_AS_OF).toBe(true)
     expect(daysOld(RELEASE_MONTH_END)).toBe(0)
@@ -93,7 +93,7 @@ describe('isValidRelease', () => {
   it('rejects invalid, future, coarse, and missing dates', () => {
     expect(isValidRelease('2026-10-66')).toBe(false)
     expect(isValidRelease('2026-12-31')).toBe(false)
-    expect(isValidRelease('2026-10-15')).toBe(false)
+    expect(isValidRelease('2026-11-15')).toBe(false)
     expect(isValidRelease('Sep 2026')).toBe(false)
     expect(isValidRelease(null)).toBe(false)
     expect(isValidRelease('')).toBe(false)
