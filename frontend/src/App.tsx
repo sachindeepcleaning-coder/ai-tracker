@@ -143,7 +143,7 @@ export default function App() {
               </button>
             ))}
             <button type="button" onClick={() => setTab('tracker')} className="ml-auto btn btn-ghost text-xs py-1">
-              Full Sep tracker
+              Full tracker
             </button>
           </div>
           <p className="text-xs text-white/50 mt-1">Explorer defaults to <b>Sort: Latest release ↓</b> so the freshest models are on top; switch to <b>Rank ↑</b> for the performance-ordered frontier list. Dates prefixed <b>≈</b> are approximations (inferred from family/provider release windows).</p>

@@ -8,7 +8,7 @@ const TABS = [
   { id: 'hardware', label: 'Hardware Fit', icon: HardDrive },
   { id: 'cost', label: 'Cost Calculator', icon: IndianRupee },
   { id: 'compare', label: 'Compare', icon: Scale },
-  { id: 'tracker', label: 'Sep Tracker', icon: Timer },
+  { id: 'tracker', label: 'Tracker', icon: Timer },
 ]
 
 const CSV_URL = 'https://github.com/sachindeepcleaning-coder/ai-tracker/blob/master/coding_benchmarks_july2026_final.csv'

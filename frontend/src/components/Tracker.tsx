@@ -400,7 +400,7 @@ export default function Tracker({ onOpenModel }: { onOpenModel?: (rankId: string
     <div className="space-y-4">
       <div className="card p-3 flex items-center gap-2 flex-wrap" role="tablist" aria-label="Tracker views">
         <span className="inline-flex items-center gap-1.5 text-sm font-bold px-1">
-          <Sparkles size={14} className="text-violet-400" aria-hidden="true" /> Sep tracker
+          <Sparkles size={14} className="text-violet-400" aria-hidden="true" /> Tracker
         </span>
         {VIEWS.map((v) => {
           const Icon = v.icon
