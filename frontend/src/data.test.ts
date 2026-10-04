@@ -9,11 +9,11 @@ const data = JSON.parse(raw)
 const models = data.all_coding_models
 
 describe('data.json integrity (regen gate)', () => {
-  it('has 293 rows with unique contiguous ranks 1-293', () => {
-    expect(models.length).toBe(293)
+  it('has 299 rows with unique contiguous ranks 1-299', () => {
+    expect(models.length).toBe(299)
     const ranks = models.map((m) => parseInt(m.rank, 10)).sort((a, b) => a - b)
-    expect(ranks).toEqual(Array.from({ length: 293 }, (_, i) => i + 1))
-    expect(new Set(models.map((m) => m.id)).size).toBe(293)
+    expect(ranks).toEqual(Array.from({ length: 299 }, (_, i) => i + 1))
+    expect(new Set(models.map((m) => m.id)).size).toBe(299)
   })
 
   it('has new schema fields with allowed enums', () => {
