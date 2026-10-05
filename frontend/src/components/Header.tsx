@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { Search, Award, HardDrive, IndianRupee, Scale, Timer } from 'lucide-react'
+import { Search, Award, HardDrive, IndianRupee, Scale, Timer, ArrowLeftRight } from 'lucide-react'
 import { VERIFIED_AT } from '../lib/parse'
 
 const TABS = [
@@ -9,6 +9,7 @@ const TABS = [
   { id: 'cost', label: 'Cost Calculator', icon: IndianRupee },
   { id: 'compare', label: 'Compare', icon: Scale },
   { id: 'tracker', label: 'Tracker', icon: Timer },
+  { id: 'gap', label: 'Open vs Closed', icon: ArrowLeftRight },
 ]
 
 const CSV_URL = 'https://github.com/sachindeepcleaning-coder/ai-tracker/blob/master/coding_benchmarks_july2026_final.csv'

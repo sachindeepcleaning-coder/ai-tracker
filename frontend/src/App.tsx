@@ -15,6 +15,7 @@ const HardwareFit = lazy(() => import('./components/HardwareFit'))
 const CostCalc = lazy(() => import('./components/CostCalc'))
 const Compare = lazy(() => import('./components/Compare'))
 const Tracker = lazy(() => import('./components/Tracker'))
+const GapAnalysis = lazy(() => import('./components/GapAnalysis'))
 
 function TabFallback() {
   return (
@@ -177,6 +178,7 @@ export default function App() {
             {tab === 'cost' && <CostCalc />}
             {tab === 'compare' && <Compare compareModels={compareModels} onBack={() => setTab('explorer')} onClear={() => setCompare([])} />}
             {tab === 'tracker' && <Tracker onOpenModel={(id) => { const m = allModels.find((x) => x.id === id); if (m) setDetail(m) }} />}
+            {tab === 'gap' && <GapAnalysis />}
           </Suspense>
         </ErrorBoundary>
       </main>
