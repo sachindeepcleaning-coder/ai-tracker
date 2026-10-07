@@ -63,7 +63,7 @@ jobs:
         working-directory: frontend
 
       - name: Drift gate (regen outputs must match committed files)
-        run: git diff --exit-code ../README.md src/data.json ../public/data.json
+        run: git diff --exit-code ../README.md src/data.json public/data.json
         working-directory: frontend
 
       - name: Lint
