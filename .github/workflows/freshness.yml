@@ -1,0 +1,59 @@
+name: Data freshness (weekly)
+
+# Real-time freshness check. The vitest staleness gate compares against the
+# committed data_as_of (deterministic CI); this workflow compares against the
+# real current date and files an issue when the catalog goes stale.
+on:
+  schedule:
+    - cron: '0 9 * * 1' # Mondays 09:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Compute stale fraction vs today
+        id: stale
+        run: |
+          python3 - <<'EOF'
+          import json
+          import datetime
+          import os
+          d = json.load(open('frontend/src/data.json'))
+          today = datetime.date.today()
+          ages = []
+          for m in d['all_coding_models']:
+              try:
+                  dt = datetime.date.fromisoformat(m.get('last_verified'))
+              except (TypeError, ValueError):
+                  continue
+              ages.append((today - dt).days)
+          stale = sum(1 for a in ages if a > 30)
+          total = len(d['all_coding_models'])
+          frac = stale / total
+          print(f'stale={stale}/{total} frac={frac:.3f} today={today}')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f'stale={stale}\ntotal={total}\nfrac={frac:.3f}\n')
+          EOF
+
+      - name: Open or update freshness issue
+        if: fromJSON(steps.stale.outputs.frac) > 0.5
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="Data freshness: catalog re-verification due"
+          BODY="More than 50% of catalog rows are older than 30 days (stale=${{ steps.stale.outputs.stale }}/${{ steps.stale.outputs.total }}). Please re-verify Last Verified dates against primary sources and update coding_benchmarks.csv, then run the data pipeline. See docs/AUDIT_TODO.md."
+          EXISTING=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY"
+          fi
