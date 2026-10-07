@@ -7,12 +7,15 @@ cell was emptied with a note rather than guessed.
 ## Perf item-4 outcome (mobile TBT target <600ms MISSED)
 
 - Baseline (local dist, 3-run median): perf 0.50, TBT 1410ms, LCP ~4.3s.
-- After (content-visibility cards, 12-first pagination, loading placeholder,
-  no eager recharts preload): perf 0.56, TBT 932ms, LCP ~4.3s.
+- After round 1 (content-visibility cards, 12-first pagination, loading
+  placeholder, no eager recharts preload): perf 0.56, TBT 932ms, LCP ~4.3s.
+- After round 2 (public/data.json runtime fetch + preload, main chunk
+  488→220KB): perf 0.59, TBT 827ms, LCP ~4.7s (+350ms fetch cost).
+  Offline still works via the sw.js same-origin runtime cache. GitHub Pages
+  serves stock headers (no custom cache-control possible).
 - Main chunk contents (vite-bundle-visualizer): react ~458KB + data.json
   ~314KB + app ~77KB + lucide ~10KB (raw attribution).
-- Tried and REVERTED: (a) data.json runtime fetch — main chunk 488→220KB
-  but LCP +2.3s for -124ms TBT (bad trade); (b) manualChunks recharts
+- Tried and REVERTED: (a) fetch without preload (+2.3s LCP for -124ms TBT); (b) manualChunks recharts
   vendor chunk — Vite emitted it as eager modulepreload (+428KB on first
   paint); (c) compact data.json — no bundle effect (esbuild minifies the
   inline JSON anyway); (d) removing backdrop-blur / card entrance animation
