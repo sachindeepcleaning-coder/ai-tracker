@@ -177,7 +177,7 @@ DeepSeek = price increase (cheapest hour 2.3× old output; cache-hit +10×). Gem
 
 ## Hardware — What Fits Where (Q4 weights only; +KV/cache at ctx)
 
-**How "Full Q4 VRAM (GB)" is computed:** weights-only size at standard 4-bit quantization (Q4_K_M-class, ≈0.5 bytes per parameter; e.g. 27B → ~14GB). Excludes KV cache, activations and runtime overhead (+10–15GB on top). Larger community builds (e.g. UD-Q4_K_XL, ≈0.63 bytes/param) run ~25% bigger and are labeled where used — a bare "Q4" figure always means the catalog definition, so the same model never shows two different Q4 sizes without a quant label.
+**How "Full Q4 VRAM (GB)" is computed:** weights-only size at standard 4-bit quantization (Q4_K_M-class, ≈0.5 bytes per parameter; e.g. 27B → ~14GB). Excludes KV cache, activations and runtime overhead (+10–15GB on top). Larger community builds (e.g. UD-Q4_K_XL, ≈0.63 bytes/param) run ~25% bigger and are labeled where used — a bare "Q4" figure always means the catalog definition, so the same model never shows two different Q4 sizes without a quant label. Named exception: **DeepSeek V4.1 Flash shows 280GB because that is 552B backbone × 0.5** (official card: "552B backbone parameters"); the full safetensors checkpoint is 763.2B including vision/Engram/MTP, so expect a ~763GB download even though the "fits" labels assume the 552B backbone.
 
 **Mac Studio M5 bandwidth assumptions:** `1× Mac Studio M5 512GB` = M5 Ultra class, ≈1.2 TB/s unified memory bandwidth (512GB tier); `4× Mac Studio M5 2TB` = 4 nodes ≈ 4.8 TB/s aggregate before Thunderbolt interconnect overhead (single-stream decode is interconnect-bound across nodes, so divide by ~2–3× in practice). M5 Max 128GB = 614 GB/s. Single-stream decode ceiling ≈ bandwidth ÷ Q4-GB.
 

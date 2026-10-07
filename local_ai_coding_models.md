@@ -1430,7 +1430,7 @@ Qwen3-Coder-Next is notable: **70.6% SWE-bench with only 3B active params**, but
 - **Dual Mac ultimate:** DeepSeek V4 Pro Max (800GB, 80.6% SWE, 93.5% LCB) or LongCat-2.0 (800GB, MIT)
 - **MoE gotcha:** Active params are misleading — Qwen3-Coder-Next is 3B active but **40GB total** @ Q4 (doesn't fit single 5090)
 - **No model ≥78% SWE fits a single 5090** — all need CPU offload or multi-GPU (Inkling needs ~2TB VRAM)
-- **500+ tok/s is a myth** — real max ~240 tok/s with MTP, ~180 tok/s standard
+- **500+ tok/s is a myth** — previous "~240 tok/s max" figure REMOVED (it was the impossible V4-FP8-on-2×Pro-6000 config: 284GB weights exceed 192GB VRAM)
 
 ---
 

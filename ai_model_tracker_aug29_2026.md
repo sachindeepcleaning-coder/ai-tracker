@@ -392,7 +392,7 @@ B. [₹ Pricing Quick Reference](#appendix-b--pricing-quick-reference-aug-29-951
 - **Pricing:** Same peak/off-peak as V4 Flash: **$0.22/$0.66 off-peak + $0.44/$1.32 peak** (effective Aug 16) — **off-peak $0.22 in / $0.66 out** per gap analysis (Sep 2 clarifies $0.22 not $0.11; cache $0.007/M). Vision input priced at text rate (no surcharge). **₹20.93/₹62.78 off-peak per Mtok**.
 - **Open weights:** ✅ HF (vision variant). Repo: `deepseek-ai/DeepSeek-V4-Flash-Vision`
 - **Q4 VRAM:** ~155 GB at Q4 (same as text V4 Flash)
-- **India relevance:** **2× Pro 6000 (192GB)** ✅ ~240 tok/s at FP8; **4× DGX Spark (512GB)** ✅ 80–100 tok/s. Adds screenshot-to-code / repo-diagram analysis capability to the cheapest frontier-class coding model — now with quantified +1.2 TB gain.
+- **India relevance:** **2× Pro 6000 (192GB)** fits V4 Flash Vision at Q4 (FP8 ~240 tok/s claim REMOVED — 284GB weights exceed 192GB VRAM); **4× DGX Spark (512GB)** ✅ 80–100 tok/s. Adds screenshot-to-code / repo-diagram analysis capability to the cheapest frontier-class coding model — now with quantified +1.2 TB gain.
 - **Verdict:** Direct upgrade path from V4 Flash for teams doing agentic coding with visual context. No meaningful cost increase; benchmark fill confirms vision does not regress coding.
 
 ---
@@ -937,7 +937,7 @@ See `single_user_india_local_ai.md` §Post-Session Update Sep 1 2026 for full ta
 | **Cohere Parse 5** 🆕 | ~2.3 GB | ✅ | ✅ | ✅ | ✅ | Available |
 | **LFM2.5-VL-3B** 🆕 | ~2 GB | ✅ | ✅ | ✅ | ✅ | Available |
 | **LFM2.5-2.6B** | ~1.5 GB | ✅ | ✅ | ✅ | ✅ | Available |
-| Qwen3.8-27B | 14 GB | ✅ ~200 tok/s | ✅ | ✅ | ✅ | Available |
+| Qwen3.8-27B | 14 GB | ✅ ~105 tok/s single-stream | ✅ | ✅ | ✅ | Available |
 | Granite 4.2 30B | 15 GB | ✅ | ✅ | ✅ | ✅ | Available |
 | **Muse Glimmer** | ~15 GB | ✅ | ✅ | ✅ | ✅ | Available |
 | **Hy-MT2-30B-A3B** 🆕 | ~15 GB | ✅ | ✅ | ✅ | ✅ | Available |
