@@ -37,6 +37,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          # Full history: gitleaks fingerprint ignores reference the original
+          # commit; a shallow checkout changes fingerprints and breaks the scan.
+          fetch-depth: 0
 
       - name: Secret scan (gitleaks, blocking)
         run: |
