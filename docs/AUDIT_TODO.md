@@ -26,6 +26,42 @@ cell was emptied with a note rather than guessed.
   react-virtual is already a dependency) so scrolled-out cards never enter
   the DOM. Requires restructuring Explorer + its DOM-count tests.
 
+## Second-round findings (Oct 7 tasks 1–8)
+
+- **DeepSeek V4.1 Flash params:** official card says 552B backbone, HF
+  safetensors.total is 763.2B (all files). Row keeps 552B; notes cite both.
+- **V4 Pro Max (rank 6) vs V4 Pro (rank 192):** same 1.6T/49B — possible
+  duplicate rows. deepseek-ai/DeepSeek-V4-Pro exists (MIT); no
+  "V4-Pro-Max" repo found. Needs a naming decision, not taken here.
+- **Solar Pro 4 price:** Upstage list $0.30/$1.20 matches CSV; page shows
+  dated promo windows ($0.09/$0.36 thru Oct 11). Row note now cites
+  upstage.ai/pricing; revisit after Oct 11.
+- **Schematron V2 Turbo/Small:** names exist nowhere on HF
+  (inference-net has Schematron-3B/8B only). Rows kept, low confidence.
+- **Ternary Bonsai 2 27B:** only community quant forks on HF, no base repo.
+- **Hy-MT2 pair:** tencent repos carry Apache-2.0 tags — rows updated to
+  Apache 2.0. Repo createdAt (May 11) predates the Aug release claim;
+  release dates left untouched.
+- **Muse Spark 1.3 price ($1.25/$4.25):** no Meta primary source found
+  (no Muse weights repos on HF — consistent with closed API-only).
+- **Nemotron 3 Ultra license:** HF tag is generic "other"; row keeps bare
+  "Open weight" (geotoolbox reports OpenMDW-1.1, unverified here).
+- **K2-Horizon-MoVA:** HF createdAt Sep 1 vs row "HF Sep 3" — 2-day gap
+  between repo creation and announcement; left as-is.
+- **MiMo-V2.6-Flash:** official org is XiaomiMiMo with -RL/-MOPD variant
+  repos (MIT, 310.8B, Sep 21); exact base name not found.
+- **Opus 5.5 output INR** is `"₹1,902.40"` (thousands separator + quotes)
+  vs file convention `₹1902.40` — value correct, format deviant. Left
+  untouched per no-value-change rule; `--recompute-inr` would normalize it.
+- **Staleness test is deterministic** (compares against data_as_of, not the
+  wall clock). Real-time check lives in weekly freshness.yml.
+- **gitleaks:** 3 hits, all false-positive Meta CSP nonces in the archived
+  meta_blog.html snapshot (initial commit). node_modules binaries dominate
+  history blobs (19MB rolldown ×2, 16MB oxlint ×2); .git is 48M. No history
+  rewrite performed.
+- **Perf target missed:** mobile TBT 1410→827ms local median (1180 live),
+  LCP +350ms. Next step is grid virtualization (TanStack already a dep).
+
 ## Unverified values (cells emptied, see CSV Notes for row context)
 
 - **Hy3 — LiveCodeBench V6.** Removed 34.86% as an outlier vs 78.0% SWE-V.
