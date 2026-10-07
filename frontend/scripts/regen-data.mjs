@@ -7,8 +7,10 @@
  *
  * Derives every row from the CSV using the canonical column mapping, then
  * MERGES curated fields (`released`, `released_est`, `released_src`, `is_free`)
- * from the existing data.json by rank id so hand-researched dates/tiers
- * (and backfill provenance) survive regeneration.
+ * from the existing data.json keyed by `slug` (stable provider-model identity)
+ * so hand-researched dates/tiers survive regeneration AND row re-ranks.
+ * One-time migration: entries still keyed by legacy `rank-N` ids fall back
+ * through a rank lookup on first run after the slug backfill.
  * Normalizes: '-' -> null, plain-numeric cells -> numbers, "$"/"₹" stripped
  * from prices (fixes string-price rows that break numeric sort / CostCalc).
  */
@@ -106,6 +108,7 @@ const HEADER_MAP = {
   'Confidence': 'confidence',
   'Notes': 'notes',
   'Is Orchestrator': 'is_orchestrator',
+  'Slug': 'slug',
 }
 
 const rows = parseCsv(readFileSync(CSV_PATH, 'utf8'))
@@ -132,7 +135,8 @@ const colIdx = header.map((h) => HEADER_MAP[h.trim()])
   }
 }
 
-// Curated fields from the current data.json, keyed by rank id.
+// Curated fields from the current data.json, keyed by slug.
+// Legacy rank-N ids resolve through a rank fallback (one-time migration).
 const existing = existsSync(OUT_PATH)
   ? JSON.parse(readFileSync(OUT_PATH, 'utf8'))
   : { conversation_summary: null, all_coding_models: [] }
@@ -145,7 +149,8 @@ const out = rows.slice(1)
   colIdx.forEach((key, i) => {
     if (!key) return
     const raw = cells[i]
-    if (key === 'rank') { row.rank = String(parseInt(raw, 10)); row.id = `rank-${row.rank}`; return }
+    if (key === 'rank') { row.rank = String(parseInt(raw, 10)); return }
+    if (key === 'slug') { row.slug = String(raw ?? '').trim(); return }
     if (key === 'full_q4_vram_gb') { row[key] = q4(raw); return }
     if (key.startsWith('price_')) { row[key] = price(raw); return }
     if (key === 'total_parameters' || key === 'active_parameters') {
@@ -191,8 +196,10 @@ const out = rows.slice(1)
       row.confidence = 'low'
     }
   }
-  // Merge hand-researched curation (survives regeneration).
-  const prev = curated.get(row.id)
+  // Stable identity: slug from the CSV; id follows slug (rank stays as data).
+  row.id = row.slug
+  // Merge hand-researched curation (survives regeneration and re-ranks).
+  const prev = curated.get(row.slug) ?? curated.get(`rank-${row.rank}`)
   if (prev) {
     row.released = prev.released ?? null
     row.released_est = Boolean(prev.released_est)
@@ -214,6 +221,9 @@ const out = rows.slice(1)
   if (!contiguous) { console.error(`regen-data: rank continuity failed ${ranks.slice(0,5)}...${ranks.slice(-5)}`); process.exit(1) }
   const ids = new Set(out.map(m=>m.id))
   if (ids.size !== out.length) { console.error(`regen-data: duplicate ids ${out.length - ids.size}`); process.exit(1) }
+  for (const m of out) {
+    if (!m.slug || !/^[a-z0-9-]+$/.test(m.slug)) { console.error(`regen-data: bad slug ${m.rank} ${JSON.stringify(m.slug)}`); process.exit(1) }
+  }
   const allowedTypes = new Set(['foundation','orchestrator','router','cascade','specialized'])
   const allowedConf = new Set(['high','medium','low'])
   for (const m of out) {
@@ -226,5 +236,5 @@ const out = rows.slice(1)
 // Regen timestamp — surfaced as "Data last refreshed" on the site.
 const today = new Date().toISOString().slice(0,10)
 writeFileSync(OUT_PATH, JSON.stringify({ ...existing, data_regen_at: today, data_version: '2026-10-02', all_coding_models: out }, null, 2) + '\n')
-const preserved = [...curated.keys()].filter((id) => out.some((m) => m.id === id)).length
+const preserved = out.filter((m) => curated.get(m.slug) ?? curated.get(`rank-${m.rank}`)).length
 console.log(`regen-data: wrote ${out.length} models -> ${OUT_PATH} (preserved ${preserved} curated rows)`)

@@ -72,7 +72,7 @@ describe('Tracker — llm-releases-style views', () => {
       const btn = [...container.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Rank #271')
       expect(btn, 'Rank #271 badge').toBeTruthy()
       act(() => { btn.dispatchEvent(new MouseEvent('click', { bubbles: true })) })
-      expect(onOpenModel).toHaveBeenCalledWith('rank-271')
+      expect(onOpenModel).toHaveBeenCalledWith('xai-grok-4-7')
     } finally {
       unmount()
     }

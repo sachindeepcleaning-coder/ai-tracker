@@ -32,11 +32,11 @@ describe('CostCalc resolveSample — name resolution (fixes #6)', () => {
     expect(r.in).toBeGreaterThan(0)
   })
 
-  it('rank-id objects no longer resolve (defensive: warns and falls back to 0)', () => {
+  it('unknown slug-id objects do not resolve (defensive: warns and falls back to 0)', () => {
     const warn = []
     const orig = console.warn
     console.warn = (m) => warn.push(m)
-    const r = resolveSample({ id: 'rank-999', model: 'no-such-model-xyz', label: 'x', cache: 0 }, allModels)
+    const r = resolveSample({ id: 'no-such-slug-xyz', model: 'no-such-model-xyz', label: 'x', cache: 0 }, allModels)
     console.warn = orig
     expect(r.in).toBe(0)
     expect(warn.length).toBe(1)

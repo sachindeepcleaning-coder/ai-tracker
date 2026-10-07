@@ -45,9 +45,13 @@ describe('data.json integrity (regen gate)', () => {
     }
   })
 
-  it('every row has id/rank/model/provider/license', () => {
+  it('every row has id/slug/rank/model/provider/license', () => {
+    const slugs = new Set()
     for (const m of models) {
-      expect(m.id).toMatch(/^rank-\d+$/)
+      expect(m.id).toBe(m.slug)
+      expect(m.slug).toMatch(/^[a-z0-9-]+$/)
+      expect(slugs.has(m.slug), `duplicate slug ${m.slug}`).toBe(false)
+      slugs.add(m.slug)
       expect(m.model).toBeTruthy()
       expect(m.provider).toBeTruthy()
       expect(m.license).toBeTruthy()

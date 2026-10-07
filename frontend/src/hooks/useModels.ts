@@ -6,8 +6,9 @@ import { isOpenWeight, licenseBadge } from '../lib/license'
 /**
  * One catalog row (from data.json, regenerated from the CSV via `npm run data`).
  * @typedef {Object} Model
- * @property {string} id         Stable key "rank-N" (survives re-ranks better than index).
- * @property {string} rank       CSV rank "1".."279" (1 = top frontier).
+ * @property {string} id         Stable key = CSV slug (survives re-ranks; never rank-based).
+ * @property {string} slug       CSV Slug column (lowercase provider-model, [a-z0-9-], unique).
+ * @property {string} rank       CSV rank "1".."299" (1 = top frontier).
  * @property {string} model      Display name — the join key for CostCalc samples.
  * @property {string} provider
  * @property {string|null} total_parameters  "770B" / "Unknown" / "Undisc."

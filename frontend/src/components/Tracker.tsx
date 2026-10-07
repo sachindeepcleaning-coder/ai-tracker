@@ -8,6 +8,7 @@ import {
   CHANGE_ITEMS, CHANGE_TYPES, CHANGE_TYPE_META, changeCounts, groupByMonth, fmtDay, type ChangeType,
 } from '../lib/changelog'
 import { timeAgo, DATA_AS_OF } from '../lib/parse'
+import { allModels } from '../hooks/useModels'
 
 type TView = 'changelog' | 'rumors' | 'highlights'
 
@@ -34,12 +35,13 @@ function Source({ label, url }: { label: string; url?: string }) {
   )
 }
 
-function RankLink({ rank, onOpenModel }: { rank?: number; onOpenModel?: (rankId: string) => void }) {
+function RankLink({ rank, onOpenModel }: { rank?: number; onOpenModel?: (id: string) => void }) {
   if (rank == null || !onOpenModel) return null
+  const slug = allModels.find((m) => m.rank === String(rank))?.slug ?? `rank-${rank}`
   return (
     <button
       type="button"
-      onClick={() => onOpenModel(`rank-${rank}`)}
+      onClick={() => onOpenModel(slug)}
       className="inline-flex items-center gap-1 text-[11px] font-mono bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 rounded-full px-2 py-0.5 hover:bg-emerald-500/20"
       title="Open model detail"
     >
