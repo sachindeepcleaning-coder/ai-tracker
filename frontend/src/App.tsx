@@ -2,8 +2,8 @@ import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { Zap, Database, Award, Layers, Cpu, Calendar } from 'lucide-react'
 import Header from './components/Header'
 import Explorer from './components/Explorer'
-import DetailModal from './components/DetailModal'
 import ErrorBoundary from './components/ErrorBoundary'
+const LazyDetailModal = lazy(() => import('./components/DetailModal'))
 import { allModels, providers, licenseGroups, useModels } from './hooks/useModels'
 import { catalogMeta } from './hooks/useModels'
 import type { ModelFilters } from './hooks/useModels'
@@ -192,7 +192,11 @@ export default function App() {
         </ErrorBoundary>
       </main>
 
-      {detail && <DetailModal detail={detail} onClose={() => setDetail(null)} onToggleCompare={toggleCompare} inCompare={compare.includes(detail.id)} />}
+      {detail && (
+        <Suspense fallback={null}>
+          <LazyDetailModal detail={detail} onClose={() => setDetail(null)} onToggleCompare={toggleCompare} inCompare={compare.includes(detail.id)} />
+        </Suspense>
+      )}
 
       <footer className="max-w-[1400px] mx-auto px-4 md:px-6 py-6 text-xs text-white/70 border-t border-white/5 mt-6">
         <details className="mb-3 group">
