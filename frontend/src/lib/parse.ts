@@ -6,11 +6,15 @@
  */
 import dataMeta from '../data.json'
 
+if (!dataMeta.data_as_of || !/^\d{4}-\d{2}-\d{2}$/.test(dataMeta.data_as_of)) {
+  throw new Error('parse: data.json data_as_of is missing or invalid — run `npm run data`')
+}
+
 export const INR_PER_USD = 95.12
 /** Newest verified date in the CSV (data anchor for "latest" windows). */
-export const DATA_AS_OF = dataMeta.data_as_of ?? '2026-10-02'
+export const DATA_AS_OF = dataMeta.data_as_of
 /** Human label for the anchor, e.g. 'Oct 5, 2026'. */
-export const VERIFIED_AT = fmtDateFull(DATA_AS_OF) ?? 'Oct 2, 2026'
+export const VERIFIED_AT = fmtDateFull(DATA_AS_OF)
 /** End of the anchor month — the newest date a release may claim before it is
     treated as future/invalid (pricing-window prose like "intro to Dec 31" must
     never leak into release dates). Mid-month estimates (≈) stay within it. */

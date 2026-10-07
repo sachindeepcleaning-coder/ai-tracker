@@ -35,7 +35,7 @@ import { isOpenWeight, licenseBadge } from '../lib/license'
  * @property {string|null} released  ISO "2026-09-10" or coarse "Sep 2026" — curated (not in CSV).
  */
 
-/** @type {Model[]} Catalog singleton — 279 rows from data.json. */
+/** @type {Model[]} Catalog singleton — all rows from data.json. */
 export const allModels = raw.all_coding_models || raw
 
 // Dev-only invariant check: catches malformed regens (duplicate ids, rank gaps) at startup.

@@ -68,9 +68,9 @@ export default function Explorer({
   const clearAll = () => setFilters({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: 'all', modelType: 'all', confidence: 'all', hideSparse: false, freeOnly: false })
 
   // Incremental rendering: 48 cards initially, "Load more" in 48-card pages.
-  // Keeps the desktop "show all" feel (few clicks to reach 279) while first paint
-  // stays light on mobile/low-end devices. Resets whenever filters change
-  // (adjust-state-during-render pattern — no effect, no cascading render).
+  // Keeps the desktop "show all" feel (few clicks to reach the full catalog)
+  // while first paint stays light on mobile/low-end devices. Resets whenever
+  // filters change (adjust-state-during-render pattern — no effect, no cascading render).
   const PAGE = 48
   const filterKey = [q, provider, license, openOnly, maxQ4, sort, releaseWindow, modelType, confidence, hideSparse, freeOnly].join('|')
   const [state, setState] = useState({ key: filterKey, visible: PAGE })

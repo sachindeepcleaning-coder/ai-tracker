@@ -22,11 +22,11 @@ describe('App shell smoke test', () => {
     expect(text).toContain(String(dataMeta.model_count))
     expect(text).toContain('Total models')
   })
-  it('shows data-completeness card (dated=173)', () => {
+  it('shows data-completeness card matching data.json dated count', () => {
     const text = container.textContent
     expect(text).toContain('With release date')
-    // approx – at least 170 dated
-    expect(text).toMatch(/17[0-9]|18[0-9]/)
+    const dated = dataMeta.all_coding_models.filter((m) => m.released).length
+    expect(text).toContain(String(dated))
   })
   it('footer shows data-as-of date from data.json', () => {
     const text = container.textContent
