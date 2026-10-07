@@ -112,6 +112,26 @@ const rows = parseCsv(readFileSync(CSV_PATH, 'utf8'))
 const header = rows[0]
 const colIdx = header.map((h) => HEADER_MAP[h.trim()])
 
+// TASK 1 gate: every data row must have exactly header.length cells.
+// (Comment lines starting with '#' are skipped.) Prints the rank and exits 1.
+{
+  const rankIdx = header.findIndex((h) => h.trim() === 'Rank')
+  const orchIdx = header.findIndex((h) => h.trim() === 'Is Orchestrator')
+  const allowedOrch = new Set(['true', 'false', '1', '0', 'yes', 'no', ''])
+  for (const cells of rows.slice(1)) {
+    if (String(cells[0] ?? '').trim().startsWith('#')) continue
+    if (cells.length !== header.length) {
+      console.error(`regen-data: row rank=${cells[rankIdx] ?? '?'} has ${cells.length} cells, expected ${header.length}`)
+      process.exit(1)
+    }
+    const orch = String(cells[orchIdx] ?? '').trim().toLowerCase()
+    if (!allowedOrch.has(orch)) {
+      console.error(`regen-data: row rank=${cells[rankIdx] ?? '?'} has invalid is_orchestrator cell ${JSON.stringify(cells[orchIdx])}`)
+      process.exit(1)
+    }
+  }
+}
+
 // Curated fields from the current data.json, keyed by rank id.
 const existing = existsSync(OUT_PATH)
   ? JSON.parse(readFileSync(OUT_PATH, 'utf8'))

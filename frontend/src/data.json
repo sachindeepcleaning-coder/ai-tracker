@@ -9393,7 +9393,7 @@
       "last_verified": "2026-09-16",
       "source": "vendor",
       "confidence": "low",
-      "notes": "Closed API-only; AA 48 v4.3.2 (151.6 tok/s live",
+      "notes": "Closed API-only; AA 48 v4.3.2 (151.6 tok/s live, was 236.8 launch); DeepSWE 75.4 indep #1; contrib tier $0.10-$0.20",
       "is_orchestrator": false,
       "released": "2026-09-02",
       "released_est": false,
@@ -9537,7 +9537,7 @@
       "last_verified": "2026-09-16",
       "source": "huggingface",
       "confidence": "high",
-      "notes": "GA Sep10; 552B CED; 280GB Q4; TB 90.6 GPQA 90.9 DeepSWE 74.2; indep DeepSWE 74.2 match",
+      "notes": "GA Sep10; 552B CED; 280GB Q4; TB 90.6 GPQA 90.9 DeepSWE 74.2; indep DeepSWE 74.2 match, Vals TB 74.5 vs 90.6 harness gap",
       "is_orchestrator": false,
       "released": "2026-09-10",
       "released_est": false,
@@ -11093,6 +11093,6 @@
       "is_free": false
     }
   ],
-  "data_regen_at": "2026-10-04",
+  "data_regen_at": "2026-10-07",
   "data_version": "2026-10-02"
 }
