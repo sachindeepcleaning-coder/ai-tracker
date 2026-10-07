@@ -13,7 +13,7 @@ export default function GapAnalysis() {
   return (
     <div className="space-y-4" data-testid="gap-analysis">
       <div className="card p-4 md:p-5">
-        <div className="text-[11px] tracking-widest font-bold text-white/50 uppercase">Research brief · open vs closed frontier</div>
+        <div className="text-[11px] tracking-widest font-bold text-white/70 uppercase">Research brief · open vs closed frontier</div>
         <h2 className="text-xl md:text-2xl font-extrabold mt-1">How far behind is open? It depends on the job.</h2>
         <p className="text-sm text-white/60 mt-2 leading-relaxed">
           Open weights trail the closed frontier by roughly <b className="text-white/80">four months</b> on composite
@@ -21,7 +21,7 @@ export default function GapAnalysis() {
           code generation and long-context reasoning, a double-digit gap on general intelligence. This page maps the
           gap task by task from independent analyses, not vendor claims.
         </p>
-        <p className="text-xs text-white/40 mt-2">{GAP_VINTAGE}. Scores shift week to week — treat this as a frontier map, not a ranking.</p>
+        <p className="text-xs text-white/70 mt-2">{GAP_VINTAGE}. Scores shift week to week — treat this as a frontier map, not a ranking.</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
@@ -35,11 +35,11 @@ export default function GapAnalysis() {
 
       <div className="card p-4 md:p-5">
         <h3 className="font-bold">The gap, task by task</h3>
-        <p className="text-xs text-white/50 mt-1 mb-3">Best open-weight vs best proprietary score per metric (WhatLLM, Jul 2026). Variants and harnesses differ — read rows, not just the average.</p>
+        <p className="text-xs text-white/70 mt-1 mb-3">Best open-weight vs best proprietary score per metric (WhatLLM, Jul 2026). Variants and harnesses differ — read rows, not just the average.</p>
         <div className="overflow-x-auto -mx-1 px-1">
           <table className="w-full text-sm min-w-[640px]">
             <thead>
-              <tr className="text-left text-[11px] uppercase tracking-widest text-white/40">
+              <tr className="text-left text-[11px] uppercase tracking-widest text-white/70">
                 <th className="py-2 pr-3 font-bold">Task</th>
                 <th className="py-2 pr-3 font-bold">Best open</th>
                 <th className="py-2 pr-3 font-bold">Best closed</th>
@@ -51,14 +51,14 @@ export default function GapAnalysis() {
                 <tr key={r.task} className="border-t border-white/5 align-top">
                   <td className="py-3 pr-3">
                     <div className="font-semibold">{r.task}</div>
-                    <div className="text-xs text-white/40">{r.detail}</div>
+                    <div className="text-xs text-white/70">{r.detail}</div>
                   </td>
                   <td className="py-3 pr-3">
-                    <div className="font-bold text-emerald-300">{r.openScore} <span className="font-normal text-white/50 text-xs">{r.openModel}</span></div>
+                    <div className="font-bold text-emerald-300">{r.openScore} <span className="font-normal text-white/70 text-xs">{r.openModel}</span></div>
                     <div className="mt-1.5"><Bar pct={r.openPct} color="#34d399" /></div>
                   </td>
                   <td className="py-3 pr-3">
-                    <div className="font-bold text-violet-300">{r.closedScore} <span className="font-normal text-white/50 text-xs">{r.closedModel}</span></div>
+                    <div className="font-bold text-violet-300">{r.closedScore} <span className="font-normal text-white/70 text-xs">{r.closedModel}</span></div>
                     <div className="mt-1.5"><Bar pct={r.closedPct} color="#a78bfa" /></div>
                   </td>
                   <td className="py-3">
@@ -100,11 +100,11 @@ export default function GapAnalysis() {
 
       <div className="card p-4 md:p-5">
         <h3 className="font-bold">Which should you choose?</h3>
-        <p className="text-xs text-white/50 mt-1 mb-3">The practitioner consensus is a routing decision, not an ideology: rent frontier for the hardest 10%, run open for the rest.</p>
+        <p className="text-xs text-white/70 mt-1 mb-3">The practitioner consensus is a routing decision, not an ideology: rent frontier for the hardest 10%, run open for the rest.</p>
         <div className="overflow-x-auto -mx-1 px-1">
           <table className="w-full text-sm min-w-[560px]">
             <thead>
-              <tr className="text-left text-[11px] uppercase tracking-widest text-white/40">
+              <tr className="text-left text-[11px] uppercase tracking-widest text-white/70">
                 <th className="py-2 pr-3 font-bold">Situation</th>
                 <th className="py-2 pr-3 font-bold">Start with</th>
                 <th className="py-2 font-bold">Why</th>
@@ -132,7 +132,7 @@ export default function GapAnalysis() {
             </li>
           ))}
         </ul>
-        <p className="text-xs text-white/40 mt-2">Epoch AI's four-month estimate is a composite analysis, not a law of nature — public benchmarks may flatter open models. Catalog cross-checks (MiMo-V2.6-Pro AA 46.3, Opus 5.5 top closed) are Oct 2026 rows in the Explorer.</p>
+        <p className="text-xs text-white/70 mt-2">Epoch AI's four-month estimate is a composite analysis, not a law of nature — public benchmarks may flatter open models. Catalog cross-checks (MiMo-V2.6-Pro AA 46.3, Opus 5.5 top closed) are Oct 2026 rows in the Explorer.</p>
       </div>
     </div>
   )

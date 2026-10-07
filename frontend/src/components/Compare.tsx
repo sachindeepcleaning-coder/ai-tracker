@@ -79,7 +79,7 @@ export default function Compare({ compareModels, onBack, onClear }: CompareProps
             </RadarChart>
           </ResponsiveContainer>
         </div>
-        <p className="text-[11px] text-white/40 mt-1">Unscored benchmarks plot at 0 — a missing axis is "no data", not a zero score.</p>
+        <p className="text-[11px] text-white/70 mt-1">Unscored benchmarks plot at 0 — a missing axis is "no data", not a zero score.</p>
       </div>
       <div className="grid md:grid-cols-2 gap-4">
         <div className="card p-4">
@@ -118,7 +118,7 @@ export default function Compare({ compareModels, onBack, onClear }: CompareProps
       </div>
       <div className="card overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="text-xs tracking-widest uppercase text-white/50 border-b border-white/5">
+          <thead className="text-xs tracking-widest uppercase text-white/70 border-b border-white/5">
             <tr><th className="text-left p-3">Field</th>{compareModels.map((m) => <th key={m.id} className="text-left p-3">{m.model}</th>)}</tr>
           </thead>
           <tbody className="divide-y divide-white/5">

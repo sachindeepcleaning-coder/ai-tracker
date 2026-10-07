@@ -105,7 +105,7 @@ export default function CostCalc() {
     <div className="grid lg:grid-cols-3 gap-4">
       <div className="lg:col-span-1 card p-4 space-y-4">
         <h2 className="font-bold flex items-center gap-2"><IndianRupee size={16} aria-hidden="true" /> Cost Calculator</h2>
-        <p className="text-xs text-white/50">99% input / 1% output agentic loop. ₹95.12/USD `ai_coding_api_vs_local_summary.json:9`.</p>
+        <p className="text-xs text-white/70">99% input / 1% output agentic loop. ₹95.12/USD `ai_coding_api_vs_local_summary.json:9`.</p>
         <div>
           <label htmlFor="modelPick" className="text-xs font-bold tracking-widest uppercase text-white/60">Price any catalog model</label>
           <select
@@ -146,12 +146,12 @@ export default function CostCalc() {
             <div className="flex flex-wrap items-center gap-4">
               <div className="min-w-[180px]">
                 <div className="font-bold text-sm text-violet-200">{pickedRow.name}</div>
-                <div className="text-xs text-white/50">${pickedRow.in}/$ {pickedRow.out} per M (no cache tier assumed)</div>
+                <div className="text-xs text-white/70">${pickedRow.in}/$ {pickedRow.out} per M (no cache tier assumed)</div>
               </div>
               <div className="flex gap-4 flex-1 justify-end text-center">
-                <div><div className="text-xs text-white/50">Per day</div><div className="font-mono font-bold">₹{Math.round(pickedRow.day * INR_PER_USD).toLocaleString()}</div></div>
-                <div><div className="text-xs text-white/50">Per 30d</div><div className="font-mono font-bold text-violet-300">₹{(pickedRow.mo * INR_PER_USD / 100000).toFixed(1)}L</div></div>
-                <div><div className="text-xs text-white/50">Per yr</div><div className="font-mono font-bold text-violet-300">₹{(pickedRow.yr * INR_PER_USD / 10000000).toFixed(1)}Cr</div></div>
+                <div><div className="text-xs text-white/70">Per day</div><div className="font-mono font-bold">₹{Math.round(pickedRow.day * INR_PER_USD).toLocaleString()}</div></div>
+                <div><div className="text-xs text-white/70">Per 30d</div><div className="font-mono font-bold text-violet-300">₹{(pickedRow.mo * INR_PER_USD / 100000).toFixed(1)}L</div></div>
+                <div><div className="text-xs text-white/70">Per yr</div><div className="font-mono font-bold text-violet-300">₹{(pickedRow.yr * INR_PER_USD / 10000000).toFixed(1)}Cr</div></div>
               </div>
             </div>
           </div>
@@ -160,12 +160,12 @@ export default function CostCalc() {
           <div key={row.name} className="card p-4 flex flex-wrap items-center gap-4">
             <div className="min-w-[180px]">
               <div className="font-bold text-sm">{row.name}</div>
-              <div className="text-xs text-white/50">${row.in}/$ {row.out} per M{row.cache != null ? ` · hit $ ${row.cache}/M` : ''}</div>
+              <div className="text-xs text-white/70">${row.in}/$ {row.out} per M{row.cache != null ? ` · hit $ ${row.cache}/M` : ''}</div>
             </div>
             <div className="flex gap-4 flex-1 justify-end text-center">
-              <div><div className="text-xs text-white/50">Per day</div><div className="font-mono font-bold">₹{Math.round(row.day * INR_PER_USD).toLocaleString()}</div></div>
-              <div><div className="text-xs text-white/50">Per 30d</div><div className="font-mono font-bold text-emerald-400">₹{(row.mo * INR_PER_USD / 100000).toFixed(1)}L</div></div>
-              <div><div className="text-xs text-white/50">Per yr</div><div className="font-mono font-bold">₹{(row.yr * INR_PER_USD / 10000000).toFixed(1)}Cr</div></div>
+              <div><div className="text-xs text-white/70">Per day</div><div className="font-mono font-bold">₹{Math.round(row.day * INR_PER_USD).toLocaleString()}</div></div>
+              <div><div className="text-xs text-white/70">Per 30d</div><div className="font-mono font-bold text-emerald-400">₹{(row.mo * INR_PER_USD / 100000).toFixed(1)}L</div></div>
+              <div><div className="text-xs text-white/70">Per yr</div><div className="font-mono font-bold">₹{(row.yr * INR_PER_USD / 10000000).toFixed(1)}Cr</div></div>
             </div>
           </div>
         ))}
@@ -178,9 +178,9 @@ export default function CostCalc() {
             </p>
           )}
           <div className="grid grid-cols-3 gap-3 mt-3 text-sm">
-            <div className="bg-white/5 rounded-xl p-3 border border-white/10"><div className="font-bold">1×5090 ₹5L</div><div className="text-xs text-white/50">Qwen27B 200tok/s. API breakeven ~1.2 yr at 1B/day uncached V4 Flash `ai_coding_api_vs_local_summary.json:183`</div></div>
-            <div className="bg-white/5 rounded-xl p-3 border border-white/10"><div className="font-bold">4× Spark ₹24-30L</div><div className="text-xs text-white/50">GLM-5.3+V4.1 Flash+Qwen. Only sub-crore that runs all 3 `single_user_india_local_ai.md:333`</div></div>
-            <div className="bg-white/5 rounded-xl p-3 border border-white/10"><div className="font-bold">12-rack Rubin ₹775Cr</div><div className="text-xs text-white/50">Top-10 models 100k concurrent, ₹2,450/mo break-even `100k_concurrent_ai_coding_service.md:105`</div></div>
+            <div className="bg-white/5 rounded-xl p-3 border border-white/10"><div className="font-bold">1×5090 ₹5L</div><div className="text-xs text-white/70">Qwen27B 200tok/s. API breakeven ~1.2 yr at 1B/day uncached V4 Flash `ai_coding_api_vs_local_summary.json:183`</div></div>
+            <div className="bg-white/5 rounded-xl p-3 border border-white/10"><div className="font-bold">4× Spark ₹24-30L</div><div className="text-xs text-white/70">GLM-5.3+V4.1 Flash+Qwen. Only sub-crore that runs all 3 `single_user_india_local_ai.md:333`</div></div>
+            <div className="bg-white/5 rounded-xl p-3 border border-white/10"><div className="font-bold">12-rack Rubin ₹775Cr</div><div className="text-xs text-white/70">Top-10 models 100k concurrent, ₹2,450/mo break-even `100k_concurrent_ai_coding_service.md:105`</div></div>
           </div>
         </div>
       </div>

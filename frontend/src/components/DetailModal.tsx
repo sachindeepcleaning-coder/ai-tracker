@@ -72,12 +72,12 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
               <span className={`badge ${licenseBadge(detail.license).cls}`}>{licenseBadge(detail.license).label}</span>
               {detail.is_orchestrator && <span className="badge bg-sky-500/15 text-sky-300 border-sky-500/30" role="status" aria-label="Orchestrator model">Orchestrator</span>}
               <DataQualityBadge confidence={detail.confidence} />
-              <span className="text-xs text-white/50">{detail.provider}</span>
-              {detail.model_type && <span className="badge bg-white/5 text-white/50 border-white/10">{detail.model_type}</span>}
+              <span className="text-xs text-white/70">{detail.provider}</span>
+              {detail.model_type && <span className="badge bg-white/5 text-white/70 border-white/10">{detail.model_type}</span>}
             </div>
             <h3 id="model-detail-title" className="text-lg font-extrabold mt-2">{detail.model}</h3>
             <p className="text-sm text-white/60">{detail.total_parameters} {detail.active_parameters !== 'Unknown' && detail.active_parameters ? `/ ${detail.active_parameters} active` : ''} · {detail.context_window} · Q4 {detail.full_q4_vram_gb ?? '—'} GB</p>
-            <p className="text-xs text-white/40 mt-1">Source: {detail.source ?? '—'} · Last verified: {detail.last_verified ?? '—'}{detail.last_verified ? ` (${verificationAge(detail.last_verified)} old)` : ''} · Confidence: {detail.confidence ?? '—'} {detail.notes ? `· ${detail.notes}` : ''}</p>
+            <p className="text-xs text-white/70 mt-1">Source: {detail.source ?? '—'} · Last verified: {detail.last_verified ?? '—'}{detail.last_verified ? ` (${verificationAge(detail.last_verified)} old)` : ''} · Confidence: {detail.confidence ?? '—'} {detail.notes ? `· ${detail.notes}` : ''}</p>
           </div>
           <button onClick={onClose} aria-label="Close model details" title="Close (Esc)" className="w-8 h-8 rounded-full bg-white/5 border border-white/10 grid place-items-center hover:bg-white/10">
             <X size={14} aria-hidden="true" />
@@ -99,7 +99,7 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
             ['ARC-AGI-2', detail.arc_agi_2],
           ].map(([k, v]) => (
             <div key={k} className="bg-white/5 rounded-xl p-3 border border-white/5 text-center">
-              <div className="text-[11px] tracking-widest font-bold text-white/40">{k}</div>
+              <div className="text-[11px] tracking-widest font-bold text-white/70">{k}</div>
               <div className="font-bold">{v || '—'}</div>
               {v && scoreSource(v) === 'vendor' && <div className="text-[9px] uppercase tracking-wide text-amber-400/80 mt-0.5">vendor-reported</div>}
               {v && ['aa', 'scale', 'benchlm'].includes(scoreSource(v) ?? '') && <div className="text-[9px] uppercase tracking-wide text-sky-300/90 mt-0.5">independent</div>}
@@ -109,13 +109,13 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
 
         <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
           <div className="bg-white/5 rounded-xl p-3 border border-white/5">
-            <div className="text-xs text-white/50">Price (USD / Mtok)</div>
+            <div className="text-xs text-white/70">Price (USD / Mtok)</div>
             <div className="font-mono font-bold">{detail.price_in_usd_per_mtok != null ? `$${detail.price_in_usd_per_mtok} → $${detail.price_out_usd_per_mtok}` : '— (local/free)'}</div>
-            <div className="text-xs text-white/50">INR: {detail.price_in_inr_per_mtok != null ? `₹${detail.price_in_inr_per_mtok} → ₹${detail.price_out_inr_per_mtok}` : '—'}</div>
-            <div className="text-xs text-white/50">Q4 {detail.full_q4_vram_gb ?? '—'} GB · ctx {detail.context_window}</div>
+            <div className="text-xs text-white/70">INR: {detail.price_in_inr_per_mtok != null ? `₹${detail.price_in_inr_per_mtok} → ₹${detail.price_out_inr_per_mtok}` : '—'}</div>
+            <div className="text-xs text-white/70">Q4 {detail.full_q4_vram_gb ?? '—'} GB · ctx {detail.context_window}</div>
           </div>
           <div className="bg-white/5 rounded-xl p-3 border border-white/5">
-            <div className="text-xs text-white/50">License notes / Context</div>
+            <div className="text-xs text-white/70">License notes / Context</div>
             <div className="font-bold break-words">{detail.license}</div>
             <div className="text-xs text-white/60">
               {detail.is_free ? 'Free tier' : 'Paid API'}
@@ -131,7 +131,7 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
           <a href={`https://www.google.com/search?q=${encodeURIComponent(detail.model + ' pricing per million tokens')}`} target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-sm">Pricing <ArrowUpRight size={12} aria-hidden="true" /></a>
           <a href={`https://www.google.com/search?q=${encodeURIComponent(detail.model + ' paper technical report')}`} target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-sm">Paper <ArrowUpRight size={12} aria-hidden="true" /></a>
         </div>
-        <p className="text-xs text-white/40 mt-3">Scores vendor-reported unless AA/Scale/BenchLM. SWE-bench Verified contaminated per OpenAI Feb 2026 — prefer SWE-Pro Scale standardized for apples-to-apples.</p>
+        <p className="text-xs text-white/70 mt-3">Scores vendor-reported unless AA/Scale/BenchLM. SWE-bench Verified contaminated per OpenAI Feb 2026 — prefer SWE-Pro Scale standardized for apples-to-apples.</p>
       </div>
     </div>
   )

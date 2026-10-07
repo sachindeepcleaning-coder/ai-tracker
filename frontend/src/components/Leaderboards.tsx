@@ -40,7 +40,7 @@ export default function Leaderboards({ leaderboards }: { leaderboards: Record<st
             ))}
           </div>
         </div>
-        <p className="text-xs text-white/50 mt-1">{scatterData.length} models with both metrics · green = open-weight · violet = closed/API · Pareto-friendly: up-left is better.</p>
+        <p className="text-xs text-white/70 mt-1">{scatterData.length} models with both metrics · green = open-weight · violet = closed/API · Pareto-friendly: up-left is better.</p>
         <div className="mt-3 h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
             <ScatterChart>
@@ -63,7 +63,7 @@ export default function Leaderboards({ leaderboards }: { leaderboards: Record<st
           return (
             <div key={bench.key} className="card p-4">
               <h3 className="font-bold flex items-center gap-2"><Icon size={16} className="text-emerald-400" aria-hidden="true" />{bench.title}</h3>
-              <p className="text-xs text-white/50 mb-3">{data.length} scored models · scroll for all · release dates shown where known (as-of {fmtDateFull(DATA_AS_OF)}).</p>
+              <p className="text-xs text-white/70 mb-3">{data.length} scored models · scroll for all · release dates shown where known (as-of {fmtDateFull(DATA_AS_OF)}).</p>
               <div className="space-y-2 max-h-[380px] overflow-y-auto pr-1" aria-label={`${bench.title} rankings`} tabIndex={0}>
                 {data.map((m, i) => (
                   <div key={m.id} className="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10">
@@ -73,7 +73,7 @@ export default function Leaderboards({ leaderboards }: { leaderboards: Record<st
                         {m.model}
                         {m.released && <span className="ml-1.5 text-[10px] font-mono text-sky-300/80 align-middle" title={m.released_est ? 'Approximate release (inferred from family/provider window)' : 'Released'}>{m.released_est ? '≈' : ''}{fmtDate(m.released)}</span>}
                       </div>
-                      <div className="text-xs text-white/50">{m.provider} · {licenseBadge(m.license).label}</div>
+                      <div className="text-xs text-white/70">{m.provider} · {licenseBadge(m.license).label}</div>
                     </div>
                     <div className="text-sm font-mono font-bold text-emerald-400 shrink-0">
                       {m[bench.key as keyof Model]}
@@ -87,7 +87,7 @@ export default function Leaderboards({ leaderboards }: { leaderboards: Record<st
                 ))}
               </div>
               <div className="mt-3 h-[220px]">
-                <p className="text-[11px] text-white/40 mb-1">Top 12 shown in chart · full list above.</p>
+                <p className="text-[11px] text-white/70 mb-1">Top 12 shown in chart · full list above.</p>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={data.slice(0, 12).map((m) => ({ name: m.model.split(' ').slice(0, 2).join(' '), v: parsePct(m[bench.key as keyof Model]) || 0 }))} layout="vertical">
                     <XAxis type="number" domain={[0, 100]} hide />

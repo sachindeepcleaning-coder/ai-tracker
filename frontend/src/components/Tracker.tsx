@@ -27,7 +27,7 @@ function tviewFromUrl(): TView {
 }
 
 function Source({ label, url }: { label: string; url?: string }) {
-  if (!url) return <span className="text-white/40">Source: {label}</span>
+  if (!url) return <span className="text-white/70">Source: {label}</span>
   return (
     <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sky-300/90 underline hover:text-sky-200">
       Source: {label} <ArrowUpRight size={11} aria-hidden="true" />
@@ -78,13 +78,13 @@ function ChangelogView({ onOpenModel }: { onOpenModel?: (rankId: string) => void
         </p>
         <div className="mt-3 flex flex-col md:flex-row gap-2 md:items-center">
           <div className="relative flex-1">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" aria-hidden="true" />
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70" aria-hidden="true" />
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Filter changelog (e.g. DeepSeek, retired, MIT)"
               aria-label="Filter changelog"
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-white/5 border border-white/10 text-sm placeholder:text-white/40 focus:outline-none focus:border-emerald-500/50"
+              className="w-full pl-9 pr-3 py-2 rounded-xl bg-white/5 border border-white/10 text-sm placeholder:text-white/70 focus:outline-none focus:border-emerald-500/50"
             />
           </div>
         </div>
@@ -117,7 +117,7 @@ function ChangelogView({ onOpenModel }: { onOpenModel?: (rankId: string) => void
 
       {months.map((m) => (
         <section key={m.key} aria-label={m.label}>
-          <h3 className="font-bold text-sm tracking-widest uppercase text-white/50 px-1 mb-2">{m.label}</h3>
+          <h3 className="font-bold text-sm tracking-widest uppercase text-white/70 px-1 mb-2">{m.label}</h3>
           <ol className="space-y-3">
             {m.items.map((item, idx) => {
               const meta = CHANGE_TYPE_META[item.type]
@@ -134,7 +134,7 @@ function ChangelogView({ onOpenModel }: { onOpenModel?: (rankId: string) => void
                         <RankLink rank={item.rank} onOpenModel={onOpenModel} />
                       </div>
                       <h4 className="font-bold leading-snug mt-2">{item.title}</h4>
-                      <p className="text-xs text-white/50 mt-0.5">
+                      <p className="text-xs text-white/70 mt-0.5">
                         <span aria-hidden="true">{flag(item.country)} </span>{item.provider} · <Source label={item.source.label} url={item.source.url} />
                       </p>
                       <p className="text-sm text-white/70 mt-1.5 leading-relaxed">{item.summary}</p>
@@ -212,7 +212,7 @@ function RumorsView() {
           ].map(([label, n]) => (
             <div key={label as string} role="listitem" className="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
               <div className="text-2xl font-extrabold">{n}</div>
-              <div className="text-xs text-white/50">{label}</div>
+              <div className="text-xs text-white/70">{label}</div>
             </div>
           ))}
         </div>
@@ -235,7 +235,7 @@ function RumorsView() {
               )
             })}
           </div>
-          <label className="text-xs text-white/50 flex items-center gap-1.5">
+          <label className="text-xs text-white/70 flex items-center gap-1.5">
             Provider
             <select
               value={provider}
@@ -247,7 +247,7 @@ function RumorsView() {
               {providers.map((p) => <option key={p} value={p}>{p}</option>)}
             </select>
           </label>
-          <label className="text-xs text-white/50 flex items-center gap-1.5">
+          <label className="text-xs text-white/70 flex items-center gap-1.5">
             Sort
             <select
               value={sort}
@@ -284,12 +284,12 @@ function RumorsView() {
                   <article key={item.id} className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className={`badge ${meta.cls}`}>{meta.label}</span>
-                      <span className="text-xs text-white/50 font-mono">
+                      <span className="text-xs text-white/70 font-mono">
                         {item.date ? <span title={timeAgo(item.date)}>{fmtDay(item.date)} · {timeAgo(item.date)}</span> : 'date TBD'}
                       </span>
                     </div>
                     <h4 className="font-bold leading-snug mt-2">{item.name}</h4>
-                    <p className="text-xs text-white/50 mt-0.5">
+                    <p className="text-xs text-white/70 mt-0.5">
                       <span aria-hidden="true">{flag(item.country)} </span>{item.provider} · {item.countryName}
                     </p>
                     <p className="text-sm text-white/70 mt-1.5 leading-relaxed">{item.summary}</p>
@@ -300,7 +300,7 @@ function RumorsView() {
                         ['Params', item.params ?? '—'],
                       ].map(([k, v]) => (
                         <div key={k} className="bg-white/[0.04] rounded-lg p-2 border border-white/5">
-                          <dt className="text-[10px] tracking-widest font-bold text-white/40 uppercase">{k}</dt>
+                          <dt className="text-[10px] tracking-widest font-bold text-white/70 uppercase">{k}</dt>
                           <dd className="font-semibold mt-0.5 leading-snug">{v}</dd>
                         </div>
                       ))}
@@ -420,7 +420,7 @@ export default function Tracker({ onOpenModel }: { onOpenModel?: (rankId: string
             </button>
           )
         })}
-        <span className="ml-auto text-xs text-white/40">All scores vendor-reported unless AA / Scale / BenchLM</span>
+        <span className="ml-auto text-xs text-white/70">All scores vendor-reported unless AA / Scale / BenchLM</span>
       </div>
 
       {view === 'changelog' && <ChangelogView onOpenModel={onOpenModel} />}
