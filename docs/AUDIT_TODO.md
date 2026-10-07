@@ -4,6 +4,23 @@ Generated during the Oct 2026 data-integrity audit (tasks 1–7). Rule applied
 throughout: when a fact could not be verified against its cited source, the
 cell was emptied with a note rather than guessed.
 
+## Perf item-4 outcome (mobile TBT target <600ms MISSED)
+
+- Baseline (local dist, 3-run median): perf 0.50, TBT 1410ms, LCP ~4.3s.
+- After (content-visibility cards, 12-first pagination, loading placeholder,
+  no eager recharts preload): perf 0.56, TBT 932ms, LCP ~4.3s.
+- Main chunk contents (vite-bundle-visualizer): react ~458KB + data.json
+  ~314KB + app ~77KB + lucide ~10KB (raw attribution).
+- Tried and REVERTED: (a) data.json runtime fetch — main chunk 488→220KB
+  but LCP +2.3s for -124ms TBT (bad trade); (b) manualChunks recharts
+  vendor chunk — Vite emitted it as eager modulepreload (+428KB on first
+  paint); (c) compact data.json — no bundle effect (esbuild minifies the
+  inline JSON anyway); (d) removing backdrop-blur / card entrance animation
+  — no measurable effect (compositor-only).
+- Remaining path to <600ms: virtualize the model grid (TanStack
+  react-virtual is already a dependency) so scrolled-out cards never enter
+  the DOM. Requires restructuring Explorer + its DOM-count tests.
+
 ## Unverified values (cells emptied, see CSV Notes for row context)
 
 - **Hy3 — LiveCodeBench V6.** Removed 34.86% as an outlier vs 78.0% SWE-V.
