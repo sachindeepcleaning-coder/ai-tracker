@@ -135,12 +135,43 @@ const colIdx = header.map((h) => HEADER_MAP[h.trim()])
   }
 }
 
-// Curated fields from the current data.json, keyed by slug.
-// Legacy rank-N ids resolve through a rank fallback (one-time migration).
+// Curated fields from the current data.json, keyed by slug (no rank fallback).
 const existing = existsSync(OUT_PATH)
   ? JSON.parse(readFileSync(OUT_PATH, 'utf8'))
   : { conversation_summary: null, all_coding_models: [] }
 const curated = new Map(existing.all_coding_models.map((m) => [m.id, m]))
+
+// --recompute-inr: rewrite every INR cell from its USD cell x fx_usd_inr
+// (2dp, en-US grouping). Writes back to the CSV, then mapping proceeds on the
+// updated cells. Never run implicitly — values only change via this flag.
+if (process.argv.includes('--recompute-inr')) {
+  const FX = JSON.parse(readFileSync(join(here, 'fx.json'), 'utf8'))
+  const rate = FX.fx_usd_inr
+  if (typeof rate !== 'number' || !(rate > 0)) {
+    console.error('regen-data: fx.json fx_usd_inr must be a positive number')
+    process.exit(1)
+  }
+  const cellIdx = (name) => header.findIndex((h) => h.trim() === name)
+  const pairs = [['Price Input/1M', 'Price Input INR/1M'], ['Price Output/1M', 'Price Output INR/1M']]
+  let touched = 0
+  for (const cells of rows.slice(1)) {
+    if (String(cells[0] ?? '').trim().startsWith('#')) continue
+    for (const [usdCol, inrCol] of pairs) {
+      const usdRaw = String(cells[cellIdx(usdCol)] ?? '').trim()
+      // Only numeric USD cells are recomputed; Free/TBD/Gated/NIM-style
+      // labels carry meaning and are left untouched. No thousands separators
+      // (file convention: ₹2378.00, not ₹2,378.00).
+      if (usdRaw === '' || usdRaw === '-' || /\/\s*1k\b/i.test(usdRaw)) continue
+      const usd = parseFloat(usdRaw.replace(/[$₹,]/g, ''))
+      if (Number.isNaN(usd)) continue
+      const inr = '₹' + (Math.round(usd * rate * 100) / 100).toFixed(2)
+      if (cells[cellIdx(inrCol)] !== inr) { cells[cellIdx(inrCol)] = inr; touched++ }
+    }
+  }
+  const esc = (v) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v)
+  writeFileSync(CSV_PATH, rows.map((r) => r.map((c) => esc(String(c ?? ''))).join(',')).join('\r\n') + '\r\n')
+  console.log(`regen-data: --recompute-inr rewrote ${touched} INR cells at ${rate}`)
+}
 
 const out = rows.slice(1)
   .filter((cells) => !String(cells[0] ?? '').trim().startsWith('#')) // trailing CSV comment lines

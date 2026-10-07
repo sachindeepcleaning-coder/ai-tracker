@@ -1,0 +1,4 @@
+{
+  "_comment": "Single source for the USD->INR rate. CSV INR columns are derived from USD columns x this rate (2dp, en-US grouping). Change the rate here, then run: npm run data -- --recompute-inr",
+  "fx_usd_inr": 95.12
+}

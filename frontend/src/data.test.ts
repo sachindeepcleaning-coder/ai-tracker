@@ -1,8 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import data from './data.json'
+import fx from '../scripts/fx.json'
 import type { Model } from './lib/types'
 
 const models = (data.all_coding_models || []) as Model[]
+const FX_RATE = (fx as { fx_usd_inr: number }).fx_usd_inr
 
 describe('data.json integrity (regen gate)', () => {
   it('has model_count rows with unique contiguous ranks', () => {
@@ -144,6 +146,22 @@ describe('data.json integrity (regen gate)', () => {
     const mai = models.find((m) => m.model === 'MAI-Thinking-1')!
     expect(mai.aime_2026).toContain('94.5')
     expect(mai.terminal_bench).toMatch(/46\.0/)
+  })
+
+  it('INR cells equal USD x fx_usd_inr from scripts/fx.json', () => {
+    expect(typeof FX_RATE === 'number' && FX_RATE > 0, 'fx.json fx_usd_inr must be a positive number').toBe(true)
+    for (const m of models) {
+      for (const [u, i] of [['price_in_usd_per_mtok', 'price_in_inr_per_mtok'], ['price_out_usd_per_mtok', 'price_out_inr_per_mtok']] as const) {
+        const usd = m[u]
+        const inr = m[i]
+        if (usd == null || inr == null) {
+          expect(usd, `${m.rank} ${m.model}: one-sided null ${u}=${usd} ${i}=${inr}`).toBe(inr)
+          continue
+        }
+        const expected = Math.round(usd * FX_RATE * 100) / 100
+        expect(Math.abs(inr - expected), `${m.rank} ${m.model}: ${i}=${inr} != ${u}=${usd} x ${FX_RATE}`).toBeLessThanOrEqual(0.005)
+      }
+    }
   })
 
   it('prices are numbers-or-null with per-Mtok meaning; Q4 units are GB-or-null', () => {
