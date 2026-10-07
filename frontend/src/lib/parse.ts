@@ -67,6 +67,15 @@ export function daysOld(iso) {
   return Math.max(0, Math.round((new Date(DATA_AS_OF + 'T00:00:00Z') - d) / 86400000))
 }
 
+/** Age of a Last Verified date relative to the data anchor: '19d'.
+    Invalid dates -> 'unknown'; future dates clamp to '0d'. */
+export function verificationAge(iso) {
+  if (!iso || typeof iso !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return 'unknown'
+  const d = new Date(iso + 'T00:00:00Z')
+  if (isNaN(d.getTime())) return 'unknown'
+  return `${Math.max(0, Math.round((new Date(DATA_AS_OF + 'T00:00:00Z') - d) / 86400000))}d`
+}
+
 /** Relative age vs the as-of anchor: '3d ago', '2mo ago', '1y ago'.
  * Null/invalid dates -> 'date TBD'; within-month future estimates -> 'soon'. */
 export function timeAgo(iso) {

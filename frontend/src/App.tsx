@@ -93,6 +93,13 @@ export default function App() {
   useEffect(() => { document.title = `Local AI Coding Models — India Tracker (${stats.total} models)` }, [stats.total])
   const toggleCompare = (id) => setCompare((c) => c.includes(id) ? c.filter((x) => x !== id) : c.length >= 6 ? c : [...c, id])
   const compareModels = allModels.filter((m) => compare.includes(m.id))
+  const verifiedAges = allModels
+    .map((m) => m.last_verified)
+    .filter((d) => d && /^\d{4}-\d{2}-\d{2}$/.test(d))
+    .map((d) => Math.max(0, Math.round((new Date(DATA_AS_OF + 'T00:00:00Z') - new Date(d + 'T00:00:00Z')) / 86400000)))
+    .sort((a, b) => a - b)
+  const medianAge = verifiedAges.length ? verifiedAges[Math.floor(verifiedAges.length / 2)] : null
+  const oldestAge = verifiedAges.length ? verifiedAges[verifiedAges.length - 1] : null
 
   return (
     <div className="min-h-screen">
@@ -196,7 +203,7 @@ export default function App() {
             <p><b className="text-white/70">Contribute:</b> corrections and new rows welcome via <a className="underline hover:text-white/70" href="https://github.com/sachindeepcleaning-coder/ai-tracker/issues" target="_blank" rel="noopener noreferrer">GitHub issues</a> — edit the CSV, run <span className="font-mono">npm run data</span>, and the integrity tests gate the deploy.</p>
           </div>
         </details>
-        Built from <span className="text-white/70">coding_benchmarks.csv (ranks 1-{stats.total}, single source of truth)</span> + regenerated <span className="text-white/70">ai_coding_api_vs_local_summary.json + frontend/src/data.json</span>. <span className="text-white/70">Data as of {fmtDateFull(DATA_AS_OF)} ({dataMeta.model_count ?? stats.total} models) · site built {dataMeta.data_regen_at ?? DATA_AS_OF}</span>. ₹95.12/USD. Fact-checked {VERIFIED_AT} (HuggingFace / Cognition / Sakana / DeepSeek / Anthropic / Google / llm-releases / AA v4.3). Not vendor quotes — planning estimates. Source: GitHub repo `sachindeepcleaning-coder/ai-tracker`. <span className="text-amber-300/70">Planning estimates only. Benchmarks are mostly vendor-reported. Not official rankings or financial advice.</span>
+        Built from <span className="text-white/70">coding_benchmarks.csv (ranks 1-{stats.total}, single source of truth)</span> + regenerated <span className="text-white/70">ai_coding_api_vs_local_summary.json + frontend/src/data.json</span>. <span className="text-white/70">Data as of {fmtDateFull(DATA_AS_OF)} ({dataMeta.model_count ?? stats.total} models; median verified age {medianAge ?? '—'}d, oldest {oldestAge ?? '—'}d) · site built {dataMeta.data_regen_at ?? DATA_AS_OF}</span>. ₹95.12/USD. Fact-checked {VERIFIED_AT} (HuggingFace / Cognition / Sakana / DeepSeek / Anthropic / Google / llm-releases / AA v4.3). Not vendor quotes — planning estimates. Source: GitHub repo `sachindeepcleaning-coder/ai-tracker`. <span className="text-amber-300/70">Planning estimates only. Benchmarks are mostly vendor-reported. Not official rankings or financial advice.</span>
       </footer>
     </div>
   )

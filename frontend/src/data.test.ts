@@ -92,6 +92,16 @@ describe('data.json integrity (regen gate)', () => {
     expect(top).toBe('2026-10-01')
   })
 
+  it('verification freshness: at most 50% of rows older than 30 days vs data_as_of', () => {
+    const asOf = new Date(data.data_as_of + 'T00:00:00Z').getTime()
+    const ages = models
+      .map((m) => m.last_verified)
+      .filter((d) => d && /^\d{4}-\d{2}-\d{2}$/.test(d))
+      .map((d) => Math.round((asOf - new Date(d + 'T00:00:00Z').getTime()) / 86400000))
+    const stale = ages.filter((a) => a > 30).length
+    expect(stale / models.length, `${stale}/${models.length} rows verified >30d before ${data.data_as_of} — re-verify`).toBeLessThanOrEqual(0.5)
+  })
+
   it('release-date coverage >= 60% with released_est tiering (regen gate)', () => {
     const dated = models.filter((m) => m.released)
     expect(dated.length / models.length).toBeGreaterThanOrEqual(0.6)
