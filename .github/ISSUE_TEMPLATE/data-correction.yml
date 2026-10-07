@@ -1,0 +1,50 @@
+name: Data correction
+description: Fix a wrong score, price, license, or date in the model catalog
+title: "[data] <model slug>: <field> correction"
+labels: ["data"]
+body:
+  - type: input
+    id: slug
+    attributes:
+      label: Model slug
+      description: The Slug column value from coding_benchmarks.csv (e.g. deepseek-deepseek-v4-1-flash)
+      placeholder: provider-model-slug
+    validations:
+      required: true
+  - type: input
+    id: field
+    attributes:
+      label: Field
+      description: CSV column to correct (e.g. Price Input/1M, License/Type, Terminal-Bench)
+      placeholder: Price Input/1M
+    validations:
+      required: true
+  - type: input
+    id: current
+    attributes:
+      label: Current value
+      description: What the catalog says today
+    validations:
+      required: true
+  - type: input
+    id: correct
+    attributes:
+      label: Correct value
+      description: What it should say
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Primary source URL
+      description: Vendor docs/pricing page or official Hugging Face model card. Aggregators (leaderboards, blogs) are not accepted as sources.
+      placeholder: https://
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Anything else (index versions for AA scores, harness details, expiry dates)
+    validations:
+      required: false
