@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import type { Model } from '../lib/types'
-import { parsePct, parseQ4, DATA_AS_OF, isValidRelease, setDataAnchor } from '../lib/parse'
+import { parsePct, parseQ4, DATA_AS_OF, isValidRelease, setDataAnchor, assertCatalogPayload } from '../lib/parse'
 import { isOpenWeight, licenseBadge } from '../lib/license'
 
 /**
@@ -11,26 +11,21 @@ import { isOpenWeight, licenseBadge } from '../lib/license'
  * evaluation until the catalog arrives, so every importer below sees a
  * populated array with no loading-state plumbing.
  */
-interface CatalogPayload {
-  all_coding_models: Model[]
-  model_count?: number
-  data_as_of?: string
-  data_regen_at?: string
-}
-const payload: CatalogPayload = import.meta.env.MODE === 'test'
-  ? (await import('../data.json')).default as CatalogPayload
+const payload: unknown = import.meta.env.MODE === 'test'
+  ? (await import('../data.json')).default
   : await fetch(`${import.meta.env.BASE_URL}data.json`).then((r) => {
       if (!r.ok) throw new Error(`catalog fetch failed: ${r.status}`)
       return r.json()
     })
+assertCatalogPayload(payload)
 setDataAnchor(payload.data_as_of ?? '')
 export const catalogMeta = {
   model_count: payload.model_count ?? payload.all_coding_models.length,
   data_as_of: payload.data_as_of ?? '',
   data_regen_at: payload.data_regen_at ?? '',
 }
-/** @type {Model[]} Catalog singleton — all rows from the runtime payload. */
-export const allModels = payload.all_coding_models as Model[]
+/** @type {Model[]} Catalog singleton — all rows from the runtime payload (validated above). */
+export const allModels = payload.all_coding_models
 
 /**
  * One catalog row (from data.json, regenerated from the CSV via `npm run data`).

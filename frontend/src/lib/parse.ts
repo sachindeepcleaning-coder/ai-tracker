@@ -16,6 +16,39 @@ export let VERIFIED_AT = ''
     never leak into release dates). Mid-month estimates (≈) stay within it. */
 export let RELEASE_MONTH_END = ''
 
+/** Runtime-validated catalog payload: every row must carry the identity and
+    display fields the UI reads unconditionally. Throws loudly on the first
+    malformed row instead of letting a bad cast through. */
+export interface CatalogPayload {
+  all_coding_models: Model[]
+  model_count?: number
+  data_as_of?: string
+  data_regen_at?: string
+}
+
+const REQUIRED_ROW_STRINGS = ['id', 'slug', 'rank', 'model', 'provider', 'license'] as const
+
+export function assertCatalogPayload(raw: unknown): asserts raw is CatalogPayload {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
+    throw new Error('catalog payload is not an object — run `npm run data`')
+  }
+  const rows = (raw as { all_coding_models?: unknown }).all_coding_models
+  if (!Array.isArray(rows) || rows.length === 0) {
+    throw new Error('catalog payload has no all_coding_models array — run `npm run data`')
+  }
+  rows.forEach((row, i) => {
+    if (!row || typeof row !== 'object') {
+      throw new Error(`catalog row ${i} is not an object — run \`npm run data\``)
+    }
+    for (const k of REQUIRED_ROW_STRINGS) {
+      const v = (row as Record<string, unknown>)[k]
+      if (typeof v !== 'string' || v.length === 0) {
+        throw new Error(`catalog row ${i} has invalid ${k} — run \`npm run data\``)
+      }
+    }
+  })
+}
+
 /** Set by useModels after the catalog loads (or test-setup in tests). Throws
     on a missing/invalid anchor — parse must never run dateless. */
 export function setDataAnchor(iso: string) {
