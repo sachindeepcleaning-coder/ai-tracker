@@ -198,8 +198,9 @@ const out = rows.slice(1)
   }
   // Stable identity: slug from the CSV; id follows slug (rank stays as data).
   row.id = row.slug
-  // Merge hand-researched curation (survives regeneration and re-ranks).
-  const prev = curated.get(row.slug) ?? curated.get(`rank-${row.rank}`)
+  // Merge hand-researched curation keyed on slug ONLY (survives re-ranks).
+  // The legacy rank-N fallback was removed: ranks are display order, not identity.
+  const prev = curated.get(row.slug)
   if (prev) {
     row.released = prev.released ?? null
     row.released_est = Boolean(prev.released_est)
@@ -233,23 +234,56 @@ const out = rows.slice(1)
     if (m.last_verified && !/^\d{4}-\d{2}-\d{2}$/.test(m.last_verified)) { console.error(`regen-data: bad last_verified ${m.id} ${m.last_verified}`); process.exit(1) }
   }
 }
-// TASK 5 CI check (warning only): price/license/notes cells carrying
-// through|thru|until + a past date print a build-log warning.
+// Promo-expiry gate: FAIL when a license/notes cell carries a past end date
+// (through|thru|until|ended|expires + ISO or "Month day", or "to <Month> <day>")
+// that is not already marked handled (expired/removed/ended).
 {
   const MONTHS = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12 }
   const verifiedDates = out.map((m) => m.last_verified).filter((d) => d && /^\d{4}-\d{2}-\d{2}$/.test(d)).sort()
   const anchor = verifiedDates[verifiedDates.length - 1] ?? ''
   const [ay, amo, ady] = anchor.split('-').map(Number)
+  const toISO = (y, mo, dy) => `${y}-${String(mo).padStart(2, '0')}-${String(dy).padStart(2, '0')}`
+  const failures = []
+  const PATTERNS = [
+    /(through|thru|until|ended|expires?)\s+(\d{4}-\d{2}-\d{2})/i,
+    /(through|thru|until|ended|expires?)\s+([A-Za-z]{3,9})\s+(\d{1,2})(?:,?\s*(\d{4}))?/i,
+    /\bto\s+([A-Za-z]{3,9})\s+(\d{1,2})(?:,?\s*(\d{4}))?/i,
+  ]
   for (const m of out) {
     for (const cell of [m.license, m.notes]) {
       if (!cell || /expired|removed/i.test(cell)) continue // already handled
-      const hit = String(cell).match(/(through|thru|until)\s+([A-Za-z]{3,9})\s*(\d{1,2})?/i)
-      if (!hit) continue
-      const mo = MONTHS[hit[2].slice(0, 3).toLowerCase()]
-      if (!mo || !ay) continue
-      const past = mo < amo || (mo === amo && hit[3] && parseInt(hit[3], 10) < ady)
-      if (past) console.warn(`regen-data WARNING: ${m.id} may carry an expired date claim: ${JSON.stringify(hit[0])}`)
+      // "ended <date>" is itself a handled marker (documents a finished promo).
+      if (/ended/i.test(cell)) continue
+      for (const re of PATTERNS) {
+        const hit = String(cell).match(re)
+        if (!hit) continue
+        // Pattern groups differ: patterns 1-2 put the month in hit[2],
+        // the "to <Month>" pattern puts it in hit[1]. Normalize first.
+        const isoFrag = [hit[1], hit[2]].find((v) => /^\d{4}-\d{2}-\d{2}$/.test(v ?? ''))
+        const monthName = isoFrag ?? (/[A-Za-z]/.test(hit[2] ?? '') ? hit[2] : hit[1])
+        const dayStr = /[A-Za-z]/.test(hit[2] ?? '') ? hit[3] : hit[2]
+        const yearStr = /[A-Za-z]/.test(hit[2] ?? '') ? hit[4] : hit[3]
+        let iso = null
+        if (isoFrag) {
+          iso = isoFrag
+        } else {
+          const mo = MONTHS[String(monthName ?? '').slice(0, 3).toLowerCase()]
+          if (!mo || !ay) continue
+          const dy = parseInt(dayStr, 10)
+          const last = yearStr ? parseInt(yearStr, 10) : null
+          const y = last ?? ay
+          if (!dy || dy < 1 || dy > 31) continue
+          iso = toISO(y, mo, dy)
+          // Month-day without year in a later month than the anchor = next year, not past.
+          if (!last && (mo > amo || (mo === amo && dy >= ady))) continue
+        }
+        if (iso < anchor) failures.push(`${m.id}: past end-date claim ${JSON.stringify(hit[0])} (anchor ${anchor})`)
+      }
     }
+  }
+  if (failures.length) {
+    console.error(`regen-data: ${failures.length} unmarked past date claim(s):\n  ${failures.join('\n  ')}`)
+    process.exit(1)
   }
 }
 // data_as_of = newest Last Verified date in the CSV (NOT today's date).
@@ -259,5 +293,5 @@ const verifiedDates = out.map((m) => m.last_verified).filter((d) => d && /^\d{4}
 const dataAsOf = verifiedDates[verifiedDates.length - 1] ?? null
 const { data_version: _dropped, ...rest } = existing // legacy key retired (TASK 3)
 writeFileSync(OUT_PATH, JSON.stringify({ ...rest, data_regen_at: today, model_count: out.length, data_as_of: dataAsOf, all_coding_models: out }, null, 2) + '\n')
-const preserved = out.filter((m) => curated.get(m.slug) ?? curated.get(`rank-${m.rank}`)).length
+const preserved = out.filter((m) => curated.get(m.slug)).length
 console.log(`regen-data: wrote ${out.length} models -> ${OUT_PATH} (preserved ${preserved} curated rows)`)
