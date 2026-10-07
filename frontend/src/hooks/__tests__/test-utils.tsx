@@ -1,10 +1,11 @@
 import * as React from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, type Root } from 'react-dom/client'
 import { act } from 'react'
 
-export function renderHook(fn) {
-  let result = { current: undefined }
-  let root, container
+export function renderHook<T>(fn: () => T) {
+  const result: { current: T | undefined } = { current: undefined }
+  let root: Root
+  let container: HTMLDivElement
   function Comp() {
     result.current = fn()
     return null

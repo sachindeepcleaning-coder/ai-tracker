@@ -2,11 +2,14 @@ import React from 'react'
 import { Scale, Zap, BarChart3, Radar } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, ScatterChart, Scatter, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar as RadarSeries, Legend } from 'recharts'
 import { parsePct, parseQ4, fmtDate } from '../lib/parse'
+import type { Model } from '../lib/types'
 
 const COLORS = ['#10B981', '#8B5CF6', '#06B6D4', '#F59E0B', '#EF4444', '#3B82F6']
 
+type RadarPoint = { bench: string; [model: string]: string | number }
+
 /** Radar data: per-benchmark values for each selected model (unscored → 0). */
-const RADAR_BENCHES = [
+const RADAR_BENCHES: { key: keyof Model; label: string }[] = [
   { key: 'swe_bench_verified', label: 'SWE-V' },
   { key: 'terminal_bench', label: 'TB 2.1' },
   { key: 'livecodebench_v6', label: 'LCB V6' },
@@ -15,9 +18,9 @@ const RADAR_BENCHES = [
   { key: 'aime_2026', label: 'AIME' },
 ]
 
-function radarData(compareModels) {
+function radarData(compareModels: Model[]): RadarPoint[] {
   return RADAR_BENCHES.map((b) => {
-    const point = { bench: b.label }
+    const point: RadarPoint = { bench: b.label }
     for (const m of compareModels) {
       point[m.model.split(' ')[0]] = parsePct(m[b.key]) || 0
     }
@@ -25,7 +28,15 @@ function radarData(compareModels) {
   })
 }
 
-export default function Compare({ compareModels, onBack, onClear }) {
+interface CompareProps {
+  compareModels: Model[]
+  onBack: () => void
+  onClear: () => void
+}
+
+type FieldRow = [label: string, fn: (m: Model) => React.ReactNode]
+
+export default function Compare({ compareModels, onBack, onClear }: CompareProps) {
   if (compareModels.length < 2) {
     return (
       <div className="card p-10 text-center">
@@ -111,20 +122,20 @@ export default function Compare({ compareModels, onBack, onClear }) {
             <tr><th className="text-left p-3">Field</th>{compareModels.map((m) => <th key={m.id} className="text-left p-3">{m.model}</th>)}</tr>
           </thead>
           <tbody className="divide-y divide-white/5">
-            {[
-              ['Provider', (m) => m.provider],
-              ['Released', (m) => (m.released ? fmtDate(m.released) : '—')],
-              ['Params', (m) => `${m.total_parameters} / ${m.active_parameters}`],
-              ['Q4 VRAM', (m) => m.full_q4_vram_gb ?? '—'],
-              ['License', (m) => m.license],
-              ['Context', (m) => m.context_window],
-              ['SWE-V', (m) => m.swe_bench_verified ?? '—'],
-              ['SWE-Pro', (m) => m.swe_bench_pro ?? '—'],
-              ['LCB V6', (m) => m.livecodebench_v6 ?? '—'],
-              ['TB 2.1', (m) => m.terminal_bench ?? '—'],
-              ['Price in/out $/M', (m) => m.price_in_usd_per_mtok != null ? `$${m.price_in_usd_per_mtok}/$${m.price_out_usd_per_mtok}` : '—'],
-              ['Price INR', (m) => m.price_in_inr_per_mtok != null ? `₹${m.price_in_inr_per_mtok}/₹${m.price_out_inr_per_mtok}` : '—'],
-            ].map(([label, fn]) => (
+            {([
+              ['Provider', (m: Model) => m.provider],
+              ['Released', (m: Model) => (m.released ? fmtDate(m.released) : '—')],
+              ['Params', (m: Model) => `${m.total_parameters} / ${m.active_parameters}`],
+              ['Q4 VRAM', (m: Model) => m.full_q4_vram_gb ?? '—'],
+              ['License', (m: Model) => m.license],
+              ['Context', (m: Model) => m.context_window],
+              ['SWE-V', (m: Model) => m.swe_bench_verified ?? '—'],
+              ['SWE-Pro', (m: Model) => m.swe_bench_pro ?? '—'],
+              ['LCB V6', (m: Model) => m.livecodebench_v6 ?? '—'],
+              ['TB 2.1', (m: Model) => m.terminal_bench ?? '—'],
+              ['Price in/out $/M', (m: Model) => m.price_in_usd_per_mtok != null ? `$${m.price_in_usd_per_mtok}/$${m.price_out_usd_per_mtok}` : '—'],
+              ['Price INR', (m: Model) => m.price_in_inr_per_mtok != null ? `₹${m.price_in_inr_per_mtok}/₹${m.price_out_inr_per_mtok}` : '—'],
+            ] as FieldRow[]).map(([label, fn]) => (
               <tr key={label} className="hover:bg-white/[0.03]"><td className="p-3 font-semibold text-white/70">{label}</td>{compareModels.map((m) => <td key={m.id} className="p-3">{fn(m)}</td>)}</tr>
             ))}
           </tbody>

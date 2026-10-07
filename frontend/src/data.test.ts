@@ -1,12 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { readFileSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
-import { dirname, join } from 'node:path'
+import data from './data.json'
+import type { Model } from './lib/types'
 
-const here = dirname(fileURLToPath(import.meta.url))
-const raw = readFileSync(join(here, 'data.json'), 'utf8')
-const data = JSON.parse(raw)
-const models = data.all_coding_models
+const models = (data.all_coding_models || []) as Model[]
 
 describe('data.json integrity (regen gate)', () => {
   it('has model_count rows with unique contiguous ranks', () => {
@@ -25,7 +21,8 @@ describe('data.json integrity (regen gate)', () => {
     }
     expect(data.model_count).toBe(models.length)
     expect(data.data_as_of).toMatch(/^\d{4}-\d{2}-\d{2}$/)
-    const maxVerified = models.map((m) => m.last_verified).filter(Boolean).sort().at(-1)
+    const sorted = models.map((m) => m.last_verified).filter(Boolean).sort()
+    const maxVerified = sorted[sorted.length - 1]
     expect(data.data_as_of).toBe(maxVerified)
     expect(data).not.toHaveProperty('data_version')
   })
@@ -43,7 +40,7 @@ describe('data.json integrity (regen gate)', () => {
   it('has no string prices or string is_free (regression: rank-265/266/267)', () => {
     for (const m of models) {
       for (const k of ['price_in_usd_per_mtok', 'price_out_usd_per_mtok', 'price_in_inr_per_mtok', 'price_out_inr_per_mtok']) {
-        expect(m[k] === null || typeof m[k] === 'number', `${m.rank} ${m.model}.${k} should be number|null, got ${typeof m[k]}`).toBe(true)
+        expect((m as unknown as Record<string, unknown>)[k] === null || typeof (m as unknown as Record<string, unknown>)[k] === 'number', `${m.rank} ${m.model}.${k} should be number|null, got ${typeof (m as unknown as Record<string, unknown>)[k]}`).toBe(true)
       }
       expect(typeof m.is_free, `${m.rank} is_free should be boolean`).toBe('boolean')
     }
@@ -65,7 +62,7 @@ describe('data.json integrity (regen gate)', () => {
   it('curated released dates survive (31 dated incl. V4.1 Flash Sep 10)', () => {
     const dated = models.filter((m) => m.released)
     expect(dated.length).toBeGreaterThanOrEqual(30)
-    const flash = models.find((m) => m.model === 'DeepSeek V4.1 Flash')
+    const flash = models.find((m) => m.model === 'DeepSeek V4.1 Flash')!
     expect(flash.released).toBe('2026-09-10')
   })
 
@@ -88,7 +85,7 @@ describe('data.json integrity (regen gate)', () => {
     // The real September releases stay at the top of a valid-date sort.
     const top = [...models]
       .filter((m) => m.released)
-      .sort((a, b) => b.released.localeCompare(a.released))[0].released
+      .sort((a, b) => (b.released ?? '').localeCompare(a.released ?? ''))[0]!.released
     expect(top).toBe('2026-10-01')
   })
 
@@ -116,7 +113,7 @@ describe('data.json integrity (regen gate)', () => {
     expect(exact.length).toBeGreaterThanOrEqual(30)
     expect(est.length).toBeGreaterThan(0)
     // SWE-2 verified Sep 10 via Cognition blog (was coarse mid-month est)
-    const swe2 = models.find((m) => m.model === 'SWE-2')
+    const swe2 = models.find((m) => m.model === 'SWE-2')!
     expect(swe2.released).toBe('2026-09-10')
     expect(swe2.released_est).toBe(false)
   })
@@ -126,7 +123,7 @@ describe('data.json integrity (regen gate)', () => {
   })
 
   it('SWE-2 keeps only correctly-attributed benchmarks (TB2.1 yes; GPQA/ARC null)', () => {
-    const swe2 = models.find((m) => m.model === 'SWE-2')
+    const swe2 = models.find((m) => m.model === 'SWE-2')!
     expect(swe2.terminal_bench).toContain('92.8')
     expect(swe2.gpqa_diamond).toBeNull() // TB4 27.3% was misattributed here in the CSV
     expect(swe2.arc_agi_2).toBeNull() // FrontierCode 50.0% was misattributed here
@@ -144,7 +141,7 @@ describe('data.json integrity (regen gate)', () => {
     const aimeBad = models.filter((m) => [m.math, m.aime_2026].some((v) => v && /AIME\s*25/i.test(v)))
     expect(aimeBad.map((m) => `${m.rank} ${m.model}`), 'AIME25 must not sit in MATH/AIME26 columns').toEqual([])
     // MAI-Thinking-1 keeps its real numbers in the right columns
-    const mai = models.find((m) => m.model === 'MAI-Thinking-1')
+    const mai = models.find((m) => m.model === 'MAI-Thinking-1')!
     expect(mai.aime_2026).toContain('94.5')
     expect(mai.terminal_bench).toMatch(/46\.0/)
   })
@@ -152,7 +149,7 @@ describe('data.json integrity (regen gate)', () => {
   it('prices are numbers-or-null with per-Mtok meaning; Q4 units are GB-or-null', () => {
     for (const m of models) {
       for (const k of ['price_in_usd_per_mtok', 'price_out_usd_per_mtok', 'price_in_inr_per_mtok', 'price_out_inr_per_mtok']) {
-        const v = m[k]
+        const v = (m as unknown as Record<string, unknown>)[k]
         expect(v === null || typeof v === 'number', `${m.rank} ${m.model}.${k} got ${typeof v}`).toBe(true)
       }
       const q = m.full_q4_vram_gb
@@ -163,11 +160,11 @@ describe('data.json integrity (regen gate)', () => {
       expect(String(q ?? ''), `${m.rank} ${m.model} Q4 must be GB, not grams`).not.toMatch(/G$/)
     }
     // Cohere Parse 5 is per-PAGE pricing: must be null $/Mtok, not 1.5
-    const parse5 = models.find((m) => m.model === 'Cohere Parse 5')
+    const parse5 = models.find((m) => m.model === 'Cohere Parse 5')!
     expect(parse5.price_in_usd_per_mtok).toBeNull()
     expect(parse5.price_out_usd_per_mtok).toBeNull()
     // North-Micro-Vision column-shift fix: 128K is context, not a price
-    const nmv = models.find((m) => m.model === 'North-Micro-Vision-Instruct')
+    const nmv = models.find((m) => m.model === 'North-Micro-Vision-Instruct')!
     expect(nmv.context_window).toBe('128K')
     expect(nmv.price_out_inr_per_mtok).toBeNull()
   })

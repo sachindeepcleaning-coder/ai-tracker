@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { IndianRupee } from 'lucide-react'
+import type { Model } from '../lib/types'
 import { allModels } from '../hooks/useModels'
 import { INR_PER_USD } from '../lib/parse'
 
@@ -23,24 +24,33 @@ const COST_SAMPLES = [
 
 // shared for tests — oxlint: CostCalc is the default component export; this helper is test-only
 // eslint-disable-next-line react/only-export-components -- helper exported for vitest
-function normalizeModelName(s) {
+function normalizeModelName(s: string) {
   return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '').trim()
 }
 
+interface CostSample {
+  id?: string
+  model?: string
+  label: string
+  in?: number
+  out?: number
+  cache?: number
+}
+
 // eslint-disable-next-line react/only-export-components -- helper exported for vitest
-export function resolveSample(s, catalog = allModels) {
+export function resolveSample(s: CostSample, catalog: Model[] = allModels) {
   // 1) exact
   let model = catalog.find((m) => m.model === s.model)
   // 2) exact by id (defensive: survives renames if caller passes {id})
   if (!model && s.id) model = catalog.find((m) => m.id === s.id)
   // 3) normalized (case/punctuation-insensitive) — handles "Claude Fable 5.1" vs "Fable 5.1", hyphens, etc.
   if (!model) {
-    const want = normalizeModelName(s.model)
+    const want = normalizeModelName(s.model ?? '')
     model = catalog.find((m) => normalizeModelName(m.model) === want)
   }
   // 4) substring fallback — only if exactly one candidate (avoids "GPT-5" matching both GPT-5.6 Sol and GPT-5 Terra)
   if (!model) {
-    const want = normalizeModelName(s.model)
+    const want = normalizeModelName(s.model ?? '')
     const candidates = catalog.filter(
       (m) => normalizeModelName(m.model).includes(want) || want.includes(normalizeModelName(m.model)),
     )
@@ -55,7 +65,7 @@ export function resolveSample(s, catalog = allModels) {
     in: s.in ?? model?.price_in_usd_per_mtok ?? 0,
     out: s.out ?? model?.price_out_usd_per_mtok ?? 0,
     cache: s.cache,
-  }
+  } as { name: string; in: number; out: number; cache: number | null | undefined }
 }
 
 export default function CostCalc() {
@@ -74,7 +84,7 @@ export default function CostCalc() {
     // Representative models — Sep 10 online-verified per-token $/Mtok (off-peak where tiered)
     const rows = COST_SAMPLES.map((s) => {
       const r = resolveSample(s)
-      const cost = (miss / 1e6) * r.in + (hit / 1e6) * r.cache + (output / 1e6) * r.out
+      const cost = (miss / 1e6) * r.in + (hit / 1e6) * (r.cache ?? 0) + (output / 1e6) * r.out
       return { name: r.name, day: cost, mo: cost * 30, yr: cost * 365, in: r.in, out: r.out, cache: r.cache }
     })
     if (picked) {

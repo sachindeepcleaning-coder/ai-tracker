@@ -15,8 +15,8 @@ const TABS = [
 const CSV_URL = 'https://github.com/sachindeepcleaning-coder/ai-tracker/blob/master/coding_benchmarks.csv'
 const JSON_URL = 'https://github.com/sachindeepcleaning-coder/ai-tracker/blob/master/frontend/src/data.json'
 
-export default function Header({ tab, onTab, stats, explorerCount }) {
-  const navRef = useRef(null)
+export default function Header({ tab, onTab, stats, explorerCount }: { tab: string; onTab: (t: string) => void; stats: { total: number }; explorerCount: number }) {
+  const navRef = useRef<HTMLDivElement>(null)
 
   // Keep the active tab visible when the tab strip overflows on small screens.
   useEffect(() => {

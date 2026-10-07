@@ -3,18 +3,26 @@ import { X, ArrowUpRight } from 'lucide-react'
 import { licenseBadge } from '../lib/license'
 import { fmtDateFull, scoreSource, verificationAge } from '../lib/parse'
 import { DataQualityBadge } from './DataQualityBadge'
+import type { Model } from '../lib/types'
 
 const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
 
-export default function DetailModal({ detail, onClose, onToggleCompare, inCompare }) {
-  const panelRef = useRef(null)
+interface DetailModalProps {
+  detail: Model
+  onClose: () => void
+  onToggleCompare: (id: string) => void
+  inCompare: boolean
+}
+
+export default function DetailModal({ detail, onClose, onToggleCompare, inCompare }: DetailModalProps) {
+  const panelRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const panel = panelRef.current
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
 
-    const onKeyDown = (e) => {
+    const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         e.preventDefault()
         onClose()
@@ -22,7 +30,7 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
       }
       if (e.key !== 'Tab' || !panel) return
       // Focus trap: keep Tab / Shift+Tab inside the dialog.
-      const focusables = [...panel.querySelectorAll(FOCUSABLE)].filter((el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true')
+      const focusables = [...panel.querySelectorAll(FOCUSABLE)].filter((el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true') as HTMLElement[]
       if (focusables.length === 0) return
       const first = focusables[0]
       const last = focusables[focusables.length - 1]
@@ -37,7 +45,7 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
     }
     window.addEventListener('keydown', onKeyDown)
     // Move keyboard focus into the dialog (first focusable, usually the close button).
-    const firstFocusable = panel?.querySelector(FOCUSABLE)
+    const firstFocusable = panel?.querySelector(FOCUSABLE) as HTMLElement | null
     firstFocusable?.focus()
 
     return () => {
@@ -94,7 +102,7 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
               <div className="text-[11px] tracking-widest font-bold text-white/40">{k}</div>
               <div className="font-bold">{v || '—'}</div>
               {v && scoreSource(v) === 'vendor' && <div className="text-[9px] uppercase tracking-wide text-amber-400/80 mt-0.5">vendor-reported</div>}
-              {v && ['aa', 'scale', 'benchlm'].includes(scoreSource(v)) && <div className="text-[9px] uppercase tracking-wide text-sky-300/90 mt-0.5">independent</div>}
+              {v && ['aa', 'scale', 'benchlm'].includes(scoreSource(v) ?? '') && <div className="text-[9px] uppercase tracking-wide text-sky-300/90 mt-0.5">independent</div>}
             </div>
           ))}
         </div>

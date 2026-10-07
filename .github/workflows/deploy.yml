@@ -68,6 +68,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Typecheck
+        run: npm run typecheck
+
       - name: Tests (would have caught #1, #2, #5–#7 before Pages went blank)
         run: npm run test
 

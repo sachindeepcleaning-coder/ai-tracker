@@ -1,13 +1,15 @@
 import { describe, it, expect } from 'vitest'
 import { renderHook } from './test-utils.jsx'
 import { useModels, compare, allModels, providers, licenseGroups, BENCHMARKS } from '../useModels.js'
+import type { ModelFilters } from '../useModels.js'
+import type { Model } from '../../lib/types'
 import { parsePct, parseQ4, isValidRelease } from '../../lib/parse.js'
 import { isOpenWeight } from '../../lib/license.js'
 import dataMeta from '../../data.json'
 
-function renderUseModels(filters = { q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'rank', releaseWindow: 'all' }) {
+function renderUseModels(filters: ModelFilters = { q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'rank', releaseWindow: 'all', modelType: 'all', confidence: 'all', hideSparse: false, freeOnly: false }) {
   const { result } = renderHook(() => useModels(filters))
-  return result.current
+  return result.current as ReturnType<typeof useModels>
 }
 
 // minimal renderHook without @testing-library
@@ -41,7 +43,7 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
       expect(Array.isArray(list)).toBe(true)
       // sorted descending
       for (let i = 1; i < list.length; i++) {
-        expect(parsePct(list[i - 1][b.key])).toBeGreaterThanOrEqual(parsePct(list[i][b.key]))
+        expect(parsePct(list[i - 1][b.key as keyof Model])).toBeGreaterThanOrEqual(parsePct(list[i][b.key as keyof Model]) ?? -1)
       }
     }
   })
@@ -58,7 +60,7 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
   })
 
   it('Explorer filters: license filter uses licenseGroups (not raw licenses)', () => {
-    const { filtered } = renderUseModels({ q: '', provider: 'all', license: licenseGroups[0], openOnly: false, maxQ4: 'all', sort: 'rank', releaseWindow: 'all' })
+    const { filtered } = renderUseModels({ q: '', provider: 'all', license: licenseGroups[0], openOnly: false, maxQ4: 'all', sort: 'rank', releaseWindow: 'all', modelType: 'all', confidence: 'all', hideSparse: false, freeOnly: false })
     expect(filtered.length).toBeGreaterThan(0)
     expect(filtered.length).toBeLessThanOrEqual(allModels.length)
   })
@@ -71,23 +73,23 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
 
   it('latest sort: real recent dates first, invalid/future/missing sink (rank tiebreak)', () => {
     // Real September releases must beat the previously-broken future/invalid dates.
-    const swe2 = { model: 'SWE-2', rank: '265', released: '2026-09-15' }
-    const flash = { model: 'DeepSeek V4.1 Flash', rank: '256', released: '2026-09-10' }
+    const swe2 = { model: 'SWE-2', rank: '265', released: '2026-09-15' } as Model
+    const flash = { model: 'DeepSeek V4.1 Flash', rank: '256', released: '2026-09-10' } as Model
     expect(compare(swe2, flash, 'latest')).toBeLessThan(0)
-    const future = { model: 'Gemini 3.7 Flash', rank: '99', released: '2026-12-31' }
-    const invalid = { model: 'Gemini 3.1 Pro', rank: '98', released: '2026-10-66' }
-    const missing = { model: 'No Date', rank: '1', released: null }
+    const future = { model: 'Gemini 3.7 Flash', rank: '99', released: '2026-12-31' } as Model
+    const invalid = { model: 'Gemini 3.1 Pro', rank: '98', released: '2026-10-66' } as Model
+    const missing = { model: 'No Date', rank: '1', released: null } as Model
     for (const bad of [future, invalid, missing]) {
       expect(compare(flash, bad, 'latest')).toBeLessThan(0)
       expect(compare(bad, flash, 'latest')).toBeGreaterThan(0)
     }
     // Equal dates fall back to rank order.
-    expect(compare({ rank: '265', released: '2026-09-15' }, { rank: '266', released: '2026-09-15' }, 'latest')).toBeLessThan(0)
+    expect(compare({ rank: '265', released: '2026-09-15' } as Model, { rank: '266', released: '2026-09-15' } as Model, 'latest')).toBeLessThan(0)
   })
 
   it('release windows never treat future/invalid dates as recent', () => {
     for (const window of ['7', '30', '90', 'dated']) {
-      const { filtered } = renderUseModels({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: window })
+      const { filtered } = renderUseModels({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: window, modelType: 'all', confidence: 'all', hideSparse: false, freeOnly: false })
       for (const m of filtered) expect(isValidRelease(m.released)).toBe(true)
     }
   })

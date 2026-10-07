@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client'
 import { act } from 'react'
 import Tracker from '../Tracker.jsx'
 
-function renderTracker(props = {}) {
+function renderTracker(props: Record<string, unknown> = {}) {
   const container = document.createElement('div')
   document.body.appendChild(container)
   const root = createRoot(container)
@@ -17,21 +17,21 @@ function renderTracker(props = {}) {
   }
 }
 
-function clickTab(container, label) {
-  const btn = [...container.querySelectorAll('[role="tab"]')].find((b) => b.textContent.includes(label))
+function clickTab(container: HTMLElement, label: string) {
+  const btn = [...container.querySelectorAll('[role="tab"]')].find((b) => b.textContent!.includes(label))
   expect(btn, `tab "${label}"`).toBeTruthy()
-  act(() => { btn.dispatchEvent(new MouseEvent('click', { bubbles: true })) })
+  act(() => { btn!.dispatchEvent(new MouseEvent('click', { bubbles: true })) })
 }
 
-function clickPill(container, label) {
-  const btn = [...container.querySelectorAll('button')].find((b) => b.textContent.trim() === label)
+function clickPill(container: HTMLElement, label: string) {
+  const btn = [...container.querySelectorAll('button')].find((b) => b.textContent!.trim() === label)
   expect(btn, `pill "${label}"`).toBeTruthy()
-  act(() => { btn.dispatchEvent(new MouseEvent('click', { bubbles: true })) })
+  act(() => { btn!.dispatchEvent(new MouseEvent('click', { bubbles: true })) })
 }
 
 describe('Tracker — llm-releases-style views', () => {
   beforeAll(() => {
-    global.IS_REACT_ACT_ENVIRONMENT = true
+    globalThis.IS_REACT_ACT_ENVIRONMENT = true
     window.history.replaceState(null, '', '/')
   })
 
@@ -69,9 +69,9 @@ describe('Tracker — llm-releases-style views', () => {
     const onOpenModel = vi.fn()
     const { container, unmount } = renderTracker({ onOpenModel })
     try {
-      const btn = [...container.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Rank #271')
+      const btn = [...container.querySelectorAll('button')].find((b) => b.textContent!.trim() === 'Rank #271')
       expect(btn, 'Rank #271 badge').toBeTruthy()
-      act(() => { btn.dispatchEvent(new MouseEvent('click', { bubbles: true })) })
+      act(() => { btn!.dispatchEvent(new MouseEvent('click', { bubbles: true })) })
       expect(onOpenModel).toHaveBeenCalledWith('xai-grok-4-7')
     } finally {
       unmount()
@@ -106,7 +106,7 @@ describe('Tracker — llm-releases-style views', () => {
     try {
       expect(container.textContent).toContain('Rumored releases')
       const active = container.querySelector('[role="tab"][aria-selected="true"]')
-      expect(active.textContent).toContain('Rumor watch')
+      expect(active!.textContent).toContain('Rumor watch')
     } finally {
       unmount()
       window.history.replaceState(null, '', '/')

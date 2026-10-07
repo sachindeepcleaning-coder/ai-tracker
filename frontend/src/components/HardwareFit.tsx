@@ -3,11 +3,13 @@ import { HardDrive } from 'lucide-react'
 import { parseQ4, fmtDate } from '../lib/parse'
 import { hardwareTiers, fitsModel } from '../lib/hardware'
 
+import type { Model } from '../lib/types'
+
 /** All open-weight models with Q4 VRAM data, best SWE-V first. Independent of Explorer filters. */
-export default function HardwareFit({ hwModels }) {
+export default function HardwareFit({ hwModels }: { hwModels: Model[] }) {
   // Count basis = the same open-weight Q4 set the matrix renders (hwModels),
   // so summary cards agree with the "open-weight only" narrative.
-  const fitsCount = (vram) => hwModels.filter((m) => {
+  const fitsCount = (vram: number) => hwModels.filter((m) => {
     const q4 = parseQ4(m.full_q4_vram_gb)
     return q4 != null && q4 <= vram
   }).length

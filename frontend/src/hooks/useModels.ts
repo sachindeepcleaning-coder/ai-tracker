@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import raw from '../data.json'
+import type { Model } from '../lib/types'
 import { parsePct, parseQ4, DATA_AS_OF, isValidRelease } from '../lib/parse'
 import { isOpenWeight, licenseBadge } from '../lib/license'
 
@@ -36,7 +37,7 @@ import { isOpenWeight, licenseBadge } from '../lib/license'
  */
 
 /** @type {Model[]} Catalog singleton — all rows from data.json. */
-export const allModels = raw.all_coding_models || raw
+export const allModels = (raw.all_coding_models || raw) as Model[]
 
 // Dev-only invariant check: catches malformed regens (duplicate ids, rank gaps) at startup.
 if (import.meta.env.DEV) {
@@ -52,7 +53,7 @@ export const providers = [...new Set(allModels.map((m) => m.provider))].sort()
 
 /** Short license category for filter dropdowns (raw strings carry dates/prices and
     would balloon a native <select> past the viewport on mobile). Capped for safety. */
-function licLabel(lic) {
+function licLabel(lic: string) {
   const label = licenseBadge(lic).label
   return label.length > 28 ? label.slice(0, 26) + '…' : label
 }
@@ -100,7 +101,7 @@ export const RELEASE_WINDOWS = [
 ]
 
 /** Row comparator for every Explorer sort key (exported for unit tests). */
-export function compare(a, b, sort) {
+export function compare(a: Model, b: Model, sort: string) {
   switch (sort) {
     case 'latest': {
       // Newest valid release first. Only structurally valid ISO dates inside
@@ -113,7 +114,7 @@ export function compare(a, b, sort) {
       if (aValid && !bValid) return -1
       if (!aValid && bValid) return 1
       if (aValid && bValid) {
-        return b.released.localeCompare(a.released) || parseInt(a.rank, 10) - parseInt(b.rank, 10)
+        return (b.released ?? '').localeCompare(a.released ?? '') || parseInt(a.rank, 10) - parseInt(b.rank, 10)
       }
       const ar = a.released || ''
       const br = b.released || ''
@@ -148,7 +149,21 @@ export function compare(a, b, sort) {
  * summary stats, the filter/sort pipeline, leaderboards, and the
  * Hardware Fit matrix rows.
  */
-export function useModels({ q, provider, license, openOnly, maxQ4, sort, releaseWindow, modelType = 'all', confidence = 'all', hideSparse = false, freeOnly = false }) {
+export interface ModelFilters {
+  q: string
+  provider: string
+  license: string
+  openOnly: boolean
+  maxQ4: string
+  sort: string
+  releaseWindow: string
+  modelType: string
+  confidence: string
+  hideSparse: boolean
+  freeOnly: boolean
+}
+
+export function useModels({ q, provider, license, openOnly, maxQ4, sort, releaseWindow, modelType = 'all', confidence = 'all', hideSparse = false, freeOnly = false }: ModelFilters) {
   const stats = useMemo(() => {
     const open = allModels.filter((m) => isOpenWeight(m.license)).length
     const withSWE = allModels.filter((m) => parsePct(m.swe_bench_verified) != null).length
@@ -224,11 +239,11 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
   // Leaderboard for EVERY benchmark column in the catalog (coding + reasoning/math),
   // sorted best-first. parsePct handles annotated cells like "USAMO 2026: 99.8%".
   const leaderboards = useMemo(() => {
-    const out = {}
+    const out: Record<string, Model[]> = {}
     for (const bench of BENCHMARKS) {
       out[bench.key] = allModels
-        .filter((m) => parsePct(m[bench.key]) != null)
-        .sort((a, b) => (parsePct(b[bench.key]) ?? -1) - (parsePct(a[bench.key]) ?? -1))
+        .filter((m) => parsePct(m[bench.key as keyof Model] as string | null) != null)
+        .sort((a, b) => (parsePct(b[bench.key as keyof Model] as string | null) ?? -1) - (parsePct(a[bench.key as keyof Model] as string | null) ?? -1))
     }
     return out
   }, [])

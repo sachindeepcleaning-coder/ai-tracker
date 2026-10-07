@@ -31,7 +31,7 @@ const CLOSED_HINTS = [
 ]
 
 /** Heuristic: does this license allow public/open model weights? */
-export function isOpenWeight(lic) {
+export function isOpenWeight(lic: unknown) {
   const l = String(lic || '').toLowerCase().trim()
   if (!l) return false
   if (l === 'tbd' || l.startsWith('tbd ')) return false
@@ -42,7 +42,7 @@ export function isOpenWeight(lic) {
 }
 
 /** Returns { label, cls } Tailwind classes for a license badge. */
-export function licenseBadge(lic) {
+export function licenseBadge(lic: unknown): { label: string; cls: string } {
   const l = String(lic || '').toLowerCase()
   if (!isOpenWeight(lic)) {
     if (l.includes('api-only') || (l.includes('proprietary') && (l.includes('available') || l.includes('preview') || l.includes('ga')))) {
@@ -51,7 +51,7 @@ export function licenseBadge(lic) {
     if (l.includes('closed') || l.includes('proprietary') || l.includes('gated') || l.includes('api (closed)')) {
       return { label: 'Closed', cls: 'bg-zinc-500/15 text-zinc-400 border-white/10' }
     }
-    return { label: lic, cls: 'bg-white/5 text-zinc-300 border-white/10' }
+    return { label: String(lic), cls: 'bg-white/5 text-zinc-300 border-white/10' }
   }
   if (l.includes('apache')) return { label: 'Apache 2.0', cls: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' }
   if (/\bmit\b/.test(l)) return { label: 'MIT', cls: 'bg-blue-500/15 text-blue-400 border-blue-500/30' }

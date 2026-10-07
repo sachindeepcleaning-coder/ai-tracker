@@ -4,16 +4,17 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGri
 import { parsePct, parseQ4, scoreSource, fmtDate, fmtDateFull, DATA_AS_OF } from '../lib/parse'
 import { licenseBadge, isOpenWeight } from '../lib/license'
 import { BENCHMARKS, allModels } from '../hooks/useModels'
+import type { Model } from '../lib/types'
 
-const ICONS = { zap: Zap, award: Award, chart: BarChart3, brain: BrainCircuit }
+const ICONS: Record<string, typeof Zap> = { zap: Zap, award: Award, chart: BarChart3, brain: BrainCircuit }
 
 /** Analytics scatter: performance vs Q4 VRAM or vs input price, open vs closed. */
-const SCATTER_METRICS = [
+const SCATTER_METRICS: { id: string; label: string; y: (m: Model) => number | null; x: (m: Model) => number | null; xLabel: string }[] = [
   { id: 'vram', label: 'SWE-V vs Q4 VRAM', y: (m) => parsePct(m.swe_bench_verified), x: (m) => parseQ4(m.full_q4_vram_gb), xLabel: 'Q4 GB' },
   { id: 'price', label: 'SWE-V vs input price', y: (m) => parsePct(m.swe_bench_verified), x: (m) => m.price_in_usd_per_mtok, xLabel: '$ in / Mtok' },
 ]
 
-export default function Leaderboards({ leaderboards }) {
+export default function Leaderboards({ leaderboards }: { leaderboards: Record<string, Model[]> }) {
   const [scatterId, setScatterId] = useState('vram')
   const metric = SCATTER_METRICS.find((s) => s.id === scatterId) || SCATTER_METRICS[0]
   const scatterData = allModels
@@ -75,11 +76,11 @@ export default function Leaderboards({ leaderboards }) {
                       <div className="text-xs text-white/50">{m.provider} · {licenseBadge(m.license).label}</div>
                     </div>
                     <div className="text-sm font-mono font-bold text-emerald-400 shrink-0">
-                      {m[bench.key]}
-                      {scoreSource(m[bench.key]) === 'vendor' ? (
+                      {m[bench.key as keyof Model]}
+                      {scoreSource(m[bench.key as keyof Model]) === 'vendor' ? (
                         <span className="ml-1 align-middle text-[9px] font-sans font-semibold uppercase tracking-wide text-amber-400/80" title="Vendor-reported score (own harness) — not independently standardized">V</span>
-                      ) : scoreSource(m[bench.key]) ? (
-                        <span className="ml-1 align-middle text-[9px] font-sans font-semibold uppercase tracking-wide text-sky-300/90" title={`Independently standardized (${scoreSource(m[bench.key]).toUpperCase()}) — apples-to-apples`}>i</span>
+                      ) : scoreSource(m[bench.key as keyof Model]) ? (
+                        <span className="ml-1 align-middle text-[9px] font-sans font-semibold uppercase tracking-wide text-sky-300/90" title={`Independently standardized (${(scoreSource(m[bench.key as keyof Model]) ?? '').toUpperCase()}) — apples-to-apples`}>i</span>
                       ) : null}
                     </div>
                   </div>
@@ -88,7 +89,7 @@ export default function Leaderboards({ leaderboards }) {
               <div className="mt-3 h-[220px]">
                 <p className="text-[11px] text-white/40 mb-1">Top 12 shown in chart · full list above.</p>
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={data.slice(0, 12).map((m) => ({ name: m.model.split(' ').slice(0, 2).join(' '), v: parsePct(m[bench.key]) || 0 }))} layout="vertical">
+                  <BarChart data={data.slice(0, 12).map((m) => ({ name: m.model.split(' ').slice(0, 2).join(' '), v: parsePct(m[bench.key as keyof Model]) || 0 }))} layout="vertical">
                     <XAxis type="number" domain={[0, 100]} hide />
                     <YAxis dataKey="name" type="category" width={90} tick={{ fontSize: 10, fill: '#94A3B8' }} />
                     <Tooltip contentStyle={{ background: '#131C2E', border: '1px solid rgba(255,255,255,0.1)' }} />

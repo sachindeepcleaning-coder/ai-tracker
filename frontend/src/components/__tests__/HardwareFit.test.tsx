@@ -12,24 +12,26 @@ const HW_MODELS = [
   { id: 'r3', model: 'Qwen3.8-27B', provider: 'Alibaba', license: 'Apache 2.0', full_q4_vram_gb: '17', swe_bench_verified: '70.2%', released: '2026-08-10', released_est: false },
 ]
 
-function renderFit(models) {
+import type { Model } from '../../lib/types'
+
+function renderFit(models: Array<Partial<Model>>) {
   const container = document.createElement('div')
   document.body.appendChild(container)
   const root = createRoot(container)
-  act(() => { root.render(<HardwareFit hwModels={models} />) })
+  act(() => { root.render(<HardwareFit hwModels={models as Model[]} />) })
   return {
     container,
-    clickButton: (text) => {
-      const btn = [...container.querySelectorAll('button')].find((b) => b.textContent.includes(text))
+    clickButton: (text: string) => {
+      const btn = [...container.querySelectorAll('button')].find((b) => b.textContent!.includes(text))
       expect(btn, `button "${text}"`).toBeTruthy()
-      act(() => { btn.dispatchEvent(new MouseEvent('click', { bubbles: true })) })
+      act(() => { btn!.dispatchEvent(new MouseEvent('click', { bubbles: true })) })
     },
     unmount: () => { act(() => root.unmount()); container.remove() },
   }
 }
 
 describe('HardwareFit — hardware tier matrix', () => {
-  beforeAll(() => { global.IS_REACT_ACT_ENVIRONMENT = true })
+  beforeAll(() => { globalThis.IS_REACT_ACT_ENVIRONMENT = true })
 
   it('renders a column, pill and summary card for every tier', () => {
     const { container, unmount } = renderFit(HW_MODELS)

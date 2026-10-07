@@ -48,6 +48,6 @@ describe('CostCalc resolveSample — name resolution (fixes #6)', () => {
     expect(rPeak.out).toBe(1.2)
     const rOff = resolveSample({ model: 'DeepSeek V4.1 Flash', label: 'off', cache: 0.003 }, allModels)
     const catalog = allModels.find(m => m.model === 'DeepSeek V4.1 Flash')
-    expect(rOff.in).toBe(catalog.price_in_usd_per_mtok)
+    expect(rOff.in).toBe(catalog!.price_in_usd_per_mtok)
   })
 })

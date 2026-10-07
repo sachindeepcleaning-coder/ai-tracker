@@ -5,6 +5,8 @@ import Explorer from './components/Explorer'
 import DetailModal from './components/DetailModal'
 import ErrorBoundary from './components/ErrorBoundary'
 import { allModels, providers, licenseGroups, useModels } from './hooks/useModels'
+import type { ModelFilters } from './hooks/useModels'
+import type { Model } from './lib/types'
 import { VERIFIED_AT, DATA_AS_OF, fmtDate, fmtDateFull, parseQ4 } from './lib/parse'
 import dataMeta from './data.json'
 
@@ -57,10 +59,10 @@ export default function App() {
   const [tab, setTab] = useState(() => {
     try { return new URLSearchParams(window.location.search).get('tab') || 'explorer' } catch { return 'explorer' }
   })
-  const [filters, setFilters] = useState(filtersFromUrl)
+  const [filters, setFilters] = useState<ModelFilters>(filtersFromUrl)
   const [showFilters, setShowFilters] = useState(false)
-  const [compare, setCompare] = useState([])
-  const [detail, setDetail] = useState(null)
+  const [compare, setCompare] = useState<string[]>([])
+  const [detail, setDetail] = useState<Model | null>(null)
 
   const { stats, filtered, latestModels, leaderboards, hwModels, bestFit } = useModels(filters)
 
@@ -91,12 +93,12 @@ export default function App() {
   }, [tab, filters])
 
   useEffect(() => { document.title = `Local AI Coding Models — India Tracker (${stats.total} models)` }, [stats.total])
-  const toggleCompare = (id) => setCompare((c) => c.includes(id) ? c.filter((x) => x !== id) : c.length >= 6 ? c : [...c, id])
+  const toggleCompare = (id: string) => setCompare((c) => c.includes(id) ? c.filter((x) => x !== id) : c.length >= 6 ? c : [...c, id])
   const compareModels = allModels.filter((m) => compare.includes(m.id))
   const verifiedAges = allModels
     .map((m) => m.last_verified)
-    .filter((d) => d && /^\d{4}-\d{2}-\d{2}$/.test(d))
-    .map((d) => Math.max(0, Math.round((new Date(DATA_AS_OF + 'T00:00:00Z') - new Date(d + 'T00:00:00Z')) / 86400000)))
+    .filter((d): d is string => !!d && /^\d{4}-\d{2}-\d{2}$/.test(d))
+    .map((d) => Math.max(0, Math.round((new Date(DATA_AS_OF + 'T00:00:00Z').getTime() - new Date(d + 'T00:00:00Z').getTime()) / 86400000)))
     .sort((a, b) => a - b)
   const medianAge = verifiedAges.length ? verifiedAges[Math.floor(verifiedAges.length / 2)] : null
   const oldestAge = verifiedAges.length ? verifiedAges[verifiedAges.length - 1] : null

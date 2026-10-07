@@ -19,7 +19,7 @@ function renderGap() {
 
 describe('GapAnalysis — open vs closed research page', () => {
   beforeAll(() => {
-    global.IS_REACT_ACT_ENVIRONMENT = true
+    globalThis.IS_REACT_ACT_ENVIRONMENT = true
   })
 
   it('renders headlines, per-task gap table and decision guide', () => {

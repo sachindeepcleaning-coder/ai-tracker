@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
 /** Prevents a single bad data row / chart glitch from blanking the whole dashboard. */
-export default class ErrorBoundary extends Component {
-  state = { error: null }
+export default class ErrorBoundary extends Component<{ children?: React.ReactNode }, { error: unknown }> {
+  state = { error: null as unknown }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: unknown) {
     return { error }
   }
 

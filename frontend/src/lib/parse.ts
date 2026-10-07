@@ -5,6 +5,7 @@
  * data_as_of = newest Last Verified date in the CSV, never the deploy date.
  */
 import dataMeta from '../data.json'
+import type { Model } from './types'
 
 if (!dataMeta.data_as_of || !/^\d{4}-\d{2}-\d{2}$/.test(dataMeta.data_as_of)) {
   throw new Error('parse: data.json data_as_of is missing or invalid — run `npm run data`')
@@ -26,7 +27,7 @@ export const RELEASE_MONTH_END = (() => {
 
 /** A "real recent" release date: valid ISO YYYY-MM-DD, not future relative to
     the as-of month. Approximate (est) dates qualify — they carry the ≈ marker. */
-export function isValidRelease(iso) {
+export function isValidRelease(iso: unknown) {
   if (!iso || typeof iso !== 'string') return false
   if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return false
   if (iso > RELEASE_MONTH_END) return false
@@ -40,7 +41,7 @@ export function isValidRelease(iso) {
 
 /** '2026-09-10' -> 'Sep 10' (UTC so the label is stable regardless of viewer timezone).
     Coarse dates that aren't ISO ('Sep 2026') pass through unchanged instead of "Invalid Date". */
-export function fmtDate(iso) {
+export function fmtDate(iso: string | null | undefined) {
   if (!iso) return null
   const d = new Date(iso + 'T00:00:00Z')
   if (isNaN(d.getTime())) return String(iso)
@@ -48,7 +49,7 @@ export function fmtDate(iso) {
 }
 
 /** '2026-09-10' -> 'Sep 10, 2026' (coarse dates pass through unchanged). */
-export function fmtDateFull(iso) {
+export function fmtDateFull(iso: string | null | undefined) {
   if (!iso) return null
   const d = new Date(iso + 'T00:00:00Z')
   if (isNaN(d.getTime())) return String(iso)
@@ -59,30 +60,30 @@ export function fmtDateFull(iso) {
     Invalid or future (past the as-of month) dates are not "recent": Infinity,
     so they never badge NEW or pass release-window filters. Within-month
     estimates just past the anchor clamp to 0 so they still badge NEW. */
-export function daysOld(iso) {
+export function daysOld(iso: string | null | undefined) {
   if (!iso) return Infinity
   if (!isValidRelease(iso)) return Infinity
   const d = new Date(iso + 'T00:00:00Z')
   if (isNaN(d.getTime())) return Infinity
-  return Math.max(0, Math.round((new Date(DATA_AS_OF + 'T00:00:00Z') - d) / 86400000))
+  return Math.max(0, Math.round((new Date(DATA_AS_OF + 'T00:00:00Z').getTime() - d.getTime()) / 86400000))
 }
 
 /** Age of a Last Verified date relative to the data anchor: '19d'.
     Invalid dates -> 'unknown'; future dates clamp to '0d'. */
-export function verificationAge(iso) {
+export function verificationAge(iso: string | null | undefined) {
   if (!iso || typeof iso !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return 'unknown'
   const d = new Date(iso + 'T00:00:00Z')
   if (isNaN(d.getTime())) return 'unknown'
-  return `${Math.max(0, Math.round((new Date(DATA_AS_OF + 'T00:00:00Z') - d) / 86400000))}d`
+  return `${Math.max(0, Math.round((new Date(DATA_AS_OF + 'T00:00:00Z').getTime() - d.getTime()) / 86400000))}d`
 }
 
 /** Relative age vs the as-of anchor: '3d ago', '2mo ago', '1y ago'.
  * Null/invalid dates -> 'date TBD'; within-month future estimates -> 'soon'. */
-export function timeAgo(iso) {
+export function timeAgo(iso: string | null | undefined) {
   if (!iso || typeof iso !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return 'date TBD'
   const d = new Date(iso + 'T00:00:00Z')
   if (isNaN(d.getTime())) return 'date TBD'
-  const n = Math.round((new Date(DATA_AS_OF + 'T00:00:00Z') - d) / 86400000)
+  const n = Math.round((new Date(DATA_AS_OF + 'T00:00:00Z').getTime() - d.getTime()) / 86400000)
   if (n < 0) return 'soon'
   if (n < 1) return 'today'
   if (n < 30) return `${n}d ago`
@@ -94,7 +95,7 @@ export function timeAgo(iso) {
     Prefers a %-anchored number so annotated prose ("USAMO 2026: 99.8%")
     doesn't rank on the year; falls back to the *last* bare number so
     a rare "USAMO 2026: 99.8" (no %) still ranks on 99.8, not the year. */
-export function parsePct(v) {
+export function parsePct(v: unknown) {
   if (!v || v === '-') return null
   const s = String(v)
   const pct = s.match(/(\d+(?:\.\d+)?)\s*%/)
@@ -107,7 +108,7 @@ export function parsePct(v) {
 }
 
 /** Normalise a "~111 GB"-style Q4 cell into a number. Returns null when unknown. */
-export function parseQ4(v) {
+export function parseQ4(v: unknown) {
   if (v == null) return null
   const s = String(v).replace(/~/g, '').trim()
   if (s === '?' || s === '-') return null
@@ -118,7 +119,7 @@ export function parseQ4(v) {
 /** Score provenance from a benchmark cell: '92.8% (TB2.1 vendor)' -> 'vendor'.
     Plain cells -> null (vendor-reported is the catalog default, so only
     deviations from prose-only reporting are surfaced in the UI). */
-export function scoreSource(v) {
+export function scoreSource(v: unknown) {
   const s = String(v ?? '').toLowerCase()
   if (!s || s === '-') return null
   if (s.includes('vendor')) return 'vendor'
@@ -129,14 +130,14 @@ export function scoreSource(v) {
 }
 
 /** "0.15" -> "$0.15/M" (keeps 2 decimals for fractions, trims trailing zeros otherwise). */
-export function fmtUsdPerM(v) {
+export function fmtUsdPerM(v: number | null | undefined) {
   if (v == null) return '—'
   const n = Number(v)
   return `$${n < 1 ? n.toFixed(2) : n.toLocaleString()}`
 }
 
 /** Human-readable param string for a model row, e.g. "770B / 49B active". */
-export function paramsLabel(m) {
+export function paramsLabel(m: Model) {
   const total = m.total_parameters && m.total_parameters !== 'Unknown' ? m.total_parameters : null
   const active = m.active_parameters && m.active_parameters !== 'Unknown' ? m.active_parameters : null
   if (!total) return active ? `${active} active` : 'Params unavailable'

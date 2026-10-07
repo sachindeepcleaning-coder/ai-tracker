@@ -5,18 +5,21 @@ import { parsePct, parseQ4, paramsLabel, fmtDate, fmtDateFull, daysOld, DATA_AS_
 import { licenseBadge } from '../lib/license'
 import { SORT_OPTIONS, RELEASE_WINDOWS, modelTypeGroups, confidenceGroups } from '../hooks/useModels'
 import { DataQualityBadge } from './DataQualityBadge'
+import type { Model } from '../lib/types'
+import type { ModelFilters } from '../hooks/useModels'
 
 /** Download the current filtered view as CSV or JSON (client-side blob). */
 const EXPORT_COLS = ['rank', 'model', 'provider', 'total_parameters', 'active_parameters', 'full_q4_vram_gb', 'license', 'swe_bench_verified', 'swe_bench_pro', 'livecodebench_v6', 'terminal_bench', 'context_window', 'price_in_usd_per_mtok', 'price_out_usd_per_mtok', 'released']
 
-function exportModels(rows, fmt) {
-  let blob, name
+function exportModels(rows: Model[], fmt: string) {
+  let blob: Blob
+  let name: string
   if (fmt === 'json') {
     blob = new Blob([JSON.stringify(rows, null, 2)], { type: 'application/json' })
     name = `ai-tracker-${rows.length}-models.json`
   } else {
-    const esc = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`
-    const csv = [EXPORT_COLS.join(','), ...rows.map((m) => EXPORT_COLS.map((c) => esc(m[c])).join(','))].join('\n')
+    const esc = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`
+    const csv = [EXPORT_COLS.join(','), ...rows.map((m: Model) => EXPORT_COLS.map((c) => esc(m[c as keyof Model])).join(','))].join('\n')
     blob = new Blob([csv], { type: 'text/csv' })
     name = `ai-tracker-${rows.length}-models.csv`
   }
@@ -29,7 +32,7 @@ function exportModels(rows, fmt) {
 }
 
 /** Native <select> with a predictable chevron (no browser-specific "empty square" artifacts). */
-function Select({ label, value, onChange, className = '', children, ...rest }) {
+function Select({ label, value, onChange, className = '', children, ...rest }: { label: string; value: string; onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void; className?: string; children: React.ReactNode; [k: string]: unknown }) {
   return (
     <div className={`relative inline-flex max-w-full ${className}`}>
       <select
@@ -44,6 +47,23 @@ function Select({ label, value, onChange, className = '', children, ...rest }) {
       <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" aria-hidden="true" />
     </div>
   )
+}
+
+interface ExplorerProps {
+  models: Model[]
+  filtered: Model[]
+  providers: string[]
+  licenseGroups: string[]
+  filters: ModelFilters
+  setFilters: React.Dispatch<React.SetStateAction<ModelFilters>>
+  showFilters: boolean
+  setShowFilters: React.Dispatch<React.SetStateAction<boolean>>
+  compare: string[]
+  compareModels: Model[]
+  toggleCompare: (id: string) => void
+  onClearCompare: () => void
+  onDetail: (m: Model) => void
+  onViewCompare: () => void
 }
 
 export default function Explorer({
@@ -61,9 +81,9 @@ export default function Explorer({
   onClearCompare,
   onDetail,
   onViewCompare,
-}) {
+}: ExplorerProps) {
   const { q, provider, license, openOnly, maxQ4, sort, releaseWindow, modelType, confidence, hideSparse, freeOnly } = filters
-  const set = (patch) => setFilters((f) => ({ ...f, ...patch }))
+  const set = (patch: Partial<ModelFilters>) => setFilters((f: ModelFilters) => ({ ...f, ...patch }))
 
   const clearAll = () => setFilters({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: 'all', modelType: 'all', confidence: 'all', hideSparse: false, freeOnly: false })
 

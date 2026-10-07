@@ -26,9 +26,12 @@ export const hardwareTiers = [
  *    offload or lower quant required — never a full-resident "tight" fit)
  *  - anything larger    -> 'no'
  */
-export function fitsModel(q4, tierVram) {
+export function fitsModel(q4: number | string | null, tierVram: number) {
   if (q4 == null) return null
-  if (q4 <= tierVram * 0.85) return 'fit'
-  if (q4 <= tierVram * 1.15) return 'offload'
+  // Preserve relational semantics for numeric strings; non-numeric stays 'no'.
+  const n = typeof q4 === 'number' ? q4 : Number(q4)
+  if (!Number.isFinite(n)) return 'no'
+  if (n <= tierVram * 0.85) return 'fit'
+  if (n <= tierVram * 1.15) return 'offload'
   return 'no'
 }
