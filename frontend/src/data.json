@@ -541,7 +541,7 @@
       "last_verified": "2026-09-16",
       "source": "vendor",
       "confidence": "high",
-      "notes": "Legacy superseded by V4.1 Flash; 80.6/67.9/93.5 but routed Sep14",
+      "notes": "Legacy superseded by V4.1 Flash; 80.6/67.9/93.5 but routed Sep14; NAME UNCONFIRMED — api-docs.deepseek.com lists only deepseek-flash and deepseek-v4-pro (no Pro Max); likely duplicates rank 192, merge decision open",
       "is_orchestrator": false,
       "slug": "deepseek-deepseek-v4-pro-max",
       "id": "deepseek-deepseek-v4-pro-max",
