@@ -13,6 +13,8 @@ cell was emptied with a note rather than guessed.
   488→220KB): perf 0.59, TBT 827ms, LCP ~4.7s (+350ms fetch cost).
   Offline still works via the sw.js same-origin runtime cache. GitHub Pages
   serves stock headers (no custom cache-control possible).
+- Live (CDN, 3-run median after deploy): perf 0.72, TBT 1180ms, LCP ~2.3s,
+  CLS 0.02, a11y 1.0. Sentry already lazy; lucide tree-shaken.
 - Main chunk contents (vite-bundle-visualizer): react ~458KB + data.json
   ~314KB + app ~77KB + lucide ~10KB (raw attribution).
 - Tried and REVERTED: (a) fetch without preload (+2.3s LCP for -124ms TBT); (b) manualChunks recharts
