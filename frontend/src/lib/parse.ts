@@ -15,7 +15,7 @@ export const INR_PER_USD = 95.12
 /** Newest verified date in the CSV (data anchor for "latest" windows). */
 export const DATA_AS_OF = dataMeta.data_as_of
 /** Human label for the anchor, e.g. 'Oct 5, 2026'. */
-export const VERIFIED_AT = fmtDateFull(DATA_AS_OF)
+export const VERIFIED_AT = fmtDateFull(DATA_AS_OF) as string
 /** End of the anchor month — the newest date a release may claim before it is
     treated as future/invalid (pricing-window prose like "intro to Dec 31" must
     never leak into release dates). Mid-month estimates (≈) stay within it. */

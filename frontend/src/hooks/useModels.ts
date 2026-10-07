@@ -4,6 +4,9 @@ import type { Model } from '../lib/types'
 import { parsePct, parseQ4, DATA_AS_OF, isValidRelease } from '../lib/parse'
 import { isOpenWeight, licenseBadge } from '../lib/license'
 
+/** @type {Model[]} Catalog singleton — all rows from data.json. */
+export const allModels = (raw.all_coding_models || raw) as Model[]
+
 /**
  * One catalog row (from data.json, regenerated from the CSV via `npm run data`).
  * @typedef {Object} Model
@@ -35,9 +38,6 @@ import { isOpenWeight, licenseBadge } from '../lib/license'
  * @property {boolean} is_free   Curated (not in CSV).
  * @property {string|null} released  ISO "2026-09-10" or coarse "Sep 2026" — curated (not in CSV).
  */
-
-/** @type {Model[]} Catalog singleton — all rows from data.json. */
-export const allModels = (raw.all_coding_models || raw) as Model[]
 
 // Dev-only invariant check: catches malformed regens (duplicate ids, rank gaps) at startup.
 if (import.meta.env.DEV) {

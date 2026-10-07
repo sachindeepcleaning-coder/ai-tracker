@@ -292,6 +292,9 @@ const today = new Date().toISOString().slice(0,10)
 const verifiedDates = out.map((m) => m.last_verified).filter((d) => d && /^\d{4}-\d{2}-\d{2}$/.test(d)).sort()
 const dataAsOf = verifiedDates[verifiedDates.length - 1] ?? null
 const { data_version: _dropped, ...rest } = existing // legacy key retired (TASK 3)
+// Pretty-printed: the CSV is the reviewed source but data.json diffs stay
+// readable too. (Compacting saves nothing in the bundle — esbuild minifies
+// the inlined JSON at build time anyway.)
 writeFileSync(OUT_PATH, JSON.stringify({ ...rest, data_regen_at: today, model_count: out.length, data_as_of: dataAsOf, all_coding_models: out }, null, 2) + '\n')
 const preserved = out.filter((m) => curated.get(m.slug)).length
 console.log(`regen-data: wrote ${out.length} models -> ${OUT_PATH} (preserved ${preserved} curated rows)`)

@@ -42,6 +42,9 @@ function siteMetaPlugin() {
 export default defineConfig({
   plugins: [react(), siteMetaPlugin()],
   base: '/ai-tracker/',
+  // NOTE: no manualChunks for recharts — forcing a shared vendor chunk makes
+  // Vite emit it as an eager modulepreload on first paint (428KB wasted).
+  // Duplication across lazy tab chunks is the cheaper trade.
   test: {
     environment: 'jsdom',
     globals: true,

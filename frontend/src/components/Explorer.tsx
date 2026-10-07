@@ -87,15 +87,19 @@ export default function Explorer({
 
   const clearAll = () => setFilters({ q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'latest', releaseWindow: 'all', modelType: 'all', confidence: 'all', hideSparse: false, freeOnly: false })
 
-  // Incremental rendering: 48 cards initially, "Load more" in 48-card pages.
-  // Keeps the desktop "show all" feel (few clicks to reach the full catalog)
-  // while first paint stays light on mobile/low-end devices. Resets whenever
-  // filters change (adjust-state-during-render pattern — no effect, no cascading render).
-  const PAGE = 48
+  // Incremental rendering: 24 cards initially, "Load more" in 24-card pages.
+  // Keeps first paint light on mobile/low-end devices (perf item-4: DOM size
+  // dominates load-time style/layout). Resets whenever filters change
+  // (adjust-state-during-render pattern — no effect, no cascading render).
+  // First paint shows 12 cards; "Load more" appends PAGE at a time (perf
+  // item-4: a previous idle-autofill fired inside the TBT window, so growth
+  // is user-initiated only).
+  const PAGE = 24
+  const FIRST_PAINT = 12
   const filterKey = [q, provider, license, openOnly, maxQ4, sort, releaseWindow, modelType, confidence, hideSparse, freeOnly].join('|')
-  const [state, setState] = useState({ key: filterKey, visible: PAGE })
+  const [state, setState] = useState({ key: filterKey, visible: FIRST_PAINT })
   if (state.key !== filterKey) {
-    setState({ key: filterKey, visible: PAGE })
+    setState({ key: filterKey, visible: FIRST_PAINT })
   }
   const visible = state.visible
   const shown = filtered.slice(0, visible)
@@ -273,7 +277,7 @@ export default function Explorer({
               const age = daysOld(m.released)
               const isNew = age <= 7
               return (
-                <div key={m.id} role="listitem" className={`card card-enter p-4 hover:border-white/15 transition group ${isSel ? 'ring-1 ring-emerald-500 border-emerald-500/30' : ''}`} style={{ animationDelay: `${Math.min(idx, 11) * 35}ms` }}>
+                <div key={m.id} role="listitem" className={`card card-cv card-enter p-4 hover:border-white/15 transition group ${isSel ? 'ring-1 ring-emerald-500 border-emerald-500/30' : ''}`} style={{ animationDelay: `${Math.min(idx, 11) * 35}ms` }}>
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
