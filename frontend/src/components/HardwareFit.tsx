@@ -31,7 +31,7 @@ export default function HardwareFit({ hwModels }: { hwModels: Model[] }) {
           <p className="text-xs text-emerald-300/90 mt-1" aria-live="polite">{matrixRows.length} of {hwModels.length} models fit {activeTier.label} (✓ or ~)</p>
         )}
         <div className="mt-3 flex items-center gap-2 flex-wrap text-xs">
-          <span className="text-white/50 font-semibold">Fits on my hardware:</span>
+          <span className="text-white/70 font-semibold">Fits on my hardware:</span>
           <button
             type="button"
             onClick={() => setTierFilter('all')}
@@ -60,7 +60,7 @@ export default function HardwareFit({ hwModels }: { hwModels: Model[] }) {
                 {hardwareTiers.map((h) => (
                   <th key={h.id} className="p-2 text-center min-w-[110px] bg-[var(--bg-card)]">
                     <div className="font-bold">{h.label}</div>
-                    <div className="font-normal text-white/50">{h.cost} · {h.vram}GB</div>
+                    <div className="font-normal text-white/70">{h.cost} · {h.vram}GB</div>
                   </th>
                 ))}
               </tr>
@@ -70,15 +70,16 @@ export default function HardwareFit({ hwModels }: { hwModels: Model[] }) {
                 const q4 = parseQ4(m.full_q4_vram_gb)
                 return (
                   <tr key={m.id} className="border-b border-white/5 hover:bg-white/[0.03]">
-                    <td className="p-2 sticky left-0 bg-[var(--bg-card)]"><div className="font-semibold">{m.model.slice(0, 28)}{m.released && <span className="ml-1 text-[10px] font-mono text-sky-300/80" title={m.released_est ? 'approximate' : 'released'}>{m.released_est ? '≈' : ''}{fmtDate(m.released)}</span>}</div><div className="text-white/50">{q4}GB · {m.provider}</div></td>
+                    <td className="p-2 sticky left-0 bg-[var(--bg-card)]"><div className="font-semibold">{m.model.slice(0, 28)}{m.released && <span className="ml-1 text-[10px] font-mono text-sky-300/80" title={m.released_est ? 'approximate' : 'released'}>{m.released_est ? '≈' : ''}{fmtDate(m.released)}</span>}</div><div className="text-white/70">{q4}GB · {m.provider}</div></td>
                     {hardwareTiers.map((h) => {
-                      const fit = fitsModel(q4, h.vram)
+                      const fit = fitsModel(parseQ4(m.full_q4_vram_gb), h.vram)
                       const symbol = fit === 'fit' ? '✓' : fit === 'offload' ? '~' : '×'
+                      const fitLabel = fit === 'fit' ? 'fits comfortably' : fit === 'offload' ? 'offload required — weights exceed VRAM' : 'does not fit'
                       return (
                         <td key={h.id} className="p-2 text-center">
                           <span
                             role="img"
-                            aria-label={`${m.model} on ${h.label}: ${fit === 'fit' ? 'fits comfortably' : fit === 'offload' ? 'offload required — weights exceed VRAM' : 'does not fit'}`}
+                            aria-label={`${symbol} — ${m.model} on ${h.label}: ${fitLabel}`}
                             className={`inline-flex w-8 h-8 items-center justify-center rounded-full text-xs font-bold ${fit === 'fit' ? 'bg-emerald-500 text-white' : fit === 'offload' ? 'bg-amber-500 text-black' : 'bg-white/10 text-white/30'}`}
                           >
                             {symbol}
@@ -101,7 +102,7 @@ export default function HardwareFit({ hwModels }: { hwModels: Model[] }) {
           return (
             <div key={h.id} className="card p-4">
               <div className="text-sm font-bold">{h.label}</div>
-              <div className="text-xs text-white/50">{h.vram}GB VRAM/unified · {h.cost} India street · {h.tok}</div>
+              <div className="text-xs text-white/70">{h.vram}GB VRAM/unified · {h.cost} India street · {h.tok}</div>
               <div className="mt-2 text-xs">Fits {n} / {q4Count} open-weight Q4 models</div>
               <div className="mt-2 h-2 bg-white/10 rounded-full overflow-hidden" role="img" aria-label={`${pct}% of Q4 models fit`}>
                 <div className="h-full bg-emerald-500" style={{ width: `${pct}%` }} />

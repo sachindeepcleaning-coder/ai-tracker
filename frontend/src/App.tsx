@@ -109,7 +109,7 @@ export default function App() {
       <Header tab={tab} onTab={setTab} stats={stats} explorerCount={filtered.length} />
 
       {/* KPI strip */}
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-4 grid grid-cols-2 md:grid-cols-6 gap-3">
+      <section aria-label="Catalog summary" className="max-w-[1400px] mx-auto px-4 md:px-6 py-4 grid grid-cols-2 md:grid-cols-6 gap-3">
         {[
           { k: 'Total models', v: stats.total, s: `CSV 1-${stats.total ?? 0} · data as of ${fmtDateFull(DATA_AS_OF)} · site built ${dataMeta.data_regen_at ?? DATA_AS_OF} · fact-checked ${VERIFIED_AT}`, icon: Database },
           { k: 'Open-weight', v: stats.open, s: `${Math.round((stats.open / stats.total) * 100)}% open`, icon: Layers },
@@ -126,16 +126,16 @@ export default function App() {
           const Icon = card.icon
           return (
             <div key={card.k} className="card p-3">
-              <div className="flex items-center gap-2 text-[11px] tracking-widest font-bold text-white/50 uppercase"><Icon size={12} aria-hidden="true" />{card.k}</div>
+              <div className="flex items-center gap-2 text-[11px] tracking-widest font-bold text-white/70 uppercase"><Icon size={12} aria-hidden="true" />{card.k}</div>
               <div className="text-xl font-extrabold mt-1">{card.v}</div>
-              <div className="text-xs text-white/50">{card.s}</div>
+              <div className="text-xs text-white/70">{card.s}</div>
             </div>
           )
         })}
-      </div>
+      </section>
 
       {/* Recent releases pointer — driven by the `released` field in data.json */}
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 pb-4">
+      <section aria-label="Newest in the catalog" className="max-w-[1400px] mx-auto px-4 md:px-6 pb-4">
         <div className="card p-4 bg-violet-500/5 border-violet-500/20">
           <div className="flex items-center gap-2 flex-wrap">
             <Zap size={16} className="text-violet-400" aria-hidden="true" />
@@ -156,9 +156,9 @@ export default function App() {
               Full tracker
             </button>
           </div>
-          <p className="text-xs text-white/50 mt-1">Explorer defaults to <b>Sort: Latest release ↓</b> so the freshest models are on top; switch to <b>Rank ↑</b> for the performance-ordered frontier list. Dates prefixed <b>≈</b> are approximations (inferred from family/provider release windows).</p>
+          <p className="text-xs text-white/70 mt-1">Explorer defaults to <b>Sort: Latest release ↓</b> so the freshest models are on top; switch to <b>Rank ↑</b> for the performance-ordered frontier list. Dates prefixed <b>≈</b> are approximations (inferred from family/provider release windows).</p>
         </div>
-      </div>
+      </section>
 
       {/* Main */}
       <main id="main" className="max-w-[1400px] mx-auto px-4 md:px-6 pb-10">
@@ -194,10 +194,10 @@ export default function App() {
 
       {detail && <DetailModal detail={detail} onClose={() => setDetail(null)} onToggleCompare={toggleCompare} inCompare={compare.includes(detail.id)} />}
 
-      <footer className="max-w-[1400px] mx-auto px-4 md:px-6 py-6 text-xs text-white/40 border-t border-white/5 mt-6">
+      <footer className="max-w-[1400px] mx-auto px-4 md:px-6 py-6 text-xs text-white/70 border-t border-white/5 mt-6">
         <details className="mb-3 group">
           <summary className="cursor-pointer text-white/60 font-semibold hover:text-white/80 select-none">About & methodology</summary>
-          <div className="mt-2 space-y-2 text-white/50 leading-relaxed">
+          <div className="mt-2 space-y-2 text-white/70 leading-relaxed">
             <p><b className="text-white/70">Data:</b> single source of truth <span className="text-white/70">coding_benchmarks.csv (ranks 1-{stats.total})</span>, regenerated into <span className="text-white/70">src/data.json</span> via <span className="font-mono">npm run data</span> (curated release dates and free-tier flags are preserved across regeneration; last refreshed {dataMeta.data_regen_at ?? DATA_AS_OF}). Fact-checked {VERIFIED_AT} against HuggingFace / Cognition / Sakana / DeepSeek / Anthropic / Google / llm-releases / AA v4.3. Not vendor quotes — planning estimates. Release dates: <b className="text-white/70">exact</b> where documented; dates prefixed <b className="text-white/70">≈</b> are approximations inferred from family/provider release windows (60% coverage and growing).</p>
             <p><b className="text-white/70">Scores:</b> vendor-reported by default; cells annotated <span className="font-mono">(vendor)</span> carry the vendor's own harness numbers, so treat a "+vendor" tag as self-reported unless marked AA / Scale / BenchLM. SWE-bench Verified is contaminated per OpenAI Feb 2026 — prefer SWE-bench Pro (Scale standardized) for apples-to-apples.</p>
             <p><b className="text-white/70">License heuristics:</b> free-text license cells are classified by string heuristics (lib/license.js); "commercially gated open weights" (e.g. Modified MIT with revenue clauses) still counts as open-weight — weights are public even when commercial use is restricted.</p>

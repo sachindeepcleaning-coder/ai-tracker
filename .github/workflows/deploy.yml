@@ -85,3 +85,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Accessibility report, non-blocking (axe on the live URL)
+        run: npx --yes @axe-core/cli https://sachindeepcleaning-coder.github.io/ai-tracker/ --exit
+        continue-on-error: true

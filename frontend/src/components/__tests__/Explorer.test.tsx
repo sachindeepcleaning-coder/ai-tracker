@@ -79,17 +79,17 @@ describe('Explorer grid layout (regression: 1-2 models per screen, needed scroll
       expect(list, 'model list container').not.toBeNull()
 
       // Cards must be grouped into row containers, several per row.
-      const firstCard = container.querySelector('article[role="listitem"]')!
+      const firstCard = container.querySelector('[role="listitem"]')!
       expect(firstCard, 'first model card').not.toBeNull()
       const firstRow = firstCard.parentElement!
       expect(firstRow.className, 'row uses the shared responsive grid').toContain('grid-cols-1')
-      const cardsInFirstRow = firstRow.querySelectorAll('article[role="listitem"]').length
+      const cardsInFirstRow = firstRow.querySelectorAll('[role="listitem"]').length
       expect(cardsInFirstRow, 'cards visible side-by-side in one row').toBeGreaterThan(1)
 
       // Every card still carries the compare toggle + benchmark cells.
       expect(container.textContent).toContain('Model 1')
       expect(container.textContent).toContain('SWE-V')
-      expect(container.querySelectorAll('article[role="listitem"]').length).toBeGreaterThan(1)
+      expect(container.querySelectorAll('[role="listitem"]').length).toBeGreaterThan(1)
     } finally {
       unmount()
     }
@@ -113,7 +113,7 @@ describe('Explorer grid layout (regression: 1-2 models per screen, needed scroll
       const list = container.querySelector('[role="list"]')!
       expect(list.className).toContain('grid-cols-1')
       expect(list.className).toContain('lg:grid-cols-3')
-      expect(list.querySelectorAll('article[role="listitem"]').length).toBe(6)
+      expect(list.querySelectorAll('[role="listitem"]').length).toBe(6)
     } finally {
       unmount()
     }

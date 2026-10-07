@@ -44,7 +44,7 @@ function Select({ label, value, onChange, className = '', children, ...rest }: {
       >
         {children}
       </select>
-      <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" aria-hidden="true" />
+      <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/70 pointer-events-none" aria-hidden="true" />
     </div>
   )
 }
@@ -116,13 +116,13 @@ export default function Explorer({
       <div className="card p-3 md:p-4">
         <div className="flex flex-col lg:flex-row gap-3">
           <div className="flex-1 relative">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" aria-hidden="true" />
+            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70" aria-hidden="true" />
             <input
               value={q}
               onChange={(e) => set({ q: e.target.value })}
               placeholder="Search model or provider (e.g. Qwen, DeepSeek, GLM)"
               aria-label="Search models or providers"
-              className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm placeholder:text-white/40 focus:outline-none focus:border-emerald-500/50"
+              className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm placeholder:text-white/70 focus:outline-none focus:border-emerald-500/50"
             />
           </div>
           <div className="flex gap-2 flex-wrap">
@@ -208,7 +208,7 @@ export default function Explorer({
                   <input type="checkbox" checked={freeOnly} onChange={(e) => set({ freeOnly: e.target.checked })} className="accent-emerald-500" />
                   Free only
                 </label>
-                <div className="text-xs text-white/50 flex items-center gap-2">
+                <div className="text-xs text-white/70 flex items-center gap-2">
                   <Check size={12} className="text-emerald-400" aria-hidden="true" />
                   <span aria-live="polite">{filtered.length} / {models.length} shown</span>
                 </div>
@@ -218,8 +218,8 @@ export default function Explorer({
                   <button onClick={clearAll} className="text-white/70 underline" type="button">Clear all</button>
                 </div>
               </div>
-              <div className="mt-3 text-[11px] text-white/40 leading-relaxed border-t border-white/5 pt-2">
-                <span className="font-bold text-white/60">Data quality:</span> <span className="badge bg-zinc-500/15 text-zinc-400 border-white/10 text-[10px]">LOW</span> no/sparse coding bench; <span className="badge bg-amber-500/15 text-amber-400 border-amber-500/30 text-[10px]">MEDIUM</span> 1 coding bench (SWE-V/LCB/TB); <span className="badge bg-emerald-500/15 text-emerald-400 border-emerald-500/30 text-[10px]">HIGH</span> ≥2 coding benches + recent (<span className="font-mono">2026-08-01</span>+) + independent source (AA/BenchLM/HF). <span className="text-white/50">Hide sparse</span> hides models without SWE-V and without TB 2.1.
+              <div className="mt-3 text-[11px] text-white/70 leading-relaxed border-t border-white/5 pt-2">
+                <span className="font-bold text-white/60">Data quality:</span> <span className="badge bg-zinc-500/15 text-zinc-400 border-white/10 text-[10px]">LOW</span> no/sparse coding bench; <span className="badge bg-amber-500/15 text-amber-400 border-amber-500/30 text-[10px]">MEDIUM</span> 1 coding bench (SWE-V/LCB/TB); <span className="badge bg-emerald-500/15 text-emerald-400 border-emerald-500/30 text-[10px]">HIGH</span> ≥2 coding benches + recent (<span className="font-mono">2026-08-01</span>+) + independent source (AA/BenchLM/HF). <span className="text-white/70">Hide sparse</span> hides models without SWE-V and without TB 2.1.
               </div>
             </div>
           </>
@@ -261,6 +261,7 @@ export default function Explorer({
         </div>
       ) : (
         <>
+          <h2 className="sr-only">Matching models</h2>
           <div ref={parentRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" role="list" aria-label="Model grid">
             {shown.map((m, idx) => {
               const swe = parsePct(m.swe_bench_verified)
@@ -272,7 +273,7 @@ export default function Explorer({
               const age = daysOld(m.released)
               const isNew = age <= 7
               return (
-                <article key={m.id} role="listitem" className={`card card-enter p-4 hover:border-white/15 transition group ${isSel ? 'ring-1 ring-emerald-500 border-emerald-500/30' : ''}`} style={{ animationDelay: `${Math.min(idx, 11) * 35}ms` }}>
+                <div key={m.id} role="listitem" className={`card card-enter p-4 hover:border-white/15 transition group ${isSel ? 'ring-1 ring-emerald-500 border-emerald-500/30' : ''}`} style={{ animationDelay: `${Math.min(idx, 11) * 35}ms` }}>
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
@@ -282,14 +283,14 @@ export default function Explorer({
                         <DataQualityBadge confidence={m.confidence} />
                         {m.is_free && <span className="badge bg-emerald-500/15 text-emerald-400 border-emerald-500/30">Free</span>}
                         {m.released && (
-                          <span className={`badge ${isNew ? 'bg-sky-500/20 text-sky-300 border-sky-400/40' : 'bg-white/5 text-white/50 border-white/10'}`} title={`${m.released_est ? 'Approximate release' : 'Released'} ${m.released}${m.released_est ? ' (inferred from family/provider release window)' : ''} (data as-of ${fmtDateFull(DATA_AS_OF)})`}>
+                          <span className={`badge ${isNew ? 'bg-sky-500/20 text-sky-300 border-sky-400/40' : 'bg-white/5 text-white/70 border-white/10'}`} title={`${m.released_est ? 'Approximate release' : 'Released'} ${m.released}${m.released_est ? ' (inferred from family/provider release window)' : ''} (data as-of ${fmtDateFull(DATA_AS_OF)})`}>
                             {isNew && <span className="inline-block w-1.5 h-1.5 rounded-full bg-sky-400 mr-1" aria-hidden="true" />}
                             {isNew ? 'NEW · ' : ''}{m.released_est ? '≈' : ''}{fmtDate(m.released)}
                           </span>
                         )}
                       </div>
                       <h3 className="font-bold leading-tight mt-2 line-clamp-2">{m.model}</h3>
-                      <p className="text-xs text-white/50">{m.provider} · {paramsLabel(m)} · {m.context_window} · {m.source} · {m.last_verified ?? "—"}</p>
+                      <p className="text-xs text-white/70">{m.provider} · {paramsLabel(m)} · {m.context_window} · {m.source} · {m.last_verified ?? "—"}</p>
                           {m.notes && <p className="text-[11px] text-amber-200/60 mt-1 line-clamp-2" title={m.notes}>Note: {m.notes}</p>}
                     </div>
                     <button
@@ -309,7 +310,7 @@ export default function Explorer({
                       { label: 'LCB V6', v: lcb },
                     ].map((b) => (
                        <div key={b.label} className="bg-white/[0.04] rounded-xl p-2 border border-white/5">
-                        <div className="text-[11px] tracking-widest font-bold text-white/40">{b.label}</div>
+                        <div className="text-[11px] tracking-widest font-bold text-white/70">{b.label}</div>
                         <div className="text-sm font-extrabold" title={b.v != null ? `${b.v.toFixed(1)}%` : 'No data — awaiting vendor/AA verification'}>{b.v != null ? b.v.toFixed(1) + '%' : '—'}</div>
                         <div className="h-1 bg-white/10 rounded-full mt-1 overflow-hidden" role="img" aria-label={`${b.label} ${b.v != null ? b.v.toFixed(1) + '%' : 'no data'}`}>
                           <div className="h-full bg-emerald-500" style={{ width: b.v != null ? `${b.v}%` : '0%' }} />
@@ -330,20 +331,20 @@ export default function Explorer({
 
                   <div className="mt-3 flex gap-2">
                     <button type="button" onClick={() => onDetail(m)} className="flex-1 btn btn-ghost text-xs py-2">Details</button>
-                    <a href={`https://huggingface.co/models?search=${encodeURIComponent(m.model)}`} target="_blank" rel="noopener noreferrer" aria-label={`Search ${m.model} on Hugging Face`} className="btn btn-ghost text-xs py-2 px-3">
+                    <a href={`https://huggingface.co/models?search=${encodeURIComponent(m.model)}`} target="_blank" rel="noopener noreferrer" aria-label={`HF — search ${m.model} on Hugging Face`} className="btn btn-ghost text-xs py-2 px-3">
                       <ArrowUpRight size={12} aria-hidden="true" /> HF
                     </a>
                   </div>
-                </article>
+                </div>
               )
             })}
           </div>
           {hidden > 0 && (
             <div className="flex flex-col items-center gap-2 pt-2">
-              <button type="button" onClick={() => setState((s) => ({ ...s, visible: s.visible + PAGE }))} className="btn btn-ghost text-sm" aria-label={`Load ${Math.min(PAGE, hidden)} more models`}>
+              <button type="button" onClick={() => setState((s) => ({ ...s, visible: s.visible + PAGE }))} className="btn btn-ghost text-sm" aria-label={`Load more (${hidden} hidden)`}>
                 Load more ({hidden} hidden)
               </button>
-              <span className="text-xs text-white/40">Showing {shown.length} of {filtered.length}</span>
+              <span className="text-xs text-white/70">Showing {shown.length} of {filtered.length}</span>
             </div>
           )}
         </>
