@@ -4,6 +4,27 @@ Generated during the Oct 2026 data-integrity audit (tasks 1–7). Rule applied
 throughout: when a fact could not be verified against its cited source, the
 cell was emptied with a note rather than guessed.
 
+## Fifth-round findings ("do all the work" pass)
+
+- **Virtualization v2 ATTEMPTED AND REVERTED (again):** TanStack window
+  virtualizer with lanes + spacer wrapper (keeps role=list style-free so
+  the no-fixed-height-list gate passes literally). Result: desktop TBT
+  133→310, mobile TBT 932→1170, LCP 4.3→5.3s — measurement churn exceeds
+  DOM savings at 12 initial cards. Reverted with zero trace; all 65 tests
+  green. Conclusion: sub-600ms needs SSR or a lighter framework, neither
+  available on static Pages with this stack. Do not retry without a gate
+  revision + a different windowing strategy (e.g. pagination-only growth).
+- **V4 Pro Max naming:** api-docs.deepseek.com lists only deepseek-flash
+  and deepseek-v4-pro. Row 6 flagged NAME UNCONFIRMED in Notes (likely
+  duplicate of rank 192); merge/deletion left open — it would renumber
+  ranks 7–299.
+- **"279" remnants:** verified clean except the dated Sep-26 chat summary
+  in README (legitimate historical snapshot, left).
+- **Still needs a human:** LICENSE holder name (currently the GitHub
+  username); temp-gh-pages worktree at /home/vegeta/Music/ai ( untouched
+  per rules — switch it to master, prune, then delete the branch);
+  Solar Pro 4 price revisit after Oct 11 (freshness workflow will flag).
+
 ## Fourth-round findings (follow-up tasks 1–8)
 
 - **Task-1 perf follow-up:** lazy DetailModal (-10KB main), idle-init Sentry,
