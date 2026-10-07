@@ -4,6 +4,27 @@ Generated during the Oct 2026 data-integrity audit (tasks 1–7). Rule applied
 throughout: when a fact could not be verified against its cited source, the
 cell was emptied with a note rather than guessed.
 
+## Fourth-round findings (follow-up tasks 1–8)
+
+- **Task-1 perf follow-up:** lazy DetailModal (-10KB main), idle-init Sentry,
+  confirmed lucide tree-shaken + recharts split. Live median after deploy:
+  TBT 1347ms, LCP 2243ms, perf 0.71, a11y 1.0 (run1 TBT 2570 cold-CDN
+  outlier). Remaining long tasks: app-boot render commit ~715ms @2.1s,
+  catalog-driven grid mount ~494ms @1.5s, throttled script eval.
+- **Virtualization ATTEMPTED AND REVERTED:** TanStack window virtualizer
+  with lanes breaks the `Explorer.test` gate ("no fixed-height nested
+  scroll pane") — the repo deliberately chose pagination over
+  virtualization (see code comment). Per no-gate-loosening rule, reverted;
+  DOM-count tests all green again. This is the remaining path to <600ms
+  if the gate is ever intentionally revised.
+- **V4 Pro Max (rank 6):** api-docs.deepseek.com lists only
+  deepseek-flash and deepseek-v4-pro — "Pro Max" is not an official name.
+  Row flagged in Notes; merge with rank 192 left open (identity change).
+- **gitleaks in CI:** needs full-history checkout (fetch-depth: 0);
+  shallow clones change fingerprints and break the ignores. Fixed.
+- **Drift-gate path incident:** gate must use frontend-relative
+  `public/data.json`, not `../public/data.json`. Fixed.
+
 ## Third-round findings (Oct 7 follow-up tasks 1–8)
 
 - **axe CI annotation (run #63):** the axe step DID run (axe-core 4.13.0,
