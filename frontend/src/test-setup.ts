@@ -14,3 +14,9 @@ if (typeof (globalThis as Record<string, unknown>).ResizeObserver === 'undefined
     disconnect() {}
   }
 }
+
+// Anchor parse helpers to the committed catalog (test-only; production gets
+// the anchor from the fetched public/data.json via useModels).
+import catalog from './data.json'
+import { setDataAnchor } from './lib/parse'
+setDataAnchor((catalog as { data_as_of: string }).data_as_of)

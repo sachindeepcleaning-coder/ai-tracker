@@ -4,26 +4,29 @@
  * Count/date anchors come from data.json (written by regen-data.mjs):
  * data_as_of = newest Last Verified date in the CSV, never the deploy date.
  */
-import dataMeta from '../data.json'
 import type { Model } from './types'
-
-if (!dataMeta.data_as_of || !/^\d{4}-\d{2}-\d{2}$/.test(dataMeta.data_as_of)) {
-  throw new Error('parse: data.json data_as_of is missing or invalid — run `npm run data`')
-}
 
 export const INR_PER_USD = 95.12
 /** Newest verified date in the CSV (data anchor for "latest" windows). */
-export const DATA_AS_OF = dataMeta.data_as_of
+export let DATA_AS_OF = ''
 /** Human label for the anchor, e.g. 'Oct 5, 2026'. */
-export const VERIFIED_AT = fmtDateFull(DATA_AS_OF) as string
+export let VERIFIED_AT = ''
 /** End of the anchor month — the newest date a release may claim before it is
     treated as future/invalid (pricing-window prose like "intro to Dec 31" must
     never leak into release dates). Mid-month estimates (≈) stay within it. */
-export const RELEASE_MONTH_END = (() => {
-  const [y, mo] = DATA_AS_OF.split('-').map(Number)
-  const end = new Date(Date.UTC(y, mo, 0))
-  return end.toISOString().slice(0, 10)
-})()
+export let RELEASE_MONTH_END = ''
+
+/** Set by useModels after the catalog loads (or test-setup in tests). Throws
+    on a missing/invalid anchor — parse must never run dateless. */
+export function setDataAnchor(iso: string) {
+  if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) {
+    throw new Error('parse: data_as_of is missing or invalid — run `npm run data`')
+  }
+  DATA_AS_OF = iso
+  VERIFIED_AT = fmtDateFull(iso) as string
+  const [y, mo] = iso.split('-').map(Number)
+  RELEASE_MONTH_END = new Date(Date.UTC(y, mo, 0)).toISOString().slice(0, 10)
+}
 
 /** A "real recent" release date: valid ISO YYYY-MM-DD, not future relative to
     the as-of month. Approximate (est) dates qualify — they carry the ≈ marker. */

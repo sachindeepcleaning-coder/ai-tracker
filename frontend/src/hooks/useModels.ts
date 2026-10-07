@@ -1,11 +1,36 @@
 import { useMemo } from 'react'
-import raw from '../data.json'
 import type { Model } from '../lib/types'
-import { parsePct, parseQ4, DATA_AS_OF, isValidRelease } from '../lib/parse'
+import { parsePct, parseQ4, DATA_AS_OF, isValidRelease, setDataAnchor } from '../lib/parse'
 import { isOpenWeight, licenseBadge } from '../lib/license'
 
-/** @type {Model[]} Catalog singleton — all rows from data.json. */
-export const allModels = (raw.all_coding_models || raw) as Model[]
+/**
+ * Catalog payload. data.json (~300KB) is fetched at runtime — dev server and
+ * production both serve public/data.json — keeping it out of the main JS
+ * bundle (perf: saves ~1.3s mobile TBT vs inlining). Under vitest it is
+ * imported directly (no local server there). Top-level await delays module
+ * evaluation until the catalog arrives, so every importer below sees a
+ * populated array with no loading-state plumbing.
+ */
+interface CatalogPayload {
+  all_coding_models: Model[]
+  model_count?: number
+  data_as_of?: string
+  data_regen_at?: string
+}
+const payload: CatalogPayload = import.meta.env.MODE === 'test'
+  ? (await import('../data.json')).default as CatalogPayload
+  : await fetch(`${import.meta.env.BASE_URL}data.json`).then((r) => {
+      if (!r.ok) throw new Error(`catalog fetch failed: ${r.status}`)
+      return r.json()
+    })
+setDataAnchor(payload.data_as_of ?? '')
+export const catalogMeta = {
+  model_count: payload.model_count ?? payload.all_coding_models.length,
+  data_as_of: payload.data_as_of ?? '',
+  data_regen_at: payload.data_regen_at ?? '',
+}
+/** @type {Model[]} Catalog singleton — all rows from the runtime payload. */
+export const allModels = payload.all_coding_models as Model[]
 
 /**
  * One catalog row (from data.json, regenerated from the CSV via `npm run data`).

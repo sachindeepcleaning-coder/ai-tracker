@@ -15,7 +15,7 @@
  * from prices (fixes string-price rows that break numeric sort / CostCalc).
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'node:fs'
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
@@ -292,9 +292,12 @@ const today = new Date().toISOString().slice(0,10)
 const verifiedDates = out.map((m) => m.last_verified).filter((d) => d && /^\d{4}-\d{2}-\d{2}$/.test(d)).sort()
 const dataAsOf = verifiedDates[verifiedDates.length - 1] ?? null
 const { data_version: _dropped, ...rest } = existing // legacy key retired (TASK 3)
-// Pretty-printed: the CSV is the reviewed source but data.json diffs stay
-// readable too. (Compacting saves nothing in the bundle — esbuild minifies
-// the inlined JSON at build time anyway.)
-writeFileSync(OUT_PATH, JSON.stringify({ ...rest, data_regen_at: today, model_count: out.length, data_as_of: dataAsOf, all_coding_models: out }, null, 2) + '\n')
+const payload = { ...rest, data_regen_at: today, model_count: out.length, data_as_of: dataAsOf, all_coding_models: out }
+writeFileSync(OUT_PATH, JSON.stringify(payload, null, 2) + '\n')
+// Public runtime copy for the production fetch (compact: transfer only, never
+// reviewed; the pretty src/data.json stays the reviewed artifact). Served with
+// Pages' default application/json; offline via the sw.js same-origin cache.
+mkdirSync(join(here, '../public'), { recursive: true })
+writeFileSync(join(here, '../public/data.json'), JSON.stringify(payload))
 const preserved = out.filter((m) => curated.get(m.slug)).length
 console.log(`regen-data: wrote ${out.length} models -> ${OUT_PATH} (preserved ${preserved} curated rows)`)
