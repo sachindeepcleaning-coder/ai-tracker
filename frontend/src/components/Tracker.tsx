@@ -7,7 +7,7 @@ import {
 import {
   CHANGE_ITEMS, CHANGE_TYPES, CHANGE_TYPE_META, changeCounts, groupByMonth, fmtDay, type ChangeType,
 } from '../lib/changelog'
-import { timeAgo, DATA_AS_OF } from '../lib/parse'
+import { timeAgo, DATA_AS_OF, fmtDateFull } from '../lib/parse'
 import { allModels } from '../hooks/useModels'
 
 type TView = 'changelog' | 'rumors' | 'highlights'
@@ -74,7 +74,7 @@ function ChangelogView({ onOpenModel }: { onOpenModel?: (rankId: string) => void
           <Newspaper size={16} className="text-emerald-400" aria-hidden="true" /> Everything, in order
         </h2>
         <p className="text-sm text-white/60 mt-1">
-          A single feed of releases, updates, deprecations, and retractions. Each item links to its catalog rank where applicable. Fact-checked {DATA_AS_OF === '2026-09-23' ? 'Sep 23, 2026' : DATA_AS_OF}.
+          A single feed of releases, updates, deprecations, and retractions. Each item links to its catalog rank where applicable. Fact-checked {fmtDateFull(DATA_AS_OF)}.
         </p>
         <div className="mt-3 flex flex-col md:flex-row gap-2 md:items-center">
           <div className="relative flex-1">

@@ -3,6 +3,8 @@ import * as React from 'react'
 import { createRoot } from 'react-dom/client'
 import { act } from 'react'
 import App from './App.jsx'
+import dataMeta from './data.json'
+import { fmtDateFull } from './lib/parse.js'
 
 describe('App shell smoke test', () => {
   let container, root
@@ -15,9 +17,9 @@ describe('App shell smoke test', () => {
   })
   afterAll(() => { act(() => root.unmount()); container.remove() })
 
-  it('renders KPI strip with total=293', () => {
+  it('renders KPI strip with total=models in data.json', () => {
     const text = container.textContent
-    expect(text).toContain('293')
+    expect(text).toContain(String(dataMeta.model_count))
     expect(text).toContain('Total models')
   })
   it('shows data-completeness card (dated=173)', () => {
@@ -26,10 +28,10 @@ describe('App shell smoke test', () => {
     // approx – at least 170 dated
     expect(text).toMatch(/17[0-9]|18[0-9]/)
   })
-  it('footer shows fact-check date', () => {
+  it('footer shows data-as-of date from data.json', () => {
     const text = container.textContent
-    expect(text).toContain('Fact-checked')
-    expect(text).toContain('Oct 2')
+    expect(text).toContain('Data as of')
+    expect(text).toContain(fmtDateFull(dataMeta.data_as_of))
   })
   it('skip-to-content link present', () => {
     expect(container.querySelector('a[href="#main"]')).not.toBeNull()

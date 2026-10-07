@@ -233,8 +233,13 @@ const out = rows.slice(1)
     if (m.last_verified && !/^\d{4}-\d{2}-\d{2}$/.test(m.last_verified)) { console.error(`regen-data: bad last_verified ${m.id} ${m.last_verified}`); process.exit(1) }
   }
 }
-// Regen timestamp — surfaced as "Data last refreshed" on the site.
+// Regen metadata — single source for counts/dates.
+// data_as_of = newest Last Verified date in the CSV (NOT today's date).
+// data_regen_at = build timestamp only; the site must display data_as_of.
 const today = new Date().toISOString().slice(0,10)
-writeFileSync(OUT_PATH, JSON.stringify({ ...existing, data_regen_at: today, data_version: '2026-10-02', all_coding_models: out }, null, 2) + '\n')
+const verifiedDates = out.map((m) => m.last_verified).filter((d) => d && /^\d{4}-\d{2}-\d{2}$/.test(d)).sort()
+const dataAsOf = verifiedDates[verifiedDates.length - 1] ?? null
+const { data_version: _dropped, ...rest } = existing // legacy key retired (TASK 3)
+writeFileSync(OUT_PATH, JSON.stringify({ ...rest, data_regen_at: today, model_count: out.length, data_as_of: dataAsOf, all_coding_models: out }, null, 2) + '\n')
 const preserved = out.filter((m) => curated.get(m.slug) ?? curated.get(`rank-${m.rank}`)).length
 console.log(`regen-data: wrote ${out.length} models -> ${OUT_PATH} (preserved ${preserved} curated rows)`)

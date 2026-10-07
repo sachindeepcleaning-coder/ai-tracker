@@ -3,6 +3,7 @@ import { renderHook } from './test-utils.jsx'
 import { useModels, compare, allModels, providers, licenseGroups, BENCHMARKS } from '../useModels.js'
 import { parsePct, parseQ4, isValidRelease } from '../../lib/parse.js'
 import { isOpenWeight } from '../../lib/license.js'
+import dataMeta from '../../data.json'
 
 function renderUseModels(filters = { q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'rank', releaseWindow: 'all' }) {
   const { result } = renderHook(() => useModels(filters))
@@ -14,7 +15,7 @@ import * as React from 'react'
 
 describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
   it('exports expected catalog singletons', () => {
-    expect(allModels.length).toBe(299)
+    expect(allModels.length).toBe(dataMeta.model_count)
     expect(providers.length).toBeGreaterThan(5)
     expect(licenseGroups.length).toBeGreaterThan(3)
     expect(BENCHMARKS.length).toBe(11)
@@ -25,7 +26,7 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
     expect(stats).toHaveProperty('withQ4')
     expect(stats).not.toHaveProperty('avgQ4')
     expect(stats).toHaveProperty('dated')
-    expect(stats.total).toBe(299)
+    expect(stats.total).toBe(dataMeta.model_count)
     expect(stats.withQ4).toBe(allModels.filter(m => parseQ4(m.full_q4_vram_gb) != null).length)
     // dated counts valid releases only — future/invalid dates never inflate it
     expect(stats.dated).toBe(allModels.filter(m => isValidRelease(m.released)).length)

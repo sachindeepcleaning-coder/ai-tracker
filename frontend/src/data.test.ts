@@ -9,11 +9,11 @@ const data = JSON.parse(raw)
 const models = data.all_coding_models
 
 describe('data.json integrity (regen gate)', () => {
-  it('has 299 rows with unique contiguous ranks 1-299', () => {
-    expect(models.length).toBe(299)
+  it('has model_count rows with unique contiguous ranks', () => {
+    expect(models.length).toBe(data.model_count)
     const ranks = models.map((m) => parseInt(m.rank, 10)).sort((a, b) => a - b)
-    expect(ranks).toEqual(Array.from({ length: 299 }, (_, i) => i + 1))
-    expect(new Set(models.map((m) => m.id)).size).toBe(299)
+    expect(ranks).toEqual(Array.from({ length: data.model_count }, (_, i) => i + 1))
+    expect(new Set(models.map((m) => m.id)).size).toBe(data.model_count)
   })
 
   it('has new schema fields with allowed enums', () => {
@@ -23,7 +23,11 @@ describe('data.json integrity (regen gate)', () => {
       expect(typeof m.is_orchestrator).toBe('boolean')
       if (m.last_verified) expect(m.last_verified).toMatch(/^\d{4}-\d{2}-\d{2}$/)
     }
-    expect(data.data_version).toBe('2026-10-02')
+    expect(data.model_count).toBe(models.length)
+    expect(data.data_as_of).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+    const maxVerified = models.map((m) => m.last_verified).filter(Boolean).sort().at(-1)
+    expect(data.data_as_of).toBe(maxVerified)
+    expect(data).not.toHaveProperty('data_version')
   })
 
   it('has at least 10 high-confidence models and notes for orchestrators', () => {

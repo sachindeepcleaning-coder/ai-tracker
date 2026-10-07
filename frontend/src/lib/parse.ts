@@ -1,16 +1,24 @@
 /**
  * Shared parsing / formatting helpers.
  * Kept dependency-free so every tab can use them without coupling.
+ * Count/date anchors come from data.json (written by regen-data.mjs):
+ * data_as_of = newest Last Verified date in the CSV, never the deploy date.
  */
+import dataMeta from '../data.json'
 
 export const INR_PER_USD = 95.12
-export const VERIFIED_AT = 'Oct 2, 2026'
-/** Data as-of anchor (from data.json conversation_summary) — used for "latest" windows. */
-export const DATA_AS_OF = '2026-10-02'
-/** End of the as-of month — the newest date a release may claim before it is
+/** Newest verified date in the CSV (data anchor for "latest" windows). */
+export const DATA_AS_OF = dataMeta.data_as_of ?? '2026-10-02'
+/** Human label for the anchor, e.g. 'Oct 5, 2026'. */
+export const VERIFIED_AT = fmtDateFull(DATA_AS_OF) ?? 'Oct 2, 2026'
+/** End of the anchor month — the newest date a release may claim before it is
     treated as future/invalid (pricing-window prose like "intro to Dec 31" must
     never leak into release dates). Mid-month estimates (≈) stay within it. */
-export const RELEASE_MONTH_END = '2026-10-31'
+export const RELEASE_MONTH_END = (() => {
+  const [y, mo] = DATA_AS_OF.split('-').map(Number)
+  const end = new Date(Date.UTC(y, mo, 0))
+  return end.toISOString().slice(0, 10)
+})()
 
 /** A "real recent" release date: valid ISO YYYY-MM-DD, not future relative to
     the as-of month. Approximate (est) dates qualify — they carry the ≈ marker. */
