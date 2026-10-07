@@ -9791,7 +9791,7 @@
       "last_verified": "2026-09-16",
       "source": "huggingface",
       "confidence": "high",
-      "notes": "GA Sep10; 552B CED; 280GB Q4; TB 90.6 GPQA 90.9 DeepSWE 74.2; indep DeepSWE 74.2 match, Vals TB 74.5 vs 90.6 harness gap",
+      "notes": "GA Sep10; 552B CED backbone per official HF card (https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash README: 552B backbone parameters); HF safetensors.total 763.2B = all files incl vision/Engram/MTP — kept 552B backbone basis, Q4 280GB follows it; TB 90.6 GPQA 90.9 DeepSWE 74.2; indep DeepSWE 74.2 match, Vals TB 74.5 vs 90.6 harness gap",
       "is_orchestrator": false,
       "slug": "deepseek-deepseek-v4-1-flash",
       "id": "deepseek-deepseek-v4-1-flash",
