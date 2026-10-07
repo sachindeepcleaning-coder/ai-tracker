@@ -79,7 +79,7 @@ V4 Pro 0831 vs Flash 0731 (post-training lift, real gains not just scale): Termi
 | 11c | **Kimi K2.7-Code** 🆕 | Coding-specialized sibling of K3 | Modified MIT, ~500 GB Q4 | ✅ |
 | 11d | **MAI-Code-1-Flash** 🆕 | **Closed-weight, API-gated (Copilot only)** — no public weights | SWE-Verified 72.6, TB2.1 62.9 | ❌ (not self-hostable) |
 
-**Takeaways:** Absolute best coding depth → Fable 5. Best open-weight overall → GLM-5.3 or K3 (very close). **Best open-weight AA Index → Qwen3.8-Max (58)**. Best MIT-licensed open coder → **Ornith-1.5-397B** (MIT, TB 86.1, SWE-V 86.0, 244 GB Q4). Best efficiency → **V4 Flash 0731** or **Qwen3.8-Flash-Next** (~111GB Q4, SWE-Pro 62.5). Best single-GPU → **Qwen3.8-27B** (AA Index 52, 17GB Q4, ~200 tok/s on 1×5090) or **Ornith-1.5-9B** (~6GB Q4, MIT). **Best budget API + local → Laguna S 2.1** ($0.10/$0.20, ~59 GB Q4, fits 1× Pro 6000). **MAI-Code-1-Flash is closed-weight** — not self-hostable; remove from local deployment plans.
+**Takeaways:** Absolute best coding depth → Fable 5. Best open-weight overall → GLM-5.3 or K3 (very close). **Best open-weight AA Index → Qwen3.8-Max (58)**. Best MIT-licensed open coder → **Ornith-1.5-397B** (MIT, TB 86.1, SWE-V 86.0, 244 GB Q4). Best efficiency → **V4 Flash 0731** or **Qwen3.8-Flash-Next** (~111GB Q4, SWE-Pro 62.5). Best single-GPU → **Qwen3.8-27B** (AA Index 52, 14GB Q4, ~105 tok/s single-stream on 1×5090) or **Ornith-1.5-9B** (~6GB Q4, MIT). **Best budget API + local → Laguna S 2.1** ($0.10/$0.20, ~59 GB Q4, fits 1× Pro 6000). **MAI-Code-1-Flash is closed-weight** — not self-hostable; remove from local deployment plans.
 
 ---
 
@@ -129,7 +129,7 @@ V4 Pro 0831 vs Flash 0731 (post-training lift, real gains not just scale): Termi
 
 | Model | Total / Active | Native / Official | 4-bit | 3-bit | 2-bit |
 |---|---|---|---|---|---|
-| Qwen 3.8 27B | 27B dense | BF16 ≈ 54–56 GB, FP8 ≈ 30–31 GB | ~17 GB | ~13–15 GB | ~9–11 GB |
+| Qwen 3.8 27B | 27B dense | BF16 ≈ 54–56 GB, FP8 ≈ 30–31 GB | ~14 GB | ~13–15 GB | ~9–11 GB |
 | **Qwen3.8-Flash-Next** 🆕 | 125B / ~6B (125B+51B n-gram+4B MTP) | BF16 ≈ 360 GB, FP8 ≈ 180 GB | ~111 GB | ~85 GB | ~55–60 GB |
 | **Qwen3.8-Max** 🆕 | 2.4T / 95B | TB-class | ~1.2 TB | — | multi-node |
 | **Laguna S 2.1** 🆕 | 118B / 8B | BF16 ≈ 236 GB | ~59 GB | ~44 GB | ~30 GB |
@@ -172,7 +172,7 @@ Dense model — KV cache grows normally.
 
 | Quant | Weights | + 32K ctx | + 128K ctx | + 262K (native) | + 1M (YaRN) |
 |---|---|---|---|---|---|
-| Q4_K_M | ~17 GB | ~20–22 GB | ~28–32 GB | ~40–48 GB | ~70–90 GB |
+| Q4_K_M | ~14 GB | ~17–19 GB | ~25–29 GB | ~37–45 GB | ~67–87 GB |
 | Q5 / Q6 | ~20–23 GB | ~25 GB | ~35 GB | ~50–55 GB | ~90–110 GB |
 | Q8 / FP8 | ~29–31 GB | ~35 GB | ~45 GB | ~60–70 GB | ~110–130 GB |
 | BF16 | ~55–56 GB | ~65 GB | ~80 GB | ~100+ GB | ~160–180 GB |
@@ -194,22 +194,22 @@ Dense model — KV cache grows normally.
 
 | Model | Setup | Context | Single-stream tok/s | Notes |
 |---|---|---|---|---|
-| V4 Flash 0731 | 2× RTX PRO 6000 (TP=2) | up to 524K | **~243** | Peak aggregate ~400 at low concurrency (FP8 + DSpark) |
+| V4 Flash 0731 | 2× RTX PRO 6000 (TP=2) | up to 524K | removed — 284GB FP8 weights exceed 192GB VRAM (Q4 fits; single-stream rate unmeasured) | Peak aggregate claims removed with the config |
 | V4 Flash 0731 | 4× B200 (HGX) | 8K–32K | — | ~1,200–1,500 tok/s generation |
 | V4 Flash 0731 | 4× B200, high concurrency | medium | — | 3,000+ tok/s system throughput possible |
 | V4 Flash 0731 | Dual DGX Spark (FP8, TP=2) | 256K | ~40–44 | Aggregate ~350 tok/s |
 | V4 Flash 0731 | Single DGX Spark (IQ2) | 131K | ~20 | Peak aggregate ~38 |
-| Qwen 3.8 27B | 1× RTX 5090 (NVFP4 + DSpark) | — | **~200–210** | — |
+| Qwen 3.8 27B | 1× RTX 5090 (NVFP4 + DSpark) | — | **~105** single-stream (~200 only with speculative decoding, assumed) | — |
 | Qwen 3.8 27B | B200 | — | 130–150+ | thousands aggregate at high concurrency |
 
-Best real-world number on consumer/prosumer Blackwell today: **~240–250 tok/s** single-stream on 2× RTX PRO 6000 with DSpark.
+REMOVED — impossible config: 284GB FP8 weights exceed 192GB VRAM on 2× RTX PRO 6000, with or without DSpark. (Q4 fits; single-stream rate unmeasured.)
 
 ### Who can actually hit ~100 tok/s locally
 
 | Model | 100+ tok/s? | Hardware needed | Notes |
 |---|---|---|---|
-| Qwen 3.8 27B | **Yes, easily** | 1× RTX 5090 / PRO 6000 / B200 | single high-end Blackwell does 150–200+ |
-| V4 Flash 0731 | **Yes** | 2× RTX PRO 6000 (or 2× H200 / 4× A100 80GB) | measured ~240 single-stream on 2× PRO 6000 |
+| Qwen 3.8 27B | **Yes, easily** | 1× RTX 5090 / PRO 6000 / B200 | ~105 tok/s single-stream on 1×5090/Pro 6000 (bandwidth cap); higher only with speculative decoding |
+| V4 Flash 0731 | **Yes, at Q4** | 2× RTX PRO 6000 (or 2× H200 / 4× A100 80GB) | FP8 ~240 claim removed — impossible config (284GB > 192GB); Q4 single-stream rate unverified |
 | V4 Pro 0831 | Possible but expensive | 4–8× B200 / multi-node | costs a lot |
 | GLM-5.3 | Borderline | 4–8 high-end cards | weights not out yet; similar/heavier than Flash |
 | Qwen 3.8 Max / K3 | No (not practical) | multi-node cluster | API for normal people |
@@ -333,13 +333,13 @@ Legend: **tok/s = single-user throughput at listed quant** (Q4 unless noted). "�
 | **1× DGX Spark** (128 GB) | ₹5.0–6.0L | ~20–30 | Q3 ~25–35 | — | ~14 (IQ2) | — | Q3 ~20–30 | Q4 ~30–40 | — | — | — |
 | **2× DGX Spark** (256 GB) | ₹10–11L | ~40–60 | Q4 ~50–70 | — | ~40–42 (FP8) | — | Q4 ~40–50 | Q4 ~50–70 | — | Q3 ~15–20 | — |
 | **3× DGX Spark** (384 GB) | ₹15–16.5L | ~60–90 | ~60–80 | — | ~60–80 | Q3 ~15–20 | Q4 ~50–70 | ~70–90 | Q3 ~15–20 | Q4 ~25–35 | — |
-| **4× DGX Spark** (512 GB) | ₹22–30L | ~80–120 | ~70–100 | — | ~80–100 | ~25–35 | ~50–80 | ~80–110 | ~20–30 (Q3) | ~35–50 | — |
-| **1× RTX 5090** (32 GB) | ₹5.0–5.4L | **~200–210** (NVFP4) | offload ~25 | — | ~10–21 (offload) | — | — | offload ~15 | — | — | — |
+| **4× DGX Spark** (512 GB) | ₹22–30L | ~64 single-stream cap | ~70–100 | — | ~80–100 | ~25–35 | ~50–80 | ~80–110 | ~20–30 (Q3) | ~35–50 | — |
+| **1× RTX 5090** (32 GB) | ₹5.0–5.4L | **~105** single-stream (~200 with speculative decoding, assumed; NVFP4) | offload ~25 | — | ~10–21 (offload) | — | — | offload ~15 | — | — | — |
 | **2× RTX 5090** (64 GB) | ₹10–11L | ~300+ | offload ~40 | — | ~15–25 (offload) | — | — | Q4 ~30–40 | — | — | — |
 | **4× RTX 5090** (128 GB) | ₹25–30L | ~400+ | Q3 ~50–70 | — | ~50–80 (Q3) | — | Q3 ~30–40 | Q4 ~50–70 | — | Q3 ~10–15 | — |
 | **8× RTX 5090** (256 GB) | ₹48–52L | ~500+ | ~70–100 | — | ~90–110 | Q2 ~10–15 | Q3 ~40–60 | ~80–110 | Q3 ~15–20 | Q4 ~20–30 | — |
-| **1× RTX Pro 6000** (96 GB) | ₹40–48L | ~200–250 | Q4 ~40–60 | — | ~15–20 (offload) | — | offload ~15 | Q4 ~40–60 | — | offload ~10 | — |
-| **2× RTX Pro 6000** (192 GB) | ₹85L–1.1Cr | ~350+ | ~50–70 | — | **~240–243** (FP8/DSpark) | — | Q3 ~25–35 | ~60–80 | — | Q3 ~15–20 | — |
+| **1× RTX Pro 6000** (96 GB) | ₹40–48L | ~105–128 single-stream cap | offload only — Flash-Next 111GB exceeds 96GB | — | ~15–20 (offload) | — | offload ~15 | Q4 ~40–60 | — | offload ~10 | — |
+| **2× RTX Pro 6000** (192 GB) | ₹85L–1.1Cr | ~350+ | ~50–70 | — | removed — FP8 284GB exceeds 192GB VRAM (Q4 fits; rate unverified) | — | Q3 ~25–35 | ~60–80 | — | Q3 ~15–20 | — |
 | **3× RTX Pro 6000** (288 GB) | ₹1.3–1.6Cr | ~400+ | ~60–80 | — | ~280–300 | Q2 ~15–25 | Q4 ~30–50 | ~80–110 | Q2 ~15–20 | Q4 ~25–35 | — |
 | **4× RTX Pro 6000** (384 GB) | ₹1.7–2.1Cr | ~500+ | ~70–100 | Q2 ~15–20 | ~320–350 | ~30–70 | ~30–70 | ~90–120 | ~25–40 (Q3) | ~35–50 | — |
 | **8× RTX Pro 6000** (768 GB) | ₹3.4–4.2Cr | ~700+ | ~100–150 | Q3 ~20–30 | ~500+ | ~50–150 | ~50–150 | ~120–180 | ~40–70 | ~60–100 | ~30–50 (Q2) |
@@ -354,12 +354,12 @@ Legend: **tok/s = single-user throughput at listed quant** (Q4 unless noted). "�
 **What this matrix says:**
 
 - **Everything ≤ Qwen3.5-397B (198 GB)** is realistically runnable in India for under ₹30 lakh.
-- **Qwen3.8-Flash-Next (111 GB Q4)** and **Laguna S 2.1 (59 GB Q4)** are new sweet spots — fit 1× Pro 6000 or 4× DGX Spark.
+- **Qwen3.8-Flash-Next (111 GB Q4)** and **Laguna S 2.1 (59 GB Q4)** are new sweet spots — fit 2× Pro 6000 or 4×5090 / 4× DGX Spark (Flash-Next exceeds a single 96GB card: offload only on 1× Pro 6000).
 - **GLM-5.3-Flash (160 GB Q4)** runs ~2× faster/token than GLM-5.3 at same VRAM; fits 4× DGX Spark at 50–80 tok/s.
-- **V4 Flash 0731** is the sweet spot — fits 2× PRO 6000 (₹85L–1.1Cr) at 240+ tok/s, or 4× RTX 5090 (₹24–28L) at ~60–80 tok/s.
+- **V4 Flash 0731** is the sweet spot — fits 2× PRO 6000 (₹85L–1.1Cr) at Q4 (FP8 240+ tok/s claim removed — 284GB weights exceed 192GB VRAM), or 4× RTX 5090 (₹24–28L) at ~60–80 tok/s.
 - **GLM-5.3** needs 4× RTX Pro 6000 or 4× DGX Spark or 2× Mac Studio — ₹1.7Cr+ unless you accept Q2/Q3 on 8× 5090.
 - **Qwen3.8-Max / Kimi K3** are out of single-user reach — DGX B300 (~₹11.7Cr) or cloud is the only path.
-- **Best tok/s per rupee (single user):** 1× RTX 5090 (~₹5L) for Qwen 3.8 27B at ~200 tok/s; 2× DGX Spark (~₹10–11L) for V4 Flash at ~40 tok/s; 1× Pro 6000 for Qwen3.8-Flash-Next / Laguna S 2.1.
+- **Best tok/s per rupee (single user):** 1× RTX 5090 (~₹5L) for Qwen 3.8 27B at ~105 tok/s single-stream; 2× DGX Spark (~₹10–11L) for V4 Flash at ~40 tok/s; 1× Pro 6000 for Laguna S 2.1 (Flash-Next needs 2× Pro 6000 — 111GB exceeds 96GB).
 
 ---
 
@@ -429,7 +429,7 @@ Legend: **tok/s = single-user throughput at listed quant** (Q4 unless noted). "�
 ## 11. Bottom Line / Recommendations
 
 - **Start with Qwen 3.8 27B** — easiest, already open (Apache 2.0), fits one good GPU, hits 100+ tok/s, **AA Index 52**, and gives roughly **Claude Sonnet-4.6-era coding** plus native screenshot/video understanding.
-- **Then add DeepSeek V4 Flash 0731** — the real prize for agentic/coding work; 2× RTX PRO 6000 (or 2× H200) comfortably clears 100 tok/s (~240 single-stream), full 1M context at 170–185 GB.
+- **Then add DeepSeek V4 Flash 0731** — the real prize for agentic/coding work; 2× RTX PRO 6000 (or 2× H200) fits it at Q4 (single-stream rate unverified; ~240 claim removed — impossible FP8 config), full 1M context at 170–185 GB.
 - **GLM-5.3** — **weights released Aug 27** (756 GB / 141 shards, custom license; **">$10B revenue → security review" trigger unconfirmed**, HF shows "other") — best open-weight coder, needs proper multi-GPU box (~4–8 cards) for good speed, or 5–8× 96 GB Blackwell cluster at 2–4-bit. **GLM-5.3-Flash (MIT)** is the cheaper 18B-active alternative (~160 GB Q4, 2× faster/token).
 - **Qwen3.8-Max** — **AA Index 58** (independent, #1 open-weight), 2.4T/95B, custom license (>$50M/yr MaaS gate), ~1.2 TB Q4 — DGX B300 or cloud only.
 - **Qwen3.8-Flash-Next** — **125B/6B**, Apache Community 1.0, Qwen4 preview, **$0.15/$0.47**, ~111 GB Q4 — fits 1× Pro 6000, SWE-Pro 62.5%, LCB 91.9%. **Top router MVP candidate.**
@@ -444,8 +444,8 @@ Legend: **tok/s = single-user throughput at listed quant** (Q4 unless noted). "�
 - **Skip V4 Pro / K3 / Qwen Max / Hy4 for true local 100 tok/s** unless building a multi-node server — API is the sane route for a single user.
 - **For most people in India:** 4× RTX 5090 (~₹25–28 lakh) or 2–3× DGX Spark (~₹10–16.5 lakh) is the realistic sweet spot.
 - **Chosen sub-crore build:** **4× DGX Spark (~₹22–30L capex, ~₹24–32L 5-yr with MikroTik switch; ~₹25–35L / ₹27–37L with Spectrum-2)** — runs GLM-5.3/Flash + V4 Flash 0731 + Qwen 3.8 27B + Qwen3.8-Flash-Next + Laguna S 2.1 all locally under ₹1 Cr. GLM-5.3 at ~25–35 tok/s; GLM-5.3-Flash ~50–80; V4 Flash ~80–100; Qwen ~80–120; Qwen3.8-Flash-Next ~70–100; Laguna S 2.1 ~60–90. Full BOM in §9B.
-- **Cheapest entry point:** 1× RTX 5090 (~₹5L) → Qwen 3.8 27B at ~200 tok/s; 1× DGX Spark (~₹5–6L) → Qwen 27B + V4 Flash (slow). MacBook M5 Max is viable only for ≤Qwen3.5-397B-class models.
+- **Cheapest entry point:** 1× RTX 5090 (~₹5L) → Qwen 3.8 27B at ~105 tok/s single-stream; 1× DGX Spark (~₹5–6L) → Qwen 27B + V4 Flash (slow). MacBook M5 Max is viable only for ≤Qwen3.5-397B-class models.
 
 ---
 
-*Sources: DeepSeek V4 announcements; GLM-5.3 launch materials; Z.ai / vendor benchmark tables; AI Release Tracker; Independent/community Blackwell runs; `local_ai_coding_models.md` tok/s tables; MacBook Pro M5 India pricing (Apple India, Mar 2026); DGX Spark India street price (Digit ₹5.05L, Computech ₹5.24L, Amazon ₹5.99L, Aug 2026). All scores vendor-reported unless noted. India prices are Aug 2026 street/retail estimates and subject to fluctuation. Weights-only sizes exclude KV cache unless stated. Master-matrix tok/s for MacBook/DGX Spark/Sparc clusters are estimates; V4 Flash 0731 @2× RTX Pro 6000 (~243 tok/s), Qwen 3.8 27B @1× RTX 5090 (~200–210), and dual-DGX-Spark (~40–44) are measured.*
+*Sources: DeepSeek V4 announcements; GLM-5.3 launch materials; Z.ai / vendor benchmark tables; AI Release Tracker; Independent/community Blackwell runs; `local_ai_coding_models.md` tok/s tables; MacBook Pro M5 India pricing (Apple India, Mar 2026); DGX Spark India street price (Digit ₹5.05L, Computech ₹5.24L, Amazon ₹5.99L, Aug 2026). All scores vendor-reported unless noted. India prices are Aug 2026 street/retail estimates and subject to fluctuation. Weights-only sizes exclude KV cache unless stated. Master-matrix tok/s for MacBook/DGX Spark/Sparc clusters are estimates; V4 Flash 0731 @2× RTX Pro 6000 (~243 tok/s) and Qwen 3.8 27B @1× RTX 5090 (~200–210) figures are REMOVED (impossible configs — see rows above for reasons), and dual-DGX-Spark (~40–44) is measured.*

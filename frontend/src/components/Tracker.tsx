@@ -342,10 +342,10 @@ function HighlightsView() {
           <h3 className="font-bold">What fits where (Q4)</h3>
           <div className="mt-2 space-y-2 text-xs">
             {[
-              ['Qwen27B 17GB', 'Fits 1×5090 ✅ ~200 tok/s'],
+              ['Qwen27B 14GB', 'Fits 1×5090 ✅ ~105 tok/s single-stream'],
               ['MiMo Distill 9B ~6GB', 'Fits 1×5090 ✅ single-GPU'],
               ['AliceAI 80B ~40GB', 'Fits 1×5090 w/ offload or 2×5090'],
-              ['Qwen Flash-Next 111GB', 'Fits 1× Pro 6000 or 3×5090'],
+              ['Qwen Flash-Next 111GB', 'Needs 2× Pro 6000 or 4×5090 (exceeds 96GB: offload only on 1× Pro 6000)'],
               ['MiMo Flash 309B ~155GB', 'Needs 2× Pro 6000 or 4× Spark'],
               ['V4.1 Flash 280GB', '4× Spark (512GB) or 8×80GB; 8B/16B active'],
               ['Ornith 397B 244GB', 'Needs 8×80GB or 4× Spark Q3'],

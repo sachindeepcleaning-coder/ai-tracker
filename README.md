@@ -75,7 +75,7 @@
 | Toolathlon Verified | **73.5%** | 67.1% | 70.3% | — |
 | GPQA Diamond | **91.7%** | 89.2% | 90.8% | 91.3% |
 
-~111 GB Q4_K_XL (Unsloth GGUF). **Fits 1× Pro 6000** or 3× 5090. No Scale/AA/BenchLM independent verification yet. **Highest-priority new addition** to router MVP.
+~111 GB Q4_K_XL (Unsloth GGUF). **Needs 4×5090 (128GB) or 2×Pro 6000 (192GB) — 111 GB exceeds a single 96GB card (offload only there), and exceeds 3×5090 (96GB).** No Scale/AA/BenchLM independent verification yet. **Highest-priority new addition** to router MVP.
 
 ### Apodex 1.1-mini — Aug 24, 2026 (Apache 2.0, open weights)
 **Apodex AI** (Tianqiao Chen) released open-weight **35B-A3B mini** built on Qwen3.5-35B-A3B with **PIVOT-RL** training. 397B flagship is closed (API-only on platform.apodex.ai, free during campaign). **Apache 2.0** weights: `apodex/Apodex-1.1-mini` on HF + FP8/NVFP4/GPTQ-Int4 quants.
@@ -140,7 +140,7 @@ Dense decoder-only reasoning LLMs with native CoT + multi-stage agentic RL: **3B
 
 **TL;DR:** Giants gain 0–2 benchmark points at 5–10× the hardware cost. Spend the savings on better infra for models that fit.
 
-**Pick:** Best absolute `GLM-5.3/K3/Hy4` (Flash = cheap MIT proxy: 2× faster/token than 5.3 at same VRAM). Best efficiency `V4 Flash 0731` (155GB Q4) or **Qwen3.8-Flash-Next** (~111GB Q4, SWE-Pro 62.5, LCB 91.9) or **Ornith-1.5-397B** (~244GB, SWE-V 86.0, MIT). Best single-GPU `Qwen3.8-27B` (17GB Q4, ~200 tok/s on 1×5090).
+**Pick:** Best absolute `GLM-5.3/K3/Hy4` (Flash = cheap MIT proxy: 2× faster/token than 5.3 at same VRAM). Best efficiency `V4 Flash 0731` (155GB Q4) or **Qwen3.8-Flash-Next** (~111GB Q4, SWE-Pro 62.5, LCB 91.9) or **Ornith-1.5-397B** (~244GB, SWE-V 86.0, MIT). Best single-GPU `Qwen3.8-27B` (14GB Q4, ~105 tok/s single-stream on 1×5090).
 
 ---
 
@@ -165,15 +165,17 @@ DeepSeek = price increase (cheapest hour 2.3× old output; cache-hit +10×). Gem
 
 ## Hardware — What Fits Where (Q4 weights only; +KV/cache at ctx)
 
+**How "Full Q4 VRAM (GB)" is computed:** weights-only size at standard 4-bit quantization (Q4_K_M-class, ≈0.5 bytes per parameter; e.g. 27B → ~14GB). Excludes KV cache, activations and runtime overhead (+10–15GB on top). Larger community builds (e.g. UD-Q4_K_XL, ≈0.63 bytes/param) run ~25% bigger and are labeled where used — a bare "Q4" figure always means the catalog definition, so the same model never shows two different Q4 sizes without a quant label.
+
 | Model | Q4 size | 1×5090 32GB | 2×5090 64GB | 4×5090 128GB | 1×Pro6000 96GB | 2×Pro6000 192GB | 4×DGX Spark 512GB | 8×Pro6000 768GB |
 |---|---|---|---|---|---|---|---|---|
-| Qwen3.8-27B | 17 GB | ✅ 200 tok/s | ✅ | ✅ | ✅ | ✅ | ✅ 80-120 tok/s | ✅ |
+| Qwen3.8-27B | 14 GB | ✅ ~105 tok/s single-stream | ✅ | ✅ | ✅ | ✅ | ✅ ~64 tok/s single-stream | ✅ |
 | **Ornith-1.5-9B** 🆕 | 6 GB | ✅ dense | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **Apodex 1.1-mini** 🆕 | 17 GB | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Qwen3.8-Flash-Next** 🆕 | 111 GB | offload ~25 | offload ~40 | Q3 ~50-70 | ✅ ~40-60 | ✅ | ~70-100 | ✅ |
+| **Qwen3.8-Flash-Next** 🆕 | 111 GB | offload ~25 | offload ~40 | Q3 ~50-70 | offload only (111 > 96GB) | ✅ | ~70-100 | ✅ |
 | **Ornith-1.5-35B-A3B** 🆕 | 22 GB | offload | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **MAI-Code-1.1-Flash** 🆕 | ~70 GB | offload | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| V4 Flash 0731 | 155 GB | offload ~15 | offload ~25 | Q3 ~60-80 | offload | **240 tok/s FP8** | ~80-100 | ✅ |
+| V4 Flash 0731 | 155 GB | offload ~15 | offload ~25 | Q3 ~60-80 | offload | Q4 fits (FP8 240 tok/s claim removed — 284GB weights exceed 192GB VRAM) | ~80-100 | ✅ |
 | GLM-5.3-Flash | 160 GB | — | — | Q3 fit | — | fit | ✅ 50-80 (2× faster than 5.3) | ✅ |
 | **Ornith-1.5-397B** 🆕 | 244 GB | — | — | — | — | — | Q3 fit | ✅ 30-50 |
 | GLM-5.3 / Hy4 | 372 /385 GB | — | — | — | — | — | **25-35 tok/s (GLM-5.3) / Hy4 Q3** | ✅ 30-70 |
@@ -181,9 +183,9 @@ DeepSeek = price increase (cheapest hour 2.3× old output; cache-hit +10×). Gem
 | K3 / Qwen Max | 1,200-1,400 GB | — | — | — | — | — | — | — (multi-node) |
 
 **Single-user India picks (Aug 2026 street, 5-yr TCO):**
-- **Best value:** `1× RTX 5090 (~₹5L)` → Qwen3.8-27B ~200 tok/s
-- **Balanced:** `2× DGX Spark (~₹10-11L)` → V4 Flash ~40 tok/s; `4× DGX Spark (~₹22-30L, MikroTik)` → GLM-5.3 25-35 + V4 Flash 80-100 + Qwen 80-120 (only sub-crore that runs all 3) `single_user_india_local_ai.md:333`
-- **Speed:** `2× Pro 6000 (~₹85L-1.1Cr)` → V4 Flash 243 tok/s; `4× Pro 6000 (~₹1.7-2.1Cr)` → GLM-5.3/Hy4 comfortable
+- **Best value:** `1× RTX 5090 (~₹5L)` → Qwen3.8-27B ~105 tok/s single-stream (decode bandwidth cap: ~1.8TB/s ÷ 14GB)
+- **Balanced:** `2× DGX Spark (~₹10-11L)` → V4 Flash ~40 tok/s; `4× DGX Spark (~₹22-30L, MikroTik)` → GLM-5.3 25-35 + V4 Flash 80-100 + Qwen ~64 single-stream (4×273GB/s ÷ 14GB) `single_user_india_local_ai.md:333`
+- **Speed:** `2× Pro 6000 (~₹85L-1.1Cr)` → V4 Flash Q4 (single-stream rate unverified; FP8/243 claim removed — 284GB weights cannot fit 192GB VRAM); `4× Pro 6000 (~₹1.7-2.1Cr)` → GLM-5.3/Hy4 comfortable
 - **Portable:** MacBook M5 Max 48-128GB (~₹5-7.5L) → Qwen27B only
 - **Any model one-at-a-time:** `DGX B300 2.1 TB (~₹5.5Cr landed, 5-yr ~₹11.7Cr)` — every open weight at Q4 with 30s NVMe→HBM swap `dgx_b300_deep_research.md`
 
@@ -221,7 +223,7 @@ Both launch Advancing AI / GTC 2026: Helios 2.9 EF dense FP4, 1.4 EF FP8, 260 TB
 | Rubin, all models (if orchestration existed) | 50 | ₹3,230 Cr | ₹6,100 Cr |
 | Helios, all models (2-3× users/rack) | 20 | ₹1,140 Cr | ₹2,340 Cr |
 
-Break-even **₹2,450/mo (top-10) → ₹10,200/mo (all-models Rubin)** per concurrent user; at 10-20% concurrency = 500K-1M subscribers → **~₹2,000/mo**. Agentic 99/1 input/output, cache-hit input ~**₹10-30/M** vs miss `₹400-800/M`. Real blocker: no engine serves 74 architectures from one pool — ship top-10 (V4 Flash/Pro, GLM-5.3/Flash, Hy4, K3, Qwen-Max, Qwen27B) behind router now `100k_concurrent_ai_coding_service.md`.
+Break-even **₹2,450/mo (top-10) → ₹10,200/mo (all-models Rubin)** per concurrent user. At 10-20% subscriber concurrency the top-10 MVP costs **~₹245-490/mo per subscriber** (₹2,450 ÷ 10–5 subscribers per concurrent seat); the **~₹2,000/mo per-subscriber** figure belongs to the all-models build at 20% concurrency (₹10,200 ÷ 5). Agentic 99/1 input/output, cache-hit input ~**₹10-30/M** vs miss `₹400-800/M`. Real blocker: no engine serves 74 architectures from one pool — ship top-10 (V4 Flash/Pro, GLM-5.3/Flash, Hy4, K3, Qwen-Max, Qwen27B) behind router now `100k_concurrent_ai_coding_service.md`.
 
 ---
 

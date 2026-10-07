@@ -6,13 +6,13 @@ describe('hardware tiers + fitsModel', () => {
     expect(hardwareTiers.length).toBeGreaterThan(3)
     expect(hardwareTiers.find(t => t.id === '4xSpark').vram).toBe(512)
   })
-  it('fit / tight / no thresholds', () => {
+  it('fit / offload / no thresholds', () => {
     // 17GB Qwen fits comfortably on 32GB (17 < 27.2)
     expect(fitsModel(17, 32)).toBe('fit')
-    // 111GB on 96GB: 111 < 110.4? no -> tight check 111 <= 110.4? Actually 96*0.85=81.6 fit, 96*1.15=110.4 tight -> 111 >110.4 => no
+    // 111GB on 96GB: 111 < 110.4? no -> offload check 111 <= 110.4? Actually 96*0.85=81.6 fit, 96*1.15=110.4 offload -> 111 >110.4 => no
     expect(fitsModel(111, 96)).toBe('no')
-    // 111 on 128: 111 <=108.8 false fit, <=147.2 true -> tight
-    expect(fitsModel(111, 128)).toBe('tight')
+    // 111 on 128: 111 <=108.8 false fit, <=147.2 true -> offload
+    expect(fitsModel(111, 128)).toBe('offload')
     // null -> null
     expect(fitsModel(null, 32)).toBeNull()
   })

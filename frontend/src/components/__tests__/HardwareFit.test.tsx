@@ -72,7 +72,7 @@ describe('HardwareFit — hardware tier matrix', () => {
       expect(container.textContent).toContain('1 of 3 models fit 1× Pro 6000 96GB')
       expect(container.querySelectorAll('tbody tr').length).toBe(1)
 
-      // 4× Pro 6000 384GB holds 372GB (tight) + 17GB, drops the 1200GB row -> 2 of 3
+      // 4× Pro 6000 384GB holds 372GB (offload) + 17GB, drops the 1200GB row -> 2 of 3
       clickButton('4× Pro 6000 384GB')
       expect(container.textContent).toContain('2 of 3 models fit 4× Pro 6000 384GB')
       expect(container.querySelectorAll('tbody tr').length).toBe(2)

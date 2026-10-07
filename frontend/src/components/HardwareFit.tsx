@@ -71,13 +71,13 @@ export default function HardwareFit({ hwModels }) {
                     <td className="p-2 sticky left-0 bg-[var(--bg-card)]"><div className="font-semibold">{m.model.slice(0, 28)}{m.released && <span className="ml-1 text-[10px] font-mono text-sky-300/80" title={m.released_est ? 'approximate' : 'released'}>{m.released_est ? '≈' : ''}{fmtDate(m.released)}</span>}</div><div className="text-white/50">{q4}GB · {m.provider}</div></td>
                     {hardwareTiers.map((h) => {
                       const fit = fitsModel(q4, h.vram)
-                      const symbol = fit === 'fit' ? '✓' : fit === 'tight' ? '~' : '×'
+                      const symbol = fit === 'fit' ? '✓' : fit === 'offload' ? '~' : '×'
                       return (
                         <td key={h.id} className="p-2 text-center">
                           <span
                             role="img"
-                            aria-label={`${m.model} on ${h.label}: ${fit === 'fit' ? 'fits comfortably' : fit === 'tight' ? 'tight fit, offload / KV tricks needed' : 'does not fit'}`}
-                            className={`inline-flex w-8 h-8 items-center justify-center rounded-full text-xs font-bold ${fit === 'fit' ? 'bg-emerald-500 text-white' : fit === 'tight' ? 'bg-amber-500 text-black' : 'bg-white/10 text-white/30'}`}
+                            aria-label={`${m.model} on ${h.label}: ${fit === 'fit' ? 'fits comfortably' : fit === 'offload' ? 'offload required — weights exceed VRAM' : 'does not fit'}`}
+                            className={`inline-flex w-8 h-8 items-center justify-center rounded-full text-xs font-bold ${fit === 'fit' ? 'bg-emerald-500 text-white' : fit === 'offload' ? 'bg-amber-500 text-black' : 'bg-white/10 text-white/30'}`}
                           >
                             {symbol}
                           </span>
@@ -110,7 +110,7 @@ export default function HardwareFit({ hwModels }) {
       </div>
 
       <div className="card p-4 text-sm text-white/60">
-        <p><b>India picks Aug 2026 street, 5-yr TCO:</b> Best value `1×5090 ~₹5L → Qwen27B 200 tok/s`, Balanced `2× DGX Spark ~₹10-11L → V4 Flash 40 tok/s`, 4× Spark ~₹22-30L runs GLM-5.3+V4.1 Flash+Qwen, `DGX B300 2.1TB ~₹5.5Cr` any model `README.md:149`.</p>
+        <p><b>India picks Aug 2026 street, 5-yr TCO:</b> Best value `1×5090 ~₹5L → Qwen27B ~105 tok/s single-stream`, Balanced `2× DGX Spark ~₹10-11L → V4 Flash 40 tok/s`, 4× Spark ~₹22-30L runs GLM-5.3+V4.1 Flash+Qwen, `DGX B300 2.1TB ~₹5.5Cr` any model `README.md:149`.</p>
       </div>
     </div>
   )
