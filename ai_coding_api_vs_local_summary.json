@@ -1,6 +1,6 @@
 {
   "conversation_summary": {
-    "date": "2026-09-10 (online re-verified; model list regenerated from coding_benchmarks_july2026_final.csv ranks 1-267; V4.1 Flash MIT open weights Sep 10)",
+    "date": "2026-09-10 (online re-verified; model list regenerated from coding_benchmarks.csv ranks 1-267; V4.1 Flash MIT open weights Sep 10)",
     "currency_assumption": "1 USD = ₹95.12",
     "goal": "Compare API costs versus local hardware for extremely high-volume agentic coding.",
     "workload": {

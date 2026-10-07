@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-const CSV_PATH = join(root, 'coding_benchmarks_july2026_final.csv')
+const CSV_PATH = join(root, 'coding_benchmarks.csv')
 const DATA_PATH = join(root, 'frontend/src/data.json')
 const README_PATH = join(root, 'README.md')
 

@@ -1,7 +1,7 @@
 # Local & Private AI: Top Open-Weight Models for Coding
 
 **Generated:** July 19, 2026 | **Updated (fact-check):** July 22, 2026 | **Updated (new models):** July 31, 2026 | **Updated (new models):** August 3, 2026 | **Updated (new models):** August 15, 2026 | **Updated (new releases):** August 27, 2026 | **Updated (verified & new releases):** August 29, 2026 | **Updated (Qwen3.8-Flash-Next, MAI-Code-1.1-Flash, North-Micro-Vision):** August 29-30, 2026 | **Synced to llm-releases.com (339 models):** Sep 2, 2026
-**Source:** `coding_benchmarks_july2026_final.csv` (vendor-reported scores aggregated by chaitanyagiri)  
+**Source:** `coding_benchmarks.csv` (vendor-reported scores aggregated by chaitanyagiri)  
 **Context:** Researching open-source/open-weight AI models that are top in coding benchmarks, for local/private deployment at 4-bit quantization.  
 **CSV Columns (23):** Rank, Model, Provider, Total Params, Active Params, License, SWE-bench Verified, SWE-bench Pro, LiveCodeBench V6, Terminal-Bench, HumanEval, MMLU-Pro, GPQA Diamond, HLE, **MATH**, **AIME 2026**, **ARC-AGI-2**, Price In/1M, Price Out/1M, Context Window, Price In INR, Price Out INR  
 **Note:** ~60 of 227 models lack any benchmark scores (listed in appendix as "pending").
@@ -1604,7 +1604,7 @@ Spending $30k+ on a 15×5090 cluster gets you **at most +3.3% SWE-bench** over a
 
 ---
 
-*Source data: `coding_benchmarks_july2026_final.csv` (vendor-reported) & independently fetched from official leaderboards*  
+*Source data: `coding_benchmarks.csv` (vendor-reported) & independently fetched from official leaderboards*  
 *Benchmarks: patrickgawron.com, zenn.dev (llama.cpp b8870), specpicks.com, gigagpu.com, guruswami-ai/mlx-benchmarks, cnrai/llm-perfbench, DeepSeek official (arXiv 2606.19348), bittide.aicompass.dev*  
 *Verified from: swebench.com (SWE-bench Verified), labs.scale.com (SWE-bench Pro), benchlm.ai (LiveCodeBench), deepswe.datacurve.ai (DeepSWE), awesomeagents.ai (Terminal-Bench 2.1), frontierswe.com (FrontierSWE)*
 

@@ -12,7 +12,7 @@ const TABS = [
   { id: 'gap', label: 'Open vs Closed', icon: ArrowLeftRight },
 ]
 
-const CSV_URL = 'https://github.com/sachindeepcleaning-coder/ai-tracker/blob/master/coding_benchmarks_july2026_final.csv'
+const CSV_URL = 'https://github.com/sachindeepcleaning-coder/ai-tracker/blob/master/coding_benchmarks.csv'
 const JSON_URL = 'https://github.com/sachindeepcleaning-coder/ai-tracker/blob/master/frontend/src/data.json'
 
 export default function Header({ tab, onTab, stats, explorerCount }) {

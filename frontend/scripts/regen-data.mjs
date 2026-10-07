@@ -2,7 +2,7 @@
 /**
  * CSV -> data.json regeneration.
  *
- * Single source of truth: `coding_benchmarks_july2026_final.csv` (repo root).
+ * Single source of truth: `coding_benchmarks.csv` (repo root).
  * Run: `npm run data` (from frontend/).
  *
  * Derives every row from the CSV using the canonical column mapping, then
@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
 const here = dirname(fileURLToPath(import.meta.url))
-const CSV_PATH = join(here, '../../coding_benchmarks_july2026_final.csv')
+const CSV_PATH = join(here, '../../coding_benchmarks.csv')
 const OUT_PATH = join(here, '../src/data.json')
 
 /** RFC-4180-ish CSV parse: handles quoted cells containing commas. */

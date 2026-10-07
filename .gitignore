@@ -1,0 +1,3 @@
+# Local artifacts — never commit session notes or scratch files.
+session_chat_*.md
+*.local

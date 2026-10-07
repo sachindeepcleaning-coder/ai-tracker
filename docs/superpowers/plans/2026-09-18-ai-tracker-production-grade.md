@@ -13,7 +13,7 @@
 ## Global Constraints
 
 - Stack: Vite + React 19 + Tailwind + Recharts — keep Vite 5, React 19.
-- Data source remains `coding_benchmarks_july2026_final.csv` → `frontend/src/data.json` via `frontend/scripts/regen-data.mjs` + `npm run data`.
+- Data source remains `coding_benchmarks.csv` → `frontend/src/data.json` via `frontend/scripts/regen-data.mjs` + `npm run data`.
 - Current count: 270 rows (rank 1-270), must stay contiguous unique `rank`/`id`; no “Unknown” invention.
 - India differentiator (₹, Q4 VRAM, TCO) stays intact.
 - Tests must stay green: `frontend/src/data.test.js`, `frontend/src/hooks/__tests__/useModels.test.jsx`, `frontend/src/App.test.jsx`, `frontend/src/lib/__tests__/**`, `frontend/src/components/__tests__/costcalc.test.js`.
@@ -24,7 +24,7 @@
 
 ## File Structure
 
-- `coding_benchmarks_july2026_final.csv` — canonical schema; add columns `Model Type`, `Last Verified`, `Source`, `Confidence`, `Notes`, `Is Orchestrator` (keep existing 23 cols stable, map via `HEADER_MAP`).
+- `coding_benchmarks.csv` — canonical schema; add columns `Model Type`, `Last Verified`, `Source`, `Confidence`, `Notes`, `Is Orchestrator` (keep existing 23 cols stable, map via `HEADER_MAP`).
 - `frontend/scripts/regen-data.mjs` — schema derivation, curated-field merge, validation/fail-fast, `data_regen_at`/`data_version` writer.
 - `frontend/src/data.json` — generated artifact ` { conversation_summary, data_regen_at, data_version, all_coding_models: Model[] }`; not hand-edited.
 - `frontend/src/lib/types.ts` (new) — `Model` interface + `ModelType`, `Source`, `Confidence` unions, `DATA_VERSION`.
@@ -41,7 +41,7 @@
 ### Task 1: Schema Expansion + Regen Pipeline (Phase 1 critical)
 
 **Files:**
-- Modify: `coding_benchmarks_july2026_final.csv:1` (header)
+- Modify: `coding_benchmarks.csv:1` (header)
 - Modify: `frontend/scripts/regen-data.mjs:66-103` (HEADER_MAP, q4/price, curated merge, validation, data_version)
 - Modify: `frontend/src/data.test.js` (schema gate)
 - Create: `frontend/src/lib/types.ts`
@@ -71,7 +71,7 @@ Expected: FAIL `model_type is undefined`
 - [ ] **Step 3: Write minimal implementation**
 
 ```csv
-# coding_benchmarks_july2026_final.csv header add:
+# coding_benchmarks.csv header add:
 ...,Price Output INR/1M,Model Type,Last Verified,Source,Confidence,Notes,Is Orchestrator
 ```
 ```ts
@@ -96,7 +96,7 @@ Expected: PASS
 - [ ] **Step 5: Commit**
 
 ```bash
-git add coding_benchmarks_july2026_final.csv frontend/scripts/regen-data.mjs frontend/src/lib/types.ts frontend/src/data.test.js frontend/src/data.json
+git add coding_benchmarks.csv frontend/scripts/regen-data.mjs frontend/src/lib/types.ts frontend/src/data.test.js frontend/src/data.json
 git commit -m "feat(data): expand schema with model_type/confidence/last_verified and gated regen validation"
 ```
 
@@ -377,7 +377,7 @@ git commit -m "feat(a11y): keyboard/aria/disclaimer and dynamic title"
 
 ```bash
 # simulate bad CSV (duplicate rank) -> npm run data should exit 1 and workflow fail
-echo "1,Duplicate,..." >> coding_benchmarks_july2026_final.csv && npm run data
+echo "1,Duplicate,..." >> coding_benchmarks.csv && npm run data
 # expect exit 1
 ```
 

@@ -1,4 +1,4 @@
-# Changelog — coding_benchmarks_july2026_final.csv
+# Changelog — coding_benchmarks.csv
 
 ## Oct 2, 2026 — Full 293-row live re-verification (8 agents, ~150 findings)
 - Dates: ~110 release dates corrected to launch-day values (family/provider-median estimates replaced where documented; month-only kept as mid-month est). Notable: GPT/Codex families to 2025 dates, Qwen3.5→Feb 2026, R1 family→Jan 2025, GLM-5→Feb 12, GLM-5.2→Jun 16, K2.6→Apr 20, K2.7→Jun 12, Spark 1.2→Aug 5, Glimmer→Aug 10, Qwen27B→Aug 14, Sonnet 5.5 pricing $2/$10, 6.1 Sol $2/$10 + 1.05M

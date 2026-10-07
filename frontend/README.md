@@ -12,7 +12,7 @@ Live site: https://sachindeepcleaning-coder.github.io/ai-tracker/
 | Build | Vite 8 (`@vitejs/plugin-react`) |
 | UI | React 19, Tailwind 3, Lucide icons |
 | Charts | Recharts 3 |
-| Data | Static `src/data.json` (ranks 1-279, single source of truth = `coding_benchmarks_july2026_final.csv`, regenerated via `npm run data`) |
+| Data | Static `src/data.json` (ranks 1-279, single source of truth = `coding_benchmarks.csv`, regenerated via `npm run data`) |
 | Lint | Oxlint |
 | Tests | Vitest 5 + jsdom (`src/**/__tests__/`, `src/App.test.tsx`, `src/data.test.ts`) |
 | Fonts | Self-hosted Inter + JetBrains Mono (woff2 in `src/assets/fonts/`) |
@@ -98,7 +98,7 @@ git subtree push --prefix frontend/dist origin gh-pages
 
 ## Updating the catalog
 
-1. Edit `coding_benchmarks_july2026_final.csv` (repo root), then run `npm run data` — this regenerates `src/data.json` using the canonical column mapping and **preserves curated `released` / `is_free`** from the existing data.json (matched by rank id).
+1. Edit `coding_benchmarks.csv` (repo root), then run `npm run data` — this regenerates `src/data.json` using the canonical column mapping and **preserves curated `released` / `is_free`** from the existing data.json (matched by rank id).
 2. Keep the `rank-<n>` id scheme — `CostCalc` resolves sample prices by **model name** (with normalized/fuzzy fallback), so re-ranks are safe.
 3. If a cost sample references a new model, add `{ model: '<exact catalog name>' }` to `COST_SAMPLES` in `components/CostCalc.tsx`.
 4. Run `npm run test && npm run lint && npm run build` — the data integrity tests catch string prices, rank gaps, and missing ids before deploy.
