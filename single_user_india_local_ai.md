@@ -443,7 +443,7 @@ Legend: **tok/s = single-user throughput at listed quant** (Q4 unless noted). "�
 - **MAI-Code-1-Flash** — **Closed-weight, API-gated (Copilot only)** — no public weights. Remove from local deployment plans.
 - **Skip V4 Pro / K3 / Qwen Max / Hy4 for true local 100 tok/s** unless building a multi-node server — API is the sane route for a single user.
 - **For most people in India:** 4× RTX 5090 (~₹25–28 lakh) or 2–3× DGX Spark (~₹10–16.5 lakh) is the realistic sweet spot.
-- **Chosen sub-crore build:** **4× DGX Spark (~₹22–30L capex, ~₹24–32L 5-yr with MikroTik switch; ~₹25–35L / ₹27–37L with Spectrum-2)** — runs GLM-5.3/Flash + V4 Flash 0731 + Qwen 3.8 27B + Qwen3.8-Flash-Next + Laguna S 2.1 all locally under ₹1 Cr. GLM-5.3 at ~25–35 tok/s; GLM-5.3-Flash ~50–80; V4 Flash ~80–100; Qwen ~80–120; Qwen3.8-Flash-Next ~70–100; Laguna S 2.1 ~60–90. Full BOM in §9B.
+- **Chosen sub-crore build:** **4× DGX Spark (~₹22–30L capex, ~₹24–32L 5-yr with MikroTik switch; ~₹25–35L / ₹27–37L with Spectrum-2)** — runs GLM-5.3/Flash + V4 Flash 0731 + Qwen 3.8 27B + Qwen3.8-Flash-Next + Laguna S 2.1 all locally under ₹1 Cr. GLM-5.3 at ~25–35 tok/s; GLM-5.3-Flash ~50–80; V4 Flash ~80–100; Qwen ~64 single-stream cap (4×273GB/s ÷ 14GB); Qwen3.8-Flash-Next ~70–100; Laguna S 2.1 ~60–90. Full BOM in §9B.
 - **Cheapest entry point:** 1× RTX 5090 (~₹5L) → Qwen 3.8 27B at ~105 tok/s single-stream; 1× DGX Spark (~₹5–6L) → Qwen 27B + V4 Flash (slow). MacBook M5 Max is viable only for ≤Qwen3.5-397B-class models.
 
 ---

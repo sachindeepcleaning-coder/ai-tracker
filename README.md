@@ -179,6 +179,8 @@ DeepSeek = price increase (cheapest hour 2.3× old output; cache-hit +10×). Gem
 
 **How "Full Q4 VRAM (GB)" is computed:** weights-only size at standard 4-bit quantization (Q4_K_M-class, ≈0.5 bytes per parameter; e.g. 27B → ~14GB). Excludes KV cache, activations and runtime overhead (+10–15GB on top). Larger community builds (e.g. UD-Q4_K_XL, ≈0.63 bytes/param) run ~25% bigger and are labeled where used — a bare "Q4" figure always means the catalog definition, so the same model never shows two different Q4 sizes without a quant label.
 
+**Mac Studio M5 bandwidth assumptions:** `1× Mac Studio M5 512GB` = M5 Ultra class, ≈1.2 TB/s unified memory bandwidth (512GB tier); `4× Mac Studio M5 2TB` = 4 nodes ≈ 4.8 TB/s aggregate before Thunderbolt interconnect overhead (single-stream decode is interconnect-bound across nodes, so divide by ~2–3× in practice). M5 Max 128GB = 614 GB/s. Single-stream decode ceiling ≈ bandwidth ÷ Q4-GB.
+
 | Model | Q4 size | 1×5090 32GB | 2×5090 64GB | 4×5090 128GB | 1×Pro6000 96GB | 2×Pro6000 192GB | 4×DGX Spark 512GB | 8×Pro6000 768GB |
 |---|---|---|---|---|---|---|---|---|
 | Qwen3.8-27B | 14 GB | ✅ ~105 tok/s single-stream | ✅ | ✅ | ✅ | ✅ | ✅ ~64 tok/s single-stream | ✅ |
@@ -187,7 +189,7 @@ DeepSeek = price increase (cheapest hour 2.3× old output; cache-hit +10×). Gem
 | **Qwen3.8-Flash-Next** 🆕 | 111 GB | offload ~25 | offload ~40 | Q3 ~50-70 | offload only (111 > 96GB) | ✅ | ~70-100 | ✅ |
 | **Ornith-1.5-35B-A3B** 🆕 | 22 GB | offload | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **MAI-Code-1.1-Flash** 🆕 | ~70 GB | offload | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| V4 Flash 0731 | 155 GB | offload ~15 | offload ~25 | Q3 ~60-80 | offload | Q4 fits (FP8 240 tok/s claim removed — 284GB weights exceed 192GB VRAM) | ~80-100 | ✅ |
+| V4 Flash 0731 | 142 GB | offload ~15 | offload ~25 | Q3 ~60-80 | offload | Q4 fits (FP8 240 tok/s claim removed — 284GB weights exceed 192GB VRAM) | ~80-100 | ✅ |
 | GLM-5.3-Flash | 160 GB | — | — | Q3 fit | — | fit | ✅ 50-80 (2× faster than 5.3) | ✅ |
 | **Ornith-1.5-397B** 🆕 | 244 GB | — | — | — | — | — | Q3 fit | ✅ 30-50 |
 | GLM-5.3 / Hy4 | 372 /385 GB | — | — | — | — | — | **25-35 tok/s (GLM-5.3) / Hy4 Q3** | ✅ 30-70 |

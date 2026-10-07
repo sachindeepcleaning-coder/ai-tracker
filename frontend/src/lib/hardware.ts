@@ -1,5 +1,8 @@
 /**
  * Local hardware tiers + VRAM fit heuristic.
+ * Mac Studio M5 bandwidth assumptions (see README): 1× M5 512GB = M5 Ultra
+ * class ≈1.2 TB/s unified; 4× M5 2TB ≈ 4.8 TB/s aggregate pre-interconnect
+ * (single-stream cross-node decode is interconnect-bound: derate 2-3×).
  */
 
 export const hardwareTiers = [
