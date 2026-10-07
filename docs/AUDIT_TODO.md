@@ -4,6 +4,36 @@ Generated during the Oct 2026 data-integrity audit (tasks 1–7). Rule applied
 throughout: when a fact could not be verified against its cited source, the
 cell was emptied with a note rather than guessed.
 
+## Third-round findings (Oct 7 follow-up tasks 1–8)
+
+- **axe CI annotation (run #63):** the axe step DID run (axe-core 4.13.0,
+  36 color-contrast hits on the then-live site) and `--exit` returned 1;
+  continue-on-error kept the job green with the annotation. Fixed by testing
+  the built page via vite preview + per-impact summary (verified exit 0
+  locally). `--save` requires a RELATIVE path (absolute gets mangled).
+- **CI deploy failure (run 37620860537):** drift gate used
+  `../public/data.json` but the file is `frontend/public/data.json`
+  (working-directory is frontend/). Fixed; deploy green since.
+- **Oct 7 bump audit:** all 10 rows bumped to 2026-10-07 have recorded
+  primary sources (Upstage pricing, platform.openai.com, blog.google,
+  HF org repos); V4.1 Flash correctly NOT bumped (notes-only edit).
+  data_as_of = 2026-10-07 = max Last Verified among sourced rows.
+- **Task-5 recheck:** V4 Pro Max row has no matching HF repo
+  (deepseek-ai/DeepSeek-V4-Pro exists instead — possible duplicate of rank
+  192, naming decision open). Hy createdAt May 11 predates Aug release
+  claims (repos predate announcements; releases untouched). K2-Horizon 2-day
+  gap (Sep 1 created vs Sep 3 row). MiMo exact base name absent (official
+  -RL/-MOPD variants corroborate MIT/params/date). Nemotron HF tag is
+  generic "other" (OpenMDW-1.1 unconfirmed here). Spark $1.25/$4.25 has no
+  Meta primary source.
+- **gitleaks CI:** blocking step added post-checkout; .gitleaksignore holds
+  the 2 fingerprints (CSP nonces in archived snapshot).
+- **INR:** Opus 5.5 cell normalized (format only); `--recompute-inr` is a
+  verified no-op on current data; test tolerance now 0.06.
+- **Stale leftovers to watch:** single_user:446 fixed; `useModels.ts:38`
+  and `Explorer.tsx:71` "279" comments are historical-context, left;
+  parse.ts fallback throws (no silent default).
+
 ## Perf item-4 outcome (mobile TBT target <600ms MISSED)
 
 - Baseline (local dist, 3-run median): perf 0.50, TBT 1410ms, LCP ~4.3s.
