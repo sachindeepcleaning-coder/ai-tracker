@@ -1,0 +1,4 @@
+# False positives: CSP nonces (nonce="8keQZMzb") in the archived scrape of
+# Meta's blog HTML, tripping generic-api-key. No secret material.
+0ad29634fa1dc40cb4e6abfd2846b7ab51dbddcc:meta_blog.html:generic-api-key:3
+0ad29634fa1dc40cb4e6abfd2846b7ab51dbddcc:meta_blog.html:generic-api-key:13
