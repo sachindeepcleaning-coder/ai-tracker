@@ -57,6 +57,10 @@ jobs:
       - name: Regenerate data (gated — fails on rank/validation errors)
         run: npm run data
 
+      - name: Regenerate README stats block (CSV-derived, committed content wins on conflicts)
+        run: node ../scripts/readme-stats.mjs
+        working-directory: frontend
+
       - name: Lint
         run: npm run lint
 
