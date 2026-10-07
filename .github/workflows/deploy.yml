@@ -77,6 +77,45 @@ jobs:
       - name: Build (base=/ai-tracker/)
         run: npm run build
 
+      - name: Accessibility report, non-blocking (axe on the built page)
+        run: |
+          npm run preview -- --port 8935 --strictPort &
+          SRV=$!
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:8935/ai-tracker/ >/dev/null; then break; fi
+            sleep 2
+          done
+          set +e
+          npx --yes @axe-core/cli http://localhost:8935/ai-tracker/ --exit --save axe-results.json > axe-report.txt 2>&1
+          AXE_EXIT=$?
+          set -e
+          kill $SRV 2>/dev/null || true
+          {
+            echo "## Accessibility (axe, non-blocking, built page)"
+            python3 - <<'EOF'
+          import json
+          try:
+              d = json.load(open('axe-results.json'))
+              pages = d if isinstance(d, list) else [d]
+              by_impact = {}
+              for page in pages:
+                  for v in page.get('violations', []):
+                      by_impact[v['impact']] = by_impact.get(v['impact'], 0) + len(v.get('nodes', []))
+              if not by_impact:
+                  print('0 violations found.')
+              else:
+                  for impact in ('critical', 'serious', 'moderate', 'minor'):
+                      if impact in by_impact:
+                          print(f'- {impact}: {by_impact[impact]} failing nodes')
+          except Exception as e:
+              print(f'axe results unparseable: {e}')
+          EOF
+            echo "axe exit code: $AXE_EXIT (step is non-blocking)"
+          } >> "$GITHUB_STEP_SUMMARY"
+          rm -f axe-results.json axe-report.txt
+          exit 0
+        continue-on-error: true
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -85,7 +124,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      - name: Accessibility report, non-blocking (axe on the live URL)
-        run: npx --yes @axe-core/cli https://sachindeepcleaning-coder.github.io/ai-tracker/ --exit
-        continue-on-error: true
