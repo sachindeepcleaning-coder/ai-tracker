@@ -1,3 +1,9 @@
 # Local artifacts — never commit session notes or scratch files.
 session_chat_*.md
 *.local
+# Dependencies, build output, secrets (all tooling lives in frontend/,
+# which has its own .gitignore; these guard the repo root).
+node_modules/
+dist/
+.env*
+*.log
