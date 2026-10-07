@@ -233,7 +233,25 @@ const out = rows.slice(1)
     if (m.last_verified && !/^\d{4}-\d{2}-\d{2}$/.test(m.last_verified)) { console.error(`regen-data: bad last_verified ${m.id} ${m.last_verified}`); process.exit(1) }
   }
 }
-// Regen metadata — single source for counts/dates.
+// TASK 5 CI check (warning only): price/license/notes cells carrying
+// through|thru|until + a past date print a build-log warning.
+{
+  const MONTHS = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12 }
+  const verifiedDates = out.map((m) => m.last_verified).filter((d) => d && /^\d{4}-\d{2}-\d{2}$/.test(d)).sort()
+  const anchor = verifiedDates[verifiedDates.length - 1] ?? ''
+  const [ay, amo, ady] = anchor.split('-').map(Number)
+  for (const m of out) {
+    for (const cell of [m.license, m.notes]) {
+      if (!cell || /expired|removed/i.test(cell)) continue // already handled
+      const hit = String(cell).match(/(through|thru|until)\s+([A-Za-z]{3,9})\s*(\d{1,2})?/i)
+      if (!hit) continue
+      const mo = MONTHS[hit[2].slice(0, 3).toLowerCase()]
+      if (!mo || !ay) continue
+      const past = mo < amo || (mo === amo && hit[3] && parseInt(hit[3], 10) < ady)
+      if (past) console.warn(`regen-data WARNING: ${m.id} may carry an expired date claim: ${JSON.stringify(hit[0])}`)
+    }
+  }
+}
 // data_as_of = newest Last Verified date in the CSV (NOT today's date).
 // data_regen_at = build timestamp only; the site must display data_as_of.
 const today = new Date().toISOString().slice(0,10)
