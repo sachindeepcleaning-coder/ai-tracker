@@ -3,7 +3,7 @@
    - Navigations (HTML): network-first, fall back to the cached shell when offline.
    - Same-origin assets (hashed JS/CSS/fonts/data): cache-first (immutable per build).
    - Never cache cross-origin or non-GET. */
-const CACHE = 'ai-tracker-v1'
+const CACHE = 'ai-tracker-v2'
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./'])))
