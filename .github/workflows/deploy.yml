@@ -36,7 +36,8 @@ jobs:
         working-directory: frontend
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        # Pinned to the v7 tag SHA (checked 2026-10-08); bump deliberately.
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           # Full history: gitleaks fingerprint ignores reference the original
           # commit; a shallow checkout changes fingerprints and breaks the scan.
@@ -46,18 +47,19 @@ jobs:
         run: |
           cd "${GITHUB_WORKSPACE}"
           curl -sL "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz" -o /tmp/gitleaks.tgz
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  /tmp/gitleaks.tgz" | sha256sum -c -
           tar xzf /tmp/gitleaks.tgz -C /tmp gitleaks
           /tmp/gitleaks detect --source . --no-banner --redact
 
       # Migrates Pages from "deploy from branch" (gh-pages) to
       # "GitHub Actions" source mode; both build from identical master content.
       - name: Configure Pages
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
         with:
           enablement: true
 
       - name: Set up Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 22
           cache: npm
@@ -70,7 +72,7 @@ jobs:
         run: npm run data
 
       - name: Drift gate (regen outputs must match committed files)
-        run: git diff --exit-code ../README.md src/data.json public/data.json
+        run: git diff --exit-code ../README.md src/data.json public/data.json public/sw-version.js public/sitemap.xml src/lib/fx.generated.ts
         working-directory: frontend
 
       - name: Lint
@@ -90,7 +92,10 @@ jobs:
       - name: Perf budgets (blocking on sizes)
         run: npm run perf
 
-      - name: Accessibility report, non-blocking (axe on the built page)
+      # Blocking on critical/serious only: moderate/minor stay advisory so a
+      # new low-impact rule cannot hold up a data deploy. Counts come from the
+      # axe JSON (not the CLI exit code, which fails on any violation).
+      - name: Accessibility (axe on the built page; critical/serious block)
         run: |
           npm run preview -- --port 8935 --strictPort &
           SRV=$!
@@ -103,8 +108,9 @@ jobs:
           AXE_EXIT=$?
           set -e
           kill $SRV 2>/dev/null || true
+          BLOCK=0
           {
-            echo "## Accessibility (axe, non-blocking, built page)"
+            echo "## Accessibility (axe, blocking on critical/serious)"
             python3 - <<'EOF'
           import json
           try:
@@ -120,20 +126,24 @@ jobs:
                   for impact in ('critical', 'serious', 'moderate', 'minor'):
                       if impact in by_impact:
                           print(f'- {impact}: {by_impact[impact]} failing nodes')
+              blocking = by_impact.get('critical', 0) + by_impact.get('serious', 0)
+              if blocking:
+                  print(f'BLOCKING: {blocking} critical/serious nodes')
+                  open('/tmp/axe-block', 'w').write('1')
           except Exception as e:
               print(f'axe results unparseable: {e}')
           EOF
-            echo "axe exit code: $AXE_EXIT (step is non-blocking)"
+            echo "axe exit code: $AXE_EXIT (advisory; the gate is critical/serious counts)"
           } >> "$GITHUB_STEP_SUMMARY"
           rm -f axe-results.json axe-report.txt
+          if [ -f /tmp/axe-block ]; then echo 'axe: critical/serious violations — failing the build'; exit 1; fi
           exit 0
-        continue-on-error: true
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           path: frontend/dist
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
