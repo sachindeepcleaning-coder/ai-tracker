@@ -8792,7 +8792,7 @@
       "last_verified": "2026-09-16",
       "source": "vendor",
       "confidence": "medium",
-      "notes": "Vendor-reported bench; check independent AA/Scale/BenchLM verification",
+      "notes": "Vendor-reported bench; check independent AA/Scale/BenchLM verification; composition per HF card https://huggingface.co/Qwen/Qwen3.8-Flash-Next : 125B + 51B n-gram + 4B MTP = 180B; Q4 111GB is the Unsloth GGUF size, not params x 0.5",
       "is_orchestrator": false,
       "slug": "alibaba-qwen3-8-flash-next",
       "id": "alibaba-qwen3-8-flash-next",
