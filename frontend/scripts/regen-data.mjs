@@ -20,8 +20,13 @@ import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
 const here = dirname(fileURLToPath(import.meta.url))
-const CSV_PATH = join(here, '../../coding_benchmarks.csv')
-const OUT_PATH = join(here, '../src/data.json')
+const CSV_PATH = process.env.CSV_PATH || join(here, '../../coding_benchmarks.csv')
+const OUT_PATH = process.env.OUT_PATH || join(here, '../src/data.json')
+
+/** Strip a UTF-8 BOM so a BOM-prefixed header still matches HEADER_MAP. */
+function stripBom(text) {
+  return text.charCodeAt(0) === 0xfeff ? text.slice(1) : text
+}
 
 /** RFC-4180-ish CSV parse: handles quoted cells containing commas. */
 function parseCsv(text) {
@@ -111,9 +116,26 @@ const HEADER_MAP = {
   'Slug': 'slug',
 }
 
-const rows = parseCsv(readFileSync(CSV_PATH, 'utf8'))
+const rows = parseCsv(stripBom(readFileSync(CSV_PATH, 'utf8')))
 const header = rows[0]
 const colIdx = header.map((h) => HEADER_MAP[h.trim()])
+
+// Header gates: every header must be known, and none may repeat.
+{
+  const seen = new Set()
+  for (const h of header) {
+    const name = h.trim()
+    if (seen.has(name)) {
+      console.error(`regen-data: duplicate header ${JSON.stringify(name)}`)
+      process.exit(1)
+    }
+    seen.add(name)
+    if (name !== '' && !(name in HEADER_MAP)) {
+      console.error(`regen-data: unknown header ${JSON.stringify(name)} (add it to HEADER_MAP or fix the CSV)`)
+      process.exit(1)
+    }
+  }
+}
 
 // TASK 1 gate: every data row must have exactly header.length cells.
 // (Comment lines starting with '#' are skipped.) Prints the rank and exits 1.
