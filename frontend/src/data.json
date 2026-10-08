@@ -8472,9 +8472,9 @@
       "rank": "221",
       "model": "GLM-5.3",
       "provider": "Z.AI",
-      "total_parameters": "743B",
+      "total_parameters": "753B",
       "active_parameters": "40B",
-      "full_q4_vram_gb": 372,
+      "full_q4_vram_gb": 377,
       "license": "Custom (open weights released Aug 27; 141 shards ~756GB; >$10B review gate unconfirmed; API $1.40/$4.40)",
       "swe_bench_verified": null,
       "swe_bench_pro": null,
@@ -8493,10 +8493,10 @@
       "price_in_inr_per_mtok": 133.17,
       "price_out_inr_per_mtok": 418.53,
       "model_type": "foundation",
-      "last_verified": "2026-09-16",
+      "last_verified": "2026-10-08",
       "source": "vendor",
       "confidence": "medium",
-      "notes": "Vendor-reported bench; check independent AA/Scale/BenchLM verification",
+      "notes": "Vendor-reported bench; check independent AA/Scale/BenchLM verification; total 753B per HF safetensors.total 753329940480 (https://huggingface.co/api/models/zai-org/GLM-5.3); Q4 377GB = 753x0.5 per README formula",
       "is_orchestrator": false,
       "slug": "z-ai-glm-5-3",
       "id": "z-ai-glm-5-3",
@@ -11505,5 +11505,5 @@
   ],
   "data_regen_at": "2026-10-08",
   "model_count": 302,
-  "data_as_of": "2026-10-07"
+  "data_as_of": "2026-10-08"
 }
