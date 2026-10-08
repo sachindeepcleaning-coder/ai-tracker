@@ -1,5 +1,11 @@
 # Changelog — coding_benchmarks.csv
 
+## Oct 8, 2026 — Haiku 5.5 + Mistral Large 4 + GLM 5.3 Fast (ranks 300-302)
+- Added Claude Haiku 5.5 (rank 300) — Anthropic GA Oct 7; $0.10/$0.50, 1M; fastest Claude tier
+- Added Mistral Large 4 (rank 301) — Mistral GA Oct 6; API-only half-price preview $0.68/$2.09, 524K, ~1.05T reported; AA 38.4/HLE 35/LCR 81.3/SciCode 54.2 indep; weights promised end-Oct
+- Added GLM 5.3 Fast (rank 302) — Z.AI fast tier listed Oct 7 (llmgateway timeline only); thin row, price TBD
+- Haiku 5.5 graduated off the rumor watch; added Large-4-weights + Reflection-Beam-weights rumors
+
 ## Oct 2, 2026 — Full 293-row live re-verification (8 agents, ~150 findings)
 - Dates: ~110 release dates corrected to launch-day values (family/provider-median estimates replaced where documented; month-only kept as mid-month est). Notable: GPT/Codex families to 2025 dates, Qwen3.5→Feb 2026, R1 family→Jan 2025, GLM-5→Feb 12, GLM-5.2→Jun 16, K2.6→Apr 20, K2.7→Jun 12, Spark 1.2→Aug 5, Glimmer→Aug 10, Qwen27B→Aug 14, Sonnet 5.5 pricing $2/$10, 6.1 Sol $2/$10 + 1.05M
 - Licenses fixed: Llama 4 Scout/Maverick + DiffusionGemma (Llama Community/Apache), Hy3 Apache 2.0, Big Pickle Closed, Magistral Medium enterprise-only, DeepSWE-Preview/SWE-Swiss MIT, Ling Flash MIT, Step-3.7 Apache, GLM-5→744B/40B, GLM-5.2→753B, Sarvam 105B→106B/10.3B + 30B→32B/2.4B Apache, ERNIE→21B, Nemotron→30B/3B, ZAYA actives, Gemma→26B/3.8B, GPT-OSS active 5.1B, LFM licenses custom, Quasar launched, Union Alpha = Pareto + live pricing, Laguna M.1 open, KAT-Air priced, Grok 4.20 $1.25/$2.50, 5.1 Codex $1.25/$10, 5.5 Pro input $30

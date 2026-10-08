@@ -73,6 +73,46 @@ export function fmtDay(iso: string): string {
 }
 
 export const CHANGE_ITEMS: ChangeItem[] = [
+  // ---------------- October 2026 ----------------
+  {
+    id: 'haiku-55-ga',
+    date: '2026-10-07',
+    type: 'released',
+    title: 'Claude Haiku 5.5 goes GA',
+    provider: 'Anthropic',
+    country: 'US',
+    countryName: 'United States',
+    rank: 300,
+    summary:
+      'Fastest Claude tier at $0.10/$0.50 per Mtok (same card as GPT-6 Luna), 1M context. High-volume/cost-sensitive slot below Sonnet 5.5; benchmarks TBD.',
+    source: { label: 'llmgateway timeline Oct 7 (secondary)' },
+  },
+  {
+    id: 'mistral-large-4-ga',
+    date: '2026-10-06',
+    type: 'released',
+    title: 'Mistral Large 4 goes GA (API-only)',
+    provider: 'Mistral AI',
+    country: 'FR',
+    countryName: 'France',
+    rank: 301,
+    summary:
+      'Frontier multimodal flagship (~1.05T reported) at half-price preview $0.68/$2.09, 524K context. AA 38.4 / HLE 35% / LCR 81.3% / SciCode 54.2% independent. Open weights promised end-October.',
+    source: { label: 'lmmarketcap + olud Oct 6 (secondary)' },
+  },
+  {
+    id: 'glm-53-fast',
+    date: '2026-10-07',
+    type: 'released',
+    title: 'GLM 5.3 Fast appears (thin)',
+    provider: 'Z.AI',
+    country: 'CN',
+    countryName: 'China',
+    rank: 302,
+    summary:
+      'Fast serving tier listed Oct 7 on the llmgateway timeline only — no dedicated model page or price found. Tracked as a thin row pending primary confirmation.',
+    source: { label: 'llmgateway timeline Oct 7 (secondary)' },
+  },
   // ---------------- September 2026 ----------------
   {
     id: 'grok-47-ga',
