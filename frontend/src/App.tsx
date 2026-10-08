@@ -4,7 +4,7 @@ import Header from './components/Header'
 import Explorer from './components/Explorer'
 import ErrorBoundary from './components/ErrorBoundary'
 const LazyDetailModal = lazy(() => import('./components/DetailModal'))
-import { allModels, providers, licenseGroups, useModels } from './hooks/useModels'
+import { allModels, providers, licenseGroups, useModels, perfMark, perfMeasure } from './hooks/useModels'
 import { catalogMeta } from './hooks/useModels'
 import type { ModelFilters } from './hooks/useModels'
 import type { Model } from './lib/types'
@@ -65,6 +65,13 @@ export default function App() {
   const [detail, setDetail] = useState<Model | null>(null)
 
   const { stats, filtered, latestModels, leaderboards, hwModels, bestFit } = useModels(filters)
+
+  // Perf mark (T5 measure-first loop): first React commit of the app shell.
+  // Paired with catalog:fetch-start from useModels for the full boot measure.
+  useEffect(() => {
+    perfMark('react:first-commit')
+    perfMeasure('app:boot-to-commit', 'catalog:fetch-start', 'react:first-commit')
+  }, [])
 
   // Keep the URL in sync with the current view (skip default values).
   useEffect(() => {

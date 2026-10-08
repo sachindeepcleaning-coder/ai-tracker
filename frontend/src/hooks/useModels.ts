@@ -10,14 +10,34 @@ import { isOpenWeight, licenseBadge } from '../lib/license'
  * imported directly (no local server there). Top-level await delays module
  * evaluation until the catalog arrives, so every importer below sees a
  * populated array with no loading-state plumbing.
+ *
+ * Perf marks (T5 measure-first loop): fetch / json-parse / validate / derived
+ * timings land in the trace as user-timing measures; read them from a
+ * throttled Lighthouse trace, never from dev-machine wall time.
  */
+function mark(name: string) { try { performance.mark(name) } catch { /* non-browser/test env */ } }
+function measure(name: string, start: string, end: string) { try { performance.measure(name, start, end) } catch { /* missing marks */ } }
+export function perfMark(name: string) { mark(name) }
+export function perfMeasure(name: string, start: string, end: string) { measure(name, start, end) }
+
+mark('catalog:fetch-start')
 const payload: unknown = import.meta.env.MODE === 'test'
   ? (await import('../data.json')).default
   : await fetch(`${import.meta.env.BASE_URL}data.json`).then((r) => {
+      mark('catalog:headers-end')
+      measure('catalog:fetch', 'catalog:fetch-start', 'catalog:headers-end')
       if (!r.ok) throw new Error(`catalog fetch failed: ${r.status}`)
+      mark('catalog:json-start')
       return r.json()
+    }).then((j) => {
+      mark('catalog:json-end')
+      measure('catalog:json-parse', 'catalog:json-start', 'catalog:json-end')
+      return j
     })
+mark('catalog:validate-start')
 assertCatalogPayload(payload)
+mark('catalog:validate-end')
+measure('catalog:validate', 'catalog:validate-start', 'catalog:validate-end')
 setDataAnchor(payload.data_as_of ?? '')
 export const catalogMeta = {
   model_count: payload.model_count ?? payload.all_coding_models.length,
@@ -69,6 +89,7 @@ if (import.meta.env.DEV) {
   }
 }
 
+mark('catalog:derived-start')
 export const providers = [...new Set(allModels.map((m) => m.provider))].sort()
 
 /** Short license category for filter dropdowns (raw strings carry dates/prices and
@@ -80,6 +101,8 @@ function licLabel(lic: string) {
 export const licenseGroups = [...new Set(allModels.map((m) => licLabel(m.license)))].sort()
 export const modelTypeGroups = [...new Set(allModels.map((m) => m.model_type || 'foundation'))].sort()
 export const confidenceGroups = ['high','medium','low']
+mark('catalog:derived-end')
+measure('catalog:derived-groups', 'catalog:derived-start', 'catalog:derived-end')
 
 /** Every benchmark column tracked in the catalog — coding first, then reasoning/math.
     Drives the Leaderboards tab (one board per benchmark). */
