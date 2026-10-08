@@ -1,7 +1,7 @@
 <!-- STATS:START -->
 # AI Knowledge Base — India Local & Private AI (Verified Oct 7, 2026)
 
-**Scope:** Open-weight coding models for local/private deployment in India — models, benchmarks, pricing, hardware, and cost to serve. **299 models** (CSV ranks 1-299, single source of truth), **175 open-weight**, **188 with release dates — data as of **Oct 7, 2026**. All file prices use **₹95.12/USD** (standardized Aug 14, 2026). All benchmark scores are **vendor-reported** unless marked `AA` / `Scale` / `BenchLM` independent. **Last Update: Oct 7, 2026.**
+**Scope:** Open-weight coding models for local/private deployment in India — models, benchmarks, pricing, hardware, and cost to serve. **302 models** (CSV ranks 1-302, single source of truth), **175 open-weight**, **188 with release dates — data as of **Oct 7, 2026**. All file prices use **₹95.12/USD** (standardized Aug 14, 2026). All benchmark scores are **vendor-reported** unless marked `AA` / `Scale` / `BenchLM` independent. **Last Update: Oct 7, 2026.**
 <!-- STATS:END -->
 
 > **Sep 23, 2026 Frontier Wave (ranks 271-279, fact-checked via live search Sep 23)**
