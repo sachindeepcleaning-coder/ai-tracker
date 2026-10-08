@@ -85,6 +85,13 @@ jobs:
       - name: Build (base=/ai-tracker/)
         run: npm run build
 
+      # TEMPORARY provenance probe: pin down where curation is lost between
+      # regen and the Pages artifact (see data.json r0.released=None live).
+      - name: Provenance probe (temporary)
+        run: |
+          md5sum src/data.json public/data.json dist/data.json
+          python3 -c "import json; print('src r0:', json.load(open('src/data.json'))['all_coding_models'][0].get('released')); print('pub r0:', json.load(open('public/data.json'))['all_coding_models'][0].get('released')); print('dist r0:', json.load(open('dist/data.json'))['all_coding_models'][0].get('released'))"
+
       - name: Accessibility report, non-blocking (axe on the built page)
         run: |
           npm run preview -- --port 8935 --strictPort &
