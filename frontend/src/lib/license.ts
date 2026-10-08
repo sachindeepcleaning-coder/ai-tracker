@@ -25,9 +25,10 @@ const CLOSED_HINTS = [
   'api-tier',
   'api (closed)',
   'non-public',
+  // NOTE: 'gated'/'tbd' are matched by regex below, not substring: 'ungated'
+  // (explicitly open) must not trip 'gated', and architecture notes like
+  // 'hybrid gated SWA' must not override a declared Apache/MIT license.
   'unknown',
-  'tbd',
-  'gated',
 ]
 
 /** Heuristic: does this license allow public/open model weights? */
@@ -35,7 +36,16 @@ export function isOpenWeight(lic: unknown) {
   const l = String(lic || '').toLowerCase().trim()
   if (!l) return false
   if (l === 'tbd' || l.startsWith('tbd ')) return false
+  // Declared license wins over note noise: 'Apache 2.0 (... gated SWA ...)'
+  // is open even though the architecture note contains 'gated'.
+  if (/^(apache|mit)\b/.test(l)) return true
+  // 'ungated HF ...' explicitly means open weights (must precede 'gated').
+  if (l.includes('ungated')) return true
   if (CLOSED_HINTS.some((h) => l.includes(h))) return false
+  // 'gated' (weights-gated) but not 'ungated'; 'tbd' (license TBD) anywhere
+  // in the cell stays conservative-closed — an explicit TBD is unconfirmed.
+  if (/(?<!un)gated/.test(l)) return false
+  if (/\btbd\b/.test(l)) return false
   if (l.includes('llama') && l.includes('community')) return true
   if (OPEN_HINTS.some((h) => l.includes(h))) return true
   return OPEN_HINT_RES.some((re) => re.test(l))

@@ -55,7 +55,25 @@ const li = idx('License/Type')
 const lv = idx('Last Verified')
 
 const total = data.length
-const open = data.filter((r) => /open weight|mit|apache|openmdw|openrail|osi/i.test(r[li] ?? '') && !/^(closed|proprietary|unknown)/i.test((r[li] ?? '').trim())).length
+// Open-weight heuristic — MUST mirror frontend/src/lib/license.ts
+// isOpenWeight (single definition of "open"; cross-checked by
+// frontend/src/lib/__tests__/license-sync.test.ts). Keep in sync.
+const OPEN_HINTS = ['open', 'apache', 'qwen community', 'qwen license', 'openmdw', 'custom (open weights', 'kimi k3 license', 'researchrail', 'openrail', 'llama community']
+const CLOSED_HINTS = ['closed', 'proprietary', 'api-only', 'api-tier', 'api (closed)', 'non-public', 'unknown']
+function isOpenWeight(lic) {
+  const l = String(lic || '').toLowerCase().trim()
+  if (!l) return false
+  if (l === 'tbd' || l.startsWith('tbd ')) return false
+  if (/^(apache|mit)\b/.test(l)) return true
+  if (l.includes('ungated')) return true
+  if (CLOSED_HINTS.some((h) => l.includes(h))) return false
+  if (/(?<!un)gated/.test(l)) return false
+  if (/\btbd\b/.test(l)) return false
+  if (l.includes('llama') && l.includes('community')) return true
+  if (OPEN_HINTS.some((h) => l.includes(h))) return true
+  return /\bmit\b/.test(l)
+}
+const open = data.filter((r) => isOpenWeight(r[li])).length
 const verified = data.map((r) => (r[lv] ?? '').trim()).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d)).sort()
 const asOf = verified[verified.length - 1]
 const d = new Date(asOf + 'T00:00:00Z')
