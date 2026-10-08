@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sachindeepcleaning-coder.github.io/ai-tracker/sitemap.xml
