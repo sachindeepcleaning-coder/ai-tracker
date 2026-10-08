@@ -110,7 +110,7 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
         <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
           <div className="bg-white/5 rounded-xl p-3 border border-white/5">
             <div className="text-xs text-white/70">Price (USD / Mtok)</div>
-            <div className="font-mono font-bold">{detail.price_in_usd_per_mtok != null ? `$${detail.price_in_usd_per_mtok} → $${detail.price_out_usd_per_mtok}` : '— (local/free)'}</div>
+            <div className="font-mono font-bold">{detail.price_in_usd_per_mtok != null ? `$${detail.price_in_usd_per_mtok} → $${detail.price_out_usd_per_mtok}` : '— (local/free)'}{detail.price_band && detail.price_band !== 'unknown' ? ` · ${detail.price_band}` : ''}</div>
             <div className="text-xs text-white/70">INR: {detail.price_in_inr_per_mtok != null ? `₹${detail.price_in_inr_per_mtok} → ₹${detail.price_out_inr_per_mtok}` : '—'}</div>
             <div className="text-xs text-white/70">Q4 {detail.full_q4_vram_gb ?? '—'} GB · ctx {detail.context_window}</div>
           </div>

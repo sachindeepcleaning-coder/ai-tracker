@@ -5,8 +5,11 @@
  * data_as_of = newest Last Verified date in the CSV, never the deploy date.
  */
 import type { Model } from './types'
+import { FX_USD_INR, FX_AS_OF } from './fx.generated'
 
-export const INR_PER_USD = 95.12
+export const INR_PER_USD = FX_USD_INR
+/** Provenance date of the FX rate (from scripts/fx.json). */
+export const FX_RATE_AS_OF = FX_AS_OF
 /** Newest verified date in the CSV (data anchor for "latest" windows). */
 export let DATA_AS_OF = ''
 /** Human label for the anchor, e.g. 'Oct 5, 2026'. */

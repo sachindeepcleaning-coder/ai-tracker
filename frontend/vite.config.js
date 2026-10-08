@@ -22,6 +22,7 @@ function siteMetaPlugin() {
     transformIndexHtml(html) {
       const here = dirname(fileURLToPath(import.meta.url))
       const meta = JSON.parse(readFileSync(join(here, 'src/data.json'), 'utf8'))
+      const fx = JSON.parse(readFileSync(join(here, 'scripts/fx.json'), 'utf8'))
       const count = meta.model_count ?? meta.all_coding_models?.length ?? 0
       const asOf = meta.data_as_of ?? ''
       const d = new Date(asOf + 'T00:00:00Z')
@@ -31,7 +32,8 @@ function siteMetaPlugin() {
         .replaceAll('%MODEL_COUNT%', String(count))
         .replaceAll('%DATA_MONTH_YEAR%', monthYear)
         .replaceAll('%DATA_AS_OF_FULL%', full)
-      if (/%MODEL_COUNT%|%DATA_MONTH_YEAR%|%DATA_AS_OF_FULL%/.test(out)) {
+        .replaceAll('%FX_RATE%', `₹${fx.fx_usd_inr}`)
+      if (/%MODEL_COUNT%|%DATA_MONTH_YEAR%|%DATA_AS_OF_FULL%|%FX_RATE%/.test(out)) {
         throw new Error('site-meta: unreplaced placeholder in index.html')
       }
       return out

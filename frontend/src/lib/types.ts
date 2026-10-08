@@ -33,6 +33,7 @@ export interface Model {
   notes: string | null
   is_orchestrator: boolean
   hf_url: string | null
+  price_band: string | null
   released: string | null
   released_est: boolean
   released_src: string | null

@@ -1,4 +1,6 @@
 {
-  "_comment": "Single source for the USD->INR rate. CSV INR columns are derived from USD columns x this rate (2dp, en-US grouping). Change the rate here, then run: npm run data -- --recompute-inr",
-  "fx_usd_inr": 95.12
+  "_comment": "Single source for the USD->INR rate. CSV INR columns are derived from USD columns x this rate (2dp, no grouping). UI labels, index.html meta, and README STATS all render from this file (via src/lib/fx.generated.ts) — never hardcode the rate elsewhere. Change the rate here, then run: npm run data -- --recompute-inr",
+  "fx_usd_inr": 95.12,
+  "as_of": "2026-08-14",
+  "source": "Repo-standardized planning rate (standardized Aug 14, 2026; not a live quote). Refresh from the RBI/FBIL USD-INR reference rate for the current date, update as_of, then recompute."
 }

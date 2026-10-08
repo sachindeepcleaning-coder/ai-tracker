@@ -18,6 +18,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const CSV_PATH = join(root, 'coding_benchmarks.csv')
 const DATA_PATH = join(root, 'frontend/src/data.json')
 const README_PATH = join(root, 'README.md')
+const FX_PATH = join(root, 'frontend/scripts/fx.json')
 
 function parseCsv(text) {
   const rows = []
@@ -85,9 +86,20 @@ try {
   dated = dj.all_coding_models.filter((m) => m.released).length
 } catch { /* data.json may not exist yet */ }
 
+// FX rate from the single config (scripts/fx.json); the STATS block never
+// hardcodes it. Displayed as-given (2dp); as_of rendered like other dates.
+const fx = JSON.parse(readFileSync(FX_PATH, 'utf8'))
+const fxRate = fx.fx_usd_inr
+if (typeof fxRate !== 'number' || !(fxRate > 0)) {
+  console.error('readme-stats: fx.json fx_usd_inr must be a positive number')
+  process.exit(1)
+}
+const fxAsOf = new Date((fx.as_of ?? '') + 'T00:00:00Z')
+  .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+
 const block = `# AI Knowledge Base — India Local & Private AI (Verified ${full})
 
-**Scope:** Open-weight coding models for local/private deployment in India — models, benchmarks, pricing, hardware, and cost to serve. **${total} models** (CSV ranks 1-${total}, single source of truth), **${open} open-weight**, ${dated == null ? 'release dates in data.json' : `**${dated} with release dates`} — data as of **${full}**. All file prices use **₹95.12/USD** (standardized Aug 14, 2026). All benchmark scores are **vendor-reported** unless marked \`AA\` / \`Scale\` / \`BenchLM\` independent. **Last Update: ${full}.**`
+**Scope:** Open-weight coding models for local/private deployment in India — models, benchmarks, pricing, hardware, and cost to serve. **${total} models** (CSV ranks 1-${total}, single source of truth), **${open} open-weight**, ${dated == null ? 'release dates in data.json' : `**${dated} with release dates`} — data as of **${full}**. All file prices use **₹${fxRate}/USD** (standardized ${fxAsOf}). All benchmark scores are **vendor-reported** unless marked \`AA\` / \`Scale\` / \`BenchLM\` independent. **Last Update: ${full}.**`
 
 const readme = readFileSync(README_PATH, 'utf8')
 const start = '<!-- STATS:START -->'

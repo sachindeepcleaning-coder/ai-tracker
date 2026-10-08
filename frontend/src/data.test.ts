@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import data from './data.json'
 import fx from '../scripts/fx.json'
+import { INR_PER_USD } from './lib/parse.js'
 import type { Model } from './lib/types'
 
 const models = (data.all_coding_models || []) as Model[]
@@ -157,6 +158,19 @@ describe('data.json integrity (regen gate)', () => {
     for (const m of linked) {
       expect(m.hf_url, `${m.rank} ${m.model}`).toMatch(/^https:\/\/huggingface\.co\/[\w.-]+\/[\w.-]+\/?$/)
     }
+  })
+
+  it('price_band is a valid UI grouping derived from input price', () => {
+    // free (free-tier flag) / budget (<=0.5) / standard (<=2) / premium (>2)
+    // / unknown (no price, not free). Thresholds documented in regen-data.mjs.
+    for (const m of models) {
+      expect(['free', 'budget', 'standard', 'premium', 'unknown'], `${m.rank} ${m.model}`).toContain(m.price_band)
+    }
+    expect(models.some((m) => m.price_band === 'free')).toBe(true)
+  })
+
+  it('fx.generated.ts matches scripts/fx.json (single FX config)', () => {
+    expect(INR_PER_USD, 'parse INR_PER_USD must come from fx.json').toBe(FX_RATE)
   })
 
   it('INR cells equal USD x fx_usd_inr from scripts/fx.json', () => {

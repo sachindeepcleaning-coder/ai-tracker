@@ -105,7 +105,7 @@ export default function CostCalc() {
     <div className="grid lg:grid-cols-3 gap-4">
       <div className="lg:col-span-1 card p-4 space-y-4">
         <h2 className="font-bold flex items-center gap-2"><IndianRupee size={16} aria-hidden="true" /> Cost Calculator</h2>
-        <p className="text-xs text-white/70">99% input / 1% output agentic loop. ₹95.12/USD `ai_coding_api_vs_local_summary.json:9`.</p>
+        <p className="text-xs text-white/70">99% input / 1% output agentic loop. ₹{INR_PER_USD}/USD `ai_coding_api_vs_local_summary.json:9`.</p>
         <div>
           <label htmlFor="modelPick" className="text-xs font-bold tracking-widest uppercase text-white/60">Price any catalog model</label>
           <select

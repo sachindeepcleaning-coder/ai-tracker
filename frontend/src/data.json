@@ -364,7 +364,8 @@
       "released": "2026-06-09",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "2",
@@ -402,7 +403,8 @@
       "released": "2026-05-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "3",
@@ -440,7 +442,8 @@
       "released": "2026-04-16",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "4",
@@ -478,7 +481,8 @@
       "released": "2026-07-09",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "5",
@@ -516,7 +520,8 @@
       "released": "2026-02-19",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "6",
@@ -554,7 +559,8 @@
       "released": "2026-08-13",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "7",
@@ -592,7 +598,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "8",
@@ -630,7 +637,8 @@
       "released": "2026-04-15",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "9",
@@ -668,7 +676,8 @@
       "released": "2026-06-30",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "10",
@@ -706,7 +715,8 @@
       "released": "2025-12-15",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "11",
@@ -744,7 +754,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "12",
@@ -782,7 +793,8 @@
       "released": "2026-07-27",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "13",
@@ -820,7 +832,8 @@
       "released": "2026-04-20",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "14",
@@ -858,7 +871,8 @@
       "released": "2026-08-26",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "15",
@@ -896,7 +910,8 @@
       "released": "2026-02-17",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "16",
@@ -934,7 +949,8 @@
       "released": "2026-07-31",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "17",
@@ -972,7 +988,8 @@
       "released": "2026-04-02",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "18",
@@ -1010,7 +1027,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "19",
@@ -1048,7 +1066,8 @@
       "released": "2025-12-17",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "20",
@@ -1086,7 +1105,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "21",
@@ -1124,7 +1144,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "22",
@@ -1162,7 +1183,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "23",
@@ -1200,7 +1222,8 @@
       "released": "2026-04-07",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "24",
@@ -1238,7 +1261,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "25",
@@ -1276,7 +1300,8 @@
       "released": "2026-07-27",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "26",
@@ -1314,7 +1339,8 @@
       "released": "2026-02-15",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "27",
@@ -1352,7 +1378,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "28",
@@ -1390,7 +1417,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "29",
@@ -1428,7 +1456,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "30",
@@ -1466,7 +1495,8 @@
       "released": "2026-04-15",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "31",
@@ -1504,7 +1534,8 @@
       "released": "2026-04-15",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "32",
@@ -1542,7 +1573,8 @@
       "released": "2025-10-15",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "33",
@@ -1580,7 +1612,8 @@
       "released": "2025-12-01",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "34",
@@ -1618,7 +1651,8 @@
       "released": "2026-08-11",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "35",
@@ -1656,7 +1690,8 @@
       "released": "2026-04-15",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "36",
@@ -1694,7 +1729,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "37",
@@ -1732,7 +1768,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "38",
@@ -1770,7 +1807,8 @@
       "released": "2025-12-22",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "39",
@@ -1808,7 +1846,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "40",
@@ -1846,7 +1885,8 @@
       "released": "2025-05-22",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "41",
@@ -1884,7 +1924,8 @@
       "released": "2025-05-22",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "42",
@@ -1922,7 +1963,8 @@
       "released": "2024-12-26",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "43",
@@ -1960,7 +2002,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "44",
@@ -1998,7 +2041,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "45",
@@ -2036,7 +2080,8 @@
       "released": "2025-03-25",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "46",
@@ -2074,7 +2119,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "47",
@@ -2112,7 +2158,8 @@
       "released": "2025-04-14",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "48",
@@ -2150,7 +2197,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "49",
@@ -2188,7 +2236,8 @@
       "released": "2024-06-20",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "50",
@@ -2226,7 +2275,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "51",
@@ -2264,7 +2314,8 @@
       "released": "2026-02-24",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "52",
@@ -2302,7 +2353,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "53",
@@ -2340,7 +2392,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "54",
@@ -2378,7 +2431,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "55",
@@ -2416,7 +2470,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "56",
@@ -2454,7 +2509,8 @@
       "released": "2026-02-24",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "57",
@@ -2492,7 +2548,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "58",
@@ -2530,7 +2587,8 @@
       "released": "2026-02-24",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "59",
@@ -2568,7 +2626,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "60",
@@ -2606,7 +2665,8 @@
       "released": "2025-04-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "61",
@@ -2644,7 +2704,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "62",
@@ -2682,7 +2743,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "63",
@@ -2720,7 +2782,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "64",
@@ -2758,7 +2821,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "65",
@@ -2796,7 +2860,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "66",
@@ -2834,7 +2899,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "67",
@@ -2872,7 +2938,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "68",
@@ -2910,7 +2977,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "69",
@@ -2948,7 +3016,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "70",
@@ -2986,7 +3055,8 @@
       "released": "2026-08-25",
       "released_est": true,
       "released_src": "curated",
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "71",
@@ -3024,7 +3094,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "72",
@@ -3062,7 +3133,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "73",
@@ -3100,7 +3172,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "74",
@@ -3138,7 +3211,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "75",
@@ -3176,7 +3250,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "76",
@@ -3214,7 +3289,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "77",
@@ -3252,7 +3328,8 @@
       "released": "2025-09-23",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "78",
@@ -3290,7 +3367,8 @@
       "released": "2026-08-26",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "79",
@@ -3328,7 +3406,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "80",
@@ -3366,7 +3445,8 @@
       "released": "2026-03-02",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "81",
@@ -3404,7 +3484,8 @@
       "released": "2025-09-15",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "82",
@@ -3442,7 +3523,8 @@
       "released": "2025-09-15",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "83",
@@ -3480,7 +3562,8 @@
       "released": "2025-09-15",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "84",
@@ -3518,7 +3601,8 @@
       "released": "2025-09-10",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "85",
@@ -3556,7 +3640,8 @@
       "released": "2026-08-26",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "86",
@@ -3594,7 +3679,8 @@
       "released": "2025-09-24",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "87",
@@ -3632,7 +3718,8 @@
       "released": "2025-07-11",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "88",
@@ -3670,7 +3757,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "89",
@@ -3708,7 +3796,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "90",
@@ -3746,7 +3835,8 @@
       "released": "2025-04-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "91",
@@ -3784,7 +3874,8 @@
       "released": "2025-09-15",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "92",
@@ -3822,7 +3913,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "93",
@@ -3860,7 +3952,8 @@
       "released": "2025-09-15",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "94",
@@ -3898,7 +3991,8 @@
       "released": "2025-09-15",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "95",
@@ -3936,7 +4030,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "96",
@@ -3974,7 +4069,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "97",
@@ -4012,7 +4108,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "98",
@@ -4050,7 +4147,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "99",
@@ -4088,7 +4186,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "100",
@@ -4126,7 +4225,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "101",
@@ -4164,7 +4264,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "102",
@@ -4202,7 +4303,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "103",
@@ -4240,7 +4342,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "104",
@@ -4278,7 +4381,8 @@
       "released": "2025-08-05",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "105",
@@ -4316,7 +4420,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "106",
@@ -4354,7 +4459,8 @@
       "released": "2025-04-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "107",
@@ -4392,7 +4498,8 @@
       "released": "2025-04-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "108",
@@ -4430,7 +4537,8 @@
       "released": "2025-03-05",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "109",
@@ -4468,7 +4576,8 @@
       "released": "2025-01-20",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "110",
@@ -4506,7 +4615,8 @@
       "released": "2025-01-20",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "111",
@@ -4544,7 +4654,8 @@
       "released": "2025-01-20",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "112",
@@ -4582,7 +4693,8 @@
       "released": "2025-01-20",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "113",
@@ -4620,7 +4732,8 @@
       "released": "2025-01-20",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "114",
@@ -4658,7 +4771,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "115",
@@ -4696,7 +4810,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "116",
@@ -4734,7 +4849,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "117",
@@ -4772,7 +4888,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "118",
@@ -4810,7 +4927,8 @@
       "released": "2026-02-20",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "119",
@@ -4848,7 +4966,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "120",
@@ -4886,7 +5005,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "121",
@@ -4924,7 +5044,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "122",
@@ -4962,7 +5083,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "123",
@@ -5000,7 +5122,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "124",
@@ -5038,7 +5161,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "125",
@@ -5076,7 +5200,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "126",
@@ -5114,7 +5239,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "127",
@@ -5152,7 +5278,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "128",
@@ -5190,7 +5317,8 @@
       "released": "2025-09-23",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "129",
@@ -5228,7 +5356,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "130",
@@ -5266,7 +5395,8 @@
       "released": "2025-07-22",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "131",
@@ -5304,7 +5434,8 @@
       "released": "2025-07-15",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "132",
@@ -5342,7 +5473,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "133",
@@ -5380,7 +5512,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "134",
@@ -5418,7 +5551,8 @@
       "released": "2025-11-12",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "135",
@@ -5456,7 +5590,8 @@
       "released": "2025-11-13",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "136",
@@ -5494,7 +5629,8 @@
       "released": "2025-12-18",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "137",
@@ -5532,7 +5668,8 @@
       "released": "2026-02-05",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "138",
@@ -5570,7 +5707,8 @@
       "released": "2025-08-07",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "139",
@@ -5608,7 +5746,8 @@
       "released": "2025-08-07",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "140",
@@ -5646,7 +5785,8 @@
       "released": "2025-11-12",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "141",
@@ -5684,7 +5824,8 @@
       "released": "2025-11-12",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "142",
@@ -5722,7 +5863,8 @@
       "released": "2026-03-05",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "143",
@@ -5760,7 +5902,8 @@
       "released": "2026-03-05",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "144",
@@ -5798,7 +5941,8 @@
       "released": "2026-04-23",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "145",
@@ -5836,7 +5980,8 @@
       "released": "2026-05-19",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "146",
@@ -5874,7 +6019,8 @@
       "released": "2025-11-18",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "147",
@@ -5912,7 +6058,8 @@
       "released": "2025-11-18",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "148",
@@ -5950,7 +6097,8 @@
       "released": "2026-04-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "149",
@@ -5988,7 +6136,8 @@
       "released": "2026-04-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "150",
@@ -6026,7 +6175,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "151",
@@ -6064,7 +6214,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "152",
@@ -6102,7 +6253,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "153",
@@ -6140,7 +6292,8 @@
       "released": "2026-09-04",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "154",
@@ -6178,7 +6331,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "155",
@@ -6216,7 +6370,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "156",
@@ -6254,7 +6409,8 @@
       "released": "2026-08-25",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "157",
@@ -6292,7 +6448,8 @@
       "released": "2026-08-25",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "158",
@@ -6330,7 +6487,8 @@
       "released": "2026-08-25",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "159",
@@ -6368,7 +6526,8 @@
       "released": "2026-08-26",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "160",
@@ -6406,7 +6565,8 @@
       "released": "2026-08-26",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "161",
@@ -6444,7 +6604,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "162",
@@ -6482,7 +6643,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "163",
@@ -6520,7 +6682,8 @@
       "released": "2025-11-13",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "164",
@@ -6558,7 +6721,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "165",
@@ -6596,7 +6760,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "166",
@@ -6634,7 +6799,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "167",
@@ -6672,7 +6838,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "168",
@@ -6710,7 +6877,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "169",
@@ -6748,7 +6916,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "170",
@@ -6786,7 +6955,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "171",
@@ -6824,7 +6994,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "172",
@@ -6862,7 +7033,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "173",
@@ -6900,7 +7072,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "174",
@@ -6938,7 +7111,8 @@
       "released": "2024-11-12",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "175",
@@ -6976,7 +7150,8 @@
       "released": "2024-09-19",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "176",
@@ -7014,7 +7189,8 @@
       "released": "2024-09-19",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "177",
@@ -7052,7 +7228,8 @@
       "released": "2025-03-24",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "178",
@@ -7090,7 +7267,8 @@
       "released": "2025-05-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "179",
@@ -7128,7 +7306,8 @@
       "released": "2025-01-20",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "180",
@@ -7166,7 +7345,8 @@
       "released": "2024-11-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "181",
@@ -7204,7 +7384,8 @@
       "released": "2025-07-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "182",
@@ -7242,7 +7423,8 @@
       "released": "2026-08-19",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "183",
@@ -7280,7 +7462,8 @@
       "released": "2026-08-19",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "184",
@@ -7318,7 +7501,8 @@
       "released": "2026-08-19",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "185",
@@ -7356,7 +7540,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "186",
@@ -7394,7 +7579,8 @@
       "released": "2025-04-14",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "187",
@@ -7432,7 +7618,8 @@
       "released": "2025-08-05",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "188",
@@ -7470,7 +7657,8 @@
       "released": "2025-05-22",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "189",
@@ -7508,7 +7696,8 @@
       "released": "2025-07-11",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "190",
@@ -7546,7 +7735,8 @@
       "released": "2025-09-05",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "191",
@@ -7584,7 +7774,8 @@
       "released": "2026-06-12",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "192",
@@ -7622,7 +7813,8 @@
       "released": "2026-08-13",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "193",
@@ -7660,7 +7852,8 @@
       "released": "2026-08-13",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "194",
@@ -7698,7 +7891,8 @@
       "released": "2026-09-02",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "195",
@@ -7736,7 +7930,8 @@
       "released": "2026-09-02",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "196",
@@ -7774,7 +7969,8 @@
       "released": "2026-07-09",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "197",
@@ -7812,7 +8008,8 @@
       "released": "2026-07-09",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "198",
@@ -7850,7 +8047,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "199",
@@ -7888,7 +8086,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "200",
@@ -7926,7 +8125,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "201",
@@ -7964,7 +8164,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "202",
@@ -8002,7 +8203,8 @@
       "released": "2026-07-21",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "203",
@@ -8040,7 +8242,8 @@
       "released": "2026-07-09",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "204",
@@ -8078,7 +8281,8 @@
       "released": "2026-07-09",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "205",
@@ -8116,7 +8320,8 @@
       "released": "2026-07-21",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "206",
@@ -8154,7 +8359,8 @@
       "released": "2026-07-10",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "207",
@@ -8192,7 +8398,8 @@
       "released": "2026-07-21",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "208",
@@ -8230,7 +8437,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "209",
@@ -8268,7 +8476,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "210",
@@ -8306,7 +8515,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "211",
@@ -8344,7 +8554,8 @@
       "released": "2026-07-24",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "212",
@@ -8382,7 +8593,8 @@
       "released": "2026-07-27",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "213",
@@ -8420,7 +8632,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "214",
@@ -8458,7 +8671,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "215",
@@ -8496,7 +8710,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "216",
@@ -8534,7 +8749,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "217",
@@ -8572,7 +8788,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "218",
@@ -8610,7 +8827,8 @@
       "released": "2026-08-14",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "219",
@@ -8648,7 +8866,8 @@
       "released": "2026-08-13",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "220",
@@ -8686,7 +8905,8 @@
       "released": "2026-09-04",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "221",
@@ -8724,7 +8944,8 @@
       "released": "2026-08-14",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "222",
@@ -8762,7 +8983,8 @@
       "released": "2026-08-13",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "223",
@@ -8800,7 +9022,8 @@
       "released": "2026-08-05",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "224",
@@ -8838,7 +9061,8 @@
       "released": "2026-08-10",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "225",
@@ -8876,7 +9100,8 @@
       "released": "2026-08-12",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "226",
@@ -8914,7 +9139,8 @@
       "released": "2026-08-25",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "227",
@@ -8952,7 +9178,8 @@
       "released": "2026-08-26",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "228",
@@ -8990,7 +9217,8 @@
       "released": "2026-08-04",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "229",
@@ -9028,7 +9256,8 @@
       "released": "2026-08-26",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "230",
@@ -9066,7 +9295,8 @@
       "released": "2026-08-11",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "231",
@@ -9104,7 +9334,8 @@
       "released": "2026-08-12",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "232",
@@ -9142,7 +9373,8 @@
       "released": "2026-08-19",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "233",
@@ -9180,7 +9412,8 @@
       "released": "2026-08-19",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "234",
@@ -9218,7 +9451,8 @@
       "released": "2026-08-19",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "235",
@@ -9256,7 +9490,8 @@
       "released": "2026-08-24",
       "released_est": false,
       "released_src": "curated",
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "236",
@@ -9294,7 +9529,8 @@
       "released": "2026-08-26",
       "released_est": true,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "237",
@@ -9332,7 +9568,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "238",
@@ -9370,7 +9607,8 @@
       "released": "2026-09-04",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "239",
@@ -9408,7 +9646,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "240",
@@ -9446,7 +9685,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "241",
@@ -9484,7 +9724,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "242",
@@ -9522,7 +9763,8 @@
       "released": "2026-08-12",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "243",
@@ -9560,7 +9802,8 @@
       "released": "2026-08-11",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "244",
@@ -9598,7 +9841,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "245",
@@ -9636,7 +9880,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "246",
@@ -9674,7 +9919,8 @@
       "released": "2026-08-12",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "247",
@@ -9712,7 +9958,8 @@
       "released": "2026-09-01",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "248",
@@ -9750,7 +9997,8 @@
       "released": "2026-09-01",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "249",
@@ -9788,7 +10036,8 @@
       "released": "2026-09-02",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "250",
@@ -9826,7 +10075,8 @@
       "released": "2026-08-21",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "251",
@@ -9864,7 +10114,8 @@
       "released": "2026-09-02",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "252",
@@ -9902,7 +10153,8 @@
       "released": "2026-09-02",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "253",
@@ -9940,7 +10192,8 @@
       "released": "2026-09-08",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "254",
@@ -9978,7 +10231,8 @@
       "released": "2026-09-03",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "255",
@@ -10016,7 +10270,8 @@
       "released": "2026-09-03",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "256",
@@ -10054,7 +10309,8 @@
       "released": "2026-09-10",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "257",
@@ -10092,7 +10348,8 @@
       "released": "2026-09-07",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "258",
@@ -10130,7 +10387,8 @@
       "released": "2026-09-03",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "259",
@@ -10168,7 +10426,8 @@
       "released": "2026-09-02",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "260",
@@ -10206,7 +10465,8 @@
       "released": "2026-09-04",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "261",
@@ -10244,7 +10504,8 @@
       "released": "2026-09-10",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "262",
@@ -10282,7 +10543,8 @@
       "released": "2026-09-02",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "263",
@@ -10320,7 +10582,8 @@
       "released": "2026-08-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "264",
@@ -10358,7 +10621,8 @@
       "released": "2026-08-03",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "265",
@@ -10396,7 +10660,8 @@
       "released": "2026-09-10",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "266",
@@ -10434,7 +10699,8 @@
       "released": "2026-09-11",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "267",
@@ -10472,7 +10738,8 @@
       "released": "2026-09-11",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "268",
@@ -10510,7 +10777,8 @@
       "released": "2026-09-15",
       "released_est": false,
       "released_src": "Salesforce press 15 Sep 2026",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "269",
@@ -10548,7 +10816,8 @@
       "released": "2026-09-16",
       "released_est": false,
       "released_src": "OpenRouter stealth/union-alpha 2026-09-16",
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "270",
@@ -10586,7 +10855,8 @@
       "released": "2026-09-16",
       "released_est": false,
       "released_src": "arXiv 2026-09-11 + release 2026-09-16 paperscode",
-      "is_free": true
+      "is_free": true,
+      "price_band": "free"
     },
     {
       "rank": "271",
@@ -10624,7 +10894,8 @@
       "released": "2026-09-21",
       "released_est": false,
       "released_src": "x.ai/news/grok-4-7",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "272",
@@ -10662,7 +10933,8 @@
       "released": "2026-09-22",
       "released_est": false,
       "released_src": "community.openai.com Sep 22 + github.blog changelog",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "273",
@@ -10700,7 +10972,8 @@
       "released": "2026-09-22",
       "released_est": false,
       "released_src": "community.openai.com Sep 22 + github.blog changelog",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "274",
@@ -10738,7 +11011,8 @@
       "released": "2026-09-22",
       "released_est": false,
       "released_src": "softreviewed + tpsreport.news Sep 22 (secondary)",
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "275",
@@ -10776,7 +11050,8 @@
       "released": "2026-09-21",
       "released_est": false,
       "released_src": "cellcog.ai/blog/mimo-v2-6 + HF created Sep 21",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "276",
@@ -10814,7 +11089,8 @@
       "released": "2026-09-21",
       "released_est": false,
       "released_src": "cellcog.ai/blog/mimo-v2-6 + HF created Sep 21",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "277",
@@ -10852,7 +11128,8 @@
       "released": "2026-09-21",
       "released_est": false,
       "released_src": "cellcog.ai/blog/mimo-v2-6 + HF created Sep 21",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "278",
@@ -10890,7 +11167,8 @@
       "released": "2026-09-21",
       "released_est": false,
       "released_src": "ccleaks AliceAI-Foundation-80B + HF lastModified Sep 21",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "279",
@@ -10928,7 +11206,8 @@
       "released": "2026-09-12",
       "released_est": false,
       "released_src": "llmgateway.io/timeline Sep 12",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "280",
@@ -10966,7 +11245,8 @@
       "released": "2026-09-11",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "281",
@@ -11004,7 +11284,8 @@
       "released": "2026-09-18",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "282",
@@ -11042,7 +11323,8 @@
       "released": "2026-09-16",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "283",
@@ -11080,7 +11362,8 @@
       "released": "2026-09-27",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "284",
@@ -11118,7 +11401,8 @@
       "released": "2026-09-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "285",
@@ -11156,7 +11440,8 @@
       "released": "2026-09-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "286",
@@ -11194,7 +11479,8 @@
       "released": "2026-09-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "287",
@@ -11232,7 +11518,8 @@
       "released": "2026-09-28",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "288",
@@ -11270,7 +11557,8 @@
       "released": "2026-09-20",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "289",
@@ -11308,7 +11596,8 @@
       "released": "2026-09-29",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "290",
@@ -11346,7 +11635,8 @@
       "released": "2026-09-29",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "291",
@@ -11384,7 +11674,8 @@
       "released": "2026-09-03",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "292",
@@ -11422,7 +11713,8 @@
       "released": "2026-09-30",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "293",
@@ -11460,7 +11752,8 @@
       "released": "2026-10-01",
       "released_est": false,
       "released_src": "curated",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "294",
@@ -11498,7 +11791,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "295",
@@ -11536,7 +11830,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "296",
@@ -11574,7 +11869,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "297",
@@ -11612,7 +11908,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "298",
@@ -11650,7 +11947,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     },
     {
       "rank": "299",
@@ -11688,7 +11986,8 @@
       "released": null,
       "released_est": false,
       "released_src": null,
-      "is_free": false
+      "is_free": false,
+      "price_band": "premium"
     },
     {
       "rank": "300",
@@ -11726,7 +12025,8 @@
       "released": "2026-10-07",
       "released_est": false,
       "released_src": "llmgateway-timeline",
-      "is_free": false
+      "is_free": false,
+      "price_band": "budget"
     },
     {
       "rank": "301",
@@ -11764,7 +12064,8 @@
       "released": "2026-10-06",
       "released_est": false,
       "released_src": "llmgateway-timeline",
-      "is_free": false
+      "is_free": false,
+      "price_band": "standard"
     },
     {
       "rank": "302",
@@ -11802,7 +12103,8 @@
       "released": "2026-10-07",
       "released_est": false,
       "released_src": "llmgateway-timeline",
-      "is_free": false
+      "is_free": false,
+      "price_band": "unknown"
     }
   ],
   "data_regen_at": "2026-10-08",
