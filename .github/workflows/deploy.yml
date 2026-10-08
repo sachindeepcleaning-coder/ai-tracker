@@ -85,6 +85,11 @@ jobs:
       - name: Build (base=/ai-tracker/)
         run: npm run build
 
+      # Measure-first loop: gzip budgets block bundle regressions; preview
+      # timing + baseline drift are report-only (machine variance is not a gate).
+      - name: Perf budgets (blocking on sizes)
+        run: npm run perf
+
       - name: Accessibility report, non-blocking (axe on the built page)
         run: |
           npm run preview -- --port 8935 --strictPort &
