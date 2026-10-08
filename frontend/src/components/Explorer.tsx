@@ -295,7 +295,7 @@ export default function Explorer({
                       </div>
                       <h3 className="font-bold leading-tight mt-2 line-clamp-2">{m.model}</h3>
                       <p className="text-xs text-white/70">{m.provider} · {paramsLabel(m)} · {m.context_window} · {m.source} · {m.last_verified ?? "—"}</p>
-                          {m.notes && <p className="text-[11px] text-amber-200/60 mt-1 line-clamp-2" title={m.notes}>Note: {m.notes}</p>}
+                          {m.notes && <p className="text-[11px] text-amber-200/85 mt-1 line-clamp-2" title={m.notes}>Note: {m.notes}</p>}
                     </div>
                     <button
                       onClick={() => toggleCompare(m.id)}

@@ -129,12 +129,6 @@ jobs:
               blocking = by_impact.get('critical', 0) + by_impact.get('serious', 0)
               if blocking:
                   print(f'BLOCKING: {blocking} critical/serious nodes')
-                  # TEMPORARY debug: print offending rules to the job log.
-                  for page in pages:
-                      for v in page.get('violations', []):
-                          if v.get('impact') in ('critical', 'serious'):
-                              html = (v.get('nodes') or [{}])[0].get('html', '')[:200]
-                              print(f"VIOLATION {v['impact']} {v['id']}: {v.get('help', '')} :: {html}")
                   open('/tmp/axe-block', 'w').write('1')
           except Exception as e:
               print(f'axe results unparseable: {e}')
