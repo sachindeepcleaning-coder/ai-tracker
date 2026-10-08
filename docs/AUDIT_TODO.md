@@ -4,6 +4,30 @@ Generated during the Oct 2026 data-integrity audit (tasks 1–7). Rule applied
 throughout: when a fact could not be verified against its cited source, the
 cell was emptied with a note rather than guessed.
 
+## Sixth-round findings (T4–T13 batch + CI hardening)
+
+- **Fixture tests clobbered public/data.json (root-caused):** regen fixture
+  tests spawned the full script with OUT_PATH pointed at tmp, but the script
+  unconditionally wrote the real `frontend/public/data.json` — every
+  `npm run test` silently reverted it to uncured rows. CI order (regen →
+  gate → tests → build) kept the drift gate green while shipping stale data.
+  Fixed via PUBLIC_OUT_PATH isolation + a regression test; the gate now also
+  covers sw-version.js, sitemap.xml, fx.generated.ts.
+- **axe gate flaked on the card fade-in (root-caused):** `card-rise`
+  animated opacity 0→1 with staggered delays; slow CI runners audited cards
+  mid-fade (35 then 33 serious contrast nodes, varying run to run) while
+  fast local runs saw 0. Entrance is now translate-only (motion kept,
+  contrast stable from frame one) with a CSS comment pinning the rule.
+- **Open count unified 175→177:** README regex and site isOpenWeight
+  disagreed both ways ('ungated' matched 'gated'; Apache rows with
+  architecture notes marked closed). Single mirrored heuristic + sync test.
+- **95.12 FX provenance:** honest label is "repo-standardized planning rate"
+  (standardized Aug 14, 2026) — NOT claimed as an RBI quote. fx.json records
+  refresh guidance (RBI/FBIL reference); all UI/README/meta render from it.
+- **Known conservative-closed rows:** license cells with explicit TBD
+  (ranks 192, 260, 294–296) stay closed by design; rank 192's TBD refers to
+  another model (documented limitation, not changed).
+
 ## Fifth-round findings ("do all the work" pass)
 
 - **Virtualization v2 ATTEMPTED AND REVERTED (again):** TanStack window
