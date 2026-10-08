@@ -15,7 +15,7 @@ function run(csvPath: string): { exit: number; output: string } {
   const outPath = csvPath + '.out.json'
   try {
     const output = execFileSync('node', [SCRIPT], {
-      env: { ...process.env, CSV_PATH: csvPath, OUT_PATH: outPath },
+      env: { ...process.env, CSV_PATH: csvPath, OUT_PATH: outPath, PUBLIC_OUT_PATH: outPath + '.public.json' },
       encoding: 'utf8',
     })
     return { exit: 0, output }
@@ -66,8 +66,7 @@ describe('regen-data.mjs CSV gates (temp fixtures)', () => {
     expect(r.exit).toBe(0)
   })
 
-  it('accepts a quoted newline inside a cell', () => {
-    const dst = join(dir, 'multiline.csv')
+  it('accepts a quoted newline inside a cell', () => {    const dst = join(dir, 'multiline.csv')
     const from = ',"Vendor-reported bench; check independent AA/Scale/BenchLM verification; composition'
     const to = ',"Vendor-reported bench; check independent\nAA/Scale/BenchLM verification; composition'
     const text = readFileSync(`${REPO}/coding_benchmarks.csv`, 'utf8').replace(from, to)
@@ -77,5 +76,17 @@ describe('regen-data.mjs CSV gates (temp fixtures)', () => {
     writeFileSync(dst, text.replace(endFrom, endTo))
     const r = run(dst)
     expect(r.exit).toBe(0)
+  })
+
+  it('never touches the real frontend/public/data.json (PUBLIC_OUT_PATH isolation)', () => {
+    const realPublic = join(REPO, 'frontend/public/data.json')
+    const before = readFileSync(realPublic, 'utf8')
+    const dst = join(dir, 'isolation.csv')
+    writeFileSync(dst, readFileSync(`${REPO}/coding_benchmarks.csv`, 'utf8'))
+    const r = run(dst)
+    expect(r.exit).toBe(0)
+    // The fixture run used an empty OUT_PATH (no curation); if the script had
+    // written the real public copy, its released dates would now be wiped.
+    expect(readFileSync(realPublic, 'utf8')).toBe(before)
   })
 })

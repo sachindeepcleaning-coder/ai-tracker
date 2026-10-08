@@ -22,6 +22,11 @@ import { dirname, join } from 'node:path'
 const here = dirname(fileURLToPath(import.meta.url))
 const CSV_PATH = process.env.CSV_PATH || join(here, '../../coding_benchmarks.csv')
 const OUT_PATH = process.env.OUT_PATH || join(here, '../src/data.json')
+// Overridable so fixture tests never clobber the real runtime copy:
+// a full script run ALWAYS writes the public file, and tests run the full
+// script with an empty OUT_PATH (no curation to merge). Without this, every
+// `npm run test` silently reverted frontend/public/data.json to uncured rows.
+const PUBLIC_PATH = process.env.PUBLIC_OUT_PATH || join(here, '../public/data.json')
 
 /** Strip a UTF-8 BOM so a BOM-prefixed header still matches HEADER_MAP. */
 function stripBom(text) {
@@ -355,7 +360,7 @@ writeFileSync(OUT_PATH, JSON.stringify(payload, null, 2) + '\n')
 // Public runtime copy for the production fetch (compact: transfer only, never
 // reviewed; the pretty src/data.json stays the reviewed artifact). Served with
 // Pages' default application/json; offline via the sw.js same-origin cache.
-mkdirSync(join(here, '../public'), { recursive: true })
-writeFileSync(join(here, '../public/data.json'), JSON.stringify(payload))
+mkdirSync(join(PUBLIC_PATH, '..'), { recursive: true })
+writeFileSync(PUBLIC_PATH, JSON.stringify(payload))
 const preserved = out.filter((m) => curated.get(m.slug)).length
 console.log(`regen-data: wrote ${out.length} models -> ${OUT_PATH} (preserved ${preserved} curated rows)`)
