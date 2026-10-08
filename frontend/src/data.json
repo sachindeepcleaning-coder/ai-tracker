@@ -11423,9 +11423,9 @@
       "is_orchestrator": false,
       "slug": "anthropic-claude-haiku-5-5",
       "id": "anthropic-claude-haiku-5-5",
-      "released": null,
+      "released": "2026-10-07",
       "released_est": false,
-      "released_src": null,
+      "released_src": "llmgateway-timeline",
       "is_free": false
     },
     {
@@ -11460,9 +11460,9 @@
       "is_orchestrator": false,
       "slug": "mistral-ai-mistral-large-4",
       "id": "mistral-ai-mistral-large-4",
-      "released": null,
+      "released": "2026-10-06",
       "released_est": false,
-      "released_src": null,
+      "released_src": "llmgateway-timeline",
       "is_free": false
     },
     {
@@ -11497,9 +11497,9 @@
       "is_orchestrator": false,
       "slug": "z-ai-glm-5-3-fast",
       "id": "z-ai-glm-5-3-fast",
-      "released": null,
+      "released": "2026-10-07",
       "released_est": false,
-      "released_src": null,
+      "released_src": "llmgateway-timeline",
       "is_free": false
     }
   ],

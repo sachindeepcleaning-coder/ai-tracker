@@ -88,7 +88,7 @@ describe('data.json integrity (regen gate)', () => {
     const top = [...models]
       .filter((m) => m.released)
       .sort((a, b) => (b.released ?? '').localeCompare(a.released ?? ''))[0]!.released
-    expect(top).toBe('2026-10-01')
+    expect(top).toBe('2026-10-07')
   })
 
   it('verification freshness: at most 50% of rows older than 30 days vs data_as_of', () => {
