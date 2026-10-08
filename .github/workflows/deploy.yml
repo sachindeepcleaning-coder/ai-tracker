@@ -140,7 +140,7 @@ jobs:
               print(f'axe results unparseable: {e}')
           EOF
             echo "axe exit code: $AXE_EXIT (advisory; the gate is critical/serious counts)"
-          } >> "$GITHUB_STEP_SUMMARY"
+          } | tee -a "$GITHUB_STEP_SUMMARY"
           rm -f axe-results.json axe-report.txt
           if [ -f /tmp/axe-block ]; then echo 'axe: critical/serious violations — failing the build'; exit 1; fi
           exit 0
