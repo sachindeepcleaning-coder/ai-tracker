@@ -16,8 +16,7 @@ The site (`frontend/src/data.json`) is generated — never edit it by hand.
 5. Promo/expiry claims (`through|thru|until|ended|expires … <date>`,
    `to <Month> <day>`, ISO dates): regen FAILS on unmarked past dates.
    Mark handled claims `EXPIRED`/`removed`, or fix the cell.
-6. Run from `frontend/`: `npm run data && npm run lint && npm run typecheck && npm run test && npm run build`.
-7. Run `node ../scripts/readme-stats.mjs` if the header counts changed
+6. Run from `frontend/`: `npm run data && npm run lint && npm run typecheck && npm run test && npm run build`. (`npm run data` always regenerates both `src/data.json` and the README stats block — there is no separate step to forget.)
    (CI also regenerates it, and the drift gate fails on mismatch).
 
 ## Licenses

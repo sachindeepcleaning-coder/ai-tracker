@@ -69,10 +69,6 @@ jobs:
       - name: Regenerate data (gated — fails on rank/validation errors)
         run: npm run data
 
-      - name: Regenerate README stats block (CSV-derived, committed content wins on conflicts)
-        run: node ../scripts/readme-stats.mjs
-        working-directory: frontend
-
       - name: Drift gate (regen outputs must match committed files)
         run: git diff --exit-code ../README.md src/data.json public/data.json
         working-directory: frontend
