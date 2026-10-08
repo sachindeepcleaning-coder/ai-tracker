@@ -17,6 +17,9 @@ const JSON_URL = 'https://github.com/sachindeepcleaning-coder/ai-tracker/blob/ma
 
 export default function Header({ tab, onTab, stats, explorerCount }: { tab: string; onTab: (t: string) => void; stats: { total: number }; explorerCount: number }) {
   const navRef = useRef<HTMLDivElement>(null)
+  // Shell-first render: stats.total is 0 until the catalog lands — show an
+  // ellipsis, never "0 models (CSV ranks 1-0…)".
+  const totalLabel = stats.total > 0 ? String(stats.total) : '…'
 
   // Keep the active tab visible when the tab strip overflows on small screens.
   useEffect(() => {
@@ -31,7 +34,7 @@ export default function Header({ tab, onTab, stats, explorerCount }: { tab: stri
           <div className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-white" style={{ background: 'linear-gradient(135deg,#10B981,#8B5CF6)' }} aria-hidden="true">AI</div>
           <div className="min-w-0">
             <h1 className="text-[15px] md:text-[16px] font-extrabold leading-none tracking-tight">Local AI Coding Models — India</h1>
-            <p className="text-[11px] text-white/60 hidden sm:block">{stats.total} models (CSV ranks 1-{stats.total} single source of truth) · Fact-checked {VERIFIED_AT} · ₹{INR_PER_USD}/USD · Private / local-first</p>
+            <p className="text-[11px] text-white/60 hidden sm:block">{totalLabel} models (CSV ranks 1-{totalLabel} single source of truth) · Fact-checked {VERIFIED_AT} · ₹{INR_PER_USD}/USD · Private / local-first</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -40,7 +43,7 @@ export default function Header({ tab, onTab, stats, explorerCount }: { tab: stri
             <a href={JSON_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-xs py-2 px-3">JSON</a>
           </div>
           <span className="hidden md:inline-flex badge bg-emerald-500/15 text-emerald-400 border-emerald-500/30">Verified {VERIFIED_AT}</span>
-          <span className="badge bg-violet-500/15 text-violet-300 border-violet-500/30 text-[10px]">{stats.total} models</span>
+          <span className="badge bg-violet-500/15 text-violet-300 border-violet-500/30 text-[10px]">{totalLabel} models</span>
         </div>
       </div>
       <nav ref={navRef} className="max-w-[1400px] mx-auto px-4 md:px-6 pb-3 flex items-center gap-2 overflow-x-auto" aria-label="Dashboard sections">

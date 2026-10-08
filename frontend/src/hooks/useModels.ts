@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useSyncExternalStore } from 'react'
 import type { Model } from '../lib/types'
 import { parsePct, parseQ4, DATA_AS_OF, isValidRelease, setDataAnchor, assertCatalogPayload } from '../lib/parse'
 import { isOpenWeight, licenseBadge } from '../lib/license'
@@ -7,9 +7,12 @@ import { isOpenWeight, licenseBadge } from '../lib/license'
  * Catalog payload. data.json (~300KB) is fetched at runtime — dev server and
  * production both serve public/data.json — keeping it out of the main JS
  * bundle (perf: saves ~1.3s mobile TBT vs inlining). Under vitest it is
- * imported directly (no local server there). Top-level await delays module
- * evaluation until the catalog arrives, so every importer below sees a
- * populated array with no loading-state plumbing.
+ * ingested synchronously from a static import (no local server there).
+ *
+ * Shell-first render: the module NEVER blocks on the network. It fires the
+ * fetch at import time and publishes the payload when it lands; the first
+ * paint is shell + skeleton, and useModels re-renders with full data on
+ * arrival (small commits instead of one blocked boot).
  *
  * Perf marks (T5 measure-first loop): fetch / json-parse / validate / derived
  * timings land in the trace as user-timing measures; read them from a
@@ -20,32 +23,104 @@ function measure(name: string, start: string, end: string) { try { performance.m
 export function perfMark(name: string) { mark(name) }
 export function perfMeasure(name: string, start: string, end: string) { measure(name, start, end) }
 
-mark('catalog:fetch-start')
-const payload: unknown = import.meta.env.MODE === 'test'
-  ? (await import('../data.json')).default
-  : await fetch(`${import.meta.env.BASE_URL}data.json`).then((r) => {
-      mark('catalog:headers-end')
-      measure('catalog:fetch', 'catalog:fetch-start', 'catalog:headers-end')
-      if (!r.ok) throw new Error(`catalog fetch failed: ${r.status}`)
-      mark('catalog:json-start')
-      return r.json()
-    }).then((j) => {
-      mark('catalog:json-end')
-      measure('catalog:json-parse', 'catalog:json-start', 'catalog:json-end')
-      return j
-    })
-mark('catalog:validate-start')
-assertCatalogPayload(payload)
-mark('catalog:validate-end')
-measure('catalog:validate', 'catalog:validate-start', 'catalog:validate-end')
-setDataAnchor(payload.data_as_of ?? '')
-export const catalogMeta = {
-  model_count: payload.model_count ?? payload.all_coding_models.length,
-  data_as_of: payload.data_as_of ?? '',
-  data_regen_at: payload.data_regen_at ?? '',
+/** Async catalog store. Published state is REPLACED (never mutated), so array
+    identity flips [] -> rows on load — exactly what useMemo deps need to
+    invalidate. Every existing importer keeps working via live bindings. */
+export let allModels: Model[] = []
+export let catalogMeta = { model_count: 0, data_as_of: '', data_regen_at: '' }
+export let providers: string[] = []
+export let licenseGroups: string[] = []
+export let modelTypeGroups: string[] = []
+export let catalogError: string | null = null
+
+const catalogListeners = new Set<() => void>()
+function notifyCatalog() {
+  catalogListeners.forEach((l) => { try { l() } catch { /* stale listener */ } })
 }
-/** @type {Model[]} Catalog singleton — all rows from the runtime payload (validated above). */
-export const allModels = payload.all_coding_models
+export function subscribeCatalog(fn: () => void): () => void {
+  catalogListeners.add(fn)
+  return () => { catalogListeners.delete(fn) }
+}
+/** Snapshot for useSyncExternalStore: the array ref itself (stable until the
+    next publish replaces it, satisfying the getSnapshot caching rule). */
+export function getCatalogSnapshot(): Model[] { return allModels }
+
+/** Short license category for filter dropdowns (raw strings carry dates/prices and
+    would balloon a native <select> past the viewport on mobile). Capped for safety. */
+function licLabel(lic: string) {
+  const label = licenseBadge(lic).label
+  return label.length > 28 ? label.slice(0, 26) + '…' : label
+}
+
+/** Validate + publish a catalog payload (shared by the fetch path, test init,
+    and tests). Throws on invalid payloads WITHOUT mutating state. */
+export function ingestCatalogPayload(payload: unknown): void {
+  mark('catalog:validate-start')
+  assertCatalogPayload(payload)
+  mark('catalog:validate-end')
+  measure('catalog:validate', 'catalog:validate-start', 'catalog:validate-end')
+  const p = payload as { all_coding_models: Model[]; model_count?: number; data_as_of?: string; data_regen_at?: string }
+  setDataAnchor(p.data_as_of ?? '')
+  mark('catalog:derived-start')
+  allModels = [...p.all_coding_models]
+  catalogMeta = {
+    model_count: p.model_count ?? p.all_coding_models.length,
+    data_as_of: p.data_as_of ?? '',
+    data_regen_at: p.data_regen_at ?? '',
+  }
+  providers = [...new Set(p.all_coding_models.map((m) => m.provider))].sort()
+  licenseGroups = [...new Set(p.all_coding_models.map((m) => licLabel(m.license)))].sort()
+  modelTypeGroups = [...new Set(p.all_coding_models.map((m) => m.model_type || 'foundation'))].sort()
+  mark('catalog:derived-end')
+  measure('catalog:derived-groups', 'catalog:derived-start', 'catalog:derived-end')
+  // Dev-only invariant check: catches malformed regens (duplicate ids, rank gaps).
+  if (import.meta.env.DEV) {
+    const ids = new Set(allModels.map((m) => m.id))
+    const ranks = allModels.map((m) => parseInt(m.rank, 10)).sort((a, b) => a - b)
+    const contiguous = ranks.every((r, i) => r === i + 1)
+    if (ids.size !== allModels.length || !contiguous) {
+      console.warn(`useModels: catalog invariants violated — ${allModels.length} rows, ${ids.size} unique ids, ranks contiguous: ${contiguous}. Re-run \`npm run data\`.`)
+    }
+  }
+  catalogError = null
+  notifyCatalog()
+}
+
+/** Test-only: return the store to the unloaded state (the production boot path). */
+export function resetCatalogForTests(): void {
+  allModels = []
+  catalogMeta = { model_count: 0, data_as_of: '', data_regen_at: '' }
+  providers = []
+  licenseGroups = []
+  modelTypeGroups = []
+  catalogError = null
+  notifyCatalog()
+}
+
+export const confidenceGroups = ['high','medium','low']
+
+if (import.meta.env.MODE === 'test') {
+  // Vitest has no local server: static import keeps every existing test synchronous.
+  ingestCatalogPayload((await import('../data.json')).default)
+} else {
+  // Production/dev: fire-and-forget — shell paints first, catalog fills in.
+  // Failure degrades to shell + error banner (catalogError), never a blank page.
+  mark('catalog:fetch-start')
+  fetch(`${import.meta.env.BASE_URL}data.json`).then((r) => {
+    mark('catalog:headers-end')
+    measure('catalog:fetch', 'catalog:fetch-start', 'catalog:headers-end')
+    if (!r.ok) throw new Error(`catalog fetch failed: ${r.status}`)
+    mark('catalog:json-start')
+    return r.json()
+  }).then((j) => {
+    mark('catalog:json-end')
+    measure('catalog:json-parse', 'catalog:json-start', 'catalog:json-end')
+    ingestCatalogPayload(j)
+  }).catch((e: unknown) => {
+    catalogError = e instanceof Error ? e.message : String(e)
+    notifyCatalog()
+  })
+}
 
 /**
  * One catalog row (from data.json, regenerated from the CSV via `npm run data`).
@@ -79,30 +154,8 @@ export const allModels = payload.all_coding_models
  * @property {string|null} released  ISO "2026-09-10" or coarse "Sep 2026" — curated (not in CSV).
  */
 
-// Dev-only invariant check: catches malformed regens (duplicate ids, rank gaps) at startup.
-if (import.meta.env.DEV) {
-  const ids = new Set(allModels.map((m) => m.id))
-  const ranks = allModels.map((m) => parseInt(m.rank, 10)).sort((a, b) => a - b)
-  const contiguous = ranks.every((r, i) => r === i + 1)
-  if (ids.size !== allModels.length || !contiguous) {
-    console.warn(`useModels: catalog invariants violated — ${allModels.length} rows, ${ids.size} unique ids, ranks contiguous: ${contiguous}. Re-run \`npm run data\`.`)
-  }
-}
-
-mark('catalog:derived-start')
-export const providers = [...new Set(allModels.map((m) => m.provider))].sort()
-
-/** Short license category for filter dropdowns (raw strings carry dates/prices and
-    would balloon a native <select> past the viewport on mobile). Capped for safety. */
-function licLabel(lic: string) {
-  const label = licenseBadge(lic).label
-  return label.length > 28 ? label.slice(0, 26) + '…' : label
-}
-export const licenseGroups = [...new Set(allModels.map((m) => licLabel(m.license)))].sort()
-export const modelTypeGroups = [...new Set(allModels.map((m) => m.model_type || 'foundation'))].sort()
-export const confidenceGroups = ['high','medium','low']
-mark('catalog:derived-end')
-measure('catalog:derived-groups', 'catalog:derived-start', 'catalog:derived-end')
+// (Module-level derived arrays live at the top of this file: providers,
+// licenseGroups, modelTypeGroups are populated by ingestCatalogPayload.)
 
 /** Every benchmark column tracked in the catalog — coding first, then reasoning/math.
     Drives the Leaderboards tab (one board per benchmark). */
@@ -207,18 +260,24 @@ export interface ModelFilters {
 }
 
 export function useModels({ q, provider, license, openOnly, maxQ4, sort, releaseWindow, modelType = 'all', confidence = 'all', hideSparse = false, freeOnly = false }: ModelFilters) {
+  // Shell-first render: the catalog array itself is the external-store
+  // snapshot — its identity flips [] -> rows on publish, which is exactly
+  // what useMemo deps need to invalidate. ready is length-based so a reset
+  // (revision bump, empty store) correctly reads unready.
+  const models = useSyncExternalStore(subscribeCatalog, getCatalogSnapshot)
+  const ready = models.length > 0
   const stats = useMemo(() => {
-    const open = allModels.filter((m) => isOpenWeight(m.license)).length
-    const withSWE = allModels.filter((m) => parsePct(m.swe_bench_verified) != null).length
-    const withQ4 = allModels.filter((m) => parseQ4(m.full_q4_vram_gb) != null).length
+    const open = models.filter((m) => isOpenWeight(m.license)).length
+    const withSWE = models.filter((m) => parsePct(m.swe_bench_verified) != null).length
+    const withQ4 = models.filter((m) => parseQ4(m.full_q4_vram_gb) != null).length
     // Valid releases only (isValidRelease): future/invalid dates never inflate
     // the coverage KPI or leak into "latest" windows — matches 'dated' filter.
-    const dated = allModels.filter((m) => isValidRelease(m.released)).length
-    return { total: allModels.length, open, closed: allModels.length - open, withSWE, withQ4, dated }
-  }, [])
+    const dated = models.filter((m) => isValidRelease(m.released)).length
+    return { total: models.length, open, closed: models.length - open, withSWE, withQ4, dated }
+  }, [models])
 
   const filtered = useMemo(() => {
-    let out = [...allModels]
+    let out = [...models]
     if (q) {
       const qq = q.toLowerCase()
       out = out.filter((m) => (m.model + ' ' + m.provider).toLowerCase().includes(qq))
@@ -249,34 +308,34 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
     if (freeOnly) out = out.filter((m) => m.is_free)
     out.sort((a, b) => compare(a, b, sort))
     return out
-  }, [q, provider, license, openOnly, maxQ4, sort, releaseWindow, modelType, confidence, hideSparse, freeOnly])
+  }, [q, provider, license, openOnly, maxQ4, sort, releaseWindow, modelType, confidence, hideSparse, freeOnly, models])
 
   // Newest catalog entries (for the "New frontier releases" pointer card) —
   // valid releases only, so a future/invalid date can never surface here.
   const latestModels = useMemo(
-    () => allModels.filter((m) => isValidRelease(m.released)).sort((a, b) => compare(a, b, 'latest')).slice(0, 4),
-    [],
+    () => models.filter((m) => isValidRelease(m.released)).sort((a, b) => compare(a, b, 'latest')).slice(0, 4),
+    [models],
   )
 
   // Best open-weight model that fits a 1×5090 (Q4 <= 32GB), best SWE-V first
   // (TB as tiebreak) — drives the dynamic "Best Q4 fit" KPI card.
   const bestFit = useMemo(() => {
-    const cands = allModels
+    const cands = models
       .filter((m) => isOpenWeight(m.license) && (parseQ4(m.full_q4_vram_gb) ?? Infinity) <= 32)
       .map((m) => ({ m, swe: parsePct(m.swe_bench_verified) ?? -1, tb: parsePct(m.terminal_bench) ?? -1 }))
       .sort((a, b) => b.swe - a.swe || b.tb - a.tb)
     return cands[0]?.m ?? null
-  }, [])
+  }, [models])
 
   // Hardware Fit matrix: every OPEN-WEIGHT model with Q4 data (local-run
   // candidates — closed/API-only models can't run on local VRAM anyway).
   // Best SWE-V first; unscored models sink to the bottom.
   const hwModels = useMemo(
     () =>
-      allModels
+      models
         .filter((m) => isOpenWeight(m.license) && parseQ4(m.full_q4_vram_gb) != null)
         .sort((a, b) => (parsePct(b.swe_bench_verified) ?? -1) - (parsePct(a.swe_bench_verified) ?? -1)),
-    [],
+    [models],
   )
 
   // Leaderboard for EVERY benchmark column in the catalog (coding + reasoning/math),
@@ -284,12 +343,12 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
   const leaderboards = useMemo(() => {
     const out: Record<string, Model[]> = {}
     for (const bench of BENCHMARKS) {
-      out[bench.key] = allModels
+      out[bench.key] = models
         .filter((m) => parsePct(m[bench.key as keyof Model] as string | null) != null)
         .sort((a, b) => (parsePct(b[bench.key as keyof Model] as string | null) ?? -1) - (parsePct(a[bench.key as keyof Model] as string | null) ?? -1))
     }
     return out
-  }, [])
+  }, [models])
 
-  return { stats, filtered, latestModels, leaderboards, hwModels, bestFit }
+  return { stats, filtered, latestModels, leaderboards, hwModels, bestFit, ready, catalogError }
 }

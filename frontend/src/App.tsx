@@ -3,6 +3,7 @@ import { Zap, Database, Award, Layers, Cpu, Calendar } from 'lucide-react'
 import Header from './components/Header'
 import Explorer from './components/Explorer'
 import ErrorBoundary from './components/ErrorBoundary'
+import { CardSkeleton } from './components/Skeleton'
 const LazyDetailModal = lazy(() => import('./components/DetailModal'))
 import { allModels, providers, licenseGroups, useModels, perfMark, perfMeasure } from './hooks/useModels'
 import { catalogMeta } from './hooks/useModels'
@@ -64,7 +65,7 @@ export default function App() {
   const [compare, setCompare] = useState<string[]>([])
   const [detail, setDetail] = useState<Model | null>(null)
 
-  const { stats, filtered, latestModels, leaderboards, hwModels, bestFit } = useModels(filters)
+  const { stats, filtered, latestModels, leaderboards, hwModels, bestFit, ready, catalogError } = useModels(filters)
 
   // Perf mark (T5 measure-first loop): first React commit of the app shell.
   // Paired with catalog:fetch-start from useModels for the full boot measure.
@@ -115,6 +116,24 @@ export default function App() {
       <a href="#main" data-testid="skip-link" className="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:top-3 focus:left-3 btn btn-primary">Skip to content</a>
       <Header tab={tab} onTab={setTab} stats={stats} explorerCount={filtered.length} />
 
+      {/* Shell-first render: KPI strip, pointer card, and tab content wait for
+          the catalog; the header + this skeleton paint immediately. */}
+      {!ready ? (
+        catalogError ? (
+          <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-10" role="alert">
+            <p className="font-bold">Catalog failed to load</p>
+            <p className="text-sm text-white/70 mt-1">{catalogError} — check your connection and reload.</p>
+          </div>
+        ) : (
+          <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" data-testid="catalog-loading" aria-label="Loading catalog">
+            {[0, 1, 2, 3, 4, 5].map((i) => <CardSkeleton key={i} />)}
+          </div>
+        )
+      ) : (
+        <></>
+      )}
+      {ready && (
+      <>
       {/* KPI strip */}
       <section aria-label="Catalog summary" className="max-w-[1400px] mx-auto px-4 md:px-6 py-4 grid grid-cols-2 md:grid-cols-6 gap-3">
         {[
@@ -198,6 +217,8 @@ export default function App() {
           </Suspense>
         </ErrorBoundary>
       </main>
+      </>
+      )}
 
       {detail && (
         <Suspense fallback={null}>
