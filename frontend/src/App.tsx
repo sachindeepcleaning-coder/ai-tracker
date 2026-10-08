@@ -105,7 +105,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:top-3 focus:left-3 btn btn-primary">Skip to content</a>
+      <a href="#main" data-testid="skip-link" className="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:top-3 focus:left-3 btn btn-primary">Skip to content</a>
       <Header tab={tab} onTab={setTab} stats={stats} explorerCount={filtered.length} />
 
       {/* KPI strip */}

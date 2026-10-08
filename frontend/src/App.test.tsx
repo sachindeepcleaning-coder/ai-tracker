@@ -5,6 +5,7 @@ import { act } from 'react'
 import App from './App.jsx'
 import dataMeta from './data.json'
 import { fmtDateFull } from './lib/parse.js'
+import { getByTestId } from './test-queries.js'
 
 describe('App shell smoke test', () => {
   let container: HTMLDivElement
@@ -35,10 +36,10 @@ describe('App shell smoke test', () => {
     expect(text).toContain(fmtDateFull(dataMeta.data_as_of))
   })
   it('skip-to-content link present', () => {
-    expect(container.querySelector('a[href="#main"]')).not.toBeNull()
+    expect(getByTestId(container, 'skip-link').textContent).toContain('Skip to content')
   })
   it('tab switch renders lazy Leaderboards with wired boards (lazy + Suspense regression)', async () => {
-    const btn = container.querySelector('[data-tab="leaderboards"]')
+    const btn = getByTestId(container, 'tab-leaderboards')
     expect(btn, 'leaderboards tab button exists').not.toBeNull()
     await act(async () => { btn!.dispatchEvent(new MouseEvent('click', { bubbles: true })) })
     // Lazy chunk resolves async — poll until Leaderboards renders (Suspense fallback gone).

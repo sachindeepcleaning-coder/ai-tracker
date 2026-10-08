@@ -259,14 +259,14 @@ export default function Explorer({
       {/* Grid — every visible card renders in a responsive multi-column grid
           (no nested scroll pane, no virtualization) with "Load more" paging. */}
       {filtered.length === 0 ? (
-        <div className="card p-10 text-center">
+        <div className="card p-10 text-center" data-testid="explorer-empty">
           <p className="font-semibold">No models match your filters.</p>
           <button onClick={clearAll} className="mt-3 btn btn-ghost text-sm" type="button">Clear all filters</button>
         </div>
       ) : (
         <>
           <h2 className="sr-only">Matching models</h2>
-          <div ref={parentRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" role="list" aria-label="Model grid">
+          <div ref={parentRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" role="list" aria-label="Model grid" data-testid="model-grid">
             {shown.map((m, idx) => {
               const swe = parsePct(m.swe_bench_verified)
               const tb = parsePct(m.terminal_bench)
@@ -277,7 +277,7 @@ export default function Explorer({
               const age = daysOld(m.released)
               const isNew = age <= 7
               return (
-                <div key={m.id} role="listitem" className={`card card-cv card-enter p-4 hover:border-white/15 transition group ${isSel ? 'ring-1 ring-emerald-500 border-emerald-500/30' : ''}`} style={{ animationDelay: `${Math.min(idx, 11) * 35}ms` }}>
+                <div key={m.id} role="listitem" data-testid="model-card" className={`card card-cv card-enter p-4 hover:border-white/15 transition group ${isSel ? 'ring-1 ring-emerald-500 border-emerald-500/30' : ''}`} style={{ animationDelay: `${Math.min(idx, 11) * 35}ms` }}>
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">

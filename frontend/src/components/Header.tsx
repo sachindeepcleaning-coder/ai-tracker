@@ -52,6 +52,7 @@ export default function Header({ tab, onTab, stats, explorerCount }: { tab: stri
             <button
               key={t.id}
               data-tab={t.id}
+              data-testid={`tab-${t.id}`}
               onClick={() => onTab(t.id)}
               aria-current={active ? 'page' : undefined}
               className={`inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm font-semibold whitespace-nowrap border transition ${active ? 'bg-white text-black border-white' : 'bg-white/5 text-white/70 border-white/10 hover:bg-white/10 hover:text-white'}`}

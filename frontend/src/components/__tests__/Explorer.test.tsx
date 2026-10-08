@@ -3,6 +3,7 @@ import * as React from 'react'
 import { createRoot } from 'react-dom/client'
 import { act } from 'react'
 import Explorer from '../Explorer.jsx'
+import { getByRole, getAllByRole, getByTestId, getAllByTestId } from '../../test-queries.js'
 import type { Model } from '../../lib/types'
 
 /** Minimal catalog rows — just the fields the Explorer cards read. */
@@ -75,21 +76,21 @@ describe('Explorer grid layout (regression: 1-2 models per screen, needed scroll
   it('lays large result sets out as a multi-column grid, not one tall column', () => {
     const { container, unmount } = renderExplorer(makeModels(30))
     try {
-      const list = container.querySelector('[role="list"]')!
+      const list = getByTestId(container, 'model-grid')
       expect(list, 'model list container').not.toBeNull()
 
       // Cards must be grouped into row containers, several per row.
-      const firstCard = container.querySelector('[role="listitem"]')!
+      const firstCard = getByTestId(container, 'model-card')
       expect(firstCard, 'first model card').not.toBeNull()
       const firstRow = firstCard.parentElement!
       expect(firstRow.className, 'row uses the shared responsive grid').toContain('grid-cols-1')
-      const cardsInFirstRow = firstRow.querySelectorAll('[role="listitem"]').length
+      const cardsInFirstRow = getAllByTestId(firstRow, 'model-card').length
       expect(cardsInFirstRow, 'cards visible side-by-side in one row').toBeGreaterThan(1)
 
       // Every card still carries the compare toggle + benchmark cells.
-      expect(container.textContent).toContain('Model 1')
-      expect(container.textContent).toContain('SWE-V')
-      expect(container.querySelectorAll('[role="listitem"]').length).toBeGreaterThan(1)
+      expect(getByRole(container, 'listitem', 'Model 1'), 'card shows model name').not.toBeNull()
+      expect(getByRole(container, 'listitem', 'SWE-V'), 'card shows benchmark cells').not.toBeNull()
+      expect(getAllByRole(container, 'listitem').length).toBeGreaterThan(1)
     } finally {
       unmount()
     }
@@ -98,7 +99,7 @@ describe('Explorer grid layout (regression: 1-2 models per screen, needed scroll
   it('no longer wraps the list in a fixed-height nested scroll pane', () => {
     const { container, unmount } = renderExplorer(makeModels(30))
     try {
-      const list = container.querySelector('[role="list"]')!
+      const list = getByTestId(container, 'model-grid')
       expect(list.getAttribute('style'), 'list has no fixed height').toBeNull()
       expect(list.className).not.toContain('overflow-auto')
       expect(container.querySelector('[style*="70vh"]')).toBeNull()
@@ -110,10 +111,10 @@ describe('Explorer grid layout (regression: 1-2 models per screen, needed scroll
   it('renders every card for small result sets in the same responsive grid', () => {
     const { container, unmount } = renderExplorer(makeModels(6))
     try {
-      const list = container.querySelector('[role="list"]')!
+      const list = getByTestId(container, 'model-grid')
       expect(list.className).toContain('grid-cols-1')
       expect(list.className).toContain('lg:grid-cols-3')
-      expect(list.querySelectorAll('[role="listitem"]').length).toBe(6)
+      expect(getAllByTestId(list, 'model-card').length).toBe(6)
     } finally {
       unmount()
     }
@@ -122,7 +123,8 @@ describe('Explorer grid layout (regression: 1-2 models per screen, needed scroll
   it('renders the empty state when filters exclude everything', () => {
     const { container, unmount } = renderExplorer([])
     try {
-      expect(container.textContent).toContain('No models match your filters')
+      const empty = getByTestId(container, 'explorer-empty')
+      expect(empty.textContent).toContain('No models match your filters')
     } finally {
       unmount()
     }
