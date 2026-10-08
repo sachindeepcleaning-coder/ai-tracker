@@ -162,6 +162,11 @@ const existing = existsSync(OUT_PATH)
   ? JSON.parse(readFileSync(OUT_PATH, 'utf8'))
   : { conversation_summary: null, all_coding_models: [] }
 const curated = new Map(existing.all_coding_models.map((m) => [m.id, m]))
+if (existsSync(OUT_PATH) && existing.all_coding_models.length === 0) {
+  console.error(`regen-data: refusing to run — ${OUT_PATH} exists but has no model rows; a wipe would destroy all curation`)
+  process.exit(1)
+}
+console.log(`regen-data: existing catalog has ${existing.all_coding_models.length} rows, ${existing.all_coding_models.filter((m) => m.released).length} with released dates`)
 
 // --recompute-inr: rewrite every INR cell from its USD cell x fx_usd_inr
 // (2dp, en-US grouping). Writes back to the CSV, then mapping proceeds on the
