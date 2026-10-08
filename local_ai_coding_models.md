@@ -3,7 +3,7 @@
 **Generated:** July 19, 2026 | **Updated (fact-check):** July 22, 2026 | **Updated (new models):** July 31, 2026 | **Updated (new models):** August 3, 2026 | **Updated (new models):** August 15, 2026 | **Updated (new releases):** August 27, 2026 | **Updated (verified & new releases):** August 29, 2026 | **Updated (Qwen3.8-Flash-Next, MAI-Code-1.1-Flash, North-Micro-Vision):** August 29-30, 2026 | **Synced to llm-releases.com (339 models):** Sep 2, 2026
 **Source:** `coding_benchmarks.csv` (vendor-reported scores aggregated by chaitanyagiri)  
 **Context:** Researching open-source/open-weight AI models that are top in coding benchmarks, for local/private deployment at 4-bit quantization.  
-**CSV Columns (23):** Rank, Model, Provider, Total Params, Active Params, License, SWE-bench Verified, SWE-bench Pro, LiveCodeBench V6, Terminal-Bench, HumanEval, MMLU-Pro, GPQA Diamond, HLE, **MATH**, **AIME 2026**, **ARC-AGI-2**, Price In/1M, Price Out/1M, Context Window, Price In INR, Price Out INR  
+**CSV Columns (23):** Rank, Model, Provider, Total Params, Active Params, License, SWE-bench Verified, SWE-bench Pro, LiveCodeBench V6, Terminal-Bench 2.1, HumanEval, MMLU-Pro, GPQA Diamond, HLE, **MATH**, **AIME 2026**, **ARC-AGI-2**, Price In/1M, Price Out/1M, Context Window, Price In INR, Price Out INR  
 **Note:** ~60 of 227 models lack any benchmark scores (listed in appendix as "pending").
 
 **⚠️ Corrections applied Sep 2, 2026 (synced to llm-releases.com 339-model catalog + methodology + Sep 1 Anthropic + Sep 2 Qwen refresh):**

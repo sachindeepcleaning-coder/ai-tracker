@@ -99,7 +99,7 @@ const HEADER_MAP = {
   'SWE-bench Verified': 'swe_bench_verified',
   'SWE-bench Pro': 'swe_bench_pro',
   'LiveCodeBench V6': 'livecodebench_v6',
-  'Terminal-Bench': 'terminal_bench',
+  'Terminal-Bench 2.1': 'terminal_bench',
   'HumanEval': 'humaneval',
   'MMLU-Pro': 'mmlu_pro',
   'GPQA Diamond': 'gpqa_diamond',

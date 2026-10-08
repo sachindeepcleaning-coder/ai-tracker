@@ -66,7 +66,7 @@ describe('regen-data.mjs CSV gates (temp fixtures)', () => {
     expect(r.exit).toBe(0)
   })
 
-  it('accepts a quoted newline inside a cell', () => {    const dst = join(dir, 'multiline.csv')
+    it('accepts a quoted newline inside a cell', () => {    const dst = join(dir, 'multiline.csv')
     const from = ',"Vendor-reported bench; check independent AA/Scale/BenchLM verification; composition'
     const to = ',"Vendor-reported bench; check independent\nAA/Scale/BenchLM verification; composition'
     const text = readFileSync(`${REPO}/coding_benchmarks.csv`, 'utf8').replace(from, to)
@@ -76,6 +76,14 @@ describe('regen-data.mjs CSV gates (temp fixtures)', () => {
     writeFileSync(dst, text.replace(endFrom, endTo))
     const r = run(dst)
     expect(r.exit).toBe(0)
+  })
+
+  it('labels the Terminal-Bench column with its version (2.1)', () => {
+    // The CSV is the single source of truth: a bare 'Terminal-Bench' header
+    // lets TB 1.x/2.x scores mix silently. UI labels already say 2.1.
+    const header = readFileSync(`${REPO}/coding_benchmarks.csv`, 'utf8').split('\n')[0]
+    expect(header).toContain('Terminal-Bench 2.1')
+    expect(header).not.toMatch(/,Terminal-Bench,/)
   })
 
   it('never touches the real frontend/public/data.json (PUBLIC_OUT_PATH isolation)', () => {
