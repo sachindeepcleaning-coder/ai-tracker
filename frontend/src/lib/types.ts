@@ -32,6 +32,7 @@ export interface Model {
   confidence: string | null
   notes: string | null
   is_orchestrator: boolean
+  hf_url: string | null
   released: string | null
   released_est: boolean
   released_src: string | null

@@ -127,7 +127,7 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
         <div className="mt-4 flex gap-2 flex-wrap">
           <button type="button" onClick={() => { onToggleCompare(detail.id); onClose() }} className="btn btn-primary text-sm">{inCompare ? 'Remove from compare' : 'Add to compare'}</button>
           <button type="button" onClick={onClose} className="btn btn-ghost text-sm">Close</button>
-          <a href={`https://huggingface.co/models?search=${encodeURIComponent(detail.model)}`} target="_blank" rel="noopener noreferrer" className="ml-auto btn btn-ghost text-sm">Open HF <ArrowUpRight size={12} aria-hidden="true" /></a>
+          <a href={detail.hf_url ?? `https://huggingface.co/models?search=${encodeURIComponent(detail.model)}`} target="_blank" rel="noopener noreferrer" title={detail.hf_url ?? 'Search Hugging Face'} className="ml-auto btn btn-ghost text-sm">{detail.hf_url ? 'Weights' : 'Open HF'} <ArrowUpRight size={12} aria-hidden="true" /></a>
           <a href={`https://www.google.com/search?q=${encodeURIComponent(detail.model + ' pricing per million tokens')}`} target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-sm">Pricing <ArrowUpRight size={12} aria-hidden="true" /></a>
           <a href={`https://www.google.com/search?q=${encodeURIComponent(detail.model + ' paper technical report')}`} target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-sm">Paper <ArrowUpRight size={12} aria-hidden="true" /></a>
         </div>

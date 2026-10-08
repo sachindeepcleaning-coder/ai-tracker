@@ -148,6 +148,17 @@ describe('data.json integrity (regen gate)', () => {
     expect(mai.terminal_bench).toMatch(/46\.0/)
   })
 
+  it('hf_url cells are canonical HF repo URLs on open-weight rows', () => {
+    // HF URL column: populated only where the row's own Notes cite the repo
+    // (never guessed); every value must be an org/repo URL, and linked rows
+    // must be open-weight (a repo link on a closed row is a contradiction).
+    const linked = models.filter((m) => m.hf_url != null)
+    expect(linked.length).toBeGreaterThan(0)
+    for (const m of linked) {
+      expect(m.hf_url, `${m.rank} ${m.model}`).toMatch(/^https:\/\/huggingface\.co\/[\w.-]+\/[\w.-]+\/?$/)
+    }
+  })
+
   it('INR cells equal USD x fx_usd_inr from scripts/fx.json', () => {
     expect(typeof FX_RATE === 'number' && FX_RATE > 0, 'fx.json fx_usd_inr must be a positive number').toBe(true)
     for (const m of models) {

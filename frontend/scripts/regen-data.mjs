@@ -119,6 +119,7 @@ const HEADER_MAP = {
   'Notes': 'notes',
   'Is Orchestrator': 'is_orchestrator',
   'Slug': 'slug',
+  'HF URL': 'hf_url',
 }
 
 const rows = parseCsv(stripBom(readFileSync(CSV_PATH, 'utf8')))
@@ -287,6 +288,15 @@ const out = rows.slice(1)
   if (ids.size !== out.length) { console.error(`regen-data: duplicate ids ${out.length - ids.size}`); process.exit(1) }
   for (const m of out) {
     if (!m.slug || !/^[a-z0-9-]+$/.test(m.slug)) { console.error(`regen-data: bad slug ${m.rank} ${JSON.stringify(m.slug)}`); process.exit(1) }
+  }
+  // HF URL gate: populated cells must be canonical repo URLs (org/repo path,
+  // no API/query URLs); empty stays null. URLs come from the row's own Notes
+  // citation — never guessed.
+  for (const m of out) {
+    if (m.hf_url != null && !/^https:\/\/huggingface\.co\/[\w.-]+\/[\w.-]+\/?$/.test(m.hf_url)) {
+      console.error(`regen-data: bad hf_url ${m.id} ${JSON.stringify(m.hf_url)}`)
+      process.exit(1)
+    }
   }
   const allowedTypes = new Set(['foundation','orchestrator','router','cascade','specialized'])
   const allowedConf = new Set(['high','medium','low'])
