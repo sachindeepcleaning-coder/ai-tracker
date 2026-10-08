@@ -420,7 +420,7 @@ export default function Tracker({ onOpenModel }: { onOpenModel?: (rankId: string
             </button>
           )
         })}
-        <span className="ml-auto text-xs text-white/70">All scores vendor-reported unless AA / Scale / BenchLM</span>
+        <span className="ml-auto text-xs text-white/70">All scores vendor-reported unless AA / Scale / BenchLM · changelog/rumor views mirror <a href="https://llm-releases.com/changelog" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/90">llm-releases.com</a></span>
       </div>
 
       {view === 'changelog' && <ChangelogView onOpenModel={onOpenModel} />}
