@@ -12,13 +12,14 @@
 - History: dated update logs moved to CHANGELOG.md; research notes live in `docs/`.
 
 **Docs in this folder:**
-- `local_ai_coding_models.md` — Full model tracker (60+ models) + verification + new-release log
-- `single_user_india_local_ai.md` — Single-user local deployment guide (RAM, tok/s, India cost)
-- `vera_rubin_all_models.md` — Rack-scale deployment (Vera Rubin NVL72 vs Helios, all models at Q4/FP16, TCO)
-- `100k_concurrent_ai_coding_service.md` — 100K concurrent users service sizing & pricing
-- `gpt56_family_breakdown.md` — GPT-5.6 Sol/Terra/Luna pricing & performance
-- `ai_cost_per_task_comparison.md` — Cost per coding-agent task ranking
-- `dgx_b300_deep_research.md` / `dgx_b300_supporting_infra.md` — DGX B300 single-node deep dive
+- `docs/local_ai_coding_models.md` — Full model tracker (60+ models) + verification + new-release log
+- `docs/single_user_india_local_ai.md` — Single-user local deployment guide (RAM, tok/s, India cost)
+- `docs/vera_rubin_all_models.md` — Rack-scale deployment (Vera Rubin NVL72 vs Helios, all models at Q4/FP16, TCO)
+- `docs/100k_concurrent_ai_coding_service.md` — 100K concurrent users service sizing & pricing
+- `docs/gpt56_family_breakdown.md` — GPT-5.6 Sol/Terra/Luna pricing & performance
+- `docs/ai_cost_per_task_comparison.md` — Cost per coding-agent task ranking
+- `docs/dgx_b300_deep_research.md` / `docs/dgx_b300_supporting_infra.md` — DGX B300 single-node deep dive
+- `docs/data-notes-archive.md` — Retired `conversation_summary` scratch notes (were shipped in data.json)
 - `coding_benchmarks.csv` / `ai_coding_api_vs_local_summary.json` — Raw data
 - `archive/` — generated/large reference snapshots (`aa_models.html`, `aa_coding.html`, `meta_blog.html`): scraped leaderboard/blog pages kept for provenance, not used by the build
 - `LICENSE` (MIT, code) + `DATA_LICENSE.md` (CC BY 4.0, data compilation) — see note below
@@ -31,7 +32,7 @@
 
 ## Frontier Open Coding Benchmark Comparison (as of Aug 29)
 
-> Vendor-reported harness scores — not directly comparable across harness labels. Only `Scale AI` mini-SWE-agent (identical scaffold) is apples-to-apples; see `local_ai_coding_models.md:252`.
+> Vendor-reported harness scores — not directly comparable across harness labels. Only `Scale AI` mini-SWE-agent (identical scaffold) is apples-to-apples; see `docs/local_ai_coding_models.md:252`.
 
 | Model | Total/Active, ctx | License | TB2.1 | DeepSWE | SWE Pro | LCB V6 | Notes |
 |---|---|---|---|---|---|---|---|
@@ -105,10 +106,10 @@ DeepSeek = price increase (cheapest hour 2.3× old output; cache-hit +10×). Gem
 
 **Single-user India picks (Aug 2026 street, 5-yr TCO):**
 - **Best value:** `1× RTX 5090 (~₹5L)` → Qwen3.8-27B ~105 tok/s single-stream (decode bandwidth cap: ~1.8TB/s ÷ 14GB)
-- **Balanced:** `2× DGX Spark (~₹10-11L)` → V4 Flash ~40 tok/s; `4× DGX Spark (~₹22-30L, MikroTik)` → GLM-5.3 25-35 + V4 Flash 80-100 + Qwen ~64 single-stream (4×273GB/s ÷ 14GB) `single_user_india_local_ai.md:333`
+- **Balanced:** `2× DGX Spark (~₹10-11L)` → V4 Flash ~40 tok/s; `4× DGX Spark (~₹22-30L, MikroTik)` → GLM-5.3 25-35 + V4 Flash 80-100 + Qwen ~64 single-stream (4×273GB/s ÷ 14GB) `docs/single_user_india_local_ai.md:333`
 - **Speed:** `2× Pro 6000 (~₹85L-1.1Cr)` → V4 Flash Q4 (single-stream rate unverified; FP8/243 claim removed — 284GB weights cannot fit 192GB VRAM); `4× Pro 6000 (~₹1.7-2.1Cr)` → GLM-5.3/Hy4 comfortable
 - **Portable:** MacBook M5 Max 48-128GB (~₹5-7.5L) → Qwen27B only
-- **Any model one-at-a-time:** `DGX B300 2.1 TB (~₹5.5Cr landed, 5-yr ~₹11.7Cr)` — every open weight at Q4 with 30s NVMe→HBM swap `dgx_b300_deep_research.md`
+- **Any model one-at-a-time:** `DGX B300 2.1 TB (~₹5.5Cr landed, 5-yr ~₹11.7Cr)` — every open weight at Q4 with 30s NVMe→HBM swap `docs/dgx_b300_deep_research.md`
 
 ---
 
@@ -144,7 +145,7 @@ Both launch Advancing AI / GTC 2026: Helios 2.9 EF dense FP4, 1.4 EF FP8, 260 TB
 | Rubin, all models (if orchestration existed) | 50 | ₹3,230 Cr | ₹6,100 Cr |
 | Helios, all models (2-3× users/rack) | 20 | ₹1,140 Cr | ₹2,340 Cr |
 
-Break-even **₹2,450/mo (top-10) → ₹10,200/mo (all-models Rubin)** per concurrent user. At 10-20% subscriber concurrency the top-10 MVP costs **~₹245-490/mo per subscriber** (₹2,450 ÷ 10–5 subscribers per concurrent seat); the **~₹2,000/mo per-subscriber** figure belongs to the all-models build at 20% concurrency (₹10,200 ÷ 5). Agentic 99/1 input/output, cache-hit input ~**₹10-30/M** vs miss `₹400-800/M`. Real blocker: no engine serves 74 architectures from one pool — ship top-10 (V4 Flash/Pro, GLM-5.3/Flash, Hy4, K3, Qwen-Max, Qwen27B) behind router now `100k_concurrent_ai_coding_service.md`.
+Break-even **₹2,450/mo (top-10) → ₹10,200/mo (all-models Rubin)** per concurrent user. At 10-20% subscriber concurrency the top-10 MVP costs **~₹245-490/mo per subscriber** (₹2,450 ÷ 10–5 subscribers per concurrent seat); the **~₹2,000/mo per-subscriber** figure belongs to the all-models build at 20% concurrency (₹10,200 ÷ 5). Agentic 99/1 input/output, cache-hit input ~**₹10-30/M** vs miss `₹400-800/M`. Real blocker: no engine serves 74 architectures from one pool — ship top-10 (V4 Flash/Pro, GLM-5.3/Flash, Hy4, K3, Qwen-Max, Qwen27B) behind router now `docs/100k_concurrent_ai_coding_service.md`.
 
 ---
 
