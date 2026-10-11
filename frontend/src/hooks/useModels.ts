@@ -273,10 +273,17 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
     // Valid releases only (isValidRelease): future/invalid dates never inflate
     // the coverage KPI or leak into "latest" windows — matches 'dated' filter.
     const dated = models.filter((m) => isValidRelease(m.released)).length
-    // Verified-source coverage: vendor, Hugging Face, or Artificial Analysis.
-    // Counted from the data (never hardcoded) for the overview KPI.
-    const verifiedSrc = models.filter((m) => ['vendor', 'huggingface', 'artificial-analysis'].includes((m.source || '').toLowerCase())).length
-    return { total: models.length, open, closed: models.length - open, withSWE, withQ4, dated, verifiedSrc }
+    // Primary-source coverage: vendor, Hugging Face, or Artificial Analysis.
+    // Counted from the data (never hardcoded) for the overview KPI. A primary
+    // source is NOT independent verification — vendor benchmarks stay
+    // vendor-reported unless an independent score exists (see indep below).
+    const primarySrc = models.filter((m) => ['vendor', 'huggingface', 'artificial-analysis'].includes((m.source || '').toLowerCase())).length
+    // Independent-verification coverage: notes or source mention an
+    // independent score. Fuzzy substring match on purpose: artificial-analysis
+    // (incl. "AA" alone is NOT matched — too ambiguous), Scale (matches
+    // "Scale", "scaled", "mini-SWE-agent" Scale runs), BenchLM, "indep".
+    const indep = models.filter((m) => /artificial-analysis|scale|benchlm|indep/i.test(`${m.notes ?? ''} ${m.source ?? ''}`)).length
+    return { total: models.length, open, closed: models.length - open, withSWE, withQ4, dated, primarySrc, indep }
   }, [models])
 
   const filtered = useMemo(() => {

@@ -25,11 +25,14 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
 
   it('stats shape uses withQ4 (not avgQ4) and fact-checked counts', () => {
     const { stats } = renderUseModels()
-    expect(stats).toHaveProperty('verifiedSrc')
-    // Verified-source KPI is counted from the data, never hardcoded.
-    const expected = allModels.filter((m) => ['vendor', 'huggingface', 'artificial-analysis'].includes((m.source || '').toLowerCase())).length
-    expect(stats.verifiedSrc).toBe(expected)
-    expect(expected).toBeGreaterThan(200)
+    expect(stats).toHaveProperty('primarySrc')
+    expect(stats).toHaveProperty('indep')
+    // Both KPIs are counted from the data, never hardcoded.
+    const expectedPrimary = allModels.filter((m) => ['vendor', 'huggingface', 'artificial-analysis'].includes((m.source || '').toLowerCase())).length
+    expect(stats.primarySrc).toBe(expectedPrimary)
+    expect(expectedPrimary).toBeGreaterThan(200)
+    const expectedIndep = allModels.filter((m) => /artificial-analysis|scale|benchlm|indep/i.test(`${m.notes ?? ''} ${m.source ?? ''}`)).length
+    expect(stats.indep).toBe(expectedIndep)
     expect(stats).toHaveProperty('withQ4')
     expect(stats).not.toHaveProperty('avgQ4')
     expect(stats).toHaveProperty('dated')

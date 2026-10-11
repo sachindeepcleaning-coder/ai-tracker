@@ -139,7 +139,8 @@ export default function App() {
         {[
           { k: 'Total models', v: stats.total, s: `CSV 1-${stats.total ?? 0} · data as of ${fmtDateFull(DATA_AS_OF)} · site built ${catalogMeta.data_regen_at ?? DATA_AS_OF} · fact-checked ${VERIFIED_AT}`, icon: Database },
           { k: 'Open-weight', v: stats.open, s: `${Math.round((stats.open / stats.total) * 100)}% open`, icon: Layers },
-          { k: 'Verified source', v: stats.total ? `${Math.round((stats.verifiedSrc / stats.total) * 100)}%` : '—', s: `${stats.verifiedSrc} of ${stats.total} from vendor / Hugging Face / Artificial Analysis`, icon: ShieldCheck },
+          { k: 'Primary source', v: stats.total ? `${Math.round((stats.primarySrc / stats.total) * 100)}%` : '—', s: `${stats.primarySrc} of ${stats.total} from vendor / Hugging Face / Artificial Analysis`, t: 'Source is the vendor or Hugging Face page. Benchmarks are still vendor-reported unless marked independent.', icon: ShieldCheck },
+          { k: 'Indep. scores', v: stats.total ? `${Math.round((stats.indep / stats.total) * 100)}%` : '—', s: `${stats.indep} of ${stats.total} cite an independent score (AA / Scale / BenchLM)`, t: 'Rows whose notes or source mention an independent benchmark run.', icon: Award },
           { k: 'With SWE-V', v: stats.withSWE, s: 'have SWE-bench Verified', icon: Award },
           { k: 'With Q4 size', v: stats.withQ4, s: 'have Q4 VRAM', icon: Cpu },
           { k: 'With release date', v: stats.dated, s: `${Math.round((stats.dated / stats.total) * 100)}% of catalog`, icon: Calendar },
@@ -152,7 +153,7 @@ export default function App() {
         ].map((card) => {
           const Icon = card.icon
           return (
-            <div key={card.k} className="card p-3">
+            <div key={card.k} className="card p-3" title={(card as { t?: string }).t ?? undefined}>
               <div className="flex items-center gap-2 text-[11px] tracking-widest font-bold text-white/70 uppercase"><Icon size={12} aria-hidden="true" />{card.k}</div>
               <div className="text-xl font-extrabold mt-1">{card.v}</div>
               <div className="text-xs text-white/70">{card.s}</div>
