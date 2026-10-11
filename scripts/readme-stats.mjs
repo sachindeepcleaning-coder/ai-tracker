@@ -112,3 +112,22 @@ if (si === -1 || ei === -1 || ei < si) {
 }
 writeFileSync(README_PATH, readme.slice(0, si + start.length) + '\n' + block + '\n' + readme.slice(ei))
 console.log(`readme-stats: ${total} models, ${open} open, dated ${dated}, as of ${asOf}`)
+
+// Frontend README count markers (same run, never stale): replaces the inner
+// text of <!-- MODELS:START -->…<!-- MODELS:END --> and
+// <!-- RANKS:START -->…<!-- RANKS:END -->. Fails loudly if the markers vanish.
+{
+  const FREADME_PATH = join(root, 'frontend/README.md')
+  let freadme = readFileSync(FREADME_PATH, 'utf8')
+  const fill = (text, marker, value) => {
+    const re = new RegExp(`<!-- ${marker}:START -->.*?<!-- ${marker}:END -->`)
+    if (!re.test(text)) {
+      console.error(`readme-stats: marker ${marker} not found in frontend/README.md`)
+      process.exit(1)
+    }
+    return text.replace(re, `<!-- ${marker}:START -->${value}<!-- ${marker}:END -->`)
+  }
+  freadme = fill(freadme, 'MODELS', `~${total} models`)
+  freadme = fill(freadme, 'RANKS', `1-${total}`)
+  writeFileSync(FREADME_PATH, freadme)
+}

@@ -4,24 +4,12 @@
 **Scope:** Open-weight coding models for local/private deployment in India — models, benchmarks, pricing, hardware, and cost to serve. **302 models** (CSV ranks 1-302, single source of truth), **177 open-weight**, **191 with release dates — data as of **Oct 8, 2026**. All file prices use **₹95.12/USD** (standardized Aug 14, 2026). All benchmark scores are **vendor-reported** unless marked `AA` / `Scale` / `BenchLM` independent. **Last Update: Oct 8, 2026.**
 <!-- STATS:END -->
 
-> **Sep 23, 2026 Frontier Wave (ranks 271-279, fact-checked via live search Sep 23)**
-> - **Grok 4.7** (xAI, GA Sep 21, $2/$6 + $0.50 cache, fast 2x variant) — was delayed past ~Sep 12, now shipped.
-> - **GPT-6 Sol / Luna** (OpenAI, GA Sep 22, $2/$10 and $0.10/$0.50) — ~50% below GPT-5.6 promo, on API/Codex/ChatGPT/Copilot.
-> - **Claude Opus 5.5** (Anthropic, GA Sep 22, $4/$20 + $0.20 cache) — secondary-only TB4.0 66.4% claim kept in notes, NOT in the TB2.1 column.
-> - **MiMo-V2.6-Pro / Flash / Distill** (Xiaomi, MIT Sep 21) — Pro 1.02T/42B at **AA 46 (v4.3.2), top open-weight** ($0.435/$0.87); Flash 309B/15B ($0.14/$0.28); Distill 9B SFT with SWE-Pro 44.6% vendor claim in the correct column.
-> - **AliceAI Foundation 80B** (Yandex, Apache 2.0 ungated Sep 21, 80B/3B, 262K) + **Atria Dawn Preview** (Sep 12, details thin).
-> - Frontend sync: Explorer virtualized list → responsive grid, hardware tiers added (4×Pro 6000 384GB, Mac Studio M5, Vera Rubin NVL72), `VERIFIED_AT`/`DATA_AS_OF` → Sep 23, `data.json` v2026-09-23 (279 models, 173 dated).
+**ai-tracker** — open-weight coding-model catalog for local/private deployment in India: benchmarks, Q4 VRAM, ₹ pricing, and hardware fit. **302 models** (CSV ranks 1-302; the stats block above is authoritative), last fact-checked **Oct 8, 2026**.
 
-> **Sep 15, 2026 Deep Audit Sync**
-> - **Salesforce Koa** added rank 268 — Nemotron 3 Super post-train for Agentforce CRM workflows, Salesforce-hosted pilot announced Sep 15, GA winter 2026, weights controlled, vendor claims 3× fewer errors on internal CRM Bench.
-> - **DeepSeek V4.1 Flash** pricing completed: peak $0.30/$1.20, off-peak $0.15/$0.60, INR ₹28.54/₹114.14, cache $0.003/$0.006; architecture 552B MoE CED, KV-compression.
-> - **GPT-6 Astra / Astra Pro** enriched: DeepSWE v1.1 74.1%, Critical cyber threshold note, TB4.0 57.7% / OSWorld 72.6%.
-> - **Grok 4.7 delayed** (missed ~Sep 12); 4.8 ~2.5T new C++ stack in training → RL next.
-> - Frontend sync: `VERIFIED_AT`/`DATA_AS_OF` updated to Sep 15, `data.json` regenerated 268 models, Tracker tab fact-checked Sep 15 with Koa & Grok entries.
-
-> **Sep 2, 2026 Sync vs llm-releases.com (343 models Sep 2, 35 new/30d) + Anthropic Sep 1 + Meta/Google Sep 2:** **Split Qwen3.8-Flash (Available API, Proprietary $0.15/$0.47, 1M) vs Flash-Next (Preview weights, Qwen Com 1.0, 262K→1M)** — was conflated. **17 models added:** Parse 5 (Cohere 2.3B $1.50/1k pgs), Ling-3.0-flash-Fin (124B/5.1B finance free), Thomson (TR legal Preview), Hy-MT2-30B-A3B (MT), Dots3-Note Preview (280B/16B 512K), LFM2.5-VL-3B (3.1B edge), Nemotron 3.5 Lightning (31.6B/3.6B), Namazu (Sakana JP), Solar Pro 4 (524K), GPT-5.6-Cyber, **Fable 5.1/Mythos 5.1** (Sep 1, $10/$50 + $0.25 cache), **Qwen3.8-Max-0902** (Sep 2, TB3 29%/DeepSWE 69.3%), **Gemini 3.8 Flash** (Sep 2, 1M $0.75/$3.75 AA 59 pre-v4.3.2), **Muse Spark 1.3** (Sep 2, 1M $1.25/$4.25 — ⚠️ launch AA 61/62 superseded by v4.3 re-score **48**), **Mercury 2.5 Preview** (Aug 31 diffusion 260K $0.20/$0.75). GLM-5.2 Turbo reconciled. Added **§0 Methodology + §7 Changelog + Status** per `llm-releases.com/methodology`. See `ai_model_tracker_aug29_2026.md` §2 + §Gap-fill + `coding_benchmarks.csv:238-256`.
-
-> **Sep 1, 2026 Live Cross-Check Updates (historical — AA figures pre-v4.3.2):** GLM-5.3 weights released **Aug 27** (not Aug 28); HF license shows "other" — Reuters >$10B review gate **unconfirmed**. **Qwen3.8-27B AA Index = 52** independent. **MAI-Code-1-Flash is closed-weight API-only** — remove from local lists. Added models: Qwen3.8-Max (AA 58), Qwen3.8-Flash-Next, MiniMax M3, Kimi K2.7-Code, Laguna S 2.1, Muse Glimmer (AA 35), Ornith-1.5-397B, Apodex 1.1-mini. See `ai_model_tracker_aug29_2026.md` §2b and `single_user_india_local_ai.md` Post-Session Update.
+- Live site: https://sachindeepcleaning-coder.github.io/ai-tracker/
+- Run it: `cd frontend && npm install && npm run dev` (Node 22); production build `npm run build`, preview with `npm run preview`.
+- Data: edit `coding_benchmarks.csv`, then `cd frontend && npm run data` — regenerates `src/data.json` + `public/data.json` and refreshes the stats block above.
+- History: dated update logs moved to CHANGELOG.md; research notes live in `docs/`.
 
 **Docs in this folder:**
 - `local_ai_coding_models.md` — Full model tracker (60+ models) + verification + new-release log
@@ -38,87 +26,6 @@
 **Licenses:** code and site in this repo are MIT (`LICENSE`); the data compilation (`coding_benchmarks.csv` and derived `frontend/src/data.json`) is CC BY 4.0 (`DATA_LICENSE.md`) — credit this repo when reusing the data. Model weights, benchmarks and vendor figures keep their own licenses (see each row's `License/Type`).
 
 **Deploy note:** the site deploys from `master` via GitHub Actions (`.github/workflows/deploy.yml`, Pages source mode). The legacy `gh-pages` branch is no longer used and is safe to delete.
-
----
-
-## 🆕 Last Update — Sep 2, 2026 (synced to llm-releases.com 339) [HISTORICAL]
-
-> **Historical section (Aug 29–Sep 2, 2026).** Preserved for provenance — the CSV (now 299 rows, data as of Oct 5, 2026) is authoritative. Picks like "V4 Flash 0731 / V4 Pro 0813 as current" and AA scores here predate the v4.3.2 re-scores; do not mix versions.
-
-### Sep 2 Gap-fill vs llm-releases.com — 12 models + Fable 5.1 + taxonomy split 🆕
-
-**Synced to `llm-releases.com` catalog (Sep 2, 339 models, 35 new/30d, methodology `detection→extraction→validation→human review→audit log`) + Anthropic Sep 1.** Local was missing doc-VLM, MT, legal/cyber verticals and conflated Qwen twins. Now also **Sep 1 frontier Fable 5.1** added at §2 top.
-
-- **Split:** `Qwen3.8-Flash` (**Available / Proprietary, 1M, $0.15/$0.47/$0.016**) vs `Qwen3.8-Flash-Next` (**Preview / Qwen Community 1.0, 262K→1M, ~111 GB Q4**) — distinct rows `llm-releases.com/models/qwen3-8-flash` vs `...flash-next`. Local previously conflated as one entry `ai_model_tracker_aug29_2026.md:Qwen3.8-Flash-Next`.
-- **Added 17 models** (`ai_model_tracker_aug29_2026.md: §2 Fable 5.1/Qwen0902/Gemini/Muse/Mercury` + `§Gap-fill Sync`, `coding_benchmarks.csv:238-256`): **Fable 5.1/Mythos 5.1** (Sep 1, $10/$50 + **$0.25 cache** → ~25%/45% cheaper, TB-Science 52.6% 2×), **Qwen3.8-Max-0902** (Sep 2, TB3 29%/DeepSWE 69.3%), **Gemini 3.8 Flash** (Sep 2, 1M $0.75/$3.75 AA 59 pre-v4.3.2), **Muse Spark 1.3** (Sep 2, 1M $1.25/$4.25 ⚠️ AA 48 v4.3, not 61/62), **Mercury 2.5 Preview** (Aug 31 diffusion 260K $0.20/$0.75) + **Parse 5** (Cohere 2.3B $1.50/1k pgs), **Ling-3.0-flash-Fin** (124B/5.1B finance), **Thomson** (TR Preview), **Hy-MT2-30B-A3B** (MT), **Dots3-Note Preview** (280B/16B), **LFM2.5-VL-3B** (3.1B), **Nemotron 3.5 Lightning** (31.6B/3.6B SWE-V 51.56), **Namazu** ($0.95/$4), **Solar Pro 4** (524K), **GPT-5.6-Cyber**. `GLM-5.2 Turbo` reconciled as **Available API tier** $1.99/$6.16.
-- **Follow-up updates:** **Laguna S 2.1** detailed (118B/8B 262K 70.2% TB2.1 /40.4% DeepSWE, free `poolside/laguna-s-2.1:free`), **MAI-Thinking-1** promoted `Upcoming→Preview` (Aug 12, 962B/34.7B 52.8% SWE-Pro /46.0% TB2.0, Foundry — `csv:34`), **DeepSeek V4 Flash Vision** benchmarks filled (83.9/59.3/57.7, 1.05M — `csv:253`), **Muse Spark 1.2 date verified Aug 5** (not Aug 6), **dots3-note IMO 42/42 = internal harness branch**.
-- **Taxonomy:** Added `Status` (Available/Preview/Retired etc.) + `§0 Methodology` + `§7 Changelog` (append-only) aligned to `llm-releases.com/methodology` + `.../changelog`. All new cards carry `Source: llm-releases.com/models/<slug> → primary`.
-
-*Local differentiator retained:* India ₹ pricing + Q4/HW fit + tok/s + 5yr TCO + Scale-standardized deltas — not in llm-releases.com.
-
----
-
-## 🆕 Last Update — Aug 19-30, 2026 (verified) [HISTORICAL]
-
-> **Historical section (Aug 19–30, 2026).** Preserved for provenance — the CSV (now 299 rows, data as of Oct 5, 2026) is authoritative and supersedes picks and scores below.
-
-### Ornith-1.5 family — Aug 19, 2026 (MIT, HF leaderboard-listed) ⭐⭐
-**DeepReinforce / Ornith** (`ornith-ai` on HF) — three MIT-licensed open-weight variants, all 262K → ~1M YaRN. **3-stage self-improving RL:** task generation + scaffold + rollout jointly optimized via GRPO (extends Ornith-1.0's 2-stage). 397B base: `qwen3_5_moe` (Qwen3.5 MoE base). No public API — self-host only.
-
-| Variant | Q4 size | SWE-bench Verified | TB 2.1 (Terminus-2) | SWE-bench Pro | DeepSWE | Toolathlon |
-|---|---|---|---|---|---|---|
-| **Ornith-1.5-397B** 🆕 | ~244 GB | **86.0% #1 HF** | **86.1% #5 HF** | **65.1%** | **56.0%** | 71.2% |
-| **Ornith-1.5-35B-A3B** 🆕 | ~22 GB | **79.0%** | **67.8%** | **59.6%** | 22.0% | 48.7% |
-| **Ornith-1.5-9B** 🆕 | ~6 GB | **70.6%** | **46.2%** | **47.5%** | — | 41.2% |
-
-⚠️ Partial verification: HF leaderboard listings for 397B at #5 TB 2.1 (86.1) and #1 SWE-bench Verified (86.0) — but uploaded by an HF Staff member (not fully independent). 35B and 9B scores are purely self-reported. No LiveCodeBench. Generation leap: 397B TB 2.1 77.5→86.1, DeepSWE 8→56. `ornith.ai/ornith_1_5.html`
-
-### Alibaba Qwen3.8-Flash-Next — Aug 26 (Qwen4 architecture preview) ⭐⭐
-**Qwen4ExpForConditionalGeneration** (qwen4_exp) — experimental preview of Qwen4 architecture. **180B total** (125B main + 51B N-gram embedding + 4B MTP) / **~6B active**. **48 layers** in 12 blocks: 3× Gated DeltaNet (linear) + 1× QSA (full MQA attention, 2048-token budget) per block. **512 experts, 10 routed + 1 shared.** Multimodal (vision tower: 1152-hidden, 27-layer, 16 heads). **262K native → 1M YaRN.** `Qwen/Qwen3.8-Flash-Next` on HF + FP8/GGUF variants. **Qwen Community 1.0** (similar to Apache 2.0, attribution + revenue trigger for hosted MaaS). QwenCloud API: use **Qwen3.8-Flash** (productionized -Next) at **$0.15/$0.47 per Mtok** ($0.016 cached).
-
-**Vendor benchmarks (Claude Code harness):**
-
-| Benchmark | Flash-Next | Qwen3.8-27B | V4 Flash 0731 | Opus 4.6 Max |
-|-----------|:-----------:|:-----------:|:-----------:|:-----------:|
-| SWE-bench Pro | **62.5%** | 61.7% | 56.0% | 53.4% |
-| DeepSWE 1.1 | **58.7%** | 42.2% | 54.4% | — |
-| LiveCodeBench v6 | **91.9%** | 90.3% | 90.6% | 88.8% |
-| SWE Multilingual | **81.0%** | 73.8% | — | 77.5% |
-| Toolathlon Verified | **73.5%** | 67.1% | 70.3% | — |
-| GPQA Diamond | **91.7%** | 89.2% | 90.8% | 91.3% |
-
-~111 GB Q4_K_XL (Unsloth GGUF). **Needs 4×5090 (128GB) or 2×Pro 6000 (192GB) — 111 GB exceeds a single 96GB card (offload only there), and exceeds 3×5090 (96GB).** No Scale/AA/BenchLM independent verification yet. **Highest-priority new addition** to router MVP.
-
-### Apodex 1.1-mini — Aug 24, 2026 (Apache 2.0, open weights)
-**Apodex AI** (Tianqiao Chen) released open-weight **35B-A3B mini** built on Qwen3.5-35B-A3B with **PIVOT-RL** training. 397B flagship is closed (API-only on platform.apodex.ai, free during campaign). **Apache 2.0** weights: `apodex/Apodex-1.1-mini` on HF + FP8/NVFP4/GPTQ-Int4 quants.
-
-Self-reported benchmarks: SWE-bench Verified **77.7%**, Terminal-Bench 2.1 **70.8%**, APEX-Agents Agent Team 27.7 (vs 1.0's 15.4), GDPVal 70.7. ⚠️ **No independent verification** — all numbers self-reported; even competitor benchmarks are Apodex's own internal reproductions.
-
-### Microsoft MAI-Code-1.1-Flash — Aug 11 (GitHub Copilot default)
-**138B total / 5B active** sparse MoE, **256K context**, multimodal (text+image → text). Deployed as **GitHub Copilot default small model** replacing 1.0. 75% cheaper than MAI-Code-1-Flash. Open weights on `github.com/microsoft/MAI-Code` (no public HF). **SWE-bench Verified 72.6%, Terminal-Bench 2.1 62.9%** (+22% vs 1.0 on TB2.1) on same VS Code production harness. ~70 GB est. Q4. Per-model API pricing TBD; Copilot list: $0.20/$0.02/$1.20 per Mtok.
-
-### Cohere Labs North-Micro-Vision-Instruct — Aug 12 (2.4B VLM, Apache 2.0)
-**2.4B dense** = 400M SigLIP 2 vision encoder + 2B LM (Command A+ arch, 28L, GQA). **Apache 2.0**, ~5 GB BF16. **DocVQA 0.921** (top among compared models), **ChartQA 0.808**, RefCOCOavg 0.732. 128K LM context. Not a coding model — tracked for North family completeness alongside North-Mini-Code-1.0 (30B/3B MoE).
-
-### Tencent Hunyuan Hy4 preview — Aug 28 (Apache 2.0)
-**770B total / 49B active** MoE (78L: 1 dense +77 MoE, 256 routed +1 shared, top-8 active), Gated DSA, 1 native MTP (10B/0.7B), **1M+ ctx**, `tencent/Hy4-preview` + `Hy4-preview-FP8` on HF/ModelScope/GitCode/CNB. **Apache 2.0** (Hy3 was community license until July). API `TokenHub + OpenRouter` **$0.834 / $2.501 per Mtok** (¥6/¥18), free 2 wks on WorkBuddy/CodeBuddy/Yuanbao/ima.
-
-Vendor-reported (Tencent appendix, `benchlm.ai/models/hy4-preview`):
-- **Terminal-Bench 2.1 85.4%** — tie **Claude Opus 5 85.4%**, +14.6 vs Hy3 70.8, -2.8 vs GLM-5.3 88.2
-- **DeepSWE 64.3%** — **+36.3 vs Hy3 28.0** (generation leap)
-- **SWE-bench Pro 65.7%**, **SWE Multilingual 82.9%**, **Toolathlon-Verified 74.1%** (ahead Qwen3.8-Max, Sol), **APEX-Agents 37.1%** (~K3 37.2%)
-- Internal blind eval 163 experts ×203 tasks: **2.99/4.00** vs GLM-5.3 2.92 (46.8%/12.8%/40.4%) vs K3 2.94 (51.2%/7.9%/40.9%) — narrow wins, Tencent-run, not independent.
-
-Doubles Hy3 params (295B/21B 256K → 770B/49B 1M). ~385 GB at Q4 — needs 8×96 GB node, data-center class.
-
-### Z.ai GLM-5.3 — weights released Aug 28
-Launched Aug 14 as 743B/40B text-only flagship (TB2.1 88.2, DeepSWE 66.9, CyberGym 84.5, HLE 62.5, $1.40/$4.40) **API-only for 2-week safety review**. **Released Aug 28** `zai-org/GLM-5.3` — 141 shards **~756 GB** (FP8 alongside BF16), 256 routed /8 active, 1,048,576 max pos, vLLM/SGLang. **Custom Z.ai license** (not MIT): >$10B/12-mo group revenue → Z.ai security review before commercial use. Different from GLM-5.3-Flash MIT and GLM-5.2 MIT.
-
-### Z.ai GLM-5.3-Flash (= Ox Alpha) — Aug 26 (MIT, verified)
-**320B/18B** MoE (45L hybrid KDA linear + NoPE sparse MLA, 8/288 experts), **1,048,576 ctx** (131K out), **first natively multimodal GLM-5** (text+image+video in). **MIT** `zai-org/GLM-5.3-Flash`, **~306 GiB FP8** → 8-GPU Hopper min (~160 GB Q4). **$0.15/$0.50/$0.03 cached**, promo halves to **Sep 9**. **AA Index 57 (v4.1.1)** (= Opus 4.8 at the time; v4.3.2 re-scores Flash to 42 — do not mix index versions). Vendor TB2.1 84.3 / DeepSWE 63.4 / Automation 48.8. Ran 6 days as anonymous `stealth/ox-alpha` on OpenRouter/OpenCode, ~42T tokens, entirely on **Chinese-made AI chips** via custom SGLang (3× efficiency claim).
-
-### IBM Granite 4.2 — Aug 25 (Apache 2.0)
-Dense decoder-only reasoning LLMs with native CoT + multi-stage agentic RL: **3B** (40L/2560), **8B** (40L/4096), **30B** (64L/4096), GQA, RoPE theta 10M, SwiGLU, **131K base →512K** extended, BF16. 8B/30B trained for tool/code/terminal/web in sandboxes. All Apache 2.0, HF + quantized variants live.
 
 ---
 
@@ -241,70 +148,3 @@ Break-even **₹2,450/mo (top-10) → ₹10,200/mo (all-models Rubin)** per conc
 
 ---
 
-## Fact-Check Status (Aug 29-30)
-
-**Confirmed via live search Aug 29-30:**
-
-**Verified added this session:**
-- **Qwen3.8-Flash-Next** (Aug 26): HF `Qwen/Qwen3.8-Flash-Next` live (Aug 24 created, Aug 26 release), Qwen Community 1.0 license, benchmarks confirmed from HF model card. Self-reported: SWE Pro 62.5%, DeepSWE 58.7%, LCB 91.9%, Toolathlon 73.5%. Qwen3.8-Flash API at $0.15/$0.47 on QwenCloud (official pricing page). Unsloth GGUF ~111 GB Q4_K_XL.
-- **MAI-Code-1.1-Flash** (Aug 11): microsoft.ai model card + blog confirmed, SWE Verified 72.6%, TB2.1 62.9%. GitHub Copilot default since Aug 11. Pricing from Copilot docs: $0.20/$1.20 per Mtok. No public HF repo (only github.com/microsoft/MAI-Code).
-- **Ornith-1.5 family** (Aug 19, DeepReinforce AI): HF `ornith-ai/Ornith-1.5-{9B,35B-A3B,397B}` live, MIT license, all with Q4_K_M GGUF. 397B at **TB 2.1 #5 (86.1)** on harborframework leaderboard, **#1 (86.0)** on SWE-bench Verified leaderboard — partial third-party verification (HF Staff uploaded). Self-improving 3-stage RL. No public API.
-- **Apodex 1.1-mini** (Aug 24, Apodex AI / Tianqiao Chen): HF `apodex/Apodex-1.1-mini` live, Apache 2.0, Qwen3.5-35B-A3B base, PIVOT-RL training. Self-reported SWE Verified 77.7%, TB 2.1 70.8%. No independent verification. Free campaign on platform.apodex.ai.
-- **Ling 3.0 Flash Fin** (Aug 27, inclusionAI): API-only, finance-specialized, 124B/5.1B, free on OpenRouter. No weights on HF.
-- **North-Micro-Vision-Instruct** (Aug 12): HF `CohereLabs/North-Micro-Vision-Instruct` confirmed, Apache 2.0, ~4.99 GB BF16, DocVQA 0.921, ChartQA 0.808.
-- **GLM-5.2 Turbo**: **UNCONFIRMED** — single TechPillow blog post only. No Z.ai primary source (HF, docs.z.ai, pricing page) confirms this model. Benchmarks cited (TB 81.0, SWE Pro 62.1) match GLM-5.2 base scores. **Not added to any table.**
-
-**Minor date corrections:**
-- DeepSeek V4 Flash Vision: **Aug 21 not Aug 24** (LLM Gateway: released Aug 21, added Aug 27)
-- Grok 4.6 release: **Aug 6 not Aug 12** (LLM Gateway: released Aug 6, added Aug 12)
-
-**Held from prior:** GLM-5.3-Flash MIT confirmed (HF zai-org/GLM-5.3-Flash Aug 25), Sol $4/$20 ≥Nov 21 (OpenAI docs, Reuters), DeepSeek peak/off-peak (api-docs.deepseek.com), Gemini $0.75→$1.50 Jan 1 2027 (blog.google), Jalapeño 700W/216GiB (openai.com), Apple M6 ships Sep 22 (apple.com/newsroom), Rubin/Helios specs (nvidia.com/amd.com).
-
-*Sources: `Qwen/Qwen3.8-Flash-Next` HF, `Qwen/Qwen3.8-Flash-Next-GGUF` Unsloth, `qwencloud.com/models/qwen3.8-flash` pricing, `microsoft.ai/pdf/MAI-Code-1.1-Flash-Model-Card.PDF`, `microsoft.ai/news/mai-code-1-1-flash-br-better-faster-at-a-quarter-of-the-cost/`, `github.com/microsoft/MAI-Code`, `CohereLabs/North-Micro-Vision-Instruct` HF, `ornith.ai/ornith_1_5.html`, `ornith-ai/Ornith-1.5-397B` HF, `huggingface.co/datasets/harborframework/terminal-bench-2.1` (Ornith 397B #5), `huggingface.co/datasets/SWE-bench/SWE-bench_Verified` (Ornith 397B #1), `apodex/Apodex-1.1-mini` HF, `www.apodex.com/blog/apodex-1-1-scaling-agentic-intelligence-for-complex-work`, `arxiv.org/abs/2608.23283`, `platform.apodex.ai/docs/pricing`, `techpillow.co/blog/zai-glm-52-turbo` (sole Turbo source, NOT confirmed).*
-
-*Generated: Aug 29-30, 2026. All figures are planning estimates, not vendor quotes.*
-
----
-
-## Chat Summary — Sep 26, 2026 (Best Open Coding + V4.1 HW Sizing)
-
-### 1. Best open-source coding (catalog 279, 159 open)
-- Highest TB: DeepSeek V4.1 Flash MIT TB 90.6 / DeepSWE 74.2
-- Best verified MIT: Ornith-1.5-397B TB 86.1 / SWE-V 86.0 (#1 HF) / SWE-Pro 65.1 — 5-run Harbor+OpenHands
-- Best Apache 2.0: Tencent Hy4 770B/49B TB 85.4 / DeepSWE 64.3 / SWE-Pro 65.7
-- Best AA composite: MiMo-V2.6-Pro MIT 1.02T/42B AA 46 (v4.3.2) #1 open, TB 89.9 / DeepSWE 71.9
-- Practical: Qwen3.8-27B Apache 14GB Q4 TB 73 / LCB 90.3 (1x5090); Flash-Next 111GB LCB 91.9; GLM-5.3-Flash MIT 160GB TB 84.3, AA 42 v4.3.2 (was 57 v4.1.1)
-
-### 2. Online verification
-- Ornith: ornith.ai/ornith_1_5.html + huggingface.co/ornith-ai/Ornith-1.5-397B — beats GLM-5.2/V4-Flash-0731, par Opus 4.8
-- Hy4: tencent.com Aug 28 + huggingface.co/tencent/Hy4-preview — Apache 2.0 confirmed
-- MiMo: artificialanalysis.ai/models/mimo-v2-6-pro AA 46 (v4.3.2) + mimo.mi.com Sep 21 + VentureBeat Sep 22 + Raschka Sep 22
-- V4.1: huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash Sep 10 MIT 552B CED 8B/16B 1M; TB 90.6 / DeepSWE 74.2 mini-SWE (commit fb2764a); API $0.15/$0.60 off-peak
-
-### 3. Hard new benchmarks (vendor unless AA/Scale)
-- DeepSWE v1.1 indep Oct 2: Spark 1.3 75.4 closed #1, GPT-6.1 Sol 75.22 #2, V4.1-Flash 74.2 tied #3/#1 open, Kimi K3 69.0; Spark speed live 151.6 (was 236.8 launch)
-- TB2.1 indep llm-stats: V4.1-Flash 0.906 #1 overall/open; AA top closed Fable 5.1 91.4
-- TB4.0 AA harder: Opus 5.5/Astra 59.6 closed; best open GLM-5.3 41.9 (#19), Qwen-Max-0902 38.9, MiMo-Pro 34.9(v), V4-Flash 12.1
-- SWE-Pro vendor agg Sep 23: Qwen-Max 67.7 (#5), Hy4 65.7 (#6 best Apache), Ornith 65.1, Flash-Next 62.5; Scale std: open 38.7 vs closed 59.1
-
-### 4. All open @FP16 1M — which machine?
-- 159 open ~46.3T params = 92.6TB FP16 + 3-5TB KV = ~98TB
-- One-at-a-time: B300 2.1TB fails giants (K3 5.6TB, Max 4.8TB); 1x Rubin 20.7TB / Helios 31TB YES any single
-- All-at-once: 5x Rubin (103TB) or 4x Helios (124TB); old 3-rack math was 69 models
-
-### 5. B300 11.7Cr (5.7Cr upfront) @FP16/@FP8?
-- FP16: all Q4 yes, FP16 only ~144/159 (fails 15x 1T+); max ~1152B per vera_rubin_all_models.md:421
-- FP8: 157/159 fit (fails K3 2.86TB, Max 2.46TB); 1.6T 1.66TB YES
-- 288GB = 1x B300, 2.1TB = 8x + NVSwitch (2304GB raw minus overhead)
-
-### 6. tok/s B300 single-user batch=1
-- 3B/262K 300-500; 13-18B/1M 40-80 (80-150 short); 40-50B/1M 30-60 Q4; 95-104B/1M 15-30 Q4
-- V4.1-FP8 @1M: ~100-180 decode, 1M prefill 60-120s; vendor API 333-400 short-ctx batched, AA 232-243, LithosAI 564-660 optimized
-
-### 7. Cheapest V4.1 8-bit (511GB disk, 614GB VRAM min = x1.2)
-- Full resident: 8x Pro 6000 768GB ~3.4-4Cr (cheapest proper) vs 8xH200/GB200 tray
-- Offload: 314GB VRAM + 196GB RAM or 307GB + NVMe
-- Boot only: 128GB Mac + DwarfStar Q2 340GB SSD-stream single-digit
-- 4x Spark 512GB <614GB no; 1x Mac 512GB no stock runner; 6x Spark 768GB yes ~20-40 short; 2x Mac 1TB memory yes but no vLLM/RDMA practical
-- M5 Ultra 512GB: 36CPU/80GPU, 1.2TB/s (+50% vs M3U), late Oct >$10k; DwarfStar Q2/Q4 yes, official FP8 no, llama.cpp #28696 draft + Ollama cloud-only; roof 75 tok/s, real 10-20 resident
-- 2x M5 Ultra 1TB: fits Q4 resident TP via DwarfStar RDMA, ~20-40 est
