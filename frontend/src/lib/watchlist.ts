@@ -8,7 +8,7 @@
  * - rumored:   reports, exec comments, leaks — unconfirmed
  *
  * Rumors stay labeled until a primary source or public release confirms them.
- * Source: ai_model_tracker_aug29_2026.md §1 CONFIRMED UPCOMING + §6 WATCH LIST.
+ * Source: docs/ai_model_tracker_aug29_2026.md §1 CONFIRMED UPCOMING + §6 WATCH LIST.
  */
 
 export type WatchStatus = 'announced' | 'preview' | 'restricted' | 'rumored'

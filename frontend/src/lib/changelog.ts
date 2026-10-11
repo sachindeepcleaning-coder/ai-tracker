@@ -3,7 +3,7 @@
  *
  * A single append-only feed of releases, updates, deprecations, and
  * retractions. Each item links back to its catalog rank where applicable.
- * Source: CHANGELOG.md + ai_model_tracker_aug29_2026.md §7 audit log.
+ * Source: CHANGELOG.md + docs/ai_model_tracker_aug29_2026.md §7 audit log.
  */
 
 export type ChangeType =
