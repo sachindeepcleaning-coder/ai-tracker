@@ -52,7 +52,7 @@ export default function HardwareFit({ hwModels }: { hwModels: Model[] }) {
             </button>
           ))}
         </div>
-        <div className="overflow-auto mt-4 max-h-[70vh]">
+        <div className="overflow-auto mt-4 max-h-[70vh]" tabIndex={0} role="region" aria-label="Hardware fit matrix (scrollable)">
           <table className="w-full text-xs">
             <thead className="sticky top-0 z-10 bg-[var(--bg-card)]">
               <tr className="border-b border-white/10">

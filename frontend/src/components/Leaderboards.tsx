@@ -25,7 +25,7 @@ export default function Leaderboards({ leaderboards }: { leaderboards: Record<st
     <div className="space-y-4">
       <div className="card p-4">
         <div className="flex items-center gap-2 flex-wrap">
-          <h3 className="font-bold flex items-center gap-2"><ScatterIcon size={16} className="text-violet-400" aria-hidden="true" /> Value frontier (analytics)</h3>
+          <h2 className="font-bold flex items-center gap-2 text-base"><ScatterIcon size={16} className="text-violet-400" aria-hidden="true" /> Value frontier (analytics)</h2>
           <div className="ml-auto flex gap-1">
             {SCATTER_METRICS.map((s) => (
               <button

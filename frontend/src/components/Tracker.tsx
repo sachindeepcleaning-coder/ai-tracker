@@ -124,7 +124,7 @@ function ChangelogView({ onOpenModel }: { onOpenModel?: (rankId: string) => void
               return (
                 <li key={item.id} className="card p-4">
                   <div className="flex items-start gap-3">
-                    <span className="text-xs font-mono text-white/30 mt-1 w-6 shrink-0" aria-hidden="true">{idx + 1}.</span>
+                    <span className="text-xs font-mono text-white/60 mt-1 w-6 shrink-0" aria-hidden="true">{idx + 1}.</span>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-xs font-mono bg-black/20 border border-white/10 rounded-full px-2 py-0.5" title={timeAgo(item.date)}>
@@ -420,8 +420,9 @@ export default function Tracker({ onOpenModel }: { onOpenModel?: (rankId: string
             </button>
           )
         })}
-        <span className="ml-auto text-xs text-white/70">All scores vendor-reported unless AA / Scale / BenchLM · changelog/rumor views mirror <a href="https://llm-releases.com/changelog" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/90">llm-releases.com</a></span>
+        <span className="ml-auto text-xs text-white/70">All scores vendor-reported unless AA / Scale / BenchLM</span>
       </div>
+      <p className="text-xs text-white/70">Changelog/rumor views mirror <a href="https://llm-releases.com/changelog" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/90">llm-releases.com</a> — thanks for the format.</p>
 
       {view === 'changelog' && <ChangelogView onOpenModel={onOpenModel} />}
       {view === 'rumors' && <RumorsView />}
