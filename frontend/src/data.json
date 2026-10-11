@@ -11767,7 +11767,7 @@
       "last_verified": "2026-10-07",
       "source": "secondary",
       "confidence": "low",
-      "notes": "GLM 5.3 Fast listed Oct 7 on llmgateway timeline only; no dedicated model page or price found Oct 8 — thin row, needs primary confirmation",
+      "notes": "UNVERIFIED: no primary Z.AI page found (checked docs.z.ai model list + HF zai-org Oct 11: repos are GLM-5.3, GLM-5.3-Flash (+BF16 variants) — no Fast or FlashX variant, so no confirmed mapping; row kept from llmgateway timeline Oct 7 listing only)",
       "is_orchestrator": false,
       "slug": "z-ai-glm-5-3-fast",
       "hf_url": null,
