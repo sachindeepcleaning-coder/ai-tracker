@@ -28,12 +28,17 @@ function siteMetaPlugin() {
       const d = new Date(asOf + 'T00:00:00Z')
       const monthYear = d.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })
       const full = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+      // Recheck line — MUST match parse.recheckLine() exactly (same date
+      // format, same words); scripts/__tests__/recheck-agreement.test.ts fails
+      // the build if dist meta and the UI helper ever disagree.
+      const recheckLine = `Data as of ${full} · ${meta.rechecked_count ?? 0} of ${count} rows re-checked against primary sources that day`
       const out = html
         .replaceAll('%MODEL_COUNT%', String(count))
         .replaceAll('%DATA_MONTH_YEAR%', monthYear)
         .replaceAll('%DATA_AS_OF_FULL%', full)
+        .replaceAll('%RECHECK_LINE%', recheckLine)
         .replaceAll('%FX_RATE%', `₹${fx.fx_usd_inr}`)
-      if (/%MODEL_COUNT%|%DATA_MONTH_YEAR%|%DATA_AS_OF_FULL%|%FX_RATE%/.test(out)) {
+      if (/%MODEL_COUNT%|%DATA_MONTH_YEAR%|%DATA_AS_OF_FULL%|%FX_RATE%|%RECHECK_LINE%/.test(out)) {
         throw new Error('site-meta: unreplaced placeholder in index.html')
       }
       return out

@@ -60,7 +60,7 @@ export function ingestCatalogPayload(payload: unknown): void {
   mark('catalog:validate-end')
   measure('catalog:validate', 'catalog:validate-start', 'catalog:validate-end')
   const p = payload as { all_coding_models: Model[]; model_count?: number; data_as_of?: string; data_regen_at?: string }
-  setDataAnchor(p.data_as_of ?? '')
+  setDataAnchor(p.data_as_of ?? '', p.all_coding_models.filter((m) => m.last_verified === p.data_as_of).length, p.all_coding_models.length)
   mark('catalog:derived-start')
   allModels = [...p.all_coding_models]
   catalogMeta = {

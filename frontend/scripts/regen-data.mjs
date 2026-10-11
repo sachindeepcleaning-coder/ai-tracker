@@ -398,7 +398,8 @@ const today = new Date().toISOString().slice(0,10)
 const verifiedDates = out.map((m) => m.last_verified).filter((d) => d && /^\d{4}-\d{2}-\d{2}$/.test(d)).sort()
 const dataAsOf = verifiedDates[verifiedDates.length - 1] ?? null
 const { data_version: _dropped, conversation_summary: _archived, ...rest } = existing // legacy keys retired (TASK 3 + audit: notes live in docs/data-notes-archive.md)
-const payload = { ...rest, data_regen_at: today, model_count: out.length, data_as_of: dataAsOf, all_coding_models: out }
+const rechecked = out.filter((m) => m.last_verified === dataAsOf).length
+const payload = { ...rest, data_regen_at: today, model_count: out.length, data_as_of: dataAsOf, rechecked_count: rechecked, all_coding_models: out }
 writeFileSync(OUT_PATH, JSON.stringify(payload, null, 2) + '\n')
 // sw-version.js: build-id cache name for the service worker. Busting the
 // cache name on every data rebuild guarantees a fresh deploy can never serve

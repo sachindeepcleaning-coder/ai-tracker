@@ -173,6 +173,11 @@ describe('data.json integrity (regen gate)', () => {
     expect(INR_PER_USD, 'parse INR_PER_USD must come from fx.json').toBe(FX_RATE)
   })
 
+  it('rechecked_count equals rows with last_verified == data_as_of', () => {
+    const expected = models.filter((m) => m.last_verified === data.data_as_of).length
+    expect((data as { rechecked_count?: unknown }).rechecked_count).toBe(expected)
+  })
+
   it('INR cells equal USD x fx_usd_inr from scripts/fx.json', () => {
     expect(typeof FX_RATE === 'number' && FX_RATE > 0, 'fx.json fx_usd_inr must be a positive number').toBe(true)
     for (const m of models) {

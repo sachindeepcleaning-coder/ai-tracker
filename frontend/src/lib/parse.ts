@@ -27,6 +27,7 @@ export interface CatalogPayload {
   model_count?: number
   data_as_of?: string
   data_regen_at?: string
+  rechecked_count?: number
 }
 
 const REQUIRED_ROW_STRINGS = ['id', 'slug', 'rank', 'model', 'provider', 'license'] as const
@@ -54,14 +55,28 @@ export function assertCatalogPayload(raw: unknown): asserts raw is CatalogPayloa
 
 /** Set by useModels after the catalog loads (or test-setup in tests). Throws
     on a missing/invalid anchor — parse must never run dateless. */
-export function setDataAnchor(iso: string) {
+export function setDataAnchor(iso: string, rechecked = 0, total = 0) {
   if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) {
     throw new Error('parse: data_as_of is missing or invalid — run `npm run data`')
   }
   DATA_AS_OF = iso
   VERIFIED_AT = fmtDateFull(iso) as string
+  RECHECKED_COUNT = rechecked
+  RECHECKED_TOTAL = total
   const [y, mo] = iso.split('-').map(Number)
   RELEASE_MONTH_END = new Date(Date.UTC(y, mo, 0)).toISOString().slice(0, 10)
+}
+
+/** Rows re-checked (last_verified == data_as_of) vs catalog size — drives the
+    honest date line. Set alongside the anchor; 0/0 before the catalog loads. */
+export let RECHECKED_COUNT = 0
+export let RECHECKED_TOTAL = 0
+
+/** Single definition of the date line, used by header/footer/meta alike so
+    the wordings cannot disagree: catalog date + how many rows were actually
+    re-checked that day. Never "fact-checked <date>" for the whole catalog. */
+export function recheckLine(): string {
+  return `Data as of ${fmtDateFull(DATA_AS_OF)} · ${RECHECKED_COUNT} of ${RECHECKED_TOTAL} rows re-checked against primary sources that day`
 }
 
 /** A "real recent" release date: valid ISO YYYY-MM-DD, not future relative to

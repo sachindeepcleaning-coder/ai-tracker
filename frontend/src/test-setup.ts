@@ -19,4 +19,7 @@ if (typeof (globalThis as Record<string, unknown>).ResizeObserver === 'undefined
 // the anchor from the fetched public/data.json via useModels).
 import catalog from './data.json'
 import { setDataAnchor } from './lib/parse'
-setDataAnchor((catalog as { data_as_of: string }).data_as_of)
+{
+  const c = catalog as { data_as_of: string; all_coding_models: { last_verified: string | null }[] }
+  setDataAnchor(c.data_as_of, c.all_coding_models.filter((m) => m.last_verified === c.data_as_of).length, c.all_coding_models.length)
+}

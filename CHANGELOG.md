@@ -1,5 +1,9 @@
 # Changelog — coding_benchmarks.csv
 
+## Oct 11, 2026 — Honest date line ("Data as of" + re-checked counts)
+- Header/footer/meta no longer claim the whole catalog was fact-checked on the newest date. Single wording from parse.recheckLine(), computed from the data: "Data as of Oct 11, 2026 · 8 of 302 rows re-checked against primary sources that day".
+- data.json gains rechecked_count (rows with last_verified == data_as_of); site-meta plugin injects the same line into title/meta/og at build time; agreement test fails the build if UI and meta disagree.
+
 ## Oct 8, 2026 — Haiku 5.5 + Mistral Large 4 + GLM 5.3 Fast (ranks 300-302)
 - Added Claude Haiku 5.5 (rank 300) — Anthropic GA Oct 7; $0.10/$0.50, 1M; fastest Claude tier
 - Added Mistral Large 4 (rank 301) — Mistral GA Oct 6; API-only half-price preview $0.68/$2.09, 524K, ~1.05T reported; AA 38.4/HLE 35/LCR 81.3/SciCode 54.2 indep; weights promised end-Oct
