@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
-import { Zap, Database, Award, Layers, Cpu, Calendar } from 'lucide-react'
+import { Zap, Database, Award, Layers, Cpu, Calendar, ShieldCheck } from 'lucide-react'
 import Header from './components/Header'
 import Explorer from './components/Explorer'
 import ErrorBoundary from './components/ErrorBoundary'
@@ -135,10 +135,11 @@ export default function App() {
       {ready && (
       <>
       {/* KPI strip */}
-      <section aria-label="Catalog summary" className="max-w-[1400px] mx-auto px-4 md:px-6 py-4 grid grid-cols-2 md:grid-cols-6 gap-3">
+      <section aria-label="Catalog summary" className="max-w-[1400px] mx-auto px-4 md:px-6 py-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3">
         {[
           { k: 'Total models', v: stats.total, s: `CSV 1-${stats.total ?? 0} · data as of ${fmtDateFull(DATA_AS_OF)} · site built ${catalogMeta.data_regen_at ?? DATA_AS_OF} · fact-checked ${VERIFIED_AT}`, icon: Database },
           { k: 'Open-weight', v: stats.open, s: `${Math.round((stats.open / stats.total) * 100)}% open`, icon: Layers },
+          { k: 'Verified source', v: stats.total ? `${Math.round((stats.verifiedSrc / stats.total) * 100)}%` : '—', s: `${stats.verifiedSrc} of ${stats.total} from vendor / Hugging Face / Artificial Analysis`, icon: ShieldCheck },
           { k: 'With SWE-V', v: stats.withSWE, s: 'have SWE-bench Verified', icon: Award },
           { k: 'With Q4 size', v: stats.withQ4, s: 'have Q4 VRAM', icon: Cpu },
           { k: 'With release date', v: stats.dated, s: `${Math.round((stats.dated / stats.total) * 100)}% of catalog`, icon: Calendar },

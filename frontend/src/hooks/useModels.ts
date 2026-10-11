@@ -273,7 +273,10 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
     // Valid releases only (isValidRelease): future/invalid dates never inflate
     // the coverage KPI or leak into "latest" windows — matches 'dated' filter.
     const dated = models.filter((m) => isValidRelease(m.released)).length
-    return { total: models.length, open, closed: models.length - open, withSWE, withQ4, dated }
+    // Verified-source coverage: vendor, Hugging Face, or Artificial Analysis.
+    // Counted from the data (never hardcoded) for the overview KPI.
+    const verifiedSrc = models.filter((m) => ['vendor', 'huggingface', 'artificial-analysis'].includes((m.source || '').toLowerCase())).length
+    return { total: models.length, open, closed: models.length - open, withSWE, withQ4, dated, verifiedSrc }
   }, [models])
 
   const filtered = useMemo(() => {
