@@ -164,9 +164,11 @@ const colIdx = header.map((h) => HEADER_MAP[h.trim()])
 }
 
 // Curated fields from the current data.json, keyed by slug (no rank fallback).
+// conversation_summary is NOT carried forward: scratch notes live in
+// docs/data-notes-archive.md; the published payload holds all_coding_models only.
 const existing = existsSync(OUT_PATH)
   ? JSON.parse(readFileSync(OUT_PATH, 'utf8'))
-  : { conversation_summary: null, all_coding_models: [] }
+  : { all_coding_models: [] }
 const curated = new Map(existing.all_coding_models.map((m) => [m.id, m]))
 if (existsSync(OUT_PATH) && existing.all_coding_models.length === 0) {
   console.error(`regen-data: refusing to run — ${OUT_PATH} exists but has no model rows; a wipe would destroy all curation`)
@@ -395,7 +397,7 @@ const out = rows.slice(1)
 const today = new Date().toISOString().slice(0,10)
 const verifiedDates = out.map((m) => m.last_verified).filter((d) => d && /^\d{4}-\d{2}-\d{2}$/.test(d)).sort()
 const dataAsOf = verifiedDates[verifiedDates.length - 1] ?? null
-const { data_version: _dropped, ...rest } = existing // legacy key retired (TASK 3)
+const { data_version: _dropped, conversation_summary: _archived, ...rest } = existing // legacy keys retired (TASK 3 + audit: notes live in docs/data-notes-archive.md)
 const payload = { ...rest, data_regen_at: today, model_count: out.length, data_as_of: dataAsOf, all_coding_models: out }
 writeFileSync(OUT_PATH, JSON.stringify(payload, null, 2) + '\n')
 // sw-version.js: build-id cache name for the service worker. Busting the
