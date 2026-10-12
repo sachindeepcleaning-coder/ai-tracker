@@ -11,7 +11,7 @@ const BENCH_KEYS = [
 
 /** A notes reference counts as primary-source (vendor docs, HF/GitHub repos),
     with or without an https:// scheme. */
-const PRIMARY_URL = /(https?:\/\/)?(huggingface\.co|github\.com|anthropic\.com|openai\.com|mistral\.ai|docs\.|blog\.google|z\.ai|deepseek\.com|cognition\.ai|artificialanalysis\.com|cohere\.com|microsoft\.ai|tencent\.com|x\.ai|google\.com|nvidia\.com|amd\.com|apple\.com)/i
+const PRIMARY_URL = /(https?:\/\/)?(huggingface\.co|github\.com|anthropic\.com|openai\.com|mistral\.ai|docs\.|blog\.google|z\.ai|deepseek\.com|cognition\.ai|artificialanalysis\.(com|ai)|cohere\.com|microsoft\.ai|tencent\.com|x\.ai|google\.com|nvidia\.com|amd\.com|apple\.com|about\.fb\.com|research\.meta\.ai)/i
 
 function hasBench(m: Model): boolean {
   return BENCH_KEYS.some((k) => {
