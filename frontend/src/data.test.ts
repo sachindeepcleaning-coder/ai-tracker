@@ -72,7 +72,10 @@ describe('data.json integrity (regen gate)', () => {
   it('no invalid or future release dates (latest-sort regression gate)', () => {
     // Guards the "Latest release" sort: invalid days (e.g. 2026-10-66) and
     // future dates past the as-of month (e.g. 2026-12-31 pricing prose) must
-    // never sit in `released` — they belong as nulls.
+    // never sit in `released` — they belong as nulls. The ceiling is the end
+    // of the data_as_of month, not a hardcoded date.
+    const [ay, amo] = (data.data_as_of as string).split('-').map(Number)
+    const monthEnd = new Date(Date.UTC(ay, amo, 0)).toISOString().slice(0, 10)
     for (const m of models) {
       const r = m.released
       if (r == null) continue
@@ -83,13 +86,14 @@ describe('data.json integrity (regen gate)', () => {
       expect(mo, `${m.rank} ${m.model} month`).toBeLessThanOrEqual(12)
       expect(dy, `${m.rank} ${m.model} day`).toBeGreaterThanOrEqual(1)
       expect(dy, `${m.rank} ${m.model} day`).toBeLessThanOrEqual(31)
-      expect(r <= '2026-10-31', `${m.rank} ${m.model} released ${r} is future`).toBe(true)
+      expect(r <= monthEnd, `${m.rank} ${m.model} released ${r} is future`).toBe(true)
     }
-    // The real September releases stay at the top of a valid-date sort.
+    // The newest real releases stay at the top of a valid-date sort
+    // (Muse Wonder pair, Oct 12 — update when a newer release is added).
     const top = [...models]
       .filter((m) => m.released)
       .sort((a, b) => (b.released ?? '').localeCompare(a.released ?? ''))[0]!.released
-    expect(top).toBe('2026-10-07')
+    expect(top).toBe('2026-10-12')
   })
 
   it('verification freshness: at most 50% of rows older than 30 days vs data_as_of', () => {
