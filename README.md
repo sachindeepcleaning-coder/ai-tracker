@@ -1,7 +1,7 @@
 <!-- STATS:START -->
 # AI Knowledge Base — India Local & Private AI (Verified Oct 13, 2026)
 
-**Scope:** Open-weight coding models for local/private deployment in India — models, benchmarks, pricing, hardware, and cost to serve. **309 models** (CSV ranks 1-309, single source of truth), **180 open-weight**, **198 with release dates — data as of **Oct 13, 2026**. All file prices use **₹95.12/USD** (standardized Aug 14, 2026). All benchmark scores are **vendor-reported** unless marked `AA` / `Scale` / `BenchLM` independent. **Last Update: Oct 13, 2026.**
+**Scope:** Open-weight coding models for local/private deployment in India — models, benchmarks, pricing, hardware, and cost to serve. **312 models** (CSV ranks 1-312, single source of truth), **181 open-weight**, **201 with release dates — data as of **Oct 13, 2026**. All file prices use **₹95.12/USD** (standardized Aug 14, 2026). All benchmark scores are **vendor-reported** unless marked `AA` / `Scale` / `BenchLM` independent. **Last Update: Oct 13, 2026.**
 <!-- STATS:END -->
 
 **ai-tracker** — open-weight coding-model catalog for local/private deployment in India: benchmarks, Q4 VRAM, ₹ pricing, and hardware fit. **302 models** (CSV ranks 1-302; the stats block above is authoritative), last fact-checked **Oct 8, 2026**.
