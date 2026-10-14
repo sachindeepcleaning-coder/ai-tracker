@@ -16,6 +16,22 @@ interface DetailModalProps {
 
 export default function DetailModal({ detail, onClose, onToggleCompare, inCompare }: DetailModalProps) {
   const panelRef = useRef<HTMLDivElement>(null)
+  // A wall of dashes looks broken: when no benchmark exists at all, show one
+  // honest empty-state instead of eleven empty cells.
+  const benches: [string, string | null][] = [
+    ['SWE-V', detail.swe_bench_verified],
+    ['SWE-Pro', detail.swe_bench_pro],
+    ['LCB V6', detail.livecodebench_v6],
+    ['TB 2.1', detail.terminal_bench],
+    ['HumanEval', detail.humaneval],
+    ['MMLU-Pro', detail.mmlu_pro],
+    ['GPQA-D', detail.gpqa_diamond],
+    ['HLE', detail.hle],
+    ['MATH', detail.math],
+    ['AIME 2026', detail.aime_2026],
+    ['ARC-AGI-2', detail.arc_agi_2],
+  ]
+  const hasAnyBench = benches.some(([, v]) => v != null && v !== '')
 
   useEffect(() => {
     const panel = panelRef.current
@@ -85,26 +101,20 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4">
-          {[
-            ['SWE-V', detail.swe_bench_verified],
-            ['SWE-Pro', detail.swe_bench_pro],
-            ['LCB V6', detail.livecodebench_v6],
-            ['TB 2.1', detail.terminal_bench],
-            ['HumanEval', detail.humaneval],
-            ['MMLU-Pro', detail.mmlu_pro],
-            ['GPQA-D', detail.gpqa_diamond],
-            ['HLE', detail.hle],
-            ['MATH', detail.math],
-            ['AIME 2026', detail.aime_2026],
-            ['ARC-AGI-2', detail.arc_agi_2],
-          ].map(([k, v]) => (
-            <div key={k} className="bg-white/5 rounded-xl p-3 border border-white/5 text-center">
-              <div className="text-[11px] tracking-widest font-bold text-white/70">{k}</div>
-              <div className="font-bold">{v || '—'}</div>
-              {v && scoreSource(v) === 'vendor' && <div className="text-[9px] uppercase tracking-wide text-amber-400/80 mt-0.5">vendor-reported</div>}
-              {v && ['aa', 'scale', 'benchlm'].includes(scoreSource(v) ?? '') && <div className="text-[9px] uppercase tracking-wide text-sky-300/90 mt-0.5">independent</div>}
+          {hasAnyBench ? (
+            benches.map(([k, v]) => (
+              <div key={k} className="bg-white/5 rounded-xl p-3 border border-white/5 text-center">
+                <div className="text-[11px] tracking-widest font-bold text-white/70">{k}</div>
+                <div className="font-bold">{v || '—'}</div>
+                {v && scoreSource(v) === 'vendor' && <div className="text-[9px] uppercase tracking-wide text-amber-400/80 mt-0.5">vendor-reported</div>}
+                {v && ['aa', 'scale', 'benchlm'].includes(scoreSource(v) ?? '') && <div className="text-[9px] uppercase tracking-wide text-sky-300/90 mt-0.5">independent</div>}
+              </div>
+            ))
+          ) : (
+            <div className="col-span-full bg-white/5 rounded-xl p-3 border border-white/5 text-center text-sm text-white/70" data-testid="no-benches">
+              No benchmark scores published yet for this model.
             </div>
-          ))}
+          )}
         </div>
 
         <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
