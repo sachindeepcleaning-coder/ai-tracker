@@ -8,9 +8,11 @@ import data from '../../data.json'
 import type { Model } from '../../lib/types'
 
 const models = (data.all_coding_models || []) as Model[]
-const empty = models.find((m) => m.rank === '300')!
+const BENCH_KEYS = ['swe_bench_verified', 'swe_bench_pro', 'livecodebench_v6', 'terminal_bench',
+  'humaneval', 'mmlu_pro', 'gpqa_diamond', 'hle', 'math', 'aime_2026', 'arc_agi_2'] as const
+const empty = models.find((m) => BENCH_KEYS.every((k) => m[k] == null || m[k] === ''))!
 const scored = models.find((m) => m.rank === '303')!
-if (!empty || !scored) throw new Error('fixture rows 300/303 missing from data.json')
+if (!empty || !scored) throw new Error('fixture rows missing from data.json')
 if (scored.swe_bench_verified == null) throw new Error('row 303 should have bench values')
 
 function render(detail: Model): { container: HTMLDivElement; unmount: () => void } {
