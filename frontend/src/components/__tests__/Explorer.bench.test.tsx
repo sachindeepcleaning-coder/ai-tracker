@@ -101,4 +101,35 @@ describe('Explorer card — benchmark visibility', () => {
       expect(c.querySelectorAll('[data-testid="bench-cell"]').length).toBe(0)
     } finally { unmount() }
   })
+
+  // A RANGE cell ("76.4-85.0%") must be shown verbatim: parsing it as a
+  // number produced "-85.0%" (the regex took the second half as a negative).
+  it('shows a range value verbatim, never a truncated or negative number', () => {
+    const muse = allModels.find((m) => m.rank === '313')! // Muse Spark Open: TB 76.4-85.0%
+    expect(muse.terminal_bench).toMatch(/\d+(\.\d+)?-\d+(\.\d+)?%/)
+    const { container, unmount } = renderExplorer([muse])
+    try {
+      const c = card(container, 'Muse Spark Open')
+      const cells = [...c.querySelectorAll('[data-testid="bench-cell"]')]
+      const shown = cells.map((x) => (x.children[1]?.textContent ?? '').trim())
+      expect(shown).toContain(muse.terminal_bench!) // verbatim
+      // No cell may display a bare negative score.
+      for (const s of shown) expect(s, 'a cell shows a negative score').not.toMatch(/^-\d/)
+    } finally { unmount() }
+  })
+
+  // A cell that names a DIFFERENT benchmark than its column (a DeepSWE score
+  // filed under ARC-AGI-2) must show that name — without the "vendor"
+  // qualifier leaking into the label.
+  it('labels a cell by the benchmark it actually holds, without qualifiers', () => {
+    const flash = allModels.find((m) => m.rank === '256')! // DeepSeek V4.1 Flash
+    const arc = flash.arc_agi_2
+    expect(arc, 'fixture has a DeepSWE score in the ARC column').toMatch(/DeepSWE/)
+    const { container, unmount } = renderExplorer([flash])
+    try {
+      const c = card(container, 'DeepSeek V4.1 Flash')
+      expect(c.textContent).toContain('DeepSWE v1.1')
+      expect(c.textContent).not.toContain('DeepSWE v1.1 vendor')
+    } finally { unmount() }
+  })
 })

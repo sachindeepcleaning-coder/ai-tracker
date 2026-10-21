@@ -49,14 +49,26 @@ export interface ScoredBench {
  */
 const CELL_NAME = /\((DeepSWE[^)]*?|TB\s?2\.1|TB2\.1|GPQA-D|SciCode|LiveClaw|AutomationBench|FrontierCode[^)]*?|MMLU[^)]*?|AIME[^)]*?|HLE[^)]*?|SWE[^)]*?)\)/i
 
+/** Trailing qualifiers that describe the number, not the benchmark. */
+const QUALIFIER = /\s+(vendor|vendors|tools?|no tools|xhigh|max|high|medium|low|partial|offline subset|reported|self-reported)$/i
+
 function cellLabel(col: BenchColumn, value: string): string {
   const m = value.match(CELL_NAME)
-  return m ? m[1].trim() : col.label
+  return m ? m[1].replace(QUALIFIER, '').trim() : col.label
 }
 
+/**
+ * Percentage of a cell, or null when the cell is not a single percentage.
+ *
+ * Strict on purpose: a RANGE ("76.4-85.0%") or a prefixed label
+ * ("MATH-500: 96.8%") is not one number, and parsing it loosely produced
+ * "-85.0%" — a negative score on a card. Those cells are shown verbatim.
+ */
 function parseCellPct(value: string): number | null {
-  const m = value.match(/(-?\d+(?:\.\d+)?)\s*%/)
+  const m = value.match(/^\s*(\d+(?:\.\d+)?)\s*%/)
   if (!m) return null
+  // A second percentage later in the cell means this is a range, not one score.
+  if (/\d+(?:\.\d+)?\s*%/.test(value.slice(m[0].length))) return null
   const n = Number(m[1])
   return Number.isFinite(n) ? n : null
 }
