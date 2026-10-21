@@ -12,6 +12,7 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "data": "node scripts/regen-data.mjs && node ../scripts/readme-stats.mjs",
+    "drift": "node scripts/drift-check.mjs",
     "perf": "node scripts/perf-check.mjs"
   },
   "dependencies": {

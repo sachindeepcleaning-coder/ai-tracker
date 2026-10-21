@@ -72,7 +72,12 @@ jobs:
         run: npm run data
 
       - name: Drift gate (regen outputs must match committed files)
-        run: git diff --exit-code ../README.md src/data.json public/data.json public/sw-version.js public/sitemap.xml src/lib/fx.generated.ts
+        # Compares the regenerated files against HEAD, normalizing ONLY the
+        # build-date stamp (data_regen_at / sw cache name). The old raw
+        # `git diff --exit-code` failed on any day other than the commit day,
+        # because the stamp is a calendar value — the gate has to compare
+        # content, not the clock.
+        run: node scripts/drift-check.mjs
         working-directory: frontend
 
       - name: Lint

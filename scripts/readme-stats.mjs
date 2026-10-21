@@ -81,9 +81,11 @@ const d = new Date(asOf + 'T00:00:00Z')
 const full = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
 
 let dated = null
+let rechecked = null
 try {
   const dj = JSON.parse(readFileSync(DATA_PATH, 'utf8'))
   dated = dj.all_coding_models.filter((m) => m.released).length
+  rechecked = dj.rechecked_count ?? null
 } catch { /* data.json may not exist yet */ }
 
 // FX rate from the single config (scripts/fx.json); the STATS block never
@@ -112,6 +114,28 @@ if (si === -1 || ei === -1 || ei < si) {
 }
 writeFileSync(README_PATH, readme.slice(0, si + start.length) + '\n' + block + '\n' + readme.slice(ei))
 console.log(`readme-stats: ${total} models, ${open} open, dated ${dated}, as of ${asOf}`)
+
+// INTRO block: the one-paragraph summary under the STATS block. It used to be
+// hand-written and drifted (it still said "302 models ... fact-checked Oct 8"
+// long after the catalog passed 300 rows). Now derived from the same source as
+// the STATS block, with the recheck line worded EXACTLY like the site's
+// parse.recheckLine() so the two can be asserted equal in a test.
+{
+  const recheckLine = rechecked == null
+    ? `Data as of ${full}`
+    : `Data as of ${full} · ${rechecked} of ${total} rows re-checked against primary sources that day`
+  const intro = `**ai-tracker** — open-weight coding-model catalog for local/private deployment in India: benchmarks, Q4 VRAM, ₹ pricing, and hardware fit. **${total} models** (CSV ranks 1-${total}). ${recheckLine}.`
+  const readme2 = readFileSync(README_PATH, 'utf8')
+  const iStart = '<!-- INTRO:START -->'
+  const iEnd = '<!-- INTRO:END -->'
+  const isi = readme2.indexOf(iStart)
+  const iei = readme2.indexOf(iEnd)
+  if (isi === -1 || iei === -1 || iei < isi) {
+    console.error('readme-stats: INTRO markers not found in README.md')
+    process.exit(1)
+  }
+  writeFileSync(README_PATH, readme2.slice(0, isi + iStart.length) + '\n' + intro + '\n' + readme2.slice(iei))
+}
 
 // Frontend README count markers (same run, never stale): replaces the inner
 // text of <!-- MODELS:START -->…<!-- MODELS:END --> and
