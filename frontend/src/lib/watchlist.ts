@@ -91,21 +91,6 @@ export const WATCH_ITEMS: WatchItem[] = [
     source: { label: 'tencent.com Aug 28' },
   },
   {
-    id: 'muse-spark-open',
-    name: 'Muse Spark open weights',
-    provider: 'Meta',
-    country: 'US',
-    countryName: 'United States',
-    status: 'announced',
-    date: '2026-08-05',
-    access: 'Open (expected)',
-    context: '1M (expected)',
-    params: 'Undisclosed',
-    summary:
-      'Meta said an open-weights Muse Spark release is coming "soon" at the 1.2 launch (Aug 5). Oct 2 reporting adds a concrete plan: Muse Spark 1.2 weights to be released. If it lands, it would be the first open-weight model from Meta\'s flagship Muse line and its largest open release to date.',
-    source: { label: 'research.meta.ai Aug 5' },
-  },
-  {
     id: 'mistral-large-4-weights',
     name: 'Mistral Large 4 open weights',
     provider: 'Mistral AI',
@@ -118,21 +103,6 @@ export const WATCH_ITEMS: WatchItem[] = [
     params: '~1.05T (reported)',
     summary:
       'Large 4 GA Oct 6 as API-only at half-price preview ($0.68/$2.09); open weights promised by end of October (catalog rank 301). If it lands, it is the first open-weight flagship from Mistral since the 675B era.',
-    source: { label: 'aitoolsrecap Oct 8 (secondary)' },
-  },
-  {
-    id: 'reflection-beam-weights',
-    name: 'Reflection Beam 501B weights',
-    provider: 'Reflection AI',
-    country: 'US',
-    countryName: 'United States',
-    status: 'rumored',
-    date: '2026-10-08',
-    access: 'Open weights (expected)',
-    context: null,
-    params: '501B (reported)',
-    summary:
-      'Reflection AI announced 501B-parameter Beam with weights still outstanding (aitoolsrecap Oct 8 tracker). No repo, price, or date — watch for the weight drop.',
     source: { label: 'aitoolsrecap Oct 8 (secondary)' },
   },
   {

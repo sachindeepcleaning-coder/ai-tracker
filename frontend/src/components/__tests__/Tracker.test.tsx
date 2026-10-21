@@ -3,6 +3,7 @@ import * as React from 'react'
 import { createRoot } from 'react-dom/client'
 import { act } from 'react'
 import Tracker from '../Tracker.jsx'
+import { WATCH_ITEMS, watchCounts, WATCH_STATUS_META } from '../../lib/watchlist.js'
 
 function renderTracker(props: Record<string, unknown> = {}) {
   const container = document.createElement('div')
@@ -90,7 +91,10 @@ describe('Tracker — llm-releases-style views', () => {
       expect(text).toContain('Mythos 5.1')
       expect(text).toContain('Grok 4.8')
 
-      clickPill(container, 'Rumor · 17')
+      // The pill count comes from the watchlist itself: shipping a rumored
+      // model (its row lands in the catalog) must not break this test.
+      const rumorPill = `${WATCH_STATUS_META.rumored.label} · ${watchCounts(WATCH_ITEMS).rumored}`
+      clickPill(container, rumorPill)
       text = container.textContent
       expect(text).toContain('Grok 4.8')
       expect(text).not.toContain('Mythos 5.1')

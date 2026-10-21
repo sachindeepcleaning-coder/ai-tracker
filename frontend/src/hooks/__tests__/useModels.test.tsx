@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { renderHook } from './test-utils.jsx'
-import { useModels, compare, allModels, providers, licenseGroups, BENCHMARKS } from '../useModels.js'
+import { useModels, compare, allModels, providers, licenseGroups, BENCHMARKS, hasIndependentScore } from '../useModels.js'
 import type { ModelFilters } from '../useModels.js'
 import type { Model } from '../../lib/types'
 import { parsePct, parseQ4, isValidRelease } from '../../lib/parse.js'
@@ -28,10 +28,12 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
     expect(stats).toHaveProperty('primarySrc')
     expect(stats).toHaveProperty('indep')
     // Both KPIs are counted from the data, never hardcoded.
-    const expectedPrimary = allModels.filter((m) => ['vendor', 'huggingface', 'artificial-analysis'].includes((m.source || '').toLowerCase())).length
+    // 'aa' is the same org as 'artificial-analysis' — the CSV spells it both
+    // ways, and the KPI subtitle names Artificial Analysis.
+    const expectedPrimary = allModels.filter((m) => ['vendor', 'huggingface', 'artificial-analysis', 'aa'].includes((m.source || '').toLowerCase())).length
     expect(stats.primarySrc).toBe(expectedPrimary)
     expect(expectedPrimary).toBeGreaterThan(200)
-    const expectedIndep = allModels.filter((m) => /artificial-analysis|scale|benchlm|indep/i.test(`${m.notes ?? ''} ${m.source ?? ''}`)).length
+    const expectedIndep = allModels.filter((m) => hasIndependentScore(m)).length
     expect(stats.indep).toBe(expectedIndep)
     expect(stats).toHaveProperty('withQ4')
     expect(stats).not.toHaveProperty('avgQ4')
@@ -41,6 +43,33 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
     // dated counts valid releases only — future/invalid dates never inflate it
     expect(stats.dated).toBe(allModels.filter(m => isValidRelease(m.released)).length)
     expect(stats.withSWE).toBe(allModels.filter(m => parsePct(m.swe_bench_verified) != null).length)
+  })
+
+  // Regression: the "Indep. scores" KPI matched the catalog's standard
+  // research TODO ("check independent AA/Scale/BenchLM verification"), so 60
+  // of the 71 rows it counted were a promise to measure, not a measurement.
+  it('indep counts only rows that CITE an independent score, not pending checks', () => {
+    const { stats } = renderUseModels()
+    // A row whose only mention is a pending check must NOT count.
+    const pendingOnly = allModels.filter((m) =>
+      /check\s+(independent\s+)?AA/i.test(m.notes ?? '') &&
+      !hasIndependentScore(m))
+    expect(pendingOnly.length, 'the catalog still has pending-check rows').toBeGreaterThan(0)
+    for (const m of pendingOnly) {
+      expect(hasIndependentScore(m), `pending row "${m.model}" must not count`).toBe(false)
+    }
+    // The count must be far below the old inflated figure.
+    expect(stats.indep).toBeLessThan(30)
+    expect(stats.indep).toBeGreaterThan(0)
+  })
+
+  it('primarySrc counts both spellings of Artificial Analysis', () => {
+    const { stats } = renderUseModels()
+    const aaRows = allModels.filter((m) => ['artificial-analysis', 'aa'].includes((m.source || '').toLowerCase()))
+    expect(aaRows.length, 'catalog has AA-sourced rows').toBeGreaterThan(0)
+    const aaCounted = allModels.filter((m) =>
+      ['vendor', 'huggingface', 'artificial-analysis', 'aa'].includes((m.source || '').toLowerCase())).length
+    expect(stats.primarySrc).toBe(aaCounted)
   })
 
   it('leaderboards: every benchmark has sorted list (down from broken shape mismatch)', () => {

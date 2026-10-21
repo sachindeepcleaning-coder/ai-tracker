@@ -9,8 +9,14 @@ import { INR_PER_USD } from '../lib/parse'
  * NAME (stable across CSV re-ranks; rank ids shift when rows are added/removed);
  * only the cache-read tier is a curated field (data.json stores it in prose).
  */
-const COST_SAMPLES = [
-  { model: 'DeepSeek V4.1 Flash', label: 'DeepSeek V4.1 Flash (off-peak)', cache: 0.003 },
+// eslint-disable-next-line react/only-export-components -- exported for vitest
+export const COST_SAMPLES = [
+  // DeepSeek tiers its API by clock hour (peak = 01-04 & 06-10 UTC). The
+  // catalog stores ONE price pair per model, so BOTH tiers must be pinned
+  // here — resolving from the catalog would give the same number twice.
+  // Off-peak $0.15/$0.60, peak $0.30/$1.20 (api-docs.deepseek.com, verified
+  // 2026-10-17; rank 315 notes carry the same pair).
+  { model: 'DeepSeek V4.1 Flash', label: 'DeepSeek V4.1 Flash (off-peak)', in: 0.15, out: 0.6, cache: 0.003 },
   { model: 'DeepSeek V4.1 Flash', label: 'DeepSeek V4.1 Flash (peak)', in: 0.3, out: 1.2, cache: 0.006 },
   { model: 'GPT-5.6 Sol', label: 'GPT-5.6 Sol (promo)', cache: 0.4 },
   { model: 'Kimi K3', label: 'Kimi K3', cache: 0.3 },

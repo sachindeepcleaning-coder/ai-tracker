@@ -14,6 +14,34 @@ const SCATTER_METRICS: { id: string; label: string; y: (m: Model) => number | nu
   { id: 'price', label: 'SWE-V vs input price', y: (m) => parsePct(m.swe_bench_verified), x: (m) => m.price_in_usd_per_mtok, xLabel: '$ in / Mtok' },
 ]
 
+/**
+ * The "harness matters" note, DERIVED from the leaderboard lists.
+ *
+ * The previous text was a frozen snapshot ("TB 2.1 tight 88.3≈88.2≈87.9",
+ * "DeepSWE 67.5>66.9>64.3", "best open 38.7% vs proprietary 59.1%") that went
+ * stale as the catalog moved — those numbers stopped matching any row, and
+ * nothing caught it. Every leader is now read off the same sorted lists the
+ * boards render, so the note can never disagree with the boards above it.
+ *
+ * Exported for unit tests: the note's claims are asserted against the data
+ * directly, not scraped out of rendered text.
+ */
+// eslint-disable-next-line react/only-export-components -- helper exported for vitest
+export function frontierNote(leaderboards: Record<string, Model[]>): string {
+  const chain = (key: string, onlyOpen?: boolean) =>
+    (leaderboards[key] ?? [])
+      .filter((m) => (onlyOpen ? isOpenWeight(m.license) : true))
+      .slice(0, 3)
+      .map((m) => `${parsePct(m[key as keyof Model] as string | null)?.toFixed(1)} ${m.model}`)
+      .join(' > ')
+  return (
+    'Current leaders, read straight off the boards above (all figures vendor-reported unless the cell says otherwise): ' +
+    `TB 2.1 ${chain('terminal_bench')} · DeepSWE ${chain('swe_bench_pro')} · LCB ${chain('livecodebench_v6')}. ` +
+    `Best open-weight on each: TB 2.1 ${chain('terminal_bench', true)} · DeepSWE ${chain('swe_bench_pro', true)}. ` +
+    'Scores from different harnesses are not directly comparable — prefer a standardized run for apples-to-apples.'
+  )
+}
+
 export default function Leaderboards({ leaderboards }: { leaderboards: Record<string, Model[]> }) {
   const [scatterId, setScatterId] = useState('vram')
   const metric = SCATTER_METRICS.find((s) => s.id === scatterId) || SCATTER_METRICS[0]
@@ -103,7 +131,7 @@ export default function Leaderboards({ leaderboards }: { leaderboards: Record<st
       </div>
       <div className="card p-4">
         <h3 className="font-bold">Note: harness matters</h3>
-        <p className="text-sm text-white/60 mt-1">TB 2.1 tight 88.3≈88.2≈87.9 (K3≈GLM-5.3≈V4 Pro), DeepSWE 67.5&gt;66.9&gt;64.3, LCB 91.9 Flash-Next &gt;90.3 27B. Scale standardized (identical mini-SWE-agent): best open 38.7% vs proprietary 59.1% — vendor +10-20 pts inflation. Use standardized for apples-to-apples.</p>
+        <p className="text-sm text-white/60 mt-1">{frontierNote(leaderboards)}</p>
       </div>
     </div>
   )

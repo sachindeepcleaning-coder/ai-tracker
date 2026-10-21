@@ -3,6 +3,9 @@ session_chat_*.md
 *.local
 # Per-developer Claude Code settings (personal allowlists, not shared).
 .claude/settings.local.json
+.claude/*.bak.*
+# Local verification screenshots (working artifacts, not repo content).
+.screenshots/
 # Dependencies, build output, secrets (all tooling lives in frontend/,
 # which has its own .gitignore; these guard the repo root).
 node_modules/

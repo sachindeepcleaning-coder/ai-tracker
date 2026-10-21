@@ -196,6 +196,34 @@ export const RELEASE_WINDOWS = [
   { value: 'dated', label: 'Released: has date only' },
 ]
 
+/**
+ * Does this row carry an INDEPENDENT MEASUREMENT (AA / Scale / BenchLM / a
+ * named independent run)?
+ *
+ * The distinction matters: the catalog's standard research note is "check
+ * independent AA/Scale/BenchLM verification" — a promise to go and measure,
+ * not a measurement. Counting those inflated the "Indep. scores" KPI from
+ * the ~14 rows that actually cite an independent run to 71.
+ *
+ * Rules:
+ *  - source is an independent measurer (Artificial Analysis, BenchLM, Scale,
+ *    LMSYS) -> independent, regardless of notes.
+ *  - otherwise, notes must cite one — but PENDING clauses are dropped first.
+ *    A clause is pending when it says "check ..." (a to-do) or "TBD" (an
+ *    unknown). "indep DeepSWE 69.0 (Datacurve)" is a citation;
+ *    "check AA/BenchLM for independent scores" is not.
+ */
+const INDEP_SOURCES = new Set(['artificial-analysis', 'aa', 'benchlm', 'scale', 'lmsys'])
+const INDEP_TEXT = /artificial-analysis|\baa\b|scale|benchlm|indep/i
+const PENDING_CLAUSE = /\b(check|tbd)\b/i
+
+export function hasIndependentScore(m: Model): boolean {
+  if (INDEP_SOURCES.has((m.source || '').toLowerCase())) return true
+  const notes = String(m.notes ?? '')
+  const substantive = notes.split(';').filter((c) => !PENDING_CLAUSE.test(c)).join('; ')
+  return INDEP_TEXT.test(substantive)
+}
+
 /** Row comparator for every Explorer sort key (exported for unit tests). */
 export function compare(a: Model, b: Model, sort: string) {
   switch (sort) {
@@ -277,12 +305,19 @@ export function useModels({ q, provider, license, openOnly, maxQ4, sort, release
     // Counted from the data (never hardcoded) for the overview KPI. A primary
     // source is NOT independent verification — vendor benchmarks stay
     // vendor-reported unless an independent score exists (see indep below).
-    const primarySrc = models.filter((m) => ['vendor', 'huggingface', 'artificial-analysis'].includes((m.source || '').toLowerCase())).length
-    // Independent-verification coverage: notes or source mention an
-    // independent score. Fuzzy substring match on purpose: artificial-analysis
-    // (incl. "AA" alone is NOT matched — too ambiguous), Scale (matches
-    // "Scale", "scaled", "mini-SWE-agent" Scale runs), BenchLM, "indep".
-    const indep = models.filter((m) => /artificial-analysis|scale|benchlm|indep/i.test(`${m.notes ?? ''} ${m.source ?? ''}`)).length
+    // 'aa' is the same org as 'artificial-analysis' (the CSV spells it both
+    // ways) — counting only the long form under-reported its own subtitle.
+    const primarySrc = models.filter((m) => ['vendor', 'huggingface', 'artificial-analysis', 'aa'].includes((m.source || '').toLowerCase())).length
+    // Independent-verification coverage: the row carries an independent
+    // MEASUREMENT — not a promise to go and measure one.
+    //
+    // The old regex matched any note containing "check ... AA/Scale/BenchLM",
+    // which is the catalog's standard research TODO. 60 of the 71 rows it
+    // counted were exactly that to-do, so the KPI claimed independent
+    // verification at 5x the rate that actually exists. A pending clause
+    // ("check ...", "... TBD") is dropped before matching; what remains is a
+    // real citation.
+    const indep = models.filter((m) => hasIndependentScore(m)).length
     return { total: models.length, open, closed: models.length - open, withSWE, withQ4, dated, primarySrc, indep }
   }, [models])
 
