@@ -7,7 +7,6 @@ import { fileURLToPath } from 'node:url'
 import { normalize, compareFile, GATED } from '../drift-check.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
-const REPO = join(here, '..', '..', '..')
 
 let dir: string
 
