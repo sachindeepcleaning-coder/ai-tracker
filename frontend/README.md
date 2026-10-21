@@ -1,7 +1,7 @@
 # AI Tracker — Frontend
 
 Single-page dashboard for local/private AI coding models (India-focused pricing, Q4 VRAM, hardware tiers).
-Built with **Vite + React 19 + Tailwind 3 + Recharts**, data baked into `src/data.json` (<!-- MODELS:START -->~321 models<!-- MODELS:END -->).
+Built with **Vite + React 19 + Tailwind 3 + Recharts**, data baked into `src/data.json` (<!-- MODELS:START -->~329 models<!-- MODELS:END -->).
 
 Live site: https://sachindeepcleaning-coder.github.io/ai-tracker/
 
@@ -12,7 +12,7 @@ Live site: https://sachindeepcleaning-coder.github.io/ai-tracker/
 | Build | Vite 8 (`@vitejs/plugin-react`) |
 | UI | React 19, Tailwind 3, Lucide icons |
 | Charts | Recharts 3 |
-| Data | Static `src/data.json` (ranks <!-- RANKS:START -->1-321<!-- RANKS:END -->, single source of truth = `coding_benchmarks.csv`, regenerated via `npm run data`) |
+| Data | Static `src/data.json` (ranks <!-- RANKS:START -->1-329<!-- RANKS:END -->, single source of truth = `coding_benchmarks.csv`, regenerated via `npm run data`) |
 | Lint | Oxlint |
 | Tests | Vitest 5 + jsdom (`src/**/__tests__/`, `src/App.test.tsx`, `src/data.test.ts`) |
 | Fonts | Self-hosted Inter + JetBrains Mono (woff2 in `src/assets/fonts/`) |
