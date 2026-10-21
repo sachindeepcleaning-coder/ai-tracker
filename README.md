@@ -5,7 +5,7 @@
 <!-- STATS:END -->
 
 <!-- INTRO:START -->
-**ai-tracker** — open-weight coding-model catalog for local/private deployment in India: benchmarks, Q4 VRAM, ₹ pricing, and hardware fit. **316 models** (CSV ranks 1-316). Data as of Oct 17, 2026 · 110 of 316 rows re-checked against primary sources that day.
+**ai-tracker** — open-weight coding-model catalog for local/private deployment in India: benchmarks, Q4 VRAM, ₹ pricing, and hardware fit. **316 models** (CSV ranks 1-316). Data as of Oct 17, 2026 · 106 of 316 rows re-checked against primary sources that day.
 <!-- INTRO:END -->
 
 - Live site: https://sachindeepcleaning-coder.github.io/ai-tracker/
