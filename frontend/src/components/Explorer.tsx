@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState, useRef, useEffect } from 'react'
 import { Search, Filter, ChevronDown, Check, X, ArrowUpRight, Download } from 'lucide-react'
-import { parsePct, parseQ4, paramsLabel, fmtDate, fmtDateFull, daysOld, DATA_AS_OF } from '../lib/parse'
+import { parseQ4, paramsLabel, fmtDate, fmtDateFull, daysOld, DATA_AS_OF } from '../lib/parse'
 import { licenseBadge } from '../lib/license'
+import { cardBenchmarks } from '../lib/benchmarks'
 import { SORT_OPTIONS, RELEASE_WINDOWS, modelTypeGroups, confidenceGroups } from '../hooks/useModels'
 import { DataQualityBadge } from './DataQualityBadge'
 import type { Model } from '../lib/types'
@@ -268,10 +269,8 @@ export default function Explorer({
           <h2 className="sr-only">Matching models</h2>
           <div ref={parentRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" role="list" aria-label="Model grid" data-testid="model-grid">
             {shown.map((m, idx) => {
-              const swe = parsePct(m.swe_bench_verified)
-              const tb = parsePct(m.terminal_bench)
-              const lcb = parsePct(m.livecodebench_v6)
               const q4 = parseQ4(m.full_q4_vram_gb)
+              const bench = cardBenchmarks(m)
               const lic = licenseBadge(m.license)
               const isSel = compare.includes(m.id)
               const age = daysOld(m.released)
@@ -308,20 +307,33 @@ export default function Explorer({
                     </button>
                   </div>
 <div className="mt-3 grid grid-cols-3 gap-2">
-                    {[
-                      { label: 'SWE-V', v: swe },
-                      { label: 'TB 2.1', v: tb },
-                      { label: 'LCB V6', v: lcb },
-                    ].map((b) => (
-                       <div key={b.label} className="bg-white/[0.04] rounded-xl p-2 border border-white/5">
+                    {bench.grid.length === 0 ? (
+                      <div className="col-span-3 bg-white/[0.04] rounded-xl p-2 border border-white/5 text-center text-[11px] text-white/70" data-testid="no-card-benches">
+                        No published benchmark scores
+                      </div>
+                    ) : (
+                      bench.grid.map((b) => (
+                       <div key={String(b.key)} data-testid="bench-cell" className="bg-white/[0.04] rounded-xl p-2 border border-white/5">
                         <div className="text-[11px] tracking-widest font-bold text-white/70">{b.label}</div>
-                        <div className="text-sm font-extrabold" title={b.v != null ? `${b.v.toFixed(1)}%` : 'No data — awaiting vendor/AA verification'}>{b.v != null ? b.v.toFixed(1) + '%' : '—'}</div>
-                        <div className="h-1 bg-white/10 rounded-full mt-1 overflow-hidden" role="img" aria-label={`${b.label} ${b.v != null ? b.v.toFixed(1) + '%' : 'no data'}`}>
-                          <div className="h-full bg-emerald-500" style={{ width: b.v != null ? `${b.v}%` : '0%' }} />
+                        <div className="text-sm font-extrabold" title={b.value}>{b.pct != null ? b.pct.toFixed(1) + '%' : b.value}</div>
+                        <div className="h-1 bg-white/10 rounded-full mt-1 overflow-hidden" role="img" aria-label={`${b.label} ${b.value}`}>
+                          <div className="h-full bg-emerald-500" style={{ width: b.pct != null ? `${b.pct}%` : '0%' }} />
                         </div>
                       </div>
-                    ))}
+                    ))
+                    )}
                   </div>
+
+                  {bench.extra.length > 0 && (
+                    <div className="mt-1.5 flex flex-wrap gap-1.5 text-[10px]" data-testid="card-extra-benches">
+                      <span className="text-white/60 self-center">Also scored:</span>
+                      {bench.extra.map((b) => (
+                        <span key={String(b.key)} className="px-1.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/80" title={b.value}>
+                          {b.label} {b.pct != null ? b.pct.toFixed(1) + '%' : b.value}
+                        </span>
+                      ))}
+                    </div>
+                  )}
 
                   <div className="mt-3 flex flex-wrap gap-1.5 text-xs">
                     <span className="px-2 py-1 rounded-full bg-white/5 border border-white/10">Q4 {q4 != null ? q4 + ' GB' : '—'}</span>

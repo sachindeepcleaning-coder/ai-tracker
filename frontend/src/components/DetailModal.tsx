@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import { X, ArrowUpRight } from 'lucide-react'
 import { licenseBadge } from '../lib/license'
 import { fmtDateFull, scoreSource, verificationAge } from '../lib/parse'
+import { BENCH_COLUMNS } from '../lib/benchmarks'
 import { DataQualityBadge } from './DataQualityBadge'
 import type { Model } from '../lib/types'
 
@@ -17,20 +18,9 @@ interface DetailModalProps {
 export default function DetailModal({ detail, onClose, onToggleCompare, inCompare }: DetailModalProps) {
   const panelRef = useRef<HTMLDivElement>(null)
   // A wall of dashes looks broken: when no benchmark exists at all, show one
-  // honest empty-state instead of eleven empty cells.
-  const benches: [string, string | null][] = [
-    ['SWE-V', detail.swe_bench_verified],
-    ['SWE-Pro', detail.swe_bench_pro],
-    ['LCB V6', detail.livecodebench_v6],
-    ['TB 2.1', detail.terminal_bench],
-    ['HumanEval', detail.humaneval],
-    ['MMLU-Pro', detail.mmlu_pro],
-    ['GPQA-D', detail.gpqa_diamond],
-    ['HLE', detail.hle],
-    ['MATH', detail.math],
-    ['AIME 2026', detail.aime_2026],
-    ['ARC-AGI-2', detail.arc_agi_2],
-  ]
+  // honest empty-state instead of eleven empty cells. Column list is shared
+  // with the Explorer card (lib/benchmarks.ts) so the two can never diverge.
+  const benches: [string, string | null][] = BENCH_COLUMNS.map((c) => [c.label, detail[c.key] as string | null])
   const hasAnyBench = benches.some(([, v]) => v != null && v !== '')
 
   useEffect(() => {
