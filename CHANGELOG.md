@@ -1,5 +1,16 @@
 # Changelog — coding_benchmarks.csv
 
+## Oct 23, 2026 — Launch-sweep gaps closed: Flint, Ling 3.1 Flash, MiniMax M3.1 Flash (ranks 330-339)
+- Added Flint v1.0 (330) — Recursive Oct 21; Apache-2.0, 39.8B total / ~2.5B active MoE for coding agents, 262,144 ctx; vendor Terminal-Bench 2.1 54.9, SWE-bench Pro v2 89.7, SWE-bench Verified 74.2; SGLang kit + official int4/NVFP4/GGUF quants; free hosted tier on OpenRouter, no paid tier
+- Added Ling 3.1 Flash (331) — InclusionAI Oct 1; MIT, 560B / 25B active hybrid-reasoning MoE, 1M ctx; LingCode long-horizon coding harness; AA index 41.1, TB4.0 33.3, HLE 39.4; OpenRouter $0.075/$0.225
+- Added Ling 3.1 Flash 1019 (332) — InclusionAI Oct 22; hosted checkpoint, no published weights (AA: proprietary); AA index 43.9 vs 41.1 for the open-weight base; $0.30/$0.90
+- Added MiniMax M3.1 Flash (333) — MiniMax GA Oct 19; open weights (minimax-community), 428B / 23B active native multimodal, 1M ctx; vendor Terminal Bench 4.0 38.1, DeepSWE v1.1 73.7, OSWorld 2.0 61.7, CyberGym 82.2; $0.15/$0.60; supersedes the preview row 283
+- Backfilled open-weight rows missing from the catalog: Command A+ (334, Cohere May 20 — the Command A family was absent entirely), Motif 3 (335, MIT, Aug 12), Solar Open2 250B (336, Upstage Solar License, Aug 12), Agnes 2.5 Pro Alpha (337, Apache 2.0, Aug 19), Hemingway-1 (338, CC-BY-NC, Sep 20), ZDTaichu5.0-9B (339, NVIDIA Open Model License, Sep 4)
+- Noted but not added: Elorian Glimpse + Perceptron Mk1.5 (proprietary, non-coding), Moondream 3/3.1 (weights on HF since Jun 30), Celeris-1 + Agnes 2.5 Pro Beta (API-only, low AA index), JT-4.1 Flash 236B A21B (no verifiable weights source), NVIDIA Switchyard + Jev (routers, not models), effort-tier and `:free`/`:batch` aliases
+- Flint row enriched from the Recursive benchmark chart (assets/flint_benchmarks_nvfp4.png): LiveCodeBench v6 80.3 (BF16) / 80.8 (NVFP4), IFBench 89.2, IFEval 95.1 — the card prose itself lists only TB2.1 54.9, SWE-Pro v2 89.7 and SWE-V 74.2
+- Checked and not added: Nemotron 3.5 Bolt E4B (no weights, AA or OpenRouter listing yet — NVIDIA's newest Nemotron repos are Oct 16); Nemotron 3.5 Embed-1B/8B + Rerank-8B + Parse (HF Oct 7 / Oct 15 / Sep 3, not text-generation → out of coding scope, same call as Cohere Embed 5); iFlytek Spark X2.6 flagship 293B-A30B (no verifiable source — llm-releases has only Spark X2.5 293B from Sep 7, HF has no 293B X2.6 repo, and the catalog's existing SPARK X2 row covers the 293B/30B proprietary tier)
+- Catalog now 339 rows (ranks 1-339), 203 open-weight, 228 with release dates; data as of Oct 23, 2026
+
 ## Oct 11, 2026 — Honest date line ("Data as of" + re-checked counts)
 - Header/footer/meta no longer claim the whole catalog was fact-checked on the newest date. Single wording from parse.recheckLine(), computed from the data: "Data as of Oct 11, 2026 · 8 of 302 rows re-checked against primary sources that day".
 - data.json gains rechecked_count (rows with last_verified == data_as_of); site-meta plugin injects the same line into title/meta/og at build time; agreement test fails the build if UI and meta disagree.
