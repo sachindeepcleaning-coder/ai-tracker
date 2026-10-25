@@ -45,5 +45,8 @@ describe('DetailModal full-catalog modal audit', () => {
     }
     console.log(`AUDIT: ${models.length} models, ${scored} scored, ${empty} empty`)
     expect(mismatches, 'modal/data mismatches').toEqual([])
-  })
+    // Renders every catalog row (344+) one at a time; the default 30s suite
+    // timeout is too tight once the catalog grows or the suite runs in
+    // parallel, so this audit gets its own budget.
+  }, 120_000)
 })
