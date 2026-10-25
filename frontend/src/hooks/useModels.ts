@@ -1,4 +1,4 @@
-import { useMemo, useSyncExternalStore } from 'react'
+import { useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import type { Model } from '../lib/types'
 import { parsePct, parseQ4, DATA_AS_OF, isValidRelease, setDataAnchor, assertCatalogPayload } from '../lib/parse'
 import { isOpenWeight, licenseBadge } from '../lib/license'
@@ -218,10 +218,51 @@ const INDEP_TEXT = /artificial-analysis|\baa\b|scale|benchlm|indep/i
 const PENDING_CLAUSE = /\b(check|tbd)\b/i
 
 export function hasIndependentScore(m: Model): boolean {
+  // Preferred path: the flag frozen at build time by regen-data.mjs (the
+  // payload ships no full notes to parse). data.test.ts + the regen gates
+  // carry parity tests so this rule and the generator rule cannot drift.
+  if (typeof m.indep === 'boolean') return m.indep
+  // Fallback for rows that still carry full notes (unit-test fixtures).
   if (INDEP_SOURCES.has((m.source || '').toLowerCase())) return true
   const notes = String(m.notes ?? '')
   const substantive = notes.split(';').filter((c) => !PENDING_CLAUSE.test(c)).join('; ')
   return INDEP_TEXT.test(substantive)
+}
+
+/**
+ * Full provenance notes live in a deferred notes.json (slug -> text), split
+ * out of the catalog payload so first paint downloads ~13KB less. One fetch
+ * for the whole session, first requested when a detail modal opens; a failed
+ * fetch resets the cache so the next open retries (e.g. offline -> online).
+ */
+let notesIndexPromise: Promise<Record<string, string>> | null = null
+
+export function fetchNotesIndex(): Promise<Record<string, string>> {
+  if (!notesIndexPromise) {
+    notesIndexPromise = fetch(`${import.meta.env.BASE_URL}notes.json`)
+      .then((r) => {
+        if (!r.ok) throw new Error(`notes fetch failed: ${r.status}`)
+        return r.json() as Promise<Record<string, string>>
+      })
+      .catch((e: unknown) => {
+        notesIndexPromise = null // allow a retry on the next open
+        throw e
+      })
+  }
+  return notesIndexPromise
+}
+
+/** The full provenance note for one model, or null while loading / absent. */
+export function useModelNote(slug: string): string | null {
+  const [note, setNote] = useState<string | null>(null)
+  useEffect(() => {
+    let alive = true
+    fetchNotesIndex()
+      .then((idx) => { if (alive) setNote(idx[slug] ?? null) })
+      .catch(() => { if (alive) setNote(null) })
+    return () => { alive = false }
+  }, [slug])
+  return note
 }
 
 /** Row comparator for every Explorer sort key (exported for unit tests). */

@@ -64,6 +64,17 @@ function parseCsv(text) {
 
 const NULLISH = new Set(['-', '?', 'undisc.', 'unknown', ''])
 
+// Notes payload split — the rules the app's useModels.hasIndependentScore()
+// used to apply to the full notes text at runtime, frozen here at build time.
+// The full provenance text moves to a deferred notes.json (keyed by slug,
+// fetched by the detail modal); catalog rows keep a <=140-char excerpt plus
+// the precomputed `indep` flag. frontend/src/data.test.ts carries a parity
+// gate asserting this rule and the app rule stay identical.
+const INDEP_SOURCES = new Set(['artificial-analysis', 'aa', 'benchlm', 'scale', 'lmsys'])
+const INDEP_TEXT = /artificial-analysis|\baa\b|scale|benchlm|indep/i
+const PENDING_CLAUSE = /\b(check|tbd)\b/i
+const NOTES_EXCERPT_LEN = 140
+
 function clean(v) {
   const s = String(v ?? '').trim()
   return NULLISH.has(s.toLowerCase()) ? null : s
@@ -287,6 +298,18 @@ const out = rows.slice(1)
   else if (row.price_in_usd_per_mtok <= 0.5) row.price_band = 'budget'
   else if (row.price_in_usd_per_mtok <= 2) row.price_band = 'standard'
   else row.price_band = 'premium'
+  // Deferred-notes split: excerpt stays in the payload, the indep flag freezes
+  // the runtime heuristic (source-based OR a notes citation after dropping
+  // pending "check ..."/"TBD" clauses). Full text is emitted to notes.json.
+  if (row.notes != null) {
+    const s = row.notes
+    row.note_excerpt = s.length <= NOTES_EXCERPT_LEN ? s : s.slice(0, NOTES_EXCERPT_LEN).replace(/\s+\S*$/, '') + '…'
+  } else {
+    row.note_excerpt = null
+  }
+  const sourceHit = INDEP_SOURCES.has(String(row.source ?? '').toLowerCase())
+  const substantive = String(row.notes ?? '').split(';').filter((c) => !PENDING_CLAUSE.test(c)).join('; ')
+  row.indep = sourceHit || INDEP_TEXT.test(substantive)
   return row
 })
 
@@ -399,6 +422,13 @@ const out = rows.slice(1)
 const today = new Date().toISOString().slice(0,10)
 const verifiedDates = out.map((m) => m.last_verified).filter((d) => d && /^\d{4}-\d{2}-\d{2}$/.test(d)).sort()
 const dataAsOf = verifiedDates[verifiedDates.length - 1] ?? null
+// Deferred-notes split: after every gate has read the raw cells, move the full
+// provenance text out of the catalog rows into notes.json (slug -> note).
+const notesOut = {}
+for (const m of out) {
+  if (m.notes) notesOut[m.slug] = m.notes
+  delete m.notes
+}
 const { data_version: _dropped, conversation_summary: _archived, ...rest } = existing // legacy keys retired (TASK 3 + audit: notes live in docs/data-notes-archive.md)
 const rechecked = out.filter((m) => m.last_verified === dataAsOf).length
 const payload = { ...rest, data_regen_at: today, model_count: out.length, data_as_of: dataAsOf, rechecked_count: rechecked, all_coding_models: out }
@@ -428,5 +458,8 @@ writeFileSync(
 // Pages' default application/json; offline via the sw.js same-origin cache.
 mkdirSync(join(PUBLIC_PATH, '..'), { recursive: true })
 writeFileSync(PUBLIC_PATH, JSON.stringify(payload))
+// Deferred provenance notes: fetched on demand by the detail modal, cached by
+// the SW like data.json (network-first). Compact: transfer only.
+writeFileSync(join(PUBLIC_PATH, '..', 'notes.json'), JSON.stringify(notesOut))
 const preserved = out.filter((m) => curated.get(m.slug)).length
-console.log(`regen-data: wrote ${out.length} models -> ${OUT_PATH} (preserved ${preserved} curated rows)`)
+console.log(`regen-data: wrote ${out.length} models -> ${OUT_PATH} (preserved ${preserved} curated rows, ${Object.keys(notesOut).length} deferred notes)`)

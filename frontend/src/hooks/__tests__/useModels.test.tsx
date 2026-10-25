@@ -1,4 +1,8 @@
+/// <reference types="node" />
 import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { join, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { renderHook } from './test-utils.jsx'
 import { useModels, compare, allModels, providers, licenseGroups, BENCHMARKS, hasIndependentScore } from '../useModels.js'
 import type { ModelFilters } from '../useModels.js'
@@ -6,6 +10,9 @@ import type { Model } from '../../lib/types'
 import { parsePct, parseQ4, isValidRelease } from '../../lib/parse.js'
 import { isOpenWeight } from '../../lib/license.js'
 import dataMeta from '../../data.json'
+
+const here = dirname(fileURLToPath(import.meta.url))
+const NOTES_PATH = join(here, '../../../public/notes.json')
 
 function renderUseModels(filters: ModelFilters = { q: '', provider: 'all', license: 'all', openOnly: false, maxQ4: 'all', sort: 'rank', releaseWindow: 'all', modelType: 'all', confidence: 'all', hideSparse: false, freeOnly: false }) {
   const { result } = renderHook(() => useModels(filters))
@@ -48,12 +55,19 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
   // Regression: the "Indep. scores" KPI matched the catalog's standard
   // research TODO ("check independent AA/Scale/BenchLM verification"), so 60
   // of the 71 rows it counted were a promise to measure, not a measurement.
+  // The rule is frozen at build time (row.indep, parity-gated in data.test.ts);
+  // this asserts pending-only rows stay flagged false in the shipped payload.
   it('indep counts only rows that CITE an independent score, not pending checks', () => {
+    const idx: Record<string, string> = JSON.parse(readFileSync(NOTES_PATH, 'utf8'))
     const { stats } = renderUseModels()
     // A row whose only mention is a pending check must NOT count.
-    const pendingOnly = allModels.filter((m) =>
-      /check\s+(independent\s+)?AA/i.test(m.notes ?? '') &&
-      !hasIndependentScore(m))
+    const PENDING_CLAUSE = /\b(check|tbd)\b/i
+    const pendingOnly = allModels.filter((m) => {
+      const notes = String(idx[m.slug] ?? '')
+      if (!/check\s+(independent\s+)?AA/i.test(notes)) return false
+      const substantive = notes.split(';').filter((c) => !PENDING_CLAUSE.test(c)).join('; ')
+      return !/artificial-analysis|\baa\b|scale|benchlm|indep/i.test(substantive)
+    })
     expect(pendingOnly.length, 'the catalog still has pending-check rows').toBeGreaterThan(0)
     for (const m of pendingOnly) {
       expect(hasIndependentScore(m), `pending row "${m.model}" must not count`).toBe(false)

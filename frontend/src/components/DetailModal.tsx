@@ -4,6 +4,7 @@ import { licenseBadge } from '../lib/license'
 import { fmtDateFull, scoreSource, verificationAge } from '../lib/parse'
 import { BENCH_COLUMNS } from '../lib/benchmarks'
 import { DataQualityBadge } from './DataQualityBadge'
+import { useModelNote } from '../hooks/useModels'
 import type { Model } from '../lib/types'
 
 const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -17,6 +18,8 @@ interface DetailModalProps {
 
 export default function DetailModal({ detail, onClose, onToggleCompare, inCompare }: DetailModalProps) {
   const panelRef = useRef<HTMLDivElement>(null)
+  // Full provenance text, deferred to notes.json and fetched on first open.
+  const note = useModelNote(detail.slug)
   // A wall of dashes looks broken: when no benchmark exists at all, show one
   // honest empty-state instead of eleven empty cells. Column list is shared
   // with the Explorer card (lib/benchmarks.ts) so the two can never diverge.
@@ -83,7 +86,13 @@ export default function DetailModal({ detail, onClose, onToggleCompare, inCompar
             </div>
             <h3 id="model-detail-title" className="text-lg font-extrabold mt-2">{detail.model}</h3>
             <p className="text-sm text-white/60">{detail.total_parameters} {detail.active_parameters !== 'Unknown' && detail.active_parameters ? `/ ${detail.active_parameters} active` : ''} · {detail.context_window} · Q4 {detail.full_q4_vram_gb ?? '—'} GB</p>
-            <p className="text-xs text-white/70 mt-1">Source: {detail.source ?? '—'} · Last verified: {detail.last_verified ?? '—'}{detail.last_verified ? ` (${verificationAge(detail.last_verified)} old)` : ''} · Confidence: {detail.confidence ?? '—'} {detail.notes ? `· ${detail.notes}` : ''}</p>
+            <p className="text-xs text-white/70 mt-1">Source: {detail.source ?? '—'} · Last verified: {detail.last_verified ?? '—'}{detail.last_verified ? ` (${verificationAge(detail.last_verified)} old)` : ''} · Confidence: {detail.confidence ?? '—'}</p>
+            {note && (
+              <div className="mt-2 bg-white/5 rounded-xl border border-white/5 p-3" data-testid="provenance-note">
+                <div className="text-[11px] uppercase tracking-wide text-white/70 font-bold">Provenance note</div>
+                <p className="text-xs text-white/70 mt-1 leading-relaxed">{note}</p>
+              </div>
+            )}
           </div>
           <button onClick={onClose} aria-label="Close model details" title="Close (Esc)" className="w-8 h-8 rounded-full bg-white/5 border border-white/10 grid place-items-center hover:bg-white/10">
             <X size={14} aria-hidden="true" />

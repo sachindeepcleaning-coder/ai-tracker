@@ -19,7 +19,7 @@ function makeModels(n: number): Model[] {
     confidence: 'high',
     released: '2026-09-10',
     released_est: false,
-    notes: 'Planning estimate.',
+    note_excerpt: 'Planning estimate.',
     context_window: '128K',
     source: 'AA',
     last_verified: '2026-09-15',

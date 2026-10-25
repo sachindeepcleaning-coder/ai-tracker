@@ -1,8 +1,17 @@
+/// <reference types="node" />
 import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { join, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import data from './data.json'
 import type { Model } from './lib/types'
 
+const here = dirname(fileURLToPath(import.meta.url))
 const models = (data.all_coding_models || []) as Model[]
+/** Full provenance notes, deferred out of the payload (public/notes.json). */
+const notesByIdx: Record<string, string> = JSON.parse(
+  readFileSync(join(here, '../public/notes.json'), 'utf8'),
+)
 
 const BENCH_KEYS = [
   'swe_bench_verified', 'swe_bench_pro', 'livecodebench_v6', 'terminal_bench',
@@ -30,7 +39,7 @@ describe('data quality gates (audit)', () => {
       if (!m.released || !/^\d{4}-\d{2}-\d{2}$/.test(m.released)) return false
       if (new Date(m.released + 'T00:00:00Z').getTime() < cutoff) return false
       if (hasBench(m)) return false
-      if (PRIMARY_URL.test(m.notes ?? '')) return false
+      if (PRIMARY_URL.test(notesByIdx[m.slug] ?? '')) return false
       return (m.confidence || 'low').toLowerCase() !== 'low'
     })
     expect(bad.map((m) => `${m.rank} ${m.model}`), 'fresh + scoreless + no primary ref must be confidence low').toEqual([])

@@ -1,7 +1,7 @@
 {
   "_comment": "Committed perf baseline (gzip KB). Refresh deliberately via `npm run perf -- --record`.",
-  "entryJsGzKb": 65,
-  "initialJsGzKb": 75.8,
+  "entryJsGzKb": 71.7,
+  "initialJsGzKb": 74.9,
   "cssGzKb": 5.7,
-  "dataJsonGzKb": 29.4
+  "dataJsonGzKb": 33.1
 }

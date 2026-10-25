@@ -1,11 +1,20 @@
+/// <reference types="node" />
 import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { join, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import data from './data.json'
 import fx from '../scripts/fx.json'
 import { INR_PER_USD } from './lib/parse.js'
 import type { Model } from './lib/types'
 
+const here = dirname(fileURLToPath(import.meta.url))
 const models = (data.all_coding_models || []) as Model[]
 const FX_RATE = (fx as { fx_usd_inr: number }).fx_usd_inr
+/** Full provenance notes, deferred out of the payload (public/notes.json). */
+function notesIndex(): Record<string, string> {
+  return JSON.parse(readFileSync(join(here, '../public/notes.json'), 'utf8'))
+}
 
 describe('data.json integrity (regen gate)', () => {
   it('has model_count rows with unique contiguous ranks', () => {
@@ -30,14 +39,52 @@ describe('data.json integrity (regen gate)', () => {
     expect(data).not.toHaveProperty('data_version')
   })
 
-  it('has at least 10 high-confidence models and notes for orchestrators', () => {
-    const high = models.filter(m=>m.confidence==='high')
-    expect(high.length).toBeGreaterThanOrEqual(10)
+  it('full notes live in the deferred index; payload keeps excerpt + indep flag', () => {
+    const idx = notesIndex()
     const orch = models.filter(m=>m.is_orchestrator)
     expect(orch.length).toBeGreaterThanOrEqual(3)
-    for (const m of orch) expect(m.notes, `${m.model} orchestrator needs notes`).toBeTruthy()
-    const withNotes = models.filter(m=>m.notes)
-    expect(withNotes.length).toBeGreaterThanOrEqual(80)
+    for (const m of orch) expect(idx[m.slug], `${m.model} orchestrator needs a full note`).toBeTruthy()
+    expect(Object.keys(idx).length, 'rows with provenance notes').toBeGreaterThanOrEqual(80)
+    for (const m of models) {
+      expect(m as unknown as Record<string, unknown>, `${m.rank} ships full notes`).not.toHaveProperty('notes')
+      expect(typeof m.indep, `${m.rank} ${m.model} indep must be boolean`).toBe('boolean')
+      const full = idx[m.slug] ?? null
+      if (full == null) {
+        expect(m.note_excerpt, `${m.slug} excerpt without a note`).toBeNull()
+        continue
+      }
+      const ex = m.note_excerpt
+      expect(ex, `${m.slug} note without an excerpt`).toBeTruthy()
+      expect((ex as string).length, `${m.slug} excerpt too long`).toBeLessThanOrEqual(141)
+      if (full.length > 140) {
+        expect((ex as string).endsWith('…'), `${m.slug} truncated excerpt needs ellipsis`).toBe(true)
+        expect(full.startsWith((ex as string).slice(0, -1)), `${m.slug} excerpt must prefix the full note`).toBe(true)
+      } else {
+        expect(ex).toBe(full)
+      }
+    }
+  })
+
+  it('indep flag matches the notes-based independent-score rule (parity gate)', () => {
+    // The runtime heuristic frozen at build time — if the generator rule and
+    // this rule drift apart, the "Indep. scores" KPI silently changes.
+    const idx = notesIndex()
+    const INDEP_SOURCES = new Set(['artificial-analysis', 'aa', 'benchlm', 'scale', 'lmsys'])
+    const INDEP_TEXT = /artificial-analysis|\baa\b|scale|benchlm|indep/i
+    const PENDING_CLAUSE = /\b(check|tbd)\b/i
+    let cited = 0
+    let sourceOnly = 0
+    for (const m of models) {
+      const sourceHit = INDEP_SOURCES.has((m.source || '').toLowerCase())
+      const notes = String(idx[m.slug] ?? '')
+      const substantive = notes.split(';').filter((c) => !PENDING_CLAUSE.test(c)).join('; ')
+      const expected = sourceHit || INDEP_TEXT.test(substantive)
+      if (expected && !sourceHit) cited++
+      if (sourceHit) sourceOnly++
+      expect(m.indep, `${m.rank} ${m.model} indep drifted from the notes rule`).toBe(expected)
+    }
+    expect(cited, 'rows citing an independent run in notes').toBeGreaterThan(0)
+    expect(sourceOnly, 'rows with an independent source value').toBeGreaterThan(0)
   })
 
   it('has no string prices or string is_free (regression: rank-265/266/267)', () => {

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 import * as React from 'react'
 import { createRoot } from 'react-dom/client'
 import { act } from 'react'
@@ -39,6 +39,39 @@ describe('DetailModal benchmark grid', () => {
       expect(container.textContent).toContain('SWE-V')
       expect(container.textContent).toContain(scored.swe_bench_verified!)
       expect(container.querySelector('[data-testid="no-benches"]')).toBeNull()
+    } finally { unmount() }
+  })
+})
+
+describe('DetailModal provenance note (deferred notes.json)', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it('fetches notes.json on open and renders the full provenance text', async () => {
+    const fullNote = 'Full provenance paragraph: scores from huggingface.co/vendor/model, verified against primary sources; indep DeepSWE 69.0 (Datacurve).'
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(
+      JSON.stringify({ [scored.slug]: fullNote }),
+      { status: 200, headers: { 'content-type': 'application/json' } },
+    )))
+    const { container, unmount } = render(scored)
+    try {
+      // The note arrives asynchronously after the first paint.
+      await act(async () => { await Promise.resolve() })
+      expect(container.textContent).toContain('Provenance')
+      expect(container.textContent).toContain(fullNote)
+      const calls = (fetch as ReturnType<typeof vi.fn>).mock.calls.map((c) => String(c[0]))
+      expect(calls.some((u) => u.endsWith('/notes.json')), `expected a notes.json fetch, got ${calls.join(',')}`).toBe(true)
+    } finally { unmount() }
+  })
+
+  it('renders without the note when the index lacks the slug (no crash, no undefined)', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(JSON.stringify({}), { status: 200 })))
+    const { container, unmount } = render(scored)
+    try {
+      await act(async () => { await Promise.resolve() })
+      expect(container.textContent).not.toContain('undefined')
+      expect(container.textContent).toContain('SWE-V')
     } finally { unmount() }
   })
 })

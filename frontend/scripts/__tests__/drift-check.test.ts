@@ -71,6 +71,7 @@ describe('drift-check.mjs', () => {
       'README.md',
       'frontend/src/data.json',
       'frontend/public/data.json',
+      'frontend/public/notes.json',
       'frontend/public/sw-version.js',
       'frontend/public/sitemap.xml',
       'frontend/src/lib/fx.generated.ts',
@@ -88,6 +89,8 @@ describe('drift-check.mjs', () => {
     const stamped = JSON.stringify({ data_regen_at: '2026-10-20', model_count: 1 })
     writeFileSync(join(d, 'frontend/src/data.json'), stamped)
     writeFileSync(join(d, 'frontend/public/data.json'), stamped)
+    // notes.json is slug-keyed JSON: valid content, unchanged across the day.
+    writeFileSync(join(d, 'frontend/public/notes.json'), '{"m-1":"full note"}\n')
     writeFileSync(join(d, 'frontend/public/sw-version.js'), "self.SW_CACHE = 'ai-tracker-2026-10-20';\n")
     execFileSync('git', ['add', '-A'], { cwd: d })
     execFileSync('git', ['commit', '-q', '-m', 'stamp'], { cwd: d })
@@ -166,7 +169,14 @@ describe('drift-check end-to-end (next-day CI regen of the real catalog)', () =>
     writeFileSync(join(d, 'frontend/scripts/fx.json'), readFileSync(join(REAL, 'frontend/scripts/fx.json')))
     // Curation source + the committed generated files, straight from HEAD.
     for (const p of GATED) {
-      const content = execFileSync('git', ['show', `HEAD:${p}`], { cwd: REAL, encoding: 'utf8' })
+      let content: string
+      try {
+        content = execFileSync('git', ['show', `HEAD:${p}`], { cwd: REAL, encoding: 'utf8' })
+      } catch {
+        // A generated artifact not yet in HEAD (e.g. notes.json on the run
+        // that introduces it): seed the mini-repo from the working tree.
+        content = readFileSync(join(REAL, p), 'utf8')
+      }
       const abs = join(d, p)
       mkdirSync(dirname(abs), { recursive: true })
       writeFileSync(abs, content)

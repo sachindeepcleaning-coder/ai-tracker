@@ -1,5 +1,13 @@
 # Changelog — coding_benchmarks.csv
 
+## Oct 25, 2026 — Payload split: provenance notes deferred to notes.json
+- The catalog payload hit 39.96KB gzipped against its 40KB perf budget — the next model row would have blocked deploys. Two-part fix:
+- data.json ceiling raised 40 -> 48KB, and a new 24KB budget added for the deferred notes file (frontend/scripts/perf-check.mjs)
+- Full provenance notes moved out of the always-downloaded payload into frontend/public/notes.json (slug -> note, written by regen-data.mjs, served network-first via sw.js and fetched on demand by the detail modal). Catalog rows keep a <=140-char excerpt (note_excerpt) so Explorer cards keep their two-line note hint; the detail modal now shows the full paragraph in a dedicated "Provenance note" block instead of appending it to the meta line
+- The runtime hasIndependentScore() heuristic (drives the "Indep. scores" KPI and per-row quality badge) is frozen at build time: regen-data.mjs computes an `indep` boolean per row with the same source/notes rules, and parity gates in data.test.ts + the regen gates assert the frozen flag and the original notes rule stay identical for every row
+- Tests updated to the new contract: data.test.ts (excerpt rules + parity), data-snapshot.test.ts / useModels.test.tsx / data-quality.test.ts read full notes from the deferred index, DetailModal tests cover the fetched note (+ absent-slug case), sw-proof asserts notes.json is network-first like data.json, drift-check gates notes.json (key order-insensitive)
+- Wire sizes: catalog 39.96KB -> 33.1KB gz; notes.json 16.4KB gz, paid only when a model detail is opened; perf baseline re-recorded
+
 ## Oct 25, 2026 — Rumor-watch sweep + 3 missed open-weight releases (ranks 342-344)
 - Added Nanbeige4.3-33B (342) — Nanbeige Oct 24; Apache-2.0, 33B dense, 524K ctx, flagship teacher model of the Nanbeige4.3 series; vendor Terminal-Bench 2.1 80.9, SWE-bench Pro 60.3, DeepSWE 65.5, leading the ~30B class vs Qwen3.8-27B / Muse-Glimmer-30B / Gemma4-31B; base checkpoint also published
 - Added Tencent Hy-Memory-30B-A3B (343) — Oct 15; Apache-2.0 long-term-memory writer (30B / ~3B active, 262K ctx) that replaces the general LLM inside Mem0/MemOS/Hy-Memory; vendor cross-harness average 55.49 vs Claude Opus 5 54.62, Code Memory Bench 67.13 on Mem0; catalogued as a specialized component model

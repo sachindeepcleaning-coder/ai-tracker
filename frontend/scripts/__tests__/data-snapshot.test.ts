@@ -9,6 +9,10 @@ const here = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(here, '..', '..', '..')
 
 const models = (data.all_coding_models || []) as Model[]
+/** Full provenance notes, deferred out of the payload (public/notes.json). */
+const notesByIdx: Record<string, string> = JSON.parse(
+  readFileSync(join(ROOT, 'frontend/public/notes.json'), 'utf8'),
+)
 
 /** Benchmark columns a card can show. */
 const BENCH_KEYS = [
@@ -30,7 +34,7 @@ describe('snapshot rows inherit their parent model scores', () => {
     const offenders: string[] = []
     let checked = 0
     for (const m of models) {
-      const notes = String(m.notes ?? '')
+      const notes = String(notesByIdx[m.slug] ?? '')
       const ref = notes.match(/same (?:open )?weights as rank (\d+)/i)
       if (!ref) continue
       checked += 1

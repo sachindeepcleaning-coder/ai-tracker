@@ -30,7 +30,12 @@ export interface Model {
   last_verified: string | null
   source: string | null
   confidence: string | null
-  notes: string | null
+  /** Full provenance text — deferred to public/notes.json, fetched on demand. */
+  notes?: string | null
+  /** <=140-char excerpt shipped in the payload (regen-data.mjs). */
+  note_excerpt: string | null
+  /** hasIndependentScore frozen at build time (regen-data.mjs parity gate). */
+  indep: boolean
   is_orchestrator: boolean
   hf_url: string | null
   price_band: string | null

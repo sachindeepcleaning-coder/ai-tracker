@@ -23,7 +23,7 @@ Live site: https://sachindeepcleaning-coder.github.io/ai-tracker/
 src/
   main.tsx                 entry (imports index.css)
   App.tsx                  tab orchestrator + KPI strip + footer
-  data.json                model catalog
+  data.json                model catalog (full provenance notes deferred to public/notes.json)
   index.css                Tailwind + @font-face + shared .card/.badge/.btn styles
   lib/
     parse.ts               parsePct / parseQ4 / INR_PER_USD / formatting
@@ -43,6 +43,9 @@ src/
     ErrorBoundary.tsx      crash guard around tab content
   scripts/
     regen-data.mjs         CSV -> data.json regeneration (preserves curated released/is_free)
+public/
+  data.json                runtime catalog fetch (network-first via sw.js)
+  notes.json               full provenance notes keyed by slug (fetched on demand by DetailModal)
 ```
 
 ## Develop

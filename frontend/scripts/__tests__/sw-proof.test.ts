@@ -36,4 +36,14 @@ describe('service worker cache strategy proof', () => {
     expect(branch).toContain('fetch(req)')
     expect(branch).toContain('caches.match(req)')
   })
+
+  it('sw.js treats the deferred notes.json like data.json (network-first, cached)', () => {
+    // notes.json is data, not an immutable hashed asset: cache-first would pin
+    // stale provenance text until the next rebuild busts the cache name.
+    const sw = readFileSync(join(PUBLIC, 'sw.js'), 'utf8')
+    const branch = sw.slice(sw.indexOf('/notes.json'))
+    expect(sw).toContain('/notes.json')
+    expect(branch).toContain('fetch(req)')
+    expect(branch).toContain('caches.match(req)')
+  })
 })

@@ -28,6 +28,7 @@ export const GATED = [
   'frontend/README.md',
   'frontend/src/data.json',
   'frontend/public/data.json',
+  'frontend/public/notes.json',
   'frontend/public/sw-version.js',
   'frontend/public/sitemap.xml',
   'frontend/src/lib/fx.generated.ts',
@@ -49,6 +50,10 @@ export function normalize(path, text) {
     const obj = JSON.parse(text)
     delete obj.data_regen_at
     return stableStringify(obj)
+  }
+  if (path.endsWith('notes.json')) {
+    // Slug-keyed map: key order never registers as drift, values verbatim.
+    return stableStringify(JSON.parse(text))
   }
   if (path.endsWith('sw-version.js')) {
     return text.replace(/ai-tracker-\d{4}-\d{2}-\d{2}/g, 'ai-tracker-<BUILD_ID>')
