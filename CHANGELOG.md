@@ -1,5 +1,12 @@
 # Changelog — coding_benchmarks.csv
 
+## Oct 25, 2026 — Kimi K3.1 Pro + Nemotron 3.5 Bolt E4B (ranks 340-341)
+- Added Kimi K3.1 Pro (340) — Moonshot AI Oct 23; post-trained Kimi K3, 2.8T total / 104B active, 1M ctx, text+image; API-only at launch ($2/$10, $0.20 cache hit, $2 cache write, 33% below K3), full weights promised by Nov 4 2026 and not public yet (AA scores it proprietary until release); vendor TB4.0 65.7, Kimi Code Bench 3.0 Long-horizon 61.2, BenchCAD 92.7; AA index 55 (#4/215), TB4.0 67.17, HLE 52.46, GDPval-AA 1846 Elo (#3), AutomationBench-AA 73%; cyber capability deliberately reduced; Highspeed is the same checkpoint at 2-3x speed for $4/$20, not a separate record
+- Added Nemotron 3.5 Bolt E4B (341) — NVIDIA GA Oct 23; OpenMDW-1.1, 8B total / 4B effective further post-trained from Gemma-4-E4B-it, 64K ctx, official 4GB Q4_K_M build + DFlash NVFP4 drafter; local voice/device assistant model with no coding benches (IFBench 63.79, BFCL-v3 68.51, Tau2 55.10, RULER 64K 86.99, LongMemEval 72.10)
+- Fixed Solar Mini 4 (307): 50pct launch discount ended Oct 23 — prices reverted from $0.05/$0.20 to $0.10/$0.40 list (₹9.51/₹38.05), which the promo-expiry gate flagged once the verification anchor moved to Oct 25
+- Checked and not added: Microsoft-Decision-1 (Oct 9 preview, decision-scoring/classification on Qwen3.5-9B, not a generation/coding model); Unstructured Transform (document-parsing suite); Hi3D (3D generation); Gemini 4 Carbon and Mistral Large 4 open weights (still unshipped); no launches dated Oct 24-25 found
+- Catalog now 341 rows (ranks 1-341), 204 open-weight, 230 with release dates; data as of Oct 25, 2026
+
 ## Oct 23, 2026 — Launch-sweep gaps closed: Flint, Ling 3.1 Flash, MiniMax M3.1 Flash (ranks 330-339)
 - Added Flint v1.0 (330) — Recursive Oct 21; Apache-2.0, 39.8B total / ~2.5B active MoE for coding agents, 262,144 ctx; vendor Terminal-Bench 2.1 54.9, SWE-bench Pro v2 89.7, SWE-bench Verified 74.2; SGLang kit + official int4/NVFP4/GGUF quants; free hosted tier on OpenRouter, no paid tier
 - Added Ling 3.1 Flash (331) — InclusionAI Oct 1; MIT, 560B / 25B active hybrid-reasoning MoE, 1M ctx; LingCode long-horizon coding harness; AA index 41.1, TB4.0 33.3, HLE 39.4; OpenRouter $0.075/$0.225
