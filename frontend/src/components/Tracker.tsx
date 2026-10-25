@@ -363,9 +363,9 @@ function HighlightsView() {
         <p className="text-sm text-white/60 mt-1">Upcoming changes already on record — plan around them, the catalog snapshot predates these.</p>
         <div className="mt-3 grid md:grid-cols-2 gap-3 text-xs">
           {[
-            ['Sep 21-22', 'Grok 4.7 shipped / Opus 5.5 + GPT-6 Sol-Luna', 'Grok 4.7 GA Sep 21 ($2/$6). Claude Opus 5.5 + GPT-6 Sol ($2/$10) / Luna ($0.10/$0.50) GA Sep 22. MiMo-V2.6-Pro MIT (AA 46, top open) Sep 21. All in catalog ranks 271-279.'],
-            ['Sep 14', 'V4 Pro routing', 'DeepSeek V4 Pro routed Sep 14 12:00 Beijing (after this snapshot); legacy V4 Flash/Vision already retired+routed, billed Flash.'],
-            ['Oct 4', 'Ling-3.0-flash-Sante free tier ends', 'API-first free thru Oct 4 via Vercel; Sante-specific weights still unconfirmed, base family MIT.'],
+            ['Oct 23', 'Solar Mini 4 launch discount ended', 'The 50% launch discount ($0.05/$0.20) ran through Oct 23 and is over — pricing is back to the $0.10/$0.40 list rate (₹9.51/₹38.05). Catalog row 307 now carries list pricing.'],
+            ['Oct 31', 'Mistral Large 4 open weights', 'HF card mistralai/Mistral-Large-4-1T-A52B is live as an Upcoming release with ETA Oct 31 (945 waiting); the repo itself is still gated, so no weights yet. 1T total / 49B active native multimodal; expect a licence revenue gate.'],
+            ['Nov 4', 'Kimi K3.1 Pro open weights', 'Moonshot promises full K3.1 Pro weights by Nov 4; API-only until then ($2/$10, 1M ctx). No moonshotai HF repo yet — Kimi K3 shipped weights 11 days after announce.'],
             ['≥Nov 21', 'GPT-5.6 Sol promo ends', 'Sol $4/20 promo holds to ≥Nov 21, then reverts to $5/30.'],
             ['Jan 1 2027', 'Gemini 3.8 Flash intro doubles', 'Intro $0.75/$3.75 → $1.50/$7.50 after Dec 31 2026.'],
           ].map(([d, t, desc]) => (
@@ -379,7 +379,7 @@ function HighlightsView() {
           ))}
         </div>
       </div>
-      <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200">Pricing that broke single-number models Aug 16-21: DeepSeek V4 Pro flat $0.435/0.87 → $0.66/1.98 off-peak $1.32/3.96 peak (price increase), V4 Flash $0.14/0.28 → $0.22/0.66 off / $0.44/1.32 peak, Sol $5/30 → $4/20 promo to ≥Nov21, Sonnet 5 $3/15 rise cancelled `$2/10 standard`, Gemini intro $0.75/3.75 → doubles $1.50/7.50 Jan 1 2027.</div>
+      <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200">Pricing that broke single-number models Aug 16-21: DeepSeek V4 Pro flat $0.435/0.87 → $0.66/1.98 off-peak $1.32/3.96 peak (price increase), V4 Flash $0.14/0.28 → $0.22/0.66 off / $0.44/1.32 peak, Sol $5/30 → $4/20 promo to ≥Nov21, Sonnet 5 $3/15 rise cancelled `$2/10 standard`, Gemini intro $0.75/3.75 → doubles $1.50/7.50 Jan 1 2027. Also expired Oct 23: Solar Mini 4’s 50% launch discount reverted to the $0.10/$0.40 list rate.</div>
     </div>
   )
 }

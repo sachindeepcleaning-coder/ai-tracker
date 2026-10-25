@@ -75,6 +75,71 @@ export function fmtDay(iso: string): string {
 export const CHANGE_ITEMS: ChangeItem[] = [
   // ---------------- October 2026 ----------------
   {
+    id: 'nanbeige43-33b',
+    date: '2026-10-24',
+    type: 'released',
+    title: 'Nanbeige4.3-33B released (Apache-2.0)',
+    provider: 'Nanbeige',
+    country: 'CN',
+    countryName: 'China',
+    rank: 342,
+    summary:
+      '33B dense teacher model for the Nanbeige4.3 series with 512K context. Vendor Terminal-Bench 2.1 80.9, SWE-bench Pro 60.3, DeepSWE 65.5 — leading the ~30B class. The card names a smaller distilled sibling (Nanbeige4.3-3B) as the next step.',
+    source: { label: 'huggingface.co/Nanbeige Oct 24' },
+  },
+  {
+    id: 'hemmingway-15',
+    date: '2026-10-24',
+    type: 'released',
+    title: 'Hemmingway-1.5 released',
+    provider: 'Hemmingway AI',
+    country: 'US',
+    countryName: 'United States',
+    rank: 344,
+    summary:
+      '27B dense CC-BY-NC-4.0 fine-tune of Hemingway-1 (262K context), tuned for human-indistinguishable prose rather than code — no coding benchmarks published. Non-commercial; catalogued for family completeness only.',
+    source: { label: 'huggingface.co/HemmingwayAI Oct 24' },
+  },
+  {
+    id: 'step5-preview-open-weights',
+    date: '2026-10-20',
+    type: 'license-change',
+    title: 'Step 5 Preview weights are public',
+    provider: 'StepFun',
+    country: 'CN',
+    countryName: 'China',
+    rank: 288,
+    summary:
+      'The catalog still listed Step 5 Preview as API-only with a weights placeholder. The official HF repos are live — FP8 and BF16 from Sep 20, NVFP4 from Oct 14 — under the StepFun Model License 1.0 (Apache-2.0-style with extra commercial conditions). Row 288 reclassified from proprietary preview to open weights.',
+    source: { label: 'huggingface.co/stepfun-ai Oct 20' },
+  },
+  {
+    id: 'mistral-large-4-weights-eta',
+    date: '2026-10-06',
+    type: 'announced',
+    title: 'Mistral Large 4 open weights — HF card ETA Oct 31',
+    provider: 'Mistral AI',
+    country: 'FR',
+    countryName: 'France',
+    rank: 301,
+    summary:
+      'The vendor promises weights "by the end of the month" and the HF card mistralai/Mistral-Large-4-1T-A52B is live as an Upcoming release with ETA Oct 31 (945 waiting); the repo is still gated. Vendor confirms 1T total / 49B active native multimodal, trained on 3,800 Grace Blackwell GPUs in Europe.',
+    source: { label: 'mistral.ai Oct 6 + HF card' },
+  },
+  {
+    id: 'hy-memory-30b-a3b',
+    date: '2026-10-15',
+    type: 'released',
+    title: 'Tencent Hy-Memory-30B-A3B released',
+    provider: 'Tencent Hunyuan',
+    country: 'CN',
+    countryName: 'China',
+    rank: 343,
+    summary:
+      'Apache-2.0 long-term-memory writer (30B / ~3B active, 262K context) that replaces the general LLM inside Mem0, MemOS and Hy-Memory. Vendor cross-harness average 55.49 vs Claude Opus 5 54.62; Code Memory Bench 67.13 on Mem0. Catalogued as a specialized component model.',
+    source: { label: 'huggingface.co/tencent Oct 15' },
+  },
+  {
     id: 'deepseek-v41-flash-1017',
     date: '2026-10-17',
     type: 'released',

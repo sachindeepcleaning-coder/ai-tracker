@@ -98,12 +98,27 @@ export const WATCH_ITEMS: WatchItem[] = [
     countryName: 'France',
     status: 'announced',
     date: '2026-10-06',
-    access: 'Open weights (expected)',
-    context: null,
-    params: '~1.05T (reported)',
+    access: 'Open weights (HF card live, ETA Oct 31 2026)',
+    context: '1M',
+    params: '1T / 49B active (52B incl. embeddings)',
     summary:
-      'Large 4 GA Oct 6 as API-only at half-price preview ($0.68/$2.09); open weights promised by end of October (catalog rank 301). If it lands, it is the first open-weight flagship from Mistral since the 675B era.',
-    source: { label: 'aitoolsrecap Oct 8 (secondary)' },
+      'Large 4 GA Oct 6 as API-only at half-price preview ($0.68/$2.09, list $1.36/$4.18); open weights promised by end of month (catalog rank 301). The HF card mistralai/Mistral-Large-4-1T-A52B is live as an Upcoming release with ETA Oct 31, 2026 and 945 people waiting, but the repo itself is still gated — no weights yet. If it lands, it is the first open-weight flagship from Mistral since the 675B era; expect a license revenue gate, since the model is being red-teamed by cyber leaders and vetted partners before release.',
+    source: { label: 'mistral.ai Oct 6 + HF card Oct 25', url: 'https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B' },
+  },
+  {
+    id: 'kimi-k31-weights',
+    name: 'Kimi K3.1 Pro open weights',
+    provider: 'Moonshot AI',
+    country: 'CN',
+    countryName: 'China',
+    status: 'announced',
+    date: '2026-10-23',
+    access: 'Open weights (promised by Nov 4 2026)',
+    context: '1M',
+    params: '2.8T / 104B active',
+    summary:
+      'K3.1 Pro launched Oct 23 as API-only ($2/$10) with the vendor promising full model weights by Nov 4, 2026 (catalog rank 340). No Moonshot HF repo exists yet — moonshotai’s newest is still Kimi-K3 (Jun 13). The release deliberately drops cyber capability, so expect a licence gate like Kimi K3’s ~$20M revenue ceiling; Kimi K3 precedent was 11 days from announce to weights.',
+    source: { label: 'kimi.ai blog Oct 23 + HF org check Oct 25', url: 'https://www.kimi.ai/blog/kimi-k3-1-pro' },
   },
   {
     id: 'muse-spark-max',
@@ -168,6 +183,36 @@ export const WATCH_ITEMS: WatchItem[] = [
   },
   // ---- Rumored ----
   {
+    id: 'nemotron-4',
+    name: 'Nemotron 4 (~1T)',
+    provider: 'NVIDIA',
+    country: 'US',
+    countryName: 'United States',
+    status: 'rumored',
+    date: '2026-08-11',
+    access: 'Open weights (expected, following the Nemotron 3.5 open line)',
+    context: null,
+    params: '~1T (reported)',
+    summary:
+      'Reuters (Aug 11, citing The Information) reports NVIDIA is building a 1-trillion-parameter Nemotron 4 to rival open models from China. The 3.5 generation already shipped open (Super VL Oct 15, Bolt E4B Oct 23, Dory 4B Oct 16), so a 1T Nemotron would extend an open-weight line — but NVIDIA has given no size, timing or license commitment for Nemotron 4.',
+    source: { label: 'Reuters Aug 11 (citing The Information)' },
+  },
+  {
+    id: 'nanbeige-43-small',
+    name: 'Nanbeige4.3 small distillation models',
+    provider: 'Nanbeige',
+    country: 'CN',
+    countryName: 'China',
+    status: 'announced',
+    date: '2026-10-24',
+    access: 'Open weights (expected)',
+    context: null,
+    params: '~3B (named example)',
+    summary:
+      'The Nanbeige4.3-33B card (Oct 24, Apache-2.0) states the 33B model is a high-capacity teacher agent that anchors distillation into smaller models, naming Nanbeige4.3-3B as the first target. No 3B repo exists yet, so this is a vendor-stated pipeline, not a scheduled launch.',
+    source: { label: 'huggingface.co/Nanbeige Oct 24' },
+  },
+  {
     id: 'grok-48',
     name: 'Grok 4.8',
     provider: 'xAI',
@@ -194,7 +239,7 @@ export const WATCH_ITEMS: WatchItem[] = [
     context: null,
     params: 'Undisclosed',
     summary:
-      'Qwen3.8-Flash-Next (125B/6B, Aug 26) is described as an early preview of the architecture that will underpin Qwen4. Leaks point to advanced 3D coding and design capabilities; rumors point to fall 2026.',
+      'Qwen3.8-Flash-Next (125B/6B, Aug 26) is described as an early preview of the architecture that will underpin Qwen4. Leaks point to advanced 3D coding and design capabilities; rumors point to fall 2026. Checked Oct 25: no Qwen4 repo exists on HF (Qwen’s newest repo is Qwen-Image-2.1-Turbo, Oct 9), and the "qwen4_exp" architecture tag in Transformers/llama.cpp is just the internal arch name of the already-shipped Qwen3.8-Flash-Next — plumbing, not a release.',
     source: { label: 'Geeky Gadgets / yottalabs.ai (leaks)' },
   },
   {
@@ -209,7 +254,7 @@ export const WATCH_ITEMS: WatchItem[] = [
     context: null,
     params: 'Undisclosed',
     summary:
-      'The Information (Jul 29) reports Moonshot seeking additional Nvidia Blackwell chips for a next-gen model. No name, params, or timeline from Moonshot itself — treat as rumor.',
+      'The Information (Jul 29) reports Moonshot seeking additional Nvidia Blackwell chips for a next-gen model. No name, params, or timeline from Moonshot itself — treat as rumor. Checked Oct 25: still no K4 signal; Moonshot’s only dated next commitment is the K3.1 Pro weights promised by Nov 4.',
     source: { label: 'The Information Jul 29 (one report)' },
   },
   {
@@ -254,7 +299,7 @@ export const WATCH_ITEMS: WatchItem[] = [
     context: null,
     params: 'Undisclosed',
     summary:
-      'GLM 5.5 had been an analyst forecast (JPMorgan/Reuters) for Aug 2026; GLM-5.3 shipped instead. Next release trajectory is Sep–Oct 2026 with no Z.ai commitment.',
+      'GLM 5.5 had been an analyst forecast (JPMorgan/Reuters) for Aug 2026; GLM-5.3 shipped instead. Next release trajectory is Sep–Oct 2026 with no Z.ai commitment. Checked Oct 25: no GLM-5.4/5.5 repo on HF (zai-org’s newest is GLM-5.3-Flash, Aug 25) and no vendor announcement — the "Ox Alpha" alias that had been circulating turned out to be GLM-5.3-Flash running on Chinese GPUs under MIT, already in the catalog, not a new model.',
     source: { label: 'JPMorgan note (no Z.ai commitment)' },
   },
   {
@@ -369,13 +414,13 @@ export const WATCH_ITEMS: WatchItem[] = [
     country: 'CN',
     countryName: 'China',
     status: 'rumored',
-    date: '2026-08-20',
+    date: '2026-10-23',
     access: 'Open weights (expected)',
     context: null,
     params: '~2.7T (reported)',
     summary:
-      'Reuters reports MiniMax training what may be the largest open-weight model, possible Q3 release (AI Weekly, 75%). Window now slipping past Sep 30 with no weights; a Q3 API preview must not be mistaken for downloadable weights.',
-    source: { label: 'Reuters via AI Weekly Aug 20' },
+      'Reuters reports MiniMax training what may be the largest open-weight model, possible Q3 release (AI Weekly, 75%). The window keeps slipping and no weights have landed. Fresh enabler signal: Reuters (Oct 23) reports MiniMax completed export registration for open-source, overseas AI model licensing, and Bloomberg (Oct 23) reports China cleared DeepSeek and MiniMax for global use — an approval path for shipping weights abroad, not a release itself. A Q3 API preview must not be mistaken for downloadable weights.',
+    source: { label: 'Reuters Oct 23 (export registration) + Reuters via AI Weekly Aug 20' },
   },
   {
     id: 'mistral-next-moe',

@@ -89,11 +89,11 @@ describe('data.json integrity (regen gate)', () => {
       expect(r <= monthEnd, `${m.rank} ${m.model} released ${r} is future`).toBe(true)
     }
     // The newest real releases stay at the top of a valid-date sort
-    // (Kimi K3.1 Pro + Nemotron 3.5 Bolt E4B, Oct 23 — update when a newer release is added).
+    // (Nanbeige4.3-33B + Hemingway-1.5, Oct 24 — update when a newer release is added).
     const top = [...models]
       .filter((m) => m.released)
       .sort((a, b) => (b.released ?? '').localeCompare(a.released ?? ''))[0]!.released
-    expect(top).toBe('2026-10-23')
+    expect(top).toBe('2026-10-24')
   })
 
   it('verification freshness: at most 50% of rows older than 30 days vs data_as_of', () => {
