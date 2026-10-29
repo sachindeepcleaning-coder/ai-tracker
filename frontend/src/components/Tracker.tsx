@@ -364,7 +364,7 @@ function HighlightsView() {
         <div className="mt-3 grid md:grid-cols-2 gap-3 text-xs">
           {[
             ['Oct 23', 'Solar Mini 4 launch discount ended', 'The 50% launch discount ($0.05/$0.20) ran through Oct 23 and is over — pricing is back to the $0.10/$0.40 list rate (₹9.51/₹38.05). Catalog row 307 now carries list pricing.'],
-            ['Oct 31', 'Mistral Large 4 open weights', 'HF card mistralai/Mistral-Large-4-1T-A52B is live as an Upcoming release with ETA Oct 31 (945 waiting); the repo itself is still gated, so no weights yet. 1T total / 49B active native multimodal; expect a licence revenue gate.'],
+            ['Oct 29', 'Mistral Large 4 open weights — shipped early', 'HF repo mistralai/Mistral-Large-4-1T-A52B ungated Oct 29 (ETA was Oct 31). 1T/49B multimodal MoE under the Mistral Ecosystem Open-Weight License (modified MIT; Model-as-a-Service needs a commercial license). API repriced to $0.70/$2.10 ($0.07 cached). Row 301 updated.'],
             ['Nov 4', 'Kimi K3.1 Pro open weights', 'Moonshot promises full K3.1 Pro weights by Nov 4; API-only until then ($2/$10, 1M ctx). No moonshotai HF repo yet — Kimi K3 shipped weights 11 days after announce.'],
             ['≥Nov 21', 'GPT-5.6 Sol promo ends', 'Sol $4/20 promo holds to ≥Nov 21, then reverts to $5/30.'],
             ['Jan 1 2027', 'Gemini 3.8 Flash intro doubles', 'Intro $0.75/$3.75 → $1.50/$7.50 after Dec 31 2026.'],

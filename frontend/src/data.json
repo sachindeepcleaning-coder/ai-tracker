@@ -12007,7 +12007,7 @@
       "total_parameters": "1T",
       "active_parameters": "49B",
       "full_q4_vram_gb": "~500",
-      "license": "Proprietary (Public Preview Oct 6 2026 API-only; open weights ETA Oct 31 2026 per the live HF card; 1T/49B active native multimodal; list $1.36/$4.18, preview sale $0.68/$2.09; 1M ctx)",
+      "license": "Mistral Ecosystem Open-Weight License (modified MIT; Model-as-a-Service requires a separate commercial license) - weights public on HF Oct 29 2026 (2 days early vs the Oct 31 ETA); 1T/49B active (52B incl. embeddings) native multimodal MoE, 128 routed + 1 shared experts, 4 active, 1M ctx; NVFP4 sibling for Blackwell; API $0.70/$2.10 ($0.07 cached)",
       "swe_bench_verified": null,
       "swe_bench_pro": null,
       "livecodebench_v6": null,
@@ -12019,13 +12019,13 @@
       "math": null,
       "aime_2026": null,
       "arc_agi_2": null,
-      "price_in_usd_per_mtok": 0.68,
-      "price_out_usd_per_mtok": 2.09,
+      "price_in_usd_per_mtok": 0.7,
+      "price_out_usd_per_mtok": 2.1,
       "context_window": "1M",
-      "price_in_inr_per_mtok": 64.68,
-      "price_out_inr_per_mtok": 198.8,
+      "price_in_inr_per_mtok": 66.58,
+      "price_out_inr_per_mtok": 199.75,
       "model_type": "foundation",
-      "last_verified": "2026-10-25",
+      "last_verified": "2026-10-29",
       "source": "vendor",
       "confidence": "medium",
       "is_orchestrator": false,
@@ -12037,7 +12037,7 @@
       "released_src": "llmgateway-timeline",
       "is_free": false,
       "price_band": "standard",
-      "note_excerpt": "Mistral Large 4 Oct 6 2026 per mistral.ai/news/mistral-large-4: public preview API only, 'Le Chonk', 1T natively multimodal MoE with 49B…",
+      "note_excerpt": "Weights PUBLIC Oct 29 2026: mistralai/Mistral-Large-4-1T-A52B ungated (BF16) plus an NVFP4 sibling, 2 days ahead of the Oct 31 ETA on the…",
       "indep": true
     },
     {
@@ -13921,8 +13921,8 @@
       "indep": false
     }
   ],
-  "data_regen_at": "2026-10-27",
+  "data_regen_at": "2026-10-29",
   "model_count": 348,
-  "data_as_of": "2026-10-27",
-  "rechecked_count": 5
+  "data_as_of": "2026-10-29",
+  "rechecked_count": 1
 }
