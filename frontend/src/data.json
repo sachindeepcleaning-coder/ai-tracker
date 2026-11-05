@@ -13567,7 +13567,7 @@
       "total_parameters": "2.8T",
       "active_parameters": "104B",
       "full_q4_vram_gb": "~1400",
-      "license": "Custom Kimi K3.1 (API-only at launch; open weights promised by Nov 4 2026; AA scores it proprietary until release)",
+      "license": "Custom Kimi K3.1-Pro License (open weights Nov 2 2026; modified MIT; Model-as-a-Service with >$20M aggregate annual revenue needs a separate Moonshot commercial agreement; UI attribution required at >100M MAU or >$20M monthly revenue; internal use exempt)",
       "swe_bench_verified": null,
       "swe_bench_pro": null,
       "livecodebench_v6": null,
@@ -13585,19 +13585,19 @@
       "price_in_inr_per_mtok": 190.24,
       "price_out_inr_per_mtok": 951.2,
       "model_type": "foundation",
-      "last_verified": "2026-10-25",
-      "source": "vendor",
+      "last_verified": "2026-11-05",
+      "source": "huggingface",
       "confidence": "medium",
       "is_orchestrator": false,
       "slug": "moonshot-ai-kimi-k3-1-pro",
-      "hf_url": null,
+      "hf_url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
       "id": "moonshot-ai-kimi-k3-1-pro",
       "released": "2026-10-23",
       "released_est": false,
       "released_src": "AA release Oct 23 2026 (kimi-k3.1-pro) + vendor blog Oct 23 2026",
       "is_free": false,
       "price_band": "standard",
-      "note_excerpt": "Kimi K3.1 Pro Oct 23 2026 per kimi.ai/blog/kimi-k3-1-pro + platform.kimi.ai (API id kimi-k3.1-pro): post-trained Kimi K3, 2.8T total / 104B…",
+      "note_excerpt": "Weights PUBLIC Nov 2 2026: moonshotai/Kimi-K3.1-Pro, HF created Nov 2 04:13Z, ungated, 112 files, MXFP4 weights / MXFP8 activations…",
       "indep": true
     },
     {
@@ -14001,8 +14001,8 @@
       "indep": false
     }
   ],
-  "data_regen_at": "2026-10-31",
+  "data_regen_at": "2026-11-05",
   "model_count": 350,
-  "data_as_of": "2026-10-31",
-  "rechecked_count": 2
+  "data_as_of": "2026-11-05",
+  "rechecked_count": 1
 }
