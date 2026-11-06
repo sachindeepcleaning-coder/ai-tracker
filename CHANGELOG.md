@@ -1,5 +1,9 @@
 # Changelog — coding_benchmarks.csv
 
+## Nov 5, 2026 (later) — Tencent Hy4 GA on OpenRouter, repriced (row 263)
+- Hy4 GA Nov 4 2026 (OpenRouter `tencent/hy4`, 1M ctx, text+image): official release with agentic / long-horizon productivity gains; repriced to **$0.417/$1.2505** ($0.021 cache) from preview $0.834/$2.501 (₹39.67/₹118.95). Weights stay Apache 2.0 `tencent/Hy4-preview` on HF (Aug 27; no separate GA repo yet); HF URL added to the row. Preview vendor TB2.1 85.4 / DeepSWE 64.3 unchanged
+- Sweep Nov 5: no new coding LLMs. Checked and not added: allenai Molmo2-4B-tb + maniflow-tb (ToyBlocks robotics), ByteDance-Seed Qwen3-30B-A3B-MoE-SAE (interpretability SAE) + Cross-Layer-TopK-CLT, nvidia MetricTrail (eval tooling), google gemini-omni-1.1/1.2-flash (video generation, OpenRouter Nov 4-5), openrouter/auto-code (coding router, Nov 5). HF blog Nov 4-5: Cosmos 3 (world sim), Phonon TTS, Dharma Field Extractor, benchmarks only
+
 ## Nov 5, 2026 — Ripple-65B Preview: frontier agentic coding, US-built, Apache 2.0 (rank 351)
 - Added **Ripple-65B Preview** (351) — Ricursive Intelligence (US) first model, **open weights Nov 4** on HF (`ricursiveAI/Ripple-65B-Preview`, BF16 + NVFP4 + base checkpoint + DFlash2; ModelScope mirror), Apache 2.0. Dense 65B — 80 layers, d_model 5120, Gemma-3N-like arch (overprovisioned heads, FFN activation clipping, gated attention, global NoPE, value residuals), 12T tokens, ~40% MFU, 1M ctx, NVFP4 fits DGX Spark; 250 tok/s on 2xB200 (batch 8)
 - Vendor full-precision table (ricursive.com/ripple): TB2.1 **80.5** (both harnesses), SWE-V 76.5, SWE-Pro v1.0 61.42 / v2.0 Hard 79.1, DeepSWE 1.1 44.3, MMLU-Pro 84.2, GPQA 85.2, AIME 2026 95.0, MCP Atlas 71.67, AutomationBench-Public 36.4, AA-LCR 75.0 — leads the US open-weight cohort (Beam 501B 80.1, Muse Spark Open 76.4, Inkling 975B 63.8, Nemotron 3 Ultra 56.4). Also on OpenRouter as `ricursiveai/ripple-65b-preview` at $0.20/$0.60 ($0.05 cache); ~33GB Q4
