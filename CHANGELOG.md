@@ -1,5 +1,11 @@
 # Changelog — coding_benchmarks.csv
 
+## Nov 9, 2026 — Inkling 2 Small added (rank 352, API-only; Apache 2.0 weights pending ~Nov 12)
+- Added **Inkling 2 Small** (352) — Thinking Machines Lab, launched Nov 5 on Tinker (Playground + fine-tuning API), **closed weights**; Apache 2.0 full weights promised ~Nov 12 2026 after external red-team. 594B/17B MoE (384 experts, top-8), 1M ctx, text+image (no audio), variable reasoning effort, 292M Perception Encoder vision tower
+- Vendor: AA Intelligence Index 31 (#4/29 price class, ~4x tokens/task vs Inkling Small), SWE-Pro v2 Hard **86.3** (2nd to Kimi K3), DeepSWE v1.1 72.1, Vibe Code Bench 81.6, Terminal-Bench 4.0 only **13.1** (vs GLM-5.3-Flash 32.8). $0.30/$1.00 ($0.03 cached) on Tinker. No HF repo yet; no independent re-run — TB4.0 13.1 means it is NOT currently a coding-agent pick despite the SWE-Pro v2-Hard number
+- Weights ETA ~Nov 12: tracker will reclassify to open weights + add HF URL when they drop (like K3.1 Pro on Nov 2). Sweep Nov 7-9 found no other new coding releases; Inkling 2 Small weights still absent from thinkingmachines org as of Nov 9
+- Catalog now 352 rows (ranks 1-352), 214 open-weight, 241 with release dates; data as of Nov 9, 2026
+
 ## Nov 5, 2026 (later) — Tencent Hy4 GA on OpenRouter, repriced (row 263)
 - Hy4 GA Nov 4 2026 (OpenRouter `tencent/hy4`, 1M ctx, text+image): official release with agentic / long-horizon productivity gains; repriced to **$0.417/$1.2505** ($0.021 cache) from preview $0.834/$2.501 (₹39.67/₹118.95). Weights stay Apache 2.0 `tencent/Hy4-preview` on HF (Aug 27; no separate GA repo yet); HF URL added to the row. Preview vendor TB2.1 85.4 / DeepSWE 64.3 unchanged
 - Sweep Nov 5: no new coding LLMs. Checked and not added: allenai Molmo2-4B-tb + maniflow-tb (ToyBlocks robotics), ByteDance-Seed Qwen3-30B-A3B-MoE-SAE (interpretability SAE) + Cross-Layer-TopK-CLT, nvidia MetricTrail (eval tooling), google gemini-omni-1.1/1.2-flash (video generation, OpenRouter Nov 4-5), openrouter/auto-code (coding router, Nov 5). HF blog Nov 4-5: Cosmos 3 (world sim), Phonon TTS, Dharma Field Extractor, benchmarks only
