@@ -1,5 +1,12 @@
 # Changelog — coding_benchmarks.csv
 
+## Nov 10, 2026 — Claude Fable 5.2 & Claude Mythos 5.2 added (ranks 355, 356; announced Nov 9)
+- **Claude Fable 5.2** (355) and **Claude Mythos 5.2** (356) — Anthropic, announced Nov 9 2026 (anthropic.com/claude-fable-and-mythos-5-2). Same underlying model; Fable = safeguards on, GA for all (`claude-fable-5-2`, AWS/GCP/Azure too); Mythos = same weights minus cyber/bio safeguards, Cyber/Life Sciences Verification Program only
+- Pricing cut from 5.1's $10/$50 to **$8/$40** per 1M (₹760.96/₹3,804.80); fast mode **$16/$80** up to 2.5x; up to 30% faster output than 5.1; 1M ctx; closed weights
+- Vendor benches (highest effort): FrontierCode 2.0 **49.1% Xhigh** (highest of any released model tested; Opus 5.5 45.5%), FrontierSWE v2 69.9%, AutomationBench 51.4%, TB-Science 0.1 74.6% (Mythos 75.3%), HLE w/tools 74.2%, OSWorld 2.1 89.3%, WANDR 82.1%, BenchCAD 2.1 83.5, RoboDojo 64.9%, Chartography 73.4%, Briefcase 66.1%/1785 Elo, RLI 41.3%. Mythos cyber: CyScenarioBench 76.3%, CVE Rediscovery 89.6% (+14.4% vs Mythos 5.1), binder design 85.1%
+- External pre-release safety testing by UK AISI, METR, Frontier Design; behavioral audit misalignment 2.67 (best so far); sandbox-escape 3.1% (Mythos 5.1 was 21%). Fable 5.1 (247) / Mythos 5.1 (248) rows kept as history
+- Catalog now 356 rows (ranks 1-356), 215 open-weight, 245 with release dates; data as of Nov 10, 2026
+
 ## Nov 9, 2026 (later) — Wit-Coder-4B (released today) + Tess-4.5-27B added (ranks 353, 354)
 - Added **Wit-Coder-4B** (353) — Rangle2, **released today Nov 9 2026**, Apache 2.0 (`Rangle2/Wit-Coder-4B`), 4B dense coding-agent DPO-2 fine-tune of Qwen3.5-4B, 32K ctx, Q4_K_M GGUF 2.78GB. Self-reported: HumanEval+ 87.2% (143/164, modified bounded protocol — not official EvalPlus), MATH-500 82/100, MMLU 5-shot 70.16%, GSM8K 82.64% (regression vs base); 42-task agent panel 71/126 task success vs base 40/126, blocked escalation 11/36 vs 0/36. Single-author RC — confidence low, directional only
 - Added **Tess-4.5-27B** (354) — Continuity Research, Apache 2.0 (`migtissera/Tess-4.5-27B`, HF Oct 18, ~950K GGUF downloads; surfaced in AI news Nov 8), 27B dense agentic-coding finetune of Qwen3.8-27B, 262K ctx, Q4_K_M 16.5GB. Community harness BenchLocal 133/150 best-of-3 (level with base), CLI-40 31/40, 25% fewer tokens than base, 0 hallucinated tool calls/182; 96 tok/s on RTX 4090 with MTP draft. No SWE/TB numbers — confidence medium, no third-party run yet
