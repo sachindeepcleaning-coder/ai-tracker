@@ -1,5 +1,12 @@
 # Changelog — coding_benchmarks.csv
 
+## Nov 13, 2026 (later) — Edge0-145B & Edge0-120B added (ranks 361-362)
+- Added **Edge0-145B** (361) and **Edge0-120B** (362) — Edge0, weights on HF Nov 11-12 2026. Latent sparse MoE derived from Qwen3.8-Flash-Next: 145B total / 10.1B active (120B / 8.64B), 48 layers, 512 experts (10 routed + 1 shared), 256K ctx, trained natively at 4 bits. Consumer-GPU focus: RTX 5090 24GB runs Q3_K (40.8GB / 28.0GB) at 121.2 / 144.6 tok/s agent decode, tested down to 16GB VRAM + 20GB host RAM residency
+- Vendor self-reported (from model cards, not yet externally reproduced): 145B — Terminal-Bench 2.1 **86.5**, DeepSWE v1.1 64.6, HLE 35.4, GPQA-Diamond 90.4, IFBench 80.6, Artificial Analysis LCR 79.3; 120B — TB2.1 **75.3**. No SWE-bench Verified/Pro numbers
+- License: Edge0 Community Model License 1.0 + Qwen Community License 1.0 (weights downloadable, commercial outputs OK, but selling the model or running a commercial model service needs a separate license) — counted open-weight. Q4 footprint 47.8GB / 33.0GB; self-host only ($0)
+- Sweep Nov 13: checked Hermes news (pages 1-2), HF newest-created models since Nov 11, and targeted search. Only other item was **deepseek-flash** API capability update (server-side search/URL fetch/file parsing on the existing V4.1 Flash model, token prices unchanged at $0.15/$0.60 off-peak) — no new model row. Qwen3-Coder-Next already cataloged (160)
+- Catalog now 362 rows (ranks 1-362), 219 open-weight, 251 with release dates; data as of Nov 13, 2026
+
 ## Nov 13, 2026 — Gemini 4 Carbon + Hydrogen, Qwen4-Max preview, ERNIE 5.5 Flash Preview added (ranks 357-360); Inkling 2 Small weights opened
 - **Inkling 2 Small (352) updated**: Apache 2.0 weights opened Nov 12 on HF (`thinkingmachines/Inkling-2-Small` NVFP4 + `Inkling-2-Small-MXFP8`), graduating from Tinker API-only; HF URL added, license now Apache 2.0; Tinker $0.30/$1.00 unchanged
 - Added **Gemini 4 Carbon** (357) — Google, Oct 2026 update (~2 weeks after Argon), dev GA Nov 10. AA Intelligence Index v5.0 **59 (#1)**, AA Coding Agent Index 59.4, TB4.0 65.2 (AA run); vendor FrontierCode 2.0 41.1% Med / 40.6% High, FrontierSWE v2 61.2%; cyber SEC-bench Pro 88.2%, ExploitGym 54.8%. $2/$10 intro → $4/$20, cached 95% off, 1M ctx
