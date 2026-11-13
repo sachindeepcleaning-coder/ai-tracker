@@ -1,5 +1,14 @@
 # Changelog — coding_benchmarks.csv
 
+## Nov 13, 2026 — Gemini 4 Carbon + Hydrogen, Qwen4-Max preview, ERNIE 5.5 Flash Preview added (ranks 357-360); Inkling 2 Small weights opened
+- **Inkling 2 Small (352) updated**: Apache 2.0 weights opened Nov 12 on HF (`thinkingmachines/Inkling-2-Small` NVFP4 + `Inkling-2-Small-MXFP8`), graduating from Tinker API-only; HF URL added, license now Apache 2.0; Tinker $0.30/$1.00 unchanged
+- Added **Gemini 4 Carbon** (357) — Google, Oct 2026 update (~2 weeks after Argon), dev GA Nov 10. AA Intelligence Index v5.0 **59 (#1)**, AA Coding Agent Index 59.4, TB4.0 65.2 (AA run); vendor FrontierCode 2.0 41.1% Med / 40.6% High, FrontierSWE v2 61.2%; cyber SEC-bench Pro 88.2%, ExploitGym 54.8%. $2/$10 intro → $4/$20, cached 95% off, 1M ctx
+- Added **Gemini 4 Hydrogen** (358) — Google, Nov 12. Fast tier (Flash successor): AA Index 51 (54 xhigh) vs Argon 50; CursorBench 54.3% default; Carbon-coordinated TB4.0 near-Carbon at -24% quota / 19% faster. $1.50/$7.50 flat across 1M; app/Search/AI Studio/API/Antigravity
+- Added **Qwen4-Max** (359) — Alibaba, managed preview Nov 11 (Qwen4 family #1; Max/Flash/Plus/27B roadmap). No benchmarks/model card/weights; 1M ctx is a Qwen Code client config; xhigh default reasoning; Token Plan from ~$3. Confidence low — planning estimate. **Qwen4 rumor watch graduates**
+- Added **ERNIE 5.5 Flash Preview** (360) — Baidu, Nov 11. 280B/14B MoE (512 experts top-10+1), 43 layers, 33.5T tokens, 1M ctx; HumanEval+ 82.3, MMLU-Pro 78.4; >200 tok/s (ECHO self-spec); independent Vals AI agent runs weak (TB4.0 ~13.6%, AutomationBench 20.7). Base open on HF (Oct 21); post-trained weights promised by Nov 25; custom license excludes EU/UK/South Korea
+- Sweep Nov 11-13: also checked and NOT added (out of coding scope): Qwen3.5-0.8B-Base (multimodal base), Gemini Decision 1 + AutoTrust-JEV-35B/v1.1 (decision models), AlphaGenome 2 (bio), AdaVaR-3B (vision), Unsloth Dynamic V3.1 + Scantist GLM-5.3-SLIM-GGUF + DSpine (quants/prunes/drafters), STDec/SGLang/vLLM/Lazarus (infra/papers)
+- Catalog now 360 rows (ranks 1-360), 217 open-weight, 249 with release dates; data as of Nov 13, 2026
+
 ## Nov 10, 2026 — Claude Fable 5.2 & Claude Mythos 5.2 added (ranks 355, 356; announced Nov 9)
 - **Claude Fable 5.2** (355) and **Claude Mythos 5.2** (356) — Anthropic, announced Nov 9 2026 (anthropic.com/claude-fable-and-mythos-5-2). Same underlying model; Fable = safeguards on, GA for all (`claude-fable-5-2`, AWS/GCP/Azure too); Mythos = same weights minus cyber/bio safeguards, Cyber/Life Sciences Verification Program only
 - Pricing cut from 5.1's $10/$50 to **$8/$40** per 1M (₹760.96/₹3,804.80); fast mode **$16/$80** up to 2.5x; up to 30% faster output than 5.1; 1M ctx; closed weights
