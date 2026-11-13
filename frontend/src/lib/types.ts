@@ -14,6 +14,7 @@ export interface Model {
   swe_bench_pro: string | null
   livecodebench_v6: string | null
   terminal_bench: string | null
+  terminal_bench_4: string | null
   humaneval: string | null
   mmlu_pro: string | null
   gpqa_diamond: string | null

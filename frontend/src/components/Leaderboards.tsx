@@ -28,16 +28,20 @@ const SCATTER_METRICS: { id: string; label: string; y: (m: Model) => number | nu
  */
 // eslint-disable-next-line react/only-export-components -- helper exported for vitest
 export function frontierNote(leaderboards: Record<string, Model[]>): string {
+  // Keep 2-decimal scores (e.g. Vals 65.15) intact; drop trailing zeros.
+  const fmt = (n: number) => String(Number(n.toFixed(2)))
   const chain = (key: string, onlyOpen?: boolean) =>
     (leaderboards[key] ?? [])
       .filter((m) => (onlyOpen ? isOpenWeight(m.license) : true))
       .slice(0, 3)
-      .map((m) => `${parsePct(m[key as keyof Model] as string | null)?.toFixed(1)} ${m.model}`)
+      .map((m) => `${fmt(parsePct(m[key as keyof Model] as string | null) as number)} ${m.model}`)
       .join(' > ')
   return (
     'Current leaders, read straight off the boards above (all figures vendor-reported unless the cell says otherwise): ' +
-    `TB 2.1 ${chain('terminal_bench')} · DeepSWE ${chain('swe_bench_pro')} · LCB ${chain('livecodebench_v6')}. ` +
-    `Best open-weight on each: TB 2.1 ${chain('terminal_bench', true)} · DeepSWE ${chain('swe_bench_pro', true)}. ` +
+    `TB 4.0 ${chain('terminal_bench_4')} · TB 2.1 ${chain('terminal_bench')} · ` +
+    `SWE-Pro ${chain('swe_bench_pro')} · LCB ${chain('livecodebench_v6')}. ` +
+    `Best open-weight on each: TB 4.0 ${chain('terminal_bench_4', true)} · ` +
+    `TB 2.1 ${chain('terminal_bench', true)} · SWE-Pro ${chain('swe_bench_pro', true)}. ` +
     'Scores from different harnesses are not directly comparable — prefer a standardized run for apples-to-apples.'
   )
 }

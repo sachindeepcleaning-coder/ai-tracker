@@ -31,10 +31,11 @@ describe('scoreSource', () => {
     expect(scoreSource('64.7% (SWE-Pro vendor; TB2.1 82% vendor)')).toBe('vendor')
     expect(scoreSource('50.0% (FrontierCode vendor)')).toBe('vendor')
   })
-  it('detects aa / scale / benchlm', () => {
+  it('detects aa / scale / benchlm / vals', () => {
     expect(scoreSource('53.9 (AA)')).toBe('aa')
     expect(scoreSource('38.7% Scale std.')).toBe('scale')
     expect(scoreSource('61.2 BenchLM')).toBe('benchlm')
+    expect(scoreSource('65.15% (Vals)')).toBe('vals')
   })
   it('plain cells -> null', () => {
     expect(scoreSource('93.4%')).toBeNull()

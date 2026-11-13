@@ -14,7 +14,7 @@ const notesByIdx: Record<string, string> = JSON.parse(
 )
 
 const BENCH_KEYS = [
-  'swe_bench_verified', 'swe_bench_pro', 'livecodebench_v6', 'terminal_bench',
+  'swe_bench_verified', 'swe_bench_pro', 'livecodebench_v6', 'terminal_bench', 'terminal_bench_4',
   'humaneval', 'mmlu_pro', 'gpqa_diamond', 'hle', 'math', 'aime_2026', 'arc_agi_2',
 ] as const
 

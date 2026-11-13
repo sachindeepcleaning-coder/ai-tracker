@@ -132,6 +132,7 @@ export default function Compare({ compareModels, onBack, onClear }: CompareProps
               ['SWE-V', (m: Model) => m.swe_bench_verified ?? '—'],
               ['SWE-Pro', (m: Model) => m.swe_bench_pro ?? '—'],
               ['LCB V6', (m: Model) => m.livecodebench_v6 ?? '—'],
+              ['TB 4.0', (m: Model) => m.terminal_bench_4 ?? '—'],
               ['TB 2.1', (m: Model) => m.terminal_bench ?? '—'],
               ['Price in/out $/M', (m: Model) => m.price_in_usd_per_mtok != null ? `$${m.price_in_usd_per_mtok}/$${m.price_out_usd_per_mtok}` : '—'],
               ['Price INR', (m: Model) => m.price_in_inr_per_mtok != null ? `₹${m.price_in_inr_per_mtok}/₹${m.price_out_inr_per_mtok}` : '—'],

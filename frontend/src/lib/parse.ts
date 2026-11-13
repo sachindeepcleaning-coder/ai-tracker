@@ -180,6 +180,7 @@ export function scoreSource(v: unknown) {
   if (/\baa\b/.test(s)) return 'aa'
   if (/\bscale\b/.test(s)) return 'scale'
   if (s.includes('benchlm')) return 'benchlm'
+  if (/\bvals\b/.test(s)) return 'vals'
   return null
 }
 

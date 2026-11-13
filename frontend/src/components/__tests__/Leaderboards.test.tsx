@@ -22,7 +22,7 @@ describe('Leaderboards — derived frontier note', () => {
 
   /** Build the same leaderboard map the component receives. */
   function buildLeaderboards() {
-    const keys = ['terminal_bench', 'swe_bench_pro', 'livecodebench_v6']
+    const keys = ['terminal_bench_4', 'terminal_bench', 'swe_bench_pro', 'livecodebench_v6']
     const out: Record<string, Model[]> = {}
     for (const k of keys) {
       out[k] = allModels
@@ -41,7 +41,7 @@ describe('Leaderboards — derived frontier note', () => {
       .map((s) => {
         // Drop the trailing sentence that follows the last leader.
         const cut = s.split('. Scores from different harnesses')[0]
-        const m = cut.match(/^(\d+\.\d)\s+(.*)$/)
+        const m = cut.match(/^(\d+(?:\.\d+)?)\s+(.*)$/)
         return m ? { score: parseFloat(m[1]), model: m[2].trim() } : null
       })
       .filter((p): p is { score: number; model: string } => p !== null)
@@ -49,8 +49,8 @@ describe('Leaderboards — derived frontier note', () => {
 
   /**
    * The note has two sentences:
-   *   1. "Current leaders ... : TB 2.1 <chain> · DeepSWE <chain> · LCB <chain>."
-   *   2. "Best open-weight on each: TB 2.1 <chain> · DeepSWE <chain>."
+   *   1. "Current leaders ... : TB 4.0 <chain> · TB 2.1 <chain> · SWE-Pro <chain> · LCB <chain>."
+   *   2. "Best open-weight on each: TB 4.0 <chain> · TB 2.1 <chain> · SWE-Pro <chain>."
    * Split on those known boundaries rather than on '·' (which also appears
    * BETWEEN the chains).
    */
@@ -58,20 +58,21 @@ describe('Leaderboards — derived frontier note', () => {
     const [first, second = ''] = note.split('Best open-weight on each:')
     const overall: Record<string, string> = {}
     for (const chunk of first.split('·')) {
-      const m = chunk.match(/(TB 2\.1|DeepSWE|LCB)\s+(.*)$/)
+      const m = chunk.match(/(TB 4\.0|TB 2\.1|SWE-Pro|LCB)\s+(.*)$/)
       if (m) overall[m[1]] = m[2].replace(/\.\s*$/, '').trim()
     }
     const open: Record<string, string> = {}
     for (const chunk of second.split('·')) {
-      const m = chunk.match(/(TB 2\.1|DeepSWE|LCB)\s+(.*)$/)
+      const m = chunk.match(/(TB 4\.0|TB 2\.1|SWE-Pro|LCB)\s+(.*)$/)
       if (m) open[m[1]] = m[2].replace(/\.\s*$/, '').trim()
     }
     return { overall, open }
   }
 
-  it('quotes the CURRENT top-3 for TB 2.1, DeepSWE and LCB', () => {
+  it('quotes the CURRENT top-3 for TB 4.0, TB 2.1, SWE-Pro and LCB', () => {
     const lb = buildLeaderboards()
     const note = frontierNote(lb)
+    expect(note).toContain(lb.terminal_bench_4[0].model)
     expect(note).toContain(lb.terminal_bench[0].model)
     expect(note).toContain(lb.swe_bench_pro[0].model)
     expect(note).toContain(lb.livecodebench_v6[0].model)
@@ -81,7 +82,7 @@ describe('Leaderboards — derived frontier note', () => {
     const lb = buildLeaderboards()
     const note = frontierNote(lb)
     const { overall } = chains(note)
-    for (const [key, label] of [['terminal_bench', 'TB 2.1'], ['swe_bench_pro', 'DeepSWE'], ['livecodebench_v6', 'LCB']] as const) {
+    for (const [key, label] of [['terminal_bench_4', 'TB 4.0'], ['terminal_bench', 'TB 2.1'], ['swe_bench_pro', 'SWE-Pro'], ['livecodebench_v6', 'LCB']] as const) {
       const seg = overall[label] ?? ''
       const got = pairs(seg)
       expect(got.length, `"${label}" quotes 3 leaders`).toBe(3)
@@ -101,7 +102,7 @@ describe('Leaderboards — derived frontier note', () => {
     const lb = buildLeaderboards()
     const note = frontierNote(lb)
     const { open } = chains(note)
-    for (const label of ['TB 2.1', 'DeepSWE']) {
+    for (const label of ['TB 4.0', 'TB 2.1', 'SWE-Pro']) {
       const got = pairs(open[label] ?? '')
       expect(got.length, `"${label}" quotes 3 open-weight leaders`).toBe(3)
       for (const p of got) {

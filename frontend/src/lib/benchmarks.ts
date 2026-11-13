@@ -20,6 +20,7 @@ export interface BenchColumn {
 
 export const BENCH_COLUMNS: BenchColumn[] = [
   { key: 'swe_bench_verified', label: 'SWE-V', headline: true },
+  { key: 'terminal_bench_4', label: 'TB 4.0', headline: true },
   { key: 'terminal_bench', label: 'TB 2.1', headline: true },
   { key: 'livecodebench_v6', label: 'LCB V6', headline: true },
   { key: 'swe_bench_pro', label: 'SWE-Pro' },

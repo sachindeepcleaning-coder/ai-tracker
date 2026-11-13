@@ -190,6 +190,9 @@ describe('data.json integrity (regen gate)', () => {
     // first-% parse in MATH/AIME26 columns.
     const tbBad = models.filter((m) => m.terminal_bench && /TB\s*(4\.0|3\.0)|TB-Science/i.test(m.terminal_bench))
     expect(tbBad.map((m) => `${m.rank} ${m.model}`), 'TB2.1 column must hold TB2.1 only').toEqual([])
+    const tb4Bad = models.filter((m) => m.terminal_bench_4 && /TB\s*2\.1|TB2\.1|TB-Science/i.test(m.terminal_bench_4))
+    expect(tb4Bad.map((m) => `${m.rank} ${m.model}`), 'TB4.0 column must hold TB4.0 only').toEqual([])
+    expect(models.filter((m) => m.terminal_bench_4).length, 'TB4.0 board has scores').toBeGreaterThan(10)
     const swevBad = models.filter((m) => m.swe_bench_verified && /SWE-Pro vendor/i.test(m.swe_bench_verified))
     expect(swevBad.map((m) => `${m.rank} ${m.model}`), 'SWE-V column must hold SWE-V only').toEqual([])
     const aimeBad = models.filter((m) => [m.math, m.aime_2026].some((v) => v && /AIME\s*25/i.test(v)))

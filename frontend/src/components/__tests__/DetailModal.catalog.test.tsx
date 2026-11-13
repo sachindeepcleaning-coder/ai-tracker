@@ -7,7 +7,7 @@ import data from '../../data.json'
 import type { Model } from '../../lib/types'
 
 const models = (data.all_coding_models || []) as Model[]
-const KEYS = ['swe_bench_verified', 'swe_bench_pro', 'livecodebench_v6', 'terminal_bench',
+const KEYS = ['swe_bench_verified', 'swe_bench_pro', 'livecodebench_v6', 'terminal_bench', 'terminal_bench_4',
   'humaneval', 'mmlu_pro', 'gpqa_diamond', 'hle', 'math', 'aime_2026', 'arc_agi_2'] as const
 
 describe('DetailModal full-catalog modal audit', () => {

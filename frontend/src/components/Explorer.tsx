@@ -10,7 +10,7 @@ import type { Model } from '../lib/types'
 import type { ModelFilters } from '../hooks/useModels'
 
 /** Download the current filtered view as CSV or JSON (client-side blob). */
-const EXPORT_COLS = ['rank', 'model', 'provider', 'total_parameters', 'active_parameters', 'full_q4_vram_gb', 'license', 'swe_bench_verified', 'swe_bench_pro', 'livecodebench_v6', 'terminal_bench', 'context_window', 'price_in_usd_per_mtok', 'price_out_usd_per_mtok', 'released']
+const EXPORT_COLS = ['rank', 'model', 'provider', 'total_parameters', 'active_parameters', 'full_q4_vram_gb', 'license', 'swe_bench_verified', 'swe_bench_pro', 'livecodebench_v6', 'terminal_bench', 'terminal_bench_4', 'context_window', 'price_in_usd_per_mtok', 'price_out_usd_per_mtok', 'released']
 
 function exportModels(rows: Model[], fmt: string) {
   let blob: Blob

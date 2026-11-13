@@ -27,7 +27,7 @@ describe('useModels wiring — regressions for #1, #2, #5, #8', () => {
     expect(allModels.length).toBe(dataMeta.model_count)
     expect(providers.length).toBeGreaterThan(5)
     expect(licenseGroups.length).toBeGreaterThan(3)
-    expect(BENCHMARKS.length).toBe(11)
+    expect(BENCHMARKS.length).toBe(12)
   })
 
   it('stats shape uses withQ4 (not avgQ4) and fact-checked counts', () => {
