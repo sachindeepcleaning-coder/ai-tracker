@@ -1,11 +1,11 @@
 <!-- STATS:START -->
 # AI Knowledge Base — India Local & Private AI (Verified Nov 16, 2026)
 
-**Scope:** Open-weight coding models for local/private deployment in India — models, benchmarks, pricing, hardware, and cost to serve. **368 models** (CSV ranks 1-368, single source of truth), **223 open-weight**, **257 with release dates — data as of **Nov 16, 2026**. All file prices use **₹95.12/USD** (standardized Aug 14, 2026). All benchmark scores are **vendor-reported** unless marked `AA` / `Scale` / `BenchLM` independent. **Last Update: Nov 16, 2026.**
+**Scope:** Open-weight coding models for local/private deployment in India — models, benchmarks, pricing, hardware, and cost to serve. **369 models** (CSV ranks 1-369, single source of truth), **224 open-weight**, **258 with release dates — data as of **Nov 16, 2026**. All file prices use **₹95.12/USD** (standardized Aug 14, 2026). All benchmark scores are **vendor-reported** unless marked `AA` / `Scale` / `BenchLM` independent. **Last Update: Nov 16, 2026.**
 <!-- STATS:END -->
 
 <!-- INTRO:START -->
-**ai-tracker** — open-weight coding-model catalog for local/private deployment in India: benchmarks, Q4 VRAM, ₹ pricing, and hardware fit. **368 models** (CSV ranks 1-368). Data as of Nov 16, 2026 · 3 of 368 rows re-checked against primary sources that day.
+**ai-tracker** — open-weight coding-model catalog for local/private deployment in India: benchmarks, Q4 VRAM, ₹ pricing, and hardware fit. **369 models** (CSV ranks 1-369). Data as of Nov 16, 2026 · 4 of 369 rows re-checked against primary sources that day.
 <!-- INTRO:END -->
 
 - Live site: https://sachindeepcleaning-coder.github.io/ai-tracker/
