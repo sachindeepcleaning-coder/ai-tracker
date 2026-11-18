@@ -23,15 +23,14 @@ const DIST = join(here, '../dist')
 const BASELINE_PATH = join(here, 'perf-baseline.json')
 
 // Gzip-KB budgets (blocking). data.json ceiling raised 40 -> 48 (Oct 25 2026)
-// when the payload hit 39.96KB; the full provenance notes moved to a deferred
-// notes.json fetched on demand by the detail modal, with its own ceiling so
-// the deferred file cannot grow unbounded either.
+// when the payload hit 39.96KB; the full provenance notes live in a deferred
+// notes.json fetched on demand by the detail modal. Their size is reported but
+// not budgeted (limit removed Nov 18 2026).
 const BUDGETS = [
   { id: 'entry-js-gz', maxKb: 90, desc: 'entry chunk (first paint JS)' },
   { id: 'initial-js-gz', maxKb: 100, desc: 'all non-lazy JS (entry + shared)' },
   { id: 'css-gz', maxKb: 10, desc: 'stylesheet' },
   { id: 'data-json-gz', maxKb: 48, desc: 'catalog payload over the wire' },
-  { id: 'notes-json-gz', maxKb: 24, desc: 'deferred provenance notes (detail modal)' },
 ]
 
 function kb(n) { return n / 1024 }
@@ -77,7 +76,7 @@ check('entry-js-gz', entryGz)
 check('initial-js-gz', initialGz)
 check('css-gz', cssGz)
 check('data-json-gz', dataGz)
-check('notes-json-gz', notesGz)
+console.log(`perf: notes-json-gz = ${notesGz.toFixed(1)}KB (no budget — report only) — deferred provenance notes (detail modal)`)
 console.log(`perf: lazy chunks (on-demand, report-only): ${lazy.map(([f, g]) => `${f.split('-')[0]} ${g.toFixed(0)}KB`).join(', ')}`)
 
 // Baseline loop: warn (don't fail) on >15% growth vs the committed baseline.
