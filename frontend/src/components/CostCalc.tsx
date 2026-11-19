@@ -18,13 +18,13 @@ export const COST_SAMPLES = [
   // 2026-10-17; rank 315 notes carry the same pair).
   { model: 'DeepSeek V4.1 Flash', label: 'DeepSeek V4.1 Flash (off-peak)', in: 0.15, out: 0.6, cache: 0.003 },
   { model: 'DeepSeek V4.1 Flash', label: 'DeepSeek V4.1 Flash (peak)', in: 0.3, out: 1.2, cache: 0.006 },
-  { model: 'GPT-5.6 Sol', label: 'GPT-5.6 Sol (promo)', cache: 0.4 },
-  { model: 'Kimi K3', label: 'Kimi K3', cache: 0.3 },
+  { model: 'GPT-6.2 Sol', label: 'GPT-6.2 Sol', cache: 0.1 },
+  { model: 'Kimi K3.1 Pro', label: 'Kimi K3.1 Pro', cache: 0.2 },
   { model: 'GLM-5.3-Flash', label: 'GLM-5.3-Flash', cache: 0.03 },
-  { model: 'Gemini 3.8 Flash', label: 'Gemini 3.8 Flash (intro)', cache: 0.075 },
-  { model: 'Muse Spark 1.3', label: 'Muse Spark 1.3', cache: 0.15 },
-  { model: 'Claude Fable 5.1', label: 'Fable 5.1', cache: 0.25 },
-  { model: 'GPT-6 Astra', label: 'GPT-6 Astra', cache: 1.0 },
+  { model: 'Gemini 4 Hydrogen', label: 'Gemini 4 Hydrogen', cache: 0.075 },
+  { model: 'Gemini 4 Neon', label: 'Gemini 4 Neon', cache: 0.15 },
+  { model: 'MAI Code 2 Flash', label: 'MAI Code 2 Flash (promo)', cache: 0.005 },
+  { model: 'GPT-6.2 Astra', label: 'GPT-6.2 Astra', cache: 0.4 },
   { model: 'Qwen3.8-27B', label: 'Qwen3.8-27B (local-like)', cache: 0.02 },
 ]
 

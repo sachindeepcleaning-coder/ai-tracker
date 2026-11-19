@@ -38,10 +38,10 @@ export function frontierNote(leaderboards: Record<string, Model[]>): string {
       .join(' > ')
   return (
     'Current leaders, read straight off the boards above (all figures vendor-reported unless the cell says otherwise): ' +
-    `TB 4.0 ${chain('terminal_bench_4')} · TB 2.1 ${chain('terminal_bench')} · ` +
+    `TB 4.1 ${chain('terminal_bench_4_1')} · TB 4.0 ${chain('terminal_bench_4')} · TB 2.1 ${chain('terminal_bench')} · ` +
     `SWE-Pro ${chain('swe_bench_pro')} · LCB ${chain('livecodebench_v6')}. ` +
-    `Best open-weight on each: TB 4.0 ${chain('terminal_bench_4', true)} · ` +
-    `TB 2.1 ${chain('terminal_bench', true)} · SWE-Pro ${chain('swe_bench_pro', true)}. ` +
+    `Best open-weight on each: TB 4.1 ${chain('terminal_bench_4_1', true)} · ` +
+    `TB 4.0 ${chain('terminal_bench_4', true)} · TB 2.1 ${chain('terminal_bench', true)} · SWE-Pro ${chain('swe_bench_pro', true)}. ` +
     'Scores from different harnesses are not directly comparable — prefer a standardized run for apples-to-apples.'
   )
 }

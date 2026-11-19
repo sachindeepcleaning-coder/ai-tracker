@@ -112,6 +112,7 @@ const HEADER_MAP = {
   'LiveCodeBench V6': 'livecodebench_v6',
   'Terminal-Bench 2.1': 'terminal_bench',
   'Terminal-Bench 4.0': 'terminal_bench_4',
+  'Terminal-Bench 4.1': 'terminal_bench_4_1',
   'HumanEval': 'humaneval',
   'MMLU-Pro': 'mmlu_pro',
   'GPQA Diamond': 'gpqa_diamond',

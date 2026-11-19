@@ -1,7 +1,7 @@
 /** Open-weight vs closed-frontier gap analysis — static research snapshot.
  *  Numbers come from independent third parties (Epoch AI, Stanford HAI 2026 AI
  *  Index, WhatLLM July 2026 gap map, Olympia Tech), cross-checked against this
- *  catalog's Oct 2026 rows. See SOURCES for links. */
+ *  catalog's Nov 2026 rows (refreshed Nov 19). See SOURCES for links. */
 
 export interface GapRow {
   task: string
@@ -17,16 +17,17 @@ export interface GapRow {
 }
 
 export const GAP_ROWS: GapRow[] = [
-  { task: 'General intelligence', detail: 'AA Intelligence Index composite', openScore: '46.3', openModel: 'MiMo-V2.6-Pro', closedScore: '57.6', closedModel: 'Claude Opus 5.5', gap: 11.3, openPct: 46.3, closedPct: 57.6 },
-  { task: 'Coding composite', detail: 'AA Coding Index', openScore: '76.2', openModel: 'Kimi K3 (Max)', closedScore: '81.6', closedModel: 'Claude Fable 5.1', gap: 5.4, openPct: 76.2, closedPct: 81.6 },
-  { task: 'Agentic / tool-use', detail: 'Multi-step task performance', openScore: '53.6', openModel: 'Qwen3.8-Flash-Next', closedScore: '57.9', closedModel: 'Claude Fable 5.1', gap: 4.3, openPct: 53.6, closedPct: 57.9 },
+  { task: 'General intelligence', detail: 'AA Intelligence Index (open v4.3.2 / closed v5.0.1)', openScore: '55', openModel: 'Kimi K3.1 Pro', closedScore: '65', closedModel: 'GPT-6.2 Astra', gap: 10, openPct: 55, closedPct: 65 },
+  { task: 'Coding agent', detail: 'Terminal-Bench 4.0 (best sourced)', openScore: '65.7', openModel: 'Kimi K3.1 Pro', closedScore: '70.6', closedModel: 'Claude Sonnet 5.5', gap: 4.9, openPct: 65.7, closedPct: 70.6 },
+  { task: 'Software engineering', detail: 'SWE-bench Pro (vendor tables)', openScore: '64.1', openModel: 'Agnes 2.5 Pro Theta', closedScore: '76.5', closedModel: 'Claude Opus 5', gap: 12.4, openPct: 64.1, closedPct: 76.5 },
   { task: 'Scientific programming', detail: 'SciCode', openScore: '61', openModel: 'MiMo-V2.6-Pro', closedScore: '67', closedModel: 'Claude Opus 5.5', gap: 6, openPct: 61, closedPct: 67 },
-  { task: 'Fresh code generation', detail: 'LiveCodeBench', openScore: '90', openModel: 'DeepSeek V3.2 Speciale', closedScore: '92', closedModel: 'Gemini 3 Pro Preview', gap: 2, openPct: 90, closedPct: 92 },
+  { task: 'Fresh code generation', detail: 'LiveCodeBench v6', openScore: '90.5', openModel: 'Agnes 2.5 Pro Theta', closedScore: '92', closedModel: 'Gemini 3 Pro Preview', gap: 1.5, openPct: 90.5, closedPct: 92 },
   { task: 'Long-context reasoning', detail: 'AA-LCR', openScore: '89', openModel: 'Kimi K3 (Max)', closedScore: '88', closedModel: 'Step 5 Preview', gap: -1, openPct: 89, closedPct: 88 },
   { task: 'Graduate science', detail: 'GPQA Diamond', openScore: '94', openModel: 'Qwen3.8 2.4T A95B', closedScore: '96', closedModel: 'GPT-6 Astra', gap: 2, openPct: 94, closedPct: 96 },
 ]
 
 export const HEADLINES = [
+  { k: 'TB4.1 65.8', s: 'New Terminal-Bench 4.1 board (Nov 2026): Opus 5.5 / Fable 5.2 lead at 65.8, Gemini 4 Neon 65.2 — Neon also ranks #1 on the Coding Agent Index (58.6) at $3/$15 per 1M.' },
   { k: '~4 months', s: 'Epoch AI: average open-weight lag behind the closed frontier since Jan 2026 (≈8 pts on its composite ECI). Down from ~16 months in the GPT-4 era — but up from 3 months in late 2025.' },
   { k: '3.3%', s: "Stanford HAI 2026 AI Index: raw capability gap between the single best closed and best open model. The old 17.5-pt MMLU chasm has closed to ~zero." },
   { k: '2–11 pts', s: 'WhatLLM July 2026 gap map: task-dependent spread. Near-parity on fresh codegen and long-context reasoning; widest on the general-intelligence composite.' },
@@ -41,7 +42,7 @@ export const OPEN_WINS = [
 ]
 
 export const GAP_HOLDS = [
-  { t: 'Long-horizon agents', d: 'Error recovery and coherent work over many steps — not single functions — is the persistent closed-model advantage (Opus 5.5 / Fable 5.1 territory).' },
+  { t: 'Long-horizon agents', d: 'Error recovery and coherent work over many steps — not single functions — is the persistent closed-model advantage (Opus 5.5 / Fable 5.2 territory).' },
   { t: 'Hardest reasoning', d: 'The 11-point Intelligence Index gap lives here: frontier math, science and sustained multi-step inference.' },
   { t: 'Calibration', d: "DeepSeek's V4 line hallucinates confidently when unsure. Frontier alignment and knowing-when-you-don't-know remain a real, if narrowing, moat." },
   { t: 'The measurement caveats', d: 'Epoch warns open models hill-climb public benchmarks harder (private-test gap may be larger), closed labs keep their best models unreleased, and the compute-investment gulf is widening even as scores converge.' },
@@ -64,4 +65,4 @@ export const SOURCES = [
   { label: 'CodeConductor — Open-Weight vs Closed Frontier: Which Should You Use? (Sep 2026)', url: 'https://codeconductor.ai/blog/open-weight-vs-closed-frontier-ai-models/' },
 ]
 
-export const GAP_VINTAGE = 'Analyses: Jun–Jul 2026 · cross-checked against catalog rows Oct 2026'
+export const GAP_VINTAGE = 'Analyses: Jun–Jul 2026 · refreshed with Nov 2026 catalog rows (TB4.1 board, Neon / GPT-6.2 / MAI Code 2)'

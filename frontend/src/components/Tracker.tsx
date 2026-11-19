@@ -325,13 +325,13 @@ function HighlightsView() {
       <div className="grid md:grid-cols-2 gap-4">
         <div className="card p-4">
           <h3 className="font-bold">Frontier tightness</h3>
-          <p className="text-sm text-white/60 mt-1">TB2.1 92.8 (SWE-2, vendor) &gt; 90.6 (V4.1 Flash) &gt; 88.3 (K3) ≈ 88.2 (GLM-5.3) ≈ 87.9 (V4 Pro 0813) &gt; 86.6 (QMax) &gt; 86.1 (Ornith); top-to-6th gap ~6.7 pts across 5-10× hardware. Giants not worth it for single-user — spend on infra for models that fit 512GB.</p>
+          <p className="text-sm text-white/60 mt-1">TB4.1 65.8 (Opus 5.5 / Fable 5.2) ≈ 65.2 (Gemini 4 Neon) &gt; 64.5 (Carbon) &gt; 63.9 (Sonnet 5.5) &gt; 62.1 (GPT-6.2 Astra) &gt; 61.5 (GPT-6.2 Sol) — top-to-6th gap ~4.3 pts, and Neon hits #1 on the Coding Agent Index at $3/$15 per 1M. On TB2.1 the open cohort is just as tight: SWE-2 92.8 &gt; V4.1 Flash 90.6 &gt; GLM-5.3 88.2 ≈ Sage-S2.1 87.9. Giants not worth it for single-user — spend on infra for models that fit 512GB.</p>
           <div className="mt-3 h-[160px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={[{ n: 'SWE-2', tb: 92.8 }, { n: 'V4.1 Flash', tb: 90.6 }, { n: 'K3', tb: 88.3 }, { n: 'GLM5.3', tb: 88.2 }, { n: 'V4 Pro', tb: 87.9 }, { n: 'QMax', tb: 86.6 }, { n: 'Ornith', tb: 86.1 }]}>
+              <BarChart data={[{ n: 'Opus 5.5', tb: 65.8 }, { n: 'Fable 5.2', tb: 65.8 }, { n: 'Neon', tb: 65.2 }, { n: 'Carbon', tb: 64.5 }, { n: 'Sonnet 5.5', tb: 63.9 }, { n: 'Astra 6.2', tb: 62.1 }, { n: 'Sol 6.2', tb: 61.5 }]}>
                 <CartesianGrid stroke="rgba(255,255,255,0.06)" />
                 <XAxis dataKey="n" tick={{ fontSize: 10, fill: '#94A3B8' }} />
-                <YAxis domain={[80, 95]} tick={{ fill: '#94A3B8' }} />
+                <YAxis domain={[55, 70]} tick={{ fill: '#94A3B8' }} />
                 <Tooltip contentStyle={{ background: '#131C2E', border: '1px solid rgba(255,255,255,0.1)' }} />
                 <Bar dataKey="tb" fill="#8B5CF6" radius={[6, 6, 0, 0]} />
               </BarChart>

@@ -139,6 +139,7 @@ if (import.meta.env.MODE === 'test') {
  * @property {string|null} livecodebench_v6
  * @property {string|null} terminal_bench
  * @property {string|null} terminal_bench_4
+ * @property {string|null} terminal_bench_4_1
  * @property {string|null} humaneval
  * @property {string|null} mmlu_pro
  * @property {string|null} gpqa_diamond
@@ -161,6 +162,7 @@ if (import.meta.env.MODE === 'test') {
 /** Every benchmark column tracked in the catalog — coding first, then reasoning/math.
     Drives the Leaderboards tab (one board per benchmark). */
 export const BENCHMARKS = [
+  { key: 'terminal_bench_4_1', title: 'Terminal-Bench 4.1', icon: 'zap' },
   { key: 'terminal_bench_4', title: 'Terminal-Bench 4.0', icon: 'zap' },
   { key: 'terminal_bench', title: 'Terminal-Bench 2.1', icon: 'zap' },
   { key: 'swe_bench_verified', title: 'SWE-bench Verified', icon: 'award' },

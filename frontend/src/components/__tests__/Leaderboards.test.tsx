@@ -22,7 +22,7 @@ describe('Leaderboards — derived frontier note', () => {
 
   /** Build the same leaderboard map the component receives. */
   function buildLeaderboards() {
-    const keys = ['terminal_bench_4', 'terminal_bench', 'swe_bench_pro', 'livecodebench_v6']
+    const keys = ['terminal_bench_4_1', 'terminal_bench_4', 'terminal_bench', 'swe_bench_pro', 'livecodebench_v6']
     const out: Record<string, Model[]> = {}
     for (const k of keys) {
       out[k] = allModels
@@ -58,12 +58,12 @@ describe('Leaderboards — derived frontier note', () => {
     const [first, second = ''] = note.split('Best open-weight on each:')
     const overall: Record<string, string> = {}
     for (const chunk of first.split('·')) {
-      const m = chunk.match(/(TB 4\.0|TB 2\.1|SWE-Pro|LCB)\s+(.*)$/)
+      const m = chunk.match(/(TB 4\.1|TB 4\.0|TB 2\.1|SWE-Pro|LCB)\s+(.*)$/)
       if (m) overall[m[1]] = m[2].replace(/\.\s*$/, '').trim()
     }
     const open: Record<string, string> = {}
     for (const chunk of second.split('·')) {
-      const m = chunk.match(/(TB 4\.0|TB 2\.1|SWE-Pro|LCB)\s+(.*)$/)
+      const m = chunk.match(/(TB 4\.1|TB 4\.0|TB 2\.1|SWE-Pro|LCB)\s+(.*)$/)
       if (m) open[m[1]] = m[2].replace(/\.\s*$/, '').trim()
     }
     return { overall, open }
@@ -82,7 +82,7 @@ describe('Leaderboards — derived frontier note', () => {
     const lb = buildLeaderboards()
     const note = frontierNote(lb)
     const { overall } = chains(note)
-    for (const [key, label] of [['terminal_bench_4', 'TB 4.0'], ['terminal_bench', 'TB 2.1'], ['swe_bench_pro', 'SWE-Pro'], ['livecodebench_v6', 'LCB']] as const) {
+    for (const [key, label] of [['terminal_bench_4_1', 'TB 4.1'], ['terminal_bench_4', 'TB 4.0'], ['terminal_bench', 'TB 2.1'], ['swe_bench_pro', 'SWE-Pro'], ['livecodebench_v6', 'LCB']] as const) {
       const seg = overall[label] ?? ''
       const got = pairs(seg)
       expect(got.length, `"${label}" quotes 3 leaders`).toBe(3)

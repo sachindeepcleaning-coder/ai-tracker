@@ -1,5 +1,9 @@
 # Changelog — coding_benchmarks.csv
 
+## Nov 19, 2026 (leaderboard + tabs refresh)
+- Added a **Terminal-Bench 4.1** CSV column and site leaderboard board (after TB4.0; TB4.0/TB2.1 columns untouched): 9 scored rows — Opus 5.5 / Fable 5.2 65.8 (tbench.ai), Gemini 4 Neon 65.2 (model card), Gemini 4 Carbon 64.5, Sonnet 5.5 63.9, GPT-6.2 Astra 62.1, GPT-6.2 Sol 61.5, GPT-6.1 Sol 60.9, GPT-6 Astra 60.3. Cross-harness gate extended to the new column; new board wired into Compare, Explorer CSV export, detail modal, and the derived frontier note (13 boards total)
+- Refreshed stale tab content: Cost Calculator presets now use GPT-6.2 Sol/Astra, Gemini 4 Neon/Hydrogen, Kimi K3.1 Pro and MAI Code 2 Flash (cache rates included); Tracker "Frontier tightness" panel now shows TB4.1 leaders; Open-vs-Closed gap analysis updated with Nov 2026 rows (Kimi K3.1 Pro 55 vs GPT-6.2 Astra 65 on AA index, TB4.0 65.7 vs 70.6, SWE-Pro 64.1 vs 76.5) and a TB4.1 headline
+
 ## Nov 19, 2026 — Gemini 4 Neon added (377)
 - Added **Gemini 4 Neon** (377) — Google, GA Nov 18 2026 (blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon; deepmind.google model card): adapted from Gemini 4 Carbon, text+image+audio+video input, 1M ctx, 64K sync output (1M via background decode), 4 effort levels. Coding: #1 on Coding Agent Index 58.6, Terminal-Bench 4.1 65.2, FrontierCode 2.0 46.2, CursorBench 4.1 65.4, SWE-sweep 39.0 in Antigravity vs 12.8 mini-SWE; Artificial Analysis Intelligence Index 61 (xhigh, #3), CWE-bench v2 70.7, SEC-bench Pro 90.5; 0.0% cheating on TB4.0. $3/$15 per 1M ($0.15 cache read), 32% lower cost per task than Carbon at high effort — closed API, no weights
 - Sweep Nov 19: OpenRouter created since Nov 17 -> google/gemini-4-neon (added) and GPT-6.2 family (already in); HF orgs -> microsoft/Aion-1.0-Instruct-2.3B (Windows on-device general SLM, not coding), Phai-A1 GGUF (quant of row 376); llm-releases no entries newer than Nov 18
