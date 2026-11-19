@@ -112,13 +112,13 @@ export const WATCH_ITEMS: WatchItem[] = [
     country: 'CN',
     countryName: 'China',
     status: 'announced',
-    date: '2026-10-23',
-    access: 'Open weights (promised by Nov 4 2026)',
+    date: '2026-11-02',
+    access: 'Open weights live (shipped Nov 2, two days early)',
     context: '1M',
     params: '2.8T / 104B active',
     summary:
-      'K3.1 Pro launched Oct 23 as API-only ($2/$10) with the vendor promising full model weights by Nov 4, 2026 (catalog rank 340). No Moonshot HF repo exists yet — moonshotai’s newest is still Kimi-K3 (Jun 13). The release deliberately drops cyber capability, so expect a licence gate like Kimi K3’s ~$20M revenue ceiling; Kimi K3 precedent was 11 days from announce to weights.',
-    source: { label: 'kimi.ai blog Oct 23 + HF org check Oct 25', url: 'https://www.kimi.ai/blog/kimi-k3-1-pro' },
+      'GRADUATED: moonshotai/Kimi-K3.1-Pro weights went public Nov 2 2026, two days ahead of the Nov 4 promise — ungated, MXFP4/MXFP8 quantization-aware, catalog row 340 reclassified to open weights. License: Kimi K3.1-Pro License (modified MIT) with MaaS revenue ceiling and attribution conditions. Entry kept for history; no longer a pending release.',
+    source: { label: 'huggingface.co/moonshotai Nov 2', url: 'https://huggingface.co/moonshotai/Kimi-K3.1-Pro' },
   },
   {
     id: 'muse-spark-max',
@@ -234,12 +234,12 @@ export const WATCH_ITEMS: WatchItem[] = [
     country: 'CN',
     countryName: 'China',
     status: 'announced',
-    date: '2026-09-21',
+    date: '2026-11-15',
     access: 'Open weights (expected for the smaller tiers)',
     context: null,
     params: 'Undisclosed (roadmap to 5-10T by Qwen4.5/Qwen5)',
     summary:
-      'Alibaba confirmed the Qwen4 family at its Apsara conference (Reuters, Sep 21; Pandaily Sep 23: "Qwen4 family into training"; Vietnam Investment Review Sep 23: 10T roadmap), with Alibaba slides projecting 5-10T parameters for Qwen4.5 and Qwen5. No tier sizes, licences or dates, and the family was said to be still in training. Tracked as one family row, not per tier — the date field holds the last hard signal (Apsara, Sep 21) and moves to the next one when it lands: a Qwen4 HF repo or weights card, a published licence, or an official release date. Checked Oct 25: no Qwen4 repo on HF (Qwen’s newest is Qwen-Image-2.1-Turbo, Oct 9); the "qwen4_exp" architecture tag in Transformers and llama.cpp is the internal arch name of the already-shipped Qwen3.8-Flash-Next (llama.cpp PR 27742, merged Aug 27) — a second PR titled "add Qwen4-Exp" (27739) was closed unmerged, so the Oct 24 "Qwen model nearing release" headline traces back to two-month-old PRs rather than new evidence.',
+      'GRADUATED (flagship): Qwen4-Max reached general availability Nov 15 2026 (catalog row 359, 2.4T/71B MoE, 1M ctx, $1.50/$4.50 per 1M on QwenCloud/API/OpenRouter). Family roadmap still has smaller tiers: Flash, Plus and the likely open-weight Qwen4-27B remain unreleased — this entry now tracks those pending tiers, not Max.',
     source: { label: 'Reuters Sep 21 + Pandaily Sep 23 (Apsara)' },
   },
   {
