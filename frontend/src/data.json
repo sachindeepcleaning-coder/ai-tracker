@@ -11011,7 +11011,7 @@
       "total_parameters": "770B",
       "active_parameters": "49B",
       "full_q4_vram_gb": 385,
-      "license": "Apache 2.0 (Hy4-preview weights on HF Aug 27 2026; Hy4 GA API Nov 4 2026 on OpenRouter; 1M ctx; TB2.1 85.4 / DeepSWE 64.3 vendor)",
+      "license": "Custom (Tencent Hy License 1.0 - Apache-2.0-derived with MaaS terms; full Hy4 weights public on HF Nov 18 2026: BF16 ~1.55TB / FP8 ~786GB / base ~1.54TB; 1M ctx; TB2.1 85.4 / DeepSWE 64.3 vendor)",
       "swe_bench_verified": null,
       "swe_bench_pro": null,
       "livecodebench_v6": null,
@@ -11031,20 +11031,20 @@
       "price_in_inr_per_mtok": 39.67,
       "price_out_inr_per_mtok": 118.95,
       "model_type": "foundation",
-      "last_verified": "2026-11-05",
+      "last_verified": "2026-11-16",
       "source": "openrouter",
       "confidence": "high",
       "is_orchestrator": false,
       "slug": "tencent-hunyuan-tencent-hy4-preview",
-      "hf_url": "https://huggingface.co/tencent/Hy4-preview",
+      "hf_url": "https://huggingface.co/tencent/Hy4",
       "id": "tencent-hunyuan-tencent-hy4-preview",
       "released": "2026-11-04",
       "released_est": false,
       "released_src": "OpenRouter tencent/hy4 GA listing Nov 4 2026 (preview Aug 28)",
       "is_free": false,
       "price_band": "budget",
-      "note_excerpt": "Hy4 GA Nov 4 2026: OpenRouter tencent/hy4, 1M ctx, text+image input — official release with strong agentic and long-horizon productivity…",
-      "indep": true
+      "note_excerpt": "Hy4 GA Nov 4 2026: OpenRouter tencent/hy4, 1M ctx, text+image input, official release with strong agentic and long-horizon productivity…",
+      "indep": false
     },
     {
       "rank": "264",
@@ -15880,5 +15880,5 @@
   "data_regen_at": "2026-11-20",
   "model_count": 378,
   "data_as_of": "2026-11-16",
-  "rechecked_count": 13
+  "rechecked_count": 14
 }

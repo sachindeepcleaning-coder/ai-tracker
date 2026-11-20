@@ -1,5 +1,8 @@
 # Changelog — coding_benchmarks.csv
 
+## Nov 20, 2026 (later) — Tencent Hy4 full flagship weights opened (row 263 updated)
+- Updated **Tencent Hy4** (263): the full flagship weights are now public on HF (Nov 18 2026) — `tencent/Hy4` BF16 245 shards ~1.55TB, `tencent/Hy4-FP8` ~786GB, `tencent/Hy4-base` ~1.54TB, plus community GGUF (`AngelSlim/Hy4-GGUF`), under the custom Tencent Hy License 1.0 (Apache-2.0-derived with MaaS terms, not OSI-approved). Row reclassified from "weights promised" to custom-license open weights; HF URL updated. GA API pricing $0.417/$1.2505 per 1M unchanged
+
 ## Nov 20, 2026 — SenseNova-Loop-9B added (378); broad sweep found no other coding releases
 - Added **SenseNova-Loop-9B** (378) — SenseTime/SenseNova, GA Nov 17 2026 (HF `sensenova/SenseNova-Loop-9B`, Apache 2.0): looped-decoder multimodal model, 32 distinct layers run as 56 executions (~9.7B stored / ~14.6B effective params), two-stream mHC, 512K ctx, text+image input; AWQ/GGUF builds. Preview vendor scores: Terminal-Bench 2.1 40.5, BIRD-Dev 71.4, AutomationBench 13.7 — leads its 3B-40B comparison set on agentic/tool-use evals; GA claims better coding scores but no published numbers yet
 - Searched everywhere Nov 19 07:00 -> Nov 20 07:00 UTC: HF global (nothing with likes>=10 since Nov 19), HF lab orgs, OpenRouter (only mistralai/pixtral-large-2502, a vision model), llm-releases (newest: Olala mini 7A1B Nov 19 - general reasoning MoE, skipped; DaisyRose-27B Nov 18 - RL-only fine-tune of Qwen3.8-27B, skipped per no-fine-tunes rule; Aion 1.0 - Windows on-device general SLM, skipped), web news (no new coding launches Nov 19-20)
