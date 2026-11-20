@@ -1,5 +1,10 @@
 # Changelog — coding_benchmarks.csv
 
+## Nov 20, 2026 — SenseNova-Loop-9B added (378); broad sweep found no other coding releases
+- Added **SenseNova-Loop-9B** (378) — SenseTime/SenseNova, GA Nov 17 2026 (HF `sensenova/SenseNova-Loop-9B`, Apache 2.0): looped-decoder multimodal model, 32 distinct layers run as 56 executions (~9.7B stored / ~14.6B effective params), two-stream mHC, 512K ctx, text+image input; AWQ/GGUF builds. Preview vendor scores: Terminal-Bench 2.1 40.5, BIRD-Dev 71.4, AutomationBench 13.7 — leads its 3B-40B comparison set on agentic/tool-use evals; GA claims better coding scores but no published numbers yet
+- Searched everywhere Nov 19 07:00 -> Nov 20 07:00 UTC: HF global (nothing with likes>=10 since Nov 19), HF lab orgs, OpenRouter (only mistralai/pixtral-large-2502, a vision model), llm-releases (newest: Olala mini 7A1B Nov 19 - general reasoning MoE, skipped; DaisyRose-27B Nov 18 - RL-only fine-tune of Qwen3.8-27B, skipped per no-fine-tunes rule; Aion 1.0 - Windows on-device general SLM, skipped), web news (no new coding launches Nov 19-20)
+- Catalog now 378 rows (ranks 1-378), 226 open-weight, 267 with release dates; data as of Nov 16, 2026
+
 ## Nov 19, 2026 (leaderboard + tabs refresh)
 - Added a **Terminal-Bench 4.1** CSV column and site leaderboard board (after TB4.0; TB4.0/TB2.1 columns untouched): 9 scored rows — Opus 5.5 / Fable 5.2 65.8 (tbench.ai), Gemini 4 Neon 65.2 (model card), Gemini 4 Carbon 64.5, Sonnet 5.5 63.9, GPT-6.2 Astra 62.1, GPT-6.2 Sol 61.5, GPT-6.1 Sol 60.9, GPT-6 Astra 60.3. Cross-harness gate extended to the new column; new board wired into Compare, Explorer CSV export, detail modal, and the derived frontier note (13 boards total)
 - Refreshed stale tab content: Cost Calculator presets now use GPT-6.2 Sol/Astra, Gemini 4 Neon/Hydrogen, Kimi K3.1 Pro and MAI Code 2 Flash (cache rates included); Tracker "Frontier tightness" panel now shows TB4.1 leaders; Open-vs-Closed gap analysis updated with Nov 2026 rows (Kimi K3.1 Pro 55 vs GPT-6.2 Astra 65 on AA index, TB4.0 65.7 vs 70.6, SWE-Pro 64.1 vs 76.5) and a TB4.1 headline
