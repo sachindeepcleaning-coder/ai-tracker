@@ -1,5 +1,10 @@
 # Changelog — coding_benchmarks.csv
 
+## Nov 20, 2026 (later) — SWE-2 Flash added (379); full Nov-release audit found no other coding gaps
+- Added **SWE-2 Flash** (379) — Cognition, launched Nov 4 2026 (Devin Desktop + CLI; weights held for a vetted-partner program): 276B total / 12B active MoE coding model built on Inkling-Small with a mid-training stage added before RL, 1M ctx. Vendor: Terminal-Bench 2.1 **89.2**, Terminal-Bench 4.0 20.0, DeepSWE v1.1 60.1, SWE-bench Pro v2 Hard 89.9, FrontierCode 2.0 24.0, FrontierCode 1.1 45.5, SWE-Atlas QA 50.0, ExploitBench 34.8 - one-fifth the price and 3x the speed of SWE-2 (row 265). Closed weights except vetted partners
+- Full November audit vs llm-releases (84 entries): all other unmatched items are out of coding scope — Tencent WeMM-Video 2B/4B/9B/35B (video), Liquid AI d1.2/d1.2-ultra (decision models), Trellis Data Agentaus 1 (220B sovereign general), TokenRhythm NeoHorse-1.5 (preview), KT Mi:dm K 3.0 Pro (general reasoning), Aion 1.0 (on-device general), DaisyRose-27B (RL-only fine-tune), TwIL-8B (fine-tune), Perplexity/HeyGen/Microsoft decision models, Lara/Bielik/LFM3-VL/Mage-VL/Rosolind (non-coding)
+- Catalog now 379 rows (ranks 1-379), 226 open-weight, 268 with release dates; data as of Nov 16, 2026
+
 ## Nov 20, 2026 (later) — Tencent Hy4 full flagship weights opened (row 263 updated)
 - Updated **Tencent Hy4** (263): the full flagship weights are now public on HF (Nov 18 2026) — `tencent/Hy4` BF16 245 shards ~1.55TB, `tencent/Hy4-FP8` ~786GB, `tencent/Hy4-base` ~1.54TB, plus community GGUF (`AngelSlim/Hy4-GGUF`), under the custom Tencent Hy License 1.0 (Apache-2.0-derived with MaaS terms, not OSI-approved). Row reclassified from "weights promised" to custom-license open weights; HF URL updated. GA API pricing $0.417/$1.2505 per 1M unchanged
 
