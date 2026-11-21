@@ -75,6 +75,58 @@ export function fmtDay(iso: string): string {
 export const CHANGE_ITEMS: ChangeItem[] = [
   // ---------------- November 2026 ----------------
   {
+    id: 'inkling-2-mini',
+    date: '2026-11-20',
+    type: 'released',
+    title: 'Inkling 2 Mini open weights',
+    provider: 'Thinking Machines Lab',
+    country: 'US',
+    countryName: 'United States',
+    rank: 380,
+    summary:
+      'Open-weight (Apache 2.0) looped MoE, 26.4B total / 3.4B active, 1M ctx, ~20GB checkpoint that runs on 32GB+ devices. Vendor: SWE-bench Verified 79.2, SWE-Pro v2 Hard 77.9, TB2.1 71.6 — strong SWE scores but TB4.0 only 5.6. $0.091/$0.362 per 1M on OpenRouter/Tinker.',
+    source: { label: 'huggingface.co/thinkingmachines Nov 20' },
+  },
+  {
+    id: 'hy4-full-weights',
+    date: '2026-11-20',
+    type: 'license-change',
+    title: 'Tencent Hy4 full flagship weights opened',
+    provider: 'Tencent Hunyuan',
+    country: 'CN',
+    countryName: 'China',
+    rank: 263,
+    summary:
+      'BF16 (~1.55TB), FP8 (~786GB) and base (~1.54TB) weights published on Hugging Face under the custom Tencent Hy License 1.0 (Apache-2.0-derived, MaaS terms). Row 263 reclassified from weights-promised to custom-license open weights.',
+    source: { label: 'huggingface.co/tencent Nov 20' },
+  },
+  {
+    id: 'swe-2-flash',
+    date: '2026-11-04',
+    type: 'released',
+    title: 'SWE-2 Flash launched in Devin',
+    provider: 'Cognition',
+    country: 'US',
+    countryName: 'United States',
+    rank: 379,
+    summary:
+      'Smaller coding model built on Inkling-Small (276B total / 12B active) with a mid-training stage before RL, 1M ctx. Vendor: TB2.1 89.2, TB4.0 20.0, DeepSWE 60.1, SWE-Pro v2 Hard 89.9, FrontierCode 2.0 24.0 — one-fifth the price and 3x the speed of SWE-2. Weights held for a vetted-partner program.',
+    source: { label: 'cognition.com/blog/swe-2-flash Nov 4' },
+  },
+  {
+    id: 'sensenova-loop-9b',
+    date: '2026-11-17',
+    type: 'released',
+    title: 'SenseNova-Loop-9B published',
+    provider: 'SenseTime',
+    country: 'CN',
+    countryName: 'China',
+    rank: 378,
+    summary:
+      'GA of the looped-decoder multimodal model: ~9.7B stored / ~14.6B effective params (32 layers run as 56 executions), 512K ctx, Apache 2.0 with AWQ/GGUF builds. Preview scores: TB2.1 40.5, BIRD-Dev 71.4, AutomationBench 13.7.',
+    source: { label: 'huggingface.co/sensenova Nov 17' },
+  },
+  {
     id: 'gemini-4-neon',
     date: '2026-11-18',
     type: 'released',
