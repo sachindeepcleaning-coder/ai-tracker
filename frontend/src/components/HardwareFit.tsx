@@ -26,7 +26,7 @@ export default function HardwareFit({ hwModels }: { hwModels: Model[] }) {
     <div className="space-y-4">
       <div className="card p-4">
         <h2 className="font-bold flex items-center gap-2"><HardDrive size={16} aria-hidden="true" /> Hardware Fit Matrix (Q4 weights)</h2>
-        <p className="text-sm text-white/60">All {hwModels.length} open-weight models with Q4 VRAM data, best SWE-V first. Closed / API-only models excluded (no local weights). Independent of Explorer filters.</p>
+        <p className="text-sm text-white/60">All {hwModels.length} open-weight models with a Q4 VRAM estimate, best SWE-V first. Closed / API-only models are excluded (no local weights), and open-weight rows without a published Q4 figure can't be placed in a VRAM matrix. Independent of Explorer filters.</p>
         {activeTier && (
           <p className="text-xs text-emerald-300/90 mt-1" aria-live="polite">{matrixRows.length} of {hwModels.length} models fit {activeTier.label} (✓ or ~)</p>
         )}
