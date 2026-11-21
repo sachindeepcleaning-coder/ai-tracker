@@ -113,7 +113,7 @@ export default function HardwareFit({ hwModels }: { hwModels: Model[] }) {
       </div>
 
       <div className="card p-4 text-sm text-white/60">
-        <p><b>India picks Aug 2026 street, 5-yr TCO:</b> Best value `1×5090 ~₹5L → Qwen27B ~105 tok/s single-stream`, Balanced `2× DGX Spark ~₹10-11L → V4 Flash 40 tok/s`, 4× Spark ~₹22-30L runs GLM-5.3+V4.1 Flash+Qwen, `DGX B300 2.1TB ~₹5.5Cr` any model `README.md:149`.</p>
+        <p><b>India picks Aug 2026 street, 5-yr TCO:</b> Best value `1×5090 ~₹5L → Qwen27B ~105 tok/s single-stream`, Balanced `2× DGX Spark ~₹10-11L → V4 Flash 40 tok/s`, 4× Spark ~₹22-30L runs GLM-5.3+V4.1 Flash+Qwen, `DGX Station GB300 748GB ~₹94L` deskside for large Q4 models, `DGX B300 2.1TB ~₹5.5Cr` any model `README.md:149`.</p>
       </div>
     </div>
   )

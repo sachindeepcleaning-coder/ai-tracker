@@ -48,16 +48,18 @@ describe('HardwareFit — hardware tier matrix', () => {
     }
   })
 
-  it('includes the new 4× Pro 6000, Mac Studio M5 and Vera Rubin NVL72 tiers', () => {
+  it('includes the new 4× Pro 6000, Mac Studio M5, DGX Station and Vera Rubin NVL72 tiers', () => {
     const { container, unmount } = renderFit(HW_MODELS)
     try {
       const text = container.textContent
       expect(text).toContain('4× Pro 6000 384GB')
+      expect(text).toContain('DGX Station GB300 748GB')
       expect(text).toContain('1× Mac Studio M5 512GB')
       expect(text).toContain('4× Mac Studio M5 2TB')
       expect(text).toContain('Vera Rubin NVL72 20.7TB')
       // India landed prices surface in the matrix sub-headers
       expect(text).toContain('₹1.7-2.1Cr')
+      expect(text).toContain('~₹94L ($99K+)')
       expect(text).toContain('₹47-65Cr')
     } finally {
       unmount()

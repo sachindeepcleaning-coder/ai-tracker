@@ -13,6 +13,7 @@ export const hardwareTiers = [
   { id: '2xPro6000', label: '2× Pro 6000 192GB', vram: 192, cost: '₹85L-1Cr', tok: 'V4 Flash Q4 (FP8 243 removed)' },
   { id: '4xPro6000', label: '4× Pro 6000 384GB', vram: 384, cost: '₹1.7-2.1Cr', tok: 'GLM-5.3/Hy4 offload' },
   { id: '4xSpark', label: '4× DGX Spark 512GB', vram: 512, cost: '₹22-30L', tok: 'GLM-5.3 25-35' },
+  { id: 'dgxStation', label: 'DGX Station GB300 748GB', vram: 748, cost: '~₹94L ($99K+)', tok: 'deskside 20 PFLOPS' },
   { id: '1xMacM5', label: '1× Mac Studio M5 512GB', vram: 512, cost: '₹5-7.5L', tok: 'unified mem' },
   { id: '4xMacM5', label: '4× Mac Studio M5 2TB', vram: 2048, cost: '₹20-30L', tok: 'unified mem' },
   { id: 'B300', label: 'DGX B300 2.1TB', vram: 2100, cost: '₹5.5Cr', tok: 'All models' },
