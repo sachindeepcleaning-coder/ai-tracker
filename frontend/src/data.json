@@ -16041,8 +16041,8 @@
       "released_src": "vendor",
       "is_free": false,
       "price_band": "unknown",
-      "note_excerpt": "Z.ai GLM-5.4, announced Nov 23 2026 (z.ai/blog/glm-5.4 'Toward Generalized Coding with Our First Loop Transformer'): first Loop Transformer…",
-      "indep": false
+      "note_excerpt": "Z.ai GLM-5.4, Nov 23 2026 (z.ai/blog/glm-5.4): first Loop Transformer flagship - 28 weight-shared GLM-5 base layers run twice (~750B…",
+      "indep": true
     }
   ],
   "data_regen_at": "2026-11-23",
