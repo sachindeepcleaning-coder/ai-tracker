@@ -1,5 +1,10 @@
 # Changelog — coding_benchmarks.csv
 
+## Nov 25, 2026 — Kolibri 1.1 added (384)
+- Added **Kolibri 1.1** (384) — Aleph Alpha, Apache 2.0 weights announced Nov 23 2026 (HF Aleph-Alpha/Kolibri-1.1, repo Nov 20): 75B total / ~3B active MoE reasoning model focused on German and English, sparse attention for cheap long contexts (1M ctx), 3.4x less GPU time per task and 41% fewer output tokens than Kolibri 1.0 (vendor). Strong coding for its size (vendor): LiveCodeBench v6 93.0, SWE-bench Verified 70.4, HumanEval 84.0, SciCode 45.1, Terminal-Bench 2.1 35.6, Code Average EN 69.5; tool calling + explicit reasoning mode, no external re-run
+- Sweep Nov 24-25: OpenRouter also listed upstage/solar-mini-4-5 and solar-pro-4-contributor (general compact models, no coding benchmarks), xiaomi/mimo-v2.6-flash-mopd (Sep 27 updated checkpoint of row 276, not a new release); HF lab orgs: only tencent/OmniEVIE-4B (multimodal retrieval, non-coding). No other coding releases
+- Catalog now 384 rows (ranks 1-384), 230 open-weight, 273 with release dates; data as of Nov 16, 2026
+
 ## Nov 24, 2026 — Ling-3.2-air added (383); ERNIE 5.5 Flash Preview weights opened (row 360)
 - Added **Ling-3.2-air** (383) — Ant Group/inclusionAI, MIT weights Nov 23 2026 (HF inclusionAI/Ling-3.2-air): 124B total / 5.5B active hybrid-linear MoE (35 KDA + 7 Gated MLA, 512 experts top-8), 256K ctx, native multimodal; open-weight successor to Ling-3.0-flash-VL. Vendor: Terminal-Bench 4.0 27% (was 0), AutomationBench-AA 61% (was 15.7), AA-Briefcase v1.1 Elo 1340 (+353), GDP.pdf all-pass 16%, AA Intelligence Index v5.0.1 23, Harvey LAB-AA 87.7 criterion pass. 256K recipe on 4x 141GB GPUs; no external re-run
 - Updated **ERNIE 5.5 Flash Preview** (360): the post-trained Apache 2.0 weights are now public on HF (Nov 23, FP8/BF16), row reclassified from base-checkpoint-only to full open weights; added vendor coding scores TB4.0 46.5 and DeepSWE 71.2, HF URL updated
