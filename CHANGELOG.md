@@ -1,5 +1,12 @@
 # Changelog — coding_benchmarks.csv
 
+## Nov 26, 2026 — SWE-2.1 (385), Mellum2.1 Instruct (386), Ternary Bonsai 2.5 27B (387) added
+- Added **SWE-2.1** (385) — Cognition, Nov 24 2026 (Devin Desktop/CLI; no public weights): pure-RL upgrade to SWE-2 on the Kimi K3 base, 250K ctx with up to 3 compactions (~1M). Vendor: Terminal-Bench 4.1 50.0 (SWE-2 24.2, Opus 5.5 65.8), FrontierCode 2.0 41.3 (ties Opus 5.5), ProgramBench 44.0, SWE-Atlas QA 71.0, SWE Marathon 54.9, ExploitBench 80.0; Cerebras Ultrafast tier 600 tok/s; $2/$10 per 1M, free through Dec 8
+- Added **Mellum2.1 Instruct** (386) — JetBrains, Apache 2.0 weights (HF JetBrains/Mellum2.1-12B-A2.5B-Instruct; announced Nov 25): 12B/2.5B MoE, 131K ctx, non-thinking direct-answer model for sub-agents/tool loops. Vendor: HumanEval+ 89.1, LCB v6 53.7, MBPP+ 74.3, SWE-bench Verified 40.4 (up from 20.2), TB2.1 8.2, SWE-Pro 20.0; ~half the output tokens of Thinking variant
+- Added **Ternary Bonsai 2.5 27B** (387) — PrismML, Apache 2.0 GGUF Nov 24 2026 (HF prism-ml/Ternary-Bonsai-2.5-27B-GGUF, 384 likes): 1.76-bit ternary Qwen3.8-27B in 5.93GB, text+image, 262K ctx; vendor SWE-bench Verified 75.6 (Bonsai 2 60.8), runs on 8GB VRAM/Apple Silicon
+- Sweep Nov 25-26: also found Tencent Hy-MT3 (1.8B/7B/30B translation) and other non-coding releases — skipped
+- Catalog now 387 rows (ranks 1-387), 232 open-weight, 276 with release dates; data as of Nov 16, 2026
+
 ## Nov 25, 2026 — Kolibri 1.1 added (384)
 - Added **Kolibri 1.1** (384) — Aleph Alpha, Apache 2.0 weights announced Nov 23 2026 (HF Aleph-Alpha/Kolibri-1.1, repo Nov 20): 75B total / ~3B active MoE reasoning model focused on German and English, sparse attention for cheap long contexts (1M ctx), 3.4x less GPU time per task and 41% fewer output tokens than Kolibri 1.0 (vendor). Strong coding for its size (vendor): LiveCodeBench v6 93.0, SWE-bench Verified 70.4, HumanEval 84.0, SciCode 45.1, Terminal-Bench 2.1 35.6, Code Average EN 69.5; tool calling + explicit reasoning mode, no external re-run
 - Sweep Nov 24-25: OpenRouter also listed upstage/solar-mini-4-5 and solar-pro-4-contributor (general compact models, no coding benchmarks), xiaomi/mimo-v2.6-flash-mopd (Sep 27 updated checkpoint of row 276, not a new release); HF lab orgs: only tencent/OmniEVIE-4B (multimodal retrieval, non-coding). No other coding releases
