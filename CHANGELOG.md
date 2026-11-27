@@ -1,5 +1,11 @@
 # Changelog — coding_benchmarks.csv
 
+## Nov 27, 2026 — GigaChat 4 708B (388) + 37B (389) added
+- Added **GigaChat 4 708B-A41B** (388) — Sber, MIT weights announced Nov 26 2026 (HF ai-sage/GigaChat4-708B-A41B): 708B total / 41B active hybrid MoE with DeepSeek Sparse Attention + Gated DeltaNet, 64 layers, 1M ctx, instant/reasoning modes. Vendor coding (7-hour timeouts): SWE-bench Verified 80.89, SWE-bench Multilingual 77.0, LiveCodeBench v6 88.82, Terminal-Bench 2.1 69.66, TB2.0 71.26, DeepSWE 35.40; RL on coding/tool use/agent workflows, technical report, SGLang/vLLM support; 2x8 H100 (TP16) serving. No external re-run
+- Added **GigaChat 4 37B-A4B** (389) — Sber, open weights under a noncommercial license for individuals (HF ai-sage/GigaChat4-37B-A4B): 37B/4B hybrid MoE, 32 layers, 1M ctx; SWE-V 70.80, SWE-bench Multilingual 61.67, LCB v6 85.00, TB2.1 39.33; runs on 1x H100 80GB with recurrent MTP speculative decoding
+- Sweep Nov 26-27: also found Tencent WeMM-Ecom (e-commerce multimodal), inclusionAI LingSante-3.1-air-vl (medical), Ming-Image/Phai-M1 (image/video), CogACT2-LIBERO (robotics) — all skipped
+- Catalog now 389 rows (ranks 1-389), 233 open-weight, 278 with release dates; data as of Nov 16, 2026
+
 ## Nov 26, 2026 — SWE-2.1 (385), Mellum2.1 Instruct (386), Ternary Bonsai 2.5 27B (387) added
 - Added **SWE-2.1** (385) — Cognition, Nov 24 2026 (Devin Desktop/CLI; no public weights): pure-RL upgrade to SWE-2 on the Kimi K3 base, 250K ctx with up to 3 compactions (~1M). Vendor: Terminal-Bench 4.1 50.0 (SWE-2 24.2, Opus 5.5 65.8), FrontierCode 2.0 41.3 (ties Opus 5.5), ProgramBench 44.0, SWE-Atlas QA 71.0, SWE Marathon 54.9, ExploitBench 80.0; Cerebras Ultrafast tier 600 tok/s; $2/$10 per 1M, free through Dec 8
 - Added **Mellum2.1 Instruct** (386) — JetBrains, Apache 2.0 weights (HF JetBrains/Mellum2.1-12B-A2.5B-Instruct; announced Nov 25): 12B/2.5B MoE, 131K ctx, non-thinking direct-answer model for sub-agents/tool loops. Vendor: HumanEval+ 89.1, LCB v6 53.7, MBPP+ 74.3, SWE-bench Verified 40.4 (up from 20.2), TB2.1 8.2, SWE-Pro 20.0; ~half the output tokens of Thinking variant
